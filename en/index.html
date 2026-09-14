@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Sir Fisher | Seafront Restaurant in Fortaleza, Brazil</title>
+  <meta name="description" content="A restaurant facing the sea on Fortaleza's Beira-Mar. Fish, prawns, Brazilian cooking and the sunset over the seafront. Address, opening hours, prices in reais and how to book." />
+  <link rel="canonical" href="https://www.sirfisher.com.br/en/" />
+
+  <link rel="alternate" hreflang="en" href="https://www.sirfisher.com.br/en/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://www.sirfisher.com.br/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.sirfisher.com.br/" />
+
+  <meta name="theme-color" content="#12293d" />
+
+  <!-- Tema: aplica a escolha salva ANTES da primeira pintura, senao a pagina
+       aparece no tema errado por um instante. Sem escolha salva, o CSS segue
+       o sistema operacional sozinho e nada e gravado. -->
+  <script>
+  (function () {
+    var raiz = document.documentElement;
+    var CHAVE = 'sf-tema';
+
+    try {
+      var salvo = localStorage.getItem(CHAVE);
+      if (salvo === 'dark' || salvo === 'light') raiz.setAttribute('data-theme', salvo);
+    } catch (e) {}
+
+    function atual() {
+      var t = raiz.getAttribute('data-theme');
+      if (t === 'dark' || t === 'light') return t;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function rotular() {
+      var escuro = atual() === 'dark';
+      var b = document.querySelector('.theme-toggle');
+      if (b) {
+        b.setAttribute('aria-label', escuro ? 'Switch to the light theme' : 'Switch to the dark theme');
+        b.setAttribute('aria-pressed', escuro ? 'true' : 'false');
+      }
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', escuro ? '#0a1622' : '#12293d');
+    }
+
+    document.addEventListener('click', function (ev) {
+      var alvo = ev.target;
+      if (!alvo || !alvo.closest) return;
+      if (!alvo.closest('.theme-toggle')) return;
+      var novo = atual() === 'dark' ? 'light' : 'dark';
+      raiz.setAttribute('data-theme', novo);
+      try { localStorage.setItem(CHAVE, novo); } catch (e) {}
+      rotular();
+    });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', rotular);
+    } else {
+      rotular();
+    }
+  })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <!-- Fontes da primeira dobra: preload evita o texto piscar antes do swap. -->
+  <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <!-- "restaurant" nao existe no vocabulario Open Graph; o valor invalido cai
+       em "website" de qualquer forma, so que com aviso no validador. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Sir Fisher" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="pt_BR" />
+  <meta property="og:url" content="https://www.sirfisher.com.br/en/" />
+  <meta property="og:title" content="Sir Fisher | Seafront Restaurant in Fortaleza, Brazil" />
+  <meta property="og:description" content="Facing the sea on Fortaleza's Beira-Mar. Fish, prawns, Brazilian cooking and the sunset over the seafront." />
+  <meta property="og:image" content="https://www.sirfisher.com.br/assets/img/og-sir-fisher-beira-mar-fortaleza.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Sunset over the sea on the Beira-Mar seafront in Fortaleza, seen from Sir Fisher" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sir Fisher | Seafront Restaurant in Fortaleza, Brazil" />
+  <meta name="twitter:description" content="Facing the sea on Fortaleza's Beira-Mar. Fish, prawns, Brazilian cooking and the sunset over the seafront." />
+  <meta name="twitter:image" content="https://www.sirfisher.com.br/assets/img/og-sir-fisher-beira-mar-fortaleza.jpg" />
+
+  <!-- Mesmo @id da home em portugues: e o mesmo restaurante, uma entidade so,
+       descrita no idioma da pagina. Um @id proprio criaria um segundo
+       restaurante aos olhos do Google. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "@id": "https://www.sirfisher.com.br/#restaurante",
+    "name": "Sir Fisher",
+    "url": "https://www.sirfisher.com.br/en/",
+    "inLanguage": "en",
+    "logo": "https://www.sirfisher.com.br/assets/img/logo-emblem.png",
+    "image": [
+      "https://www.sirfisher.com.br/assets/img/og-sir-fisher-beira-mar-fortaleza.jpg",
+      "https://www.sirfisher.com.br/assets/img/por-do-sol-beira-mar-fortaleza-720.jpg",
+      "https://www.sirfisher.com.br/assets/img/camarao-alho-e-oleo-sir-fisher-660.jpg"
+    ],
+    "description": "Restaurant on the Beira-Mar seafront in Fortaleza, Brazil, facing the sea, serving fish, prawns, Brazilian dishes and British-inspired recipes.",
+    "telephone": "+5585988544274",
+    "email": "contato@sirfisher.com.br",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Beira Mar, 3421",
+      "addressLocality": "Fortaleza",
+      "addressRegion": "CE",
+      "postalCode": "60165-121",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -3.7247085,
+      "longitude": -38.4906542
+    },
+    "hasMap": "https://maps.google.com/?cid=11176340545794629736",
+    "servesCuisine": ["Seafood", "Brazilian", "British"],
+    "priceRange": "$$",
+    "hasMenu": "https://www.hubt.com.br/sir-fisher-praia/",
+    "acceptsReservations": "https://reservas.sirfisher.com.br/",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+        "opens": "09:00",
+        "closes": "22:15"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Friday", "Saturday"],
+        "opens": "09:00",
+        "closes": "23:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/sirfisherfc",
+      "https://www.facebook.com/SirFisherfc/",
+      "https://maps.google.com/?cid=11176340545794629736"
+    ],
+    "currenciesAccepted": "BRL",
+    "paymentAccepted": "Cash, Credit card, Debit card, Pix",
+    "maximumAttendeeCapacity": 99,
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Sea view", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Outdoor seating", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Accepts reservations", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Good for groups", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Pet friendly", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Wheelchair accessible", "value": true }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://www.sirfisher.com.br/en/#faq",
+    "inLanguage": "en",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where is Sir Fisher?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Av. Beira Mar 3421, Meireles, Fortaleza, Ceara, Brazil. It faces the sea on the main seafront avenue, directly across from the Japanese Garden, and is walking distance from most Beira-Mar hotels."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the opening hours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every day from 9:00 am. Sunday to Thursday until 10:15 pm, Friday and Saturday until 11:00 pm."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is English spoken at Sir Fisher?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not always, and not by everyone. The menu has photographs, so pointing works, and so does WhatsApp: message +55 85 98854-4274 before you come and we will answer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does it cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Prices are in Brazilian reais and listed on the online menu. As a reference, the weekday set lunch runs from R$ 31 to R$ 52, roughly US$ 6 to US$ 10 at recent exchange rates."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to book a table?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not always. Part of the dining room is held for reservations and the rest is first come, first served. Booking is worth it at sunset, at weekends and on public holidays, and can be done online at reservas.sirfisher.com.br with immediate confirmation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What time is sunset in Fortaleza?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Between 5:25 pm and 5:56 pm depending on the month. Fortaleza sits close to the equator, so the sun sets at nearly the same hour all year and there is no daylight saving time. For a table facing the water, arrive around 4:00 pm."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which cards do you accept?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Visa, Mastercard, Elo and American Express, plus cash and Pix. Foreign cards are accepted and contactless works."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google tag (gtag.js). O async garante que nao bloqueia a renderizacao
+       nem o toque no botao do cardapio. Os eventos de saida disparados no
+       fim do body chegam aqui por gtag('event', ...). -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F40Z5Y9QT6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F40Z5Y9QT6', {
+      linker: { domains: ['sirfisher.com.br', 'www.sirfisher.com.br', 'reservas.sirfisher.com.br'] }
+    });
+  </script>
+  <!-- Meta Pixel. O mesmo dataset da Conversions API: os eventos do navegador e
+       os do servidor sao unidos pelo event_id, para a reserva nao contar duas
+       vezes. Ver supabase/meta-capi.sql no repositorio de reservas. -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '948509834960152');
+    fbq('track', 'PageView');
+  </script>
+</head>
+<body>
+
+  <div class="shell">
+    <a class="lang-toggle" href="../" hreflang="pt-BR" lang="pt-BR" aria-label="Ler esta página em português">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg>
+      PT
+    </a>
+    <button class="theme-toggle" type="button" aria-label="Switch to the dark theme" aria-pressed="false">
+      <svg class="ico-lua" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="ico-sol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <main>
+
+      <!-- Hero: pôr do sol da Beira Mar (identidade, claramente "um lugar") -->
+      <div class="hero">
+        <picture>
+          <source type="image/avif" srcset="../assets/img/pordosol-800.avif 800w, ../assets/img/pordosol-1200.avif 1200w" sizes="(max-width:460px) 100vw, 460px" />
+          <source type="image/webp" srcset="../assets/img/pordosol-800.webp 800w, ../assets/img/pordosol-1200.webp 1200w" sizes="(max-width:460px) 100vw, 460px" />
+          <img class="hero__img" src="../assets/img/pordosol-800.jpg" alt="Sunset on Avenida Beira Mar in Fortaleza, Brazil, seen from the tables at Sir Fisher" width="800" height="534" fetchpriority="high" />
+        </picture>
+      </div>
+
+      <!-- Letreiro -->
+      <header class="board">
+        <div class="board__medallion">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/logo-emblem-256.webp 256w, ../assets/img/logo-emblem-384.webp 384w" sizes="128px" />
+            <img src="../assets/img/logo-emblem.png" alt="Sir Fisher" width="654" height="700" />
+          </picture>
+        </div>
+        <p class="eyebrow">Av. Beira Mar · Fortaleza, Brazil</p>
+        <h1>A seafront restaurant worth a stop on the Beira-Mar.</h1>
+        <p class="board__sub">Fish, prawns, Brazilian cooking, a view of the sea and a sunset that earns the table on its own.</p>
+      </header>
+
+      <!-- Ações principais: o cardápio é a primeira coisa alcançável (QR Code) -->
+      <div class="actions">
+
+        <!-- CARDÁPIO = a própria foto do prato leva ao menu -->
+        <a class="feature" href="https://www.hubt.com.br/sir-fisher-praia/" target="_blank" rel="noopener" data-evt="click_menu" aria-label="See the full menu">
+          <picture>
+            <source type="image/avif" srcset="../assets/img/prato-800.avif 800w, ../assets/img/prato-1200.avif 1200w" sizes="(max-width:460px) 100vw, 460px" />
+            <source type="image/webp" srcset="../assets/img/prato-800.webp 800w, ../assets/img/prato-1200.webp 1200w" sizes="(max-width:460px) 100vw, 460px" />
+            <img class="feature__img" src="../assets/img/prato-800.jpg" alt="Fish and chips served at Sir Fisher" width="800" height="640" />
+          </picture>
+          <div class="feature__body">
+            <div>
+              <span class="feature__kicker">The menu</span>
+              <span class="feature__title">See the menu</span>
+              <span class="feature__sub">Tap to open it · prices in reais</span>
+            </div>
+            <span class="feature__go" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <div class="btn-pair">
+          <a class="btn btn--solid" href="https://www.hubt.com.br/sir-fisher-praia/" target="_blank" rel="noopener" data-evt="click_menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+            Menu
+          </a>
+          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/" target="_blank" rel="noopener" data-evt="click_reservation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="1"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+            Book a table
+          </a>
+        </div>
+
+        <!-- Cardápio de almoço: nasce oculto e só aparece no horário (JS no fim
+             da página). Sem JS, continua acessível pelo link "More from Sir Fisher". -->
+        <a class="btn btn--lunch" id="lunch-cta" href="../almoco-executivo/" hreflang="pt-BR" data-evt="click_menu" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          Set lunch menu
+          <span class="btn__pill">until 2 pm</span>
+        </a>
+
+        <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.2 7-12a7 7 0 0 0-14 0c0 4.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg>
+          Directions
+        </a>
+      </div>
+
+      <!-- ================= Abaixo da dobra: descoberta ================= -->
+
+      <section class="sec" id="about">
+        <h2>Sir Fisher, on the Fortaleza seafront</h2>
+        <p>We face the sea on Avenida Beira Mar, the seafront avenue where most of Fortaleza walks in the evening. Sir Fisher is a stop for people already out on the promenade: fish, prawns, Brazilian dishes and a few recipes that carry the British side of the name.</p>
+        <p>We are across from the Japanese Garden, within walking distance of most Beira-Mar hotels. Late in the afternoon the view changes with the sunset, and it gets hard to be in a hurry.</p>
+      </section>
+
+      <section class="sec" id="food">
+        <h2>What comes to the table</h2>
+        <p>Prawns, fish, cuts of meat to share and small plates for the table. Our <a href="./fish-and-chips/">fish and chips</a> is made with pescada amarela — acoupa weakfish, caught off the coast of Ceará, and the local stand-in for cod. That one has <a href="./fish-and-chips/">a page of its own in English</a>.</p>
+        <p>Prices are in Brazilian reais. As a reference, the weekday set lunch runs from R$ 31 to R$ 52, roughly US$ 6 to US$ 10.</p>
+
+        <div class="grid">
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.avif 440w, ../assets/img/camarao-alho-e-oleo-sir-fisher-660.avif 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.webp 440w, ../assets/img/camarao-alho-e-oleo-sir-fisher-660.webp 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/camarao-alho-e-oleo-sir-fisher-440.jpg" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.jpg 440w, ../assets/img/camarao-alho-e-oleo-sir-fisher-660.jpg 660w" sizes="(max-width:500px) 46vw, 205px" alt="Dish of garlic prawns with lemon, served over the Sir Fisher newspaper print" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>Garlic prawns</figcaption>
+          </figure>
+
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-440.avif 440w, ../assets/img/newcastle-camarao-empanado-sir-fisher-660.avif 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-440.webp 440w, ../assets/img/newcastle-camarao-empanado-sir-fisher-660.webp 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/newcastle-camarao-empanado-sir-fisher-440.jpg" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-440.jpg 440w, ../assets/img/newcastle-camarao-empanado-sir-fisher-660.jpg 660w" sizes="(max-width:500px) 46vw, 205px" alt="Panko-breaded prawns with chips and dipping sauce, on a wooden board" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>Newcastle, panko-breaded prawns</figcaption>
+          </figure>
+
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/isca-de-peixe-sir-fisher-440.avif 440w, ../assets/img/isca-de-peixe-sir-fisher-660.avif 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/isca-de-peixe-sir-fisher-440.webp 440w, ../assets/img/isca-de-peixe-sir-fisher-660.webp 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/isca-de-peixe-sir-fisher-440.jpg" srcset="../assets/img/isca-de-peixe-sir-fisher-440.jpg 440w, ../assets/img/isca-de-peixe-sir-fisher-660.jpg 660w" sizes="(max-width:500px) 46vw, 205px" alt="Breaded strips of pescada amarela with lemon and house sauce, on a wooden board" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>Fish strips, pescada amarela</figcaption>
+          </figure>
+
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/marine-sandwich-sir-fisher-440.avif 440w, ../assets/img/marine-sandwich-sir-fisher-660.avif 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/marine-sandwich-sir-fisher-440.webp 440w, ../assets/img/marine-sandwich-sir-fisher-660.webp 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/marine-sandwich-sir-fisher-440.jpg" srcset="../assets/img/marine-sandwich-sir-fisher-440.jpg 440w, ../assets/img/marine-sandwich-sir-fisher-660.jpg 660w" sizes="(max-width:500px) 46vw, 205px" alt="Marine Sandwich at Sir Fisher: brioche bun with sauteed prawns over breaded cream cheese" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>Marine Sandwich, with sautéed prawns</figcaption>
+          </figure>
+
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/dadinho-de-tapioca-sir-fisher-440.avif 440w, ../assets/img/dadinho-de-tapioca-sir-fisher-660.avif 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/dadinho-de-tapioca-sir-fisher-440.webp 440w, ../assets/img/dadinho-de-tapioca-sir-fisher-660.webp 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/dadinho-de-tapioca-sir-fisher-440.jpg" srcset="../assets/img/dadinho-de-tapioca-sir-fisher-440.jpg 440w, ../assets/img/dadinho-de-tapioca-sir-fisher-660.jpg 660w" sizes="(max-width:500px) 46vw, 205px" alt="Golden fried tapioca cubes served with chilli jam, on a wooden board" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>Dadinho de tapioca, fried tapioca cubes</figcaption>
+          </figure>
+
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/almoco-executivo-sir-fisher-440.avif 440w, ../assets/img/almoco-executivo-sir-fisher-660.avif 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/almoco-executivo-sir-fisher-440.webp 440w, ../assets/img/almoco-executivo-sir-fisher-660.webp 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/almoco-executivo-sir-fisher-440.jpg" srcset="../assets/img/almoco-executivo-sir-fisher-440.jpg 440w, ../assets/img/almoco-executivo-sir-fisher-660.jpg 660w" sizes="(max-width:500px) 46vw, 205px" alt="Guest having the Sir Fisher set lunch, served with rice and chips, at a table facing the sea" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>The set lunch, Monday to Friday</figcaption>
+          </figure>
+        </div>
+
+        <a class="btn btn--solid" href="https://www.hubt.com.br/sir-fisher-praia/" target="_blank" rel="noopener" data-evt="click_menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+          See the full menu
+        </a>
+      </section>
+
+      <section class="sec" id="sunset">
+        <h2>Late afternoon here</h2>
+        <p>Some days the sunset becomes part of the order. The tables face the Meireles seafront, and once the sun starts dropping it gets hard to rush.</p>
+        <p>In Fortaleza it goes down between 5:25 pm and 5:56 pm depending on the month — we sit close to the equator, so the hour barely moves across the year and there is no daylight saving time. The light starts to turn about 40 minutes earlier. For a table facing the water, come around 4:00 pm.</p>
+
+        <figure class="wide">
+          <picture>
+            <source type="image/avif" srcset="../assets/img/por-do-sol-beira-mar-fortaleza-460.avif 460w, ../assets/img/por-do-sol-beira-mar-fortaleza-720.avif 720w" sizes="(max-width:460px) 100vw, 416px" />
+            <source type="image/webp" srcset="../assets/img/por-do-sol-beira-mar-fortaleza-460.webp 460w, ../assets/img/por-do-sol-beira-mar-fortaleza-720.webp 720w" sizes="(max-width:460px) 100vw, 416px" />
+            <img src="../assets/img/por-do-sol-beira-mar-fortaleza-460.jpg" srcset="../assets/img/por-do-sol-beira-mar-fortaleza-460.jpg 460w, ../assets/img/por-do-sol-beira-mar-fortaleza-720.jpg 720w" sizes="(max-width:460px) 100vw, 416px" alt="Sun setting over the sea and the buildings of the Beira-Mar in Fortaleza, seen from Sir Fisher" width="460" height="307" loading="lazy" decoding="async" />
+          </picture>
+        </figure>
+
+        <div class="grid">
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/mesa-cheia-vista-mar-sir-fisher-440.avif 440w, ../assets/img/mesa-cheia-vista-mar-sir-fisher-660.avif 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/mesa-cheia-vista-mar-sir-fisher-440.webp 440w, ../assets/img/mesa-cheia-vista-mar-sir-fisher-660.webp 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/mesa-cheia-vista-mar-sir-fisher-440.jpg" srcset="../assets/img/mesa-cheia-vista-mar-sir-fisher-440.jpg 440w, ../assets/img/mesa-cheia-vista-mar-sir-fisher-660.jpg 660w" sizes="(max-width:500px) 46vw, 205px" alt="Guest photographing a table of prawns and small plates, facing the sea in the late afternoon" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/clientes-fim-de-tarde-sir-fisher-440.avif 440w, ../assets/img/clientes-fim-de-tarde-sir-fisher-660.avif 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/clientes-fim-de-tarde-sir-fisher-440.webp 440w, ../assets/img/clientes-fim-de-tarde-sir-fisher-660.webp 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/clientes-fim-de-tarde-sir-fisher-440.jpg" srcset="../assets/img/clientes-fim-de-tarde-sir-fisher-440.jpg 440w, ../assets/img/clientes-fim-de-tarde-sir-fisher-660.jpg 660w" sizes="(max-width:500px) 46vw, 205px" alt="Two guests talking at a Sir Fisher table, with the sea and the Beira-Mar reefs behind them" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+        </div>
+      </section>
+
+      <section class="sec" id="booking">
+        <h2>Do I need to book?</h2>
+        <p>Not always — a good part of the room is first come, first served. Booking is worth it at sunset, at weekends and on public holidays. The booking site asks for a name, a date and a number of people, and confirms immediately.</p>
+        <p>For groups larger than ten, message us on WhatsApp instead, so we can check the room first.</p>
+
+        <div class="btn-pair">
+          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/" target="_blank" rel="noopener" data-evt="click_reservation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="1"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+            Book a table
+          </a>
+          <a class="btn btn--ghost" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">
+            WhatsApp
+          </a>
+        </div>
+      </section>
+
+      <section class="sec" id="english">
+        <h2>Is English spoken?</h2>
+        <p>Not always, and not by everyone. The menu has photographs, so pointing works. WhatsApp works too: message us before you come and we will answer, and you can show the reply at the door.</p>
+        <p>Cards are accepted, foreign ones included, and contactless works. Cash and Pix as well.</p>
+      </section>
+
+      <section class="sec" id="where">
+        <h2>Where we are</h2>
+        <p>Facing the sea on the Meireles seafront, across from the Japanese Garden. Most Beira-Mar hotels are a walk away along the promenade.</p>
+        <address class="place">
+          <strong>Sir Fisher</strong>
+          Av. Beira Mar, 3421 · Meireles<br />
+          Fortaleza · Ceará · Brazil
+        </address>
+
+        <dl class="hours">
+          <div><dt>Sunday to Thursday</dt><dd>9:00 am – 10:15 pm</dd></div>
+          <div><dt>Friday and Saturday</dt><dd>9:00 am – 11:00 pm</dd></div>
+        </dl>
+
+        <div class="btn-pair">
+          <a class="btn btn--solid" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.2 7-12a7 7 0 0 0-14 0c0 4.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg>
+            Directions
+          </a>
+          <a class="btn btn--ghost" href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_maps">
+            Google Maps
+          </a>
+        </div>
+      </section>
+
+      <!-- Links secundários -->
+      <nav class="links" aria-label="More from Sir Fisher">
+        <p class="links__label">More from Sir Fisher</p>
+
+        <a class="link-row link-row--sea" href="../" hreflang="pt-BR" lang="pt-BR">
+          <span class="link-row__stamp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg>
+          </span>
+          <span class="link-row__label">Ler em português<span class="link-row__sub">A página inicial do Sir Fisher</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <a class="link-row link-row--coral" href="./fish-and-chips/">
+          <span class="link-row__stamp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-5 9-5 6 3 9 5c-3 2-4 5-9 5s-9-5-9-5z"/><circle cx="8" cy="11" r="0.9" fill="currentColor" stroke="none"/></svg>
+          </span>
+          <span class="link-row__label">Fish and chips<span class="link-row__sub">The British dish, with the fish from here</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <a class="link-row link-row--sun" id="lunch" href="../almoco-executivo/" hreflang="pt-BR" data-evt="click_menu">
+          <span class="link-row__stamp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          </span>
+          <span class="link-row__label">Set lunch menu<span class="link-row__sub">Mon–Fri · 10 am to 2 pm</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <a class="link-row link-row--sun" href="../por-do-sol/" hreflang="pt-BR">
+          <span class="link-row__stamp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M4.9 7.9l2.1 2.1M2 15h3M19 15h3M17 10l2.1-2.1"/><path d="M8 15a4 4 0 0 1 8 0"/><path d="M2 19h20"/></svg>
+          </span>
+          <span class="link-row__label">Sunset times<span class="link-row__sub">Month by month · in Portuguese</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <a class="link-row link-row--coral" href="https://www.instagram.com/sirfisherfc" target="_blank" rel="noopener" data-evt="click_instagram">
+          <span class="link-row__stamp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </span>
+          <span class="link-row__label">Instagram<span class="link-row__sub">@sirfisherfc</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <a class="link-row link-row--sea" href="https://open.spotify.com/playlist/6y71XQVrNNUDqCXPHbxGEB" target="_blank" rel="noopener" data-evt="click_spotify">
+          <span class="link-row__stamp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 1.6-2l8-1.6A1 1 0 0 1 15 4.4V13"/><circle cx="6" cy="17" r="2.5"/><circle cx="13" cy="15.5" r="2.5"/></svg>
+          </span>
+          <span class="link-row__label">Our playlist<span class="link-row__sub">What plays in the room, on Spotify</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <a class="link-row link-row--sun" href="https://g.page/r/CWhg4viCVhqbEBE/review" target="_blank" rel="noopener" data-evt="click_review">
+          <span class="link-row__stamp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9 6.8 19l1-5.8L3.6 9.1l5.8-.8L12 3z"/></svg>
+          </span>
+          <span class="link-row__label">Rate your visit<span class="link-row__sub">Leave a review on Google</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <a class="link-row link-row--sea" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">
+          <span class="link-row__stamp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-2-1.2 7.4 7.4 0 0 1-1.4-1.7c-.1-.2 0-.4.1-.5s.2-.3.4-.4.2-.2.3-.4a.5.5 0 0 0 0-.5c0-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.7 11.7 0 0 0 4.5 4c.6.3 1.1.4 1.5.5a3.6 3.6 0 0 0 1.6.1 2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c-.1-.1-.2-.2-.5-.3z"/></svg>
+          </span>
+          <span class="link-row__label">Message us<span class="link-row__sub">WhatsApp · +55 85 98854-4274</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </nav>
+
+    </main>
+
+    <footer class="foot">
+      <div class="foot__flag" aria-hidden="true"></div>
+      <address>
+        Av. Beira Mar, 3421 · Meireles<br />
+        Fortaleza · Ceará · Brazil
+      </address>
+      <p class="foot__brand">Sir Fisher · Fortaleza seafront</p>
+      <p class="foot__legal"><a href="../privacidade/" hreflang="pt-BR">Privacy notice (in Portuguese)</a></p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Cardápio de almoço: disponível seg–sex, 10h–14h (fuso de Fortaleza).
+    // Dois lugares dependem disso: o botão do topo (#lunch-cta), que só existe
+    // dentro da janela do almoço, e a linha em "More from Sir Fisher" (#lunch),
+    // que fica sempre visível e apenas muda de recado. Relógio de Fortaleza,
+    // não do aparelho: nesta página isso pesa mais ainda, porque o visitante
+    // estrangeiro quase sempre chega com o fuso de casa no celular.
+    (function () {
+      var row = document.getElementById('lunch');
+      var cta = document.getElementById('lunch-cta');
+      var sub = row ? row.querySelector('.link-row__sub') : null;
+      if (!row && !cta) return;
+
+      function isLunchNow() {
+        var parts = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'America/Fortaleza',
+          weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false
+        }).formatToParts(new Date());
+        var get = function (t) { return (parts.find(function (p) { return p.type === t; }) || {}).value; };
+        var wd = get('weekday');                 // "Mon".."Sun"
+        var h = parseInt(get('hour'), 10) % 24;  // 00–23
+        var m = parseInt(get('minute'), 10);
+        var mins = h * 60 + m;
+        var isWeekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].indexOf(wd) !== -1;
+        return isWeekday && mins >= 600 && mins < 840; // 10:00–14:00
+      }
+
+      function apply() {
+        var open;
+        try { open = isLunchNow(); }
+        catch (e) { return; } // sem Intl: mantém o texto padrão e o botão oculto
+        if (cta) cta.hidden = !open;
+        if (!row) return;
+        row.classList.toggle('is-available', open);
+        row.classList.toggle('is-unavailable', !open);
+        if (sub) sub.textContent = open
+          ? 'Available now · until 2 pm'
+          : 'Lunch only · Mon–Fri, 10 am to 2 pm';
+      }
+
+      apply();
+      // A aba pode ficar aberta atravessando as 14h (ou o 10h do dia seguinte).
+      setInterval(apply, 60000);
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) apply();
+      });
+    })();
+
+    // Eventos de saída (cardápio, reserva, WhatsApp, Maps, Instagram).
+    // Só empurra para o dataLayer/gtag, não carrega nenhuma tag por conta
+    // própria. Assim que o GA4 ou o GTM for instalado, os eventos já chegam.
+    (function () {
+      window.dataLayer = window.dataLayer || [];
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest ? e.target.closest('a[data-evt]') : null;
+        if (!a) return;
+        var name = a.getAttribute('data-evt');
+        var label = a.getAttribute('aria-label') || a.textContent || '';
+        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80) };
+        window.dataLayer.push(Object.assign({ event: name }, payload));
+        if (typeof window.gtag === 'function') window.gtag('event', name, payload);
+        // Eventos padrao do Meta: o otimizador entende esses nomes nativamente,
+        // ao contrario de eventos customizados.
+        var meta = { click_menu: 'ViewContent', click_reservation: 'InitiateCheckout',
+                     click_maps: 'FindLocation', click_whatsapp: 'Contact' }[name];
+        if (meta && typeof window.fbq === 'function') {
+          window.fbq('track', meta, { content_name: payload.link_text });
+        }
+      }, { passive: true });
+    })();
+
+  </script>
+
+  <script src="../assets/js/atribuicao.js" defer></script>
+
+</body>
+</html>

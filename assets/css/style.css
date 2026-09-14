@@ -137,8 +137,40 @@ a { color: inherit; }
   :root:not([data-theme="light"]) .theme-toggle .ico-lua { display: none; }
 }
 
+/* ---------- Alternador de idioma ----------
+   Gemeo do .theme-toggle, do outro lado do hero. Fica no mesmo lugar nas duas
+   versoes da home: quem cai no idioma errado acha a saida sem precisar rolar
+   a pagina inteira ate "Mais do Sir Fisher". Pilula em vez de circulo porque
+   carrega texto ("EN" / "PT"), nao um icone. */
+.lang-toggle {
+  position: absolute; top: 10px; left: 10px; z-index: 5;
+  height: 34px; padding: 0 11px;
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid rgba(240, 230, 205, 0.3);
+  border-radius: 999px;
+  background: rgba(10, 22, 34, 0.42);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  color: #f0e6cd;
+  font-family: var(--font-ui);
+  font-size: 12px; font-weight: 600; line-height: 1;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.18s ease, background-color 0.18s ease;
+}
+.lang-toggle:hover { opacity: 1; background: rgba(10, 22, 34, 0.62); }
+.lang-toggle:focus-visible {
+  opacity: 1; outline: 2px solid var(--sun); outline-offset: 2px;
+}
+.lang-toggle svg {
+  width: 15px; height: 15px; display: block;
+  fill: none; stroke: currentColor; stroke-width: 1.7;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .theme-toggle { transition: none; }
+  .theme-toggle,
+  .lang-toggle { transition: none; }
 }
 
 /* ---------- Hero: pôr do sol (identidade, não é menu) ---------- */
