@@ -260,6 +260,19 @@ a { color: inherit; }
 .btn--ghost { background: transparent; border-color: var(--hairline); color: var(--on-card); }
 .btn--ghost:hover { border-color: var(--on-card); }
 
+/* Botão do cardápio de almoço: só entra em cena seg–sex, 10h–14h.
+   O [hidden] precisa ser explícito porque .btn já declara display:inline-flex
+   e vence o display:none do user agent. Texto fixo em navy: o amarelo do sol
+   é claro nos dois temas, então herdar --ink apagaria o rótulo no escuro. */
+.btn--lunch { background: var(--sun); color: #12293d; box-shadow: 0 6px 16px rgba(240,166,63,0.28); }
+.btn--lunch:hover { filter: brightness(1.05); }
+.btn--lunch[hidden] { display: none; }
+.btn__pill {
+  font-size: 0.78rem; font-weight: 600;
+  padding: 3px 9px; border-radius: 999px;
+  background: rgba(18,41,61,0.13);
+}
+
 .btn-pair { display: flex; gap: 12px; }
 /* Padding/corpo menores: "Reservar mesa" cabe em uma linha ate 360px. */
 .btn-pair .btn { flex: 1; gap: 7px; padding-left: 11px; padding-right: 11px; font-size: 0.92rem; }
