@@ -162,10 +162,13 @@ a { color: inherit; }
 .lang-toggle:focus-visible {
   opacity: 1; outline: 2px solid var(--sun); outline-offset: 2px;
 }
-.lang-toggle svg {
-  width: 15px; height: 15px; display: block;
-  fill: none; stroke: currentColor; stroke-width: 1.7;
-  stroke-linecap: round; stroke-linejoin: round;
+/* A bandeira e o unico lugar do site com cor propria, alheia ao tema: e um
+   simbolo, nao um icone: recolorir pelo currentColor descaracterizaria. Por
+   isso nada de fill/stroke herdado aqui, so tamanho e o aro que a recorta. */
+.lang-toggle .flag {
+  width: 17px; height: 17px; display: block; flex: none;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(240, 230, 205, 0.45);
 }
 
 @media (prefers-reduced-motion: reduce) {

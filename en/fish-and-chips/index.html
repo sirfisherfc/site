@@ -184,8 +184,21 @@
 <body>
 
   <div class="shell">
+    <!-- A bandeira mostra o destino do clique, nao o idioma atual: quem esta
+         nesta pagina ja sabe que ela esta em ingles. -->
     <a class="lang-toggle" href="../../fish-and-chips/" hreflang="pt-BR" lang="pt-BR" aria-label="Ler esta página em português">
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg>
+      <svg class="flag" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <defs>
+          <clipPath id="bandeira-br"><circle cx="12" cy="12" r="12"/></clipPath>
+          <clipPath id="bandeira-br-globo"><circle cx="12" cy="12" r="4.1"/></clipPath>
+        </defs>
+        <g clip-path="url(#bandeira-br)">
+          <rect width="24" height="24" fill="#009b3a"/>
+          <path d="M12 2.4 21.6 12 12 21.6 2.4 12Z" fill="#fedf00"/>
+          <circle cx="12" cy="12" r="4.1" fill="#002776"/>
+          <path d="M7.9 10.4a8.4 8.4 0 0 1 8.2 2.3" fill="none" stroke="#fff" stroke-width="1.15" clip-path="url(#bandeira-br-globo)"/>
+        </g>
+      </svg>
       PT
     </a>
     <button class="theme-toggle" type="button" aria-label="Switch to the dark theme" aria-pressed="false">
