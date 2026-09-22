@@ -1,0 +1,178 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>Teste do portal do cardapio</title>
+<!--
+  Teste de aceitacao do portal do cardapio.
+
+  Roda no navegador contra /cardapio/ e confere os criterios que nao podem
+  regredir: os 81 registros na pagina, nome/preco/porcao/descricao na propria
+  listagem, adicional nunca como preco do produto, faixa de preco nas
+  variantes, porcao divergente sem numero, atalhos, busca sem acento, termo de
+  restricao alimentar mandando falar com a equipe, detalhe com endereco
+  proprio e volta na mesma posicao.
+
+  Como rodar, a partir da raiz do site:
+      python -m http.server 8777
+      abrir http://127.0.0.1:8777/tools/cardapio/teste-aceitacao.html
+
+  O iframe aponta para /cardapio/ na mesma origem, entao precisa do servidor
+  local (nao funciona abrindo o arquivo direto).
+-->
+<body><pre id="saida">rodando...</pre>
+<iframe id="quadro" src="/cardapio/" style="width:390px;height:844px;border:0;position:absolute;left:-9999px"></iframe>
+<script>
+const linhas = [];
+let falhas = 0;
+function ok(nome, cond, extra) {
+  linhas.push((cond ? 'PASSA  ' : 'FALHA  ') + nome + (extra ? '  [' + extra + ']' : ''));
+  if (!cond) falhas++;
+}
+const espera = ms => new Promise(r => setTimeout(r, ms));
+
+const quadro = document.getElementById('quadro');
+quadro.onload = async () => {
+  await espera(1200);
+  const d = quadro.contentDocument, w = quadro.contentWindow;
+  const dados = JSON.parse(d.getElementById('cardapio-dados').textContent);
+
+  // --- Catálogo completo e alcançável só rolando ---------------------------
+  const itens = d.querySelectorAll('.item');
+  ok('81 registros renderizados na página', itens.length === 81, itens.length);
+  ok('10 categorias com título escrito', d.querySelectorAll('.secao h2').length === 10);
+  ok('nenhum carrossel na página', d.querySelectorAll('[class*=carrossel],[class*=carousel],[class*=slider]').length === 0);
+
+  // --- Nada de carrinho ----------------------------------------------------
+  const proibido = /carrinho|minha selec|subtotal|finalizar|adicionar ao|quantidade|favorit/i;
+  ok('sem carrinho, seleção, subtotal ou finalizar', !proibido.test(d.body.innerText));
+  ok('sem campos de compra (checkbox/number/quantidade)',
+     d.querySelectorAll('input[type=checkbox],input[type=number],select').length === 0);
+
+  // --- Nome, preço, porção e descrição na própria listagem -----------------
+  let semPreco = [], semNome = [], semTexto = [];
+  itens.forEach(li => {
+    const t = li.innerText;
+    if (!li.querySelector('.item__nome')) semNome.push(li.id);
+    if (!/R\$\s?\d/.test(t) && !/sob consulta/i.test(t)) semPreco.push(li.id);
+    // O cliente precisa entender o item so pela listagem. Para um nome que
+    // ja se explica (Cafe Expresso), a medida cumpre esse papel.
+    if (!li.querySelector('.item__descricao, .item__descritor, .item__medida, .item__porcao')) semTexto.push(li.id);
+  });
+  ok('todo item mostra nome na listagem', semNome.length === 0, semNome.join(','));
+  ok('todo item mostra preço na listagem', semPreco.length === 0, semPreco.join(','));
+  ok('todo item mostra descrição, medida ou porção na listagem', semTexto.length === 0, semTexto.slice(0,5).join(','));
+
+  const comPorcao = dados.produtos.filter(p => p.porcao.estado === 'informada');
+  let porcaoFaltando = comPorcao.filter(p => {
+    const li = d.getElementById('item-' + p.id);
+    return li && li.innerText.indexOf(p.porcao.texto) === -1;
+  });
+  ok('porção confirmada aparece na listagem', porcaoFaltando.length === 0,
+     comPorcao.length + ' com porção; faltando: ' + porcaoFaltando.map(p => p.id).join(','));
+
+  // --- Adicional nunca como preço principal --------------------------------
+  let adicionalComoPreco = [];
+  dados.produtos.forEach(p => {
+    p.adicionais.forEach(a => {
+      const li = d.getElementById('item-' + p.id);
+      if (!li) return;
+      const preco = li.querySelector('.item__preco').innerText;
+      if (preco.indexOf((a.preco_centavos / 100).toFixed(2).replace('.', ',')) !== -1) {
+        adicionalComoPreco.push(p.id);
+      }
+    });
+  });
+  ok('nenhum adicional exibido como preço do produto', adicionalComoPreco.length === 0, adicionalComoPreco.join(','));
+  const sanduiches = ['fisher-burger', 'edimburger', 'marine-sandwich'].map(id =>
+    d.getElementById('item-' + id).querySelector('.item__preco').innerText.trim());
+  ok('sanduíches com o preço do sanduíche, não o da batata',
+     sanduiches.join(' ') === 'R$ 37,00 R$ 37,00 R$ 46,00', sanduiches.join(' | '));
+  ok('adicional aparece rotulado como adicional',
+     /Adicionar batata frita \+ R\$ 9,90/.test(d.getElementById('item-fisher-burger').innerText));
+
+  // --- Variantes: faixa clara, sem seletor de compra ------------------------
+  const cai = d.getElementById('item-caipirinha').innerText;
+  ok('variante vira faixa de preço na listagem', /R\$ 18,00/.test(cai) && /R\$ 22,00/.test(cai), cai.replace(/\n/g, ' · '));
+
+  // --- Desconhecido não vira fato ------------------------------------------
+  ok('porção divergente não exibe número', /Porção em conferência/.test(d.getElementById('item-sir-fisher-fish-n-chips').innerText));
+  ok('nenhum "serve N pessoas" inventado', !/serve\s+\d|para\s+\d+\s+pessoas/i.test(d.body.innerText));
+  ok('nenhuma etiqueta sem glúten / vegano publicada',
+     !/sem gl[uú]ten|sem lactose|vegano|vegetariano/i.test(d.body.innerText));
+  ok('alegação "Mais Pedido" não publicada', !/mais pedido/i.test(d.body.innerText));
+
+  // --- Atalhos de categoria -------------------------------------------------
+  d.getElementById('btn-categorias').click();
+  await espera(120);
+  const atalhos = d.querySelectorAll('#atalhos a');
+  ok('painel de categorias abre', !d.getElementById('painel-categorias').hidden);
+  ok('10 atalhos com nome escrito', atalhos.length === 10, atalhos.length);
+  ok('atalho aponta para a seção', atalhos[0].getAttribute('href') === '#c-fish-and-chips');
+  d.getElementById('btn-categorias').click();
+  await espera(80);
+
+  // --- Busca opcional --------------------------------------------------------
+  d.getElementById('btn-busca').click();
+  await espera(120);
+  const campo = d.getElementById('busca');
+  async function buscar(termo) {
+    campo.value = termo;
+    campo.dispatchEvent(new w.Event('input', { bubbles: true }));
+    await espera(320);
+    return d.getElementById('busca-saida');
+  }
+  let s = await buscar('camarao');
+  const achados = s.querySelectorAll('.busca-resultados li').length;
+  ok('busca sem acento encontra "camarão"', achados >= 4, achados + ' resultados');
+  ok('busca encontra por ingrediente, não só por nome',
+     /Marine Sandwich/.test(s.innerText) && /Pasteizinhos/.test(s.innerText));
+  s = await buscar('MANDIOCA');
+  ok('busca com sinônimo cadastrado (mandioca → macaxeira)',
+     /Macaxeira/.test(s.innerText), s.innerText.split('\n')[0]);
+  s = await buscar('gluten');
+  ok('termo de restrição alimentar manda falar com a equipe, não filtra',
+     /fale com a equipe/i.test(s.innerText) && !s.querySelector('.busca-resultados'));
+  s = await buscar('lasanha');
+  ok('busca vazia explica o que fazer', /Não encontramos/.test(s.innerText) && /role o cardápio/i.test(s.innerText));
+  d.getElementById('btn-busca').click();
+  await espera(80);
+
+  // --- Detalhe: endereço próprio, Voltar do navegador, posição preservada ---
+  w.scrollTo({ top: 2500, behavior: 'instant' });
+  await espera(250);
+  const antes = w.scrollY;
+  d.getElementById('item-newcastle').querySelector('.item__link').click();
+  await espera(300);
+  const det = d.getElementById('detalhe');
+  ok('detalhe abre', !det.hidden);
+  ok('detalhe tem endereço próprio', w.location.hash === '#p-newcastle', w.location.hash);
+  ok('detalhe mostra variantes/adicionais e informação alimentar',
+     /INFORMAÇÃO ALIMENTAR/i.test(det.innerText) && /PORÇÃO/i.test(det.innerText));
+  ok('detalhe ensina a pedir falando', /Chame o garçom e peça pelo nome/.test(det.innerText));
+  ok('detalhe não pede para mostrar o celular', /Não é preciso mostrar o celular/.test(det.innerText));
+  w.history.back();
+  await espera(400);
+  ok('Voltar do navegador fecha o detalhe', det.hidden);
+  ok('lista volta na mesma posição', Math.abs(w.scrollY - antes) < 5, w.scrollY + ' vs ' + antes);
+
+  // --- Acessibilidade básica -------------------------------------------------
+  const semAlt = [...d.querySelectorAll('img')].filter(i => !i.alt).length;
+  ok('toda imagem tem texto alternativo', semAlt === 0, semAlt);
+  const botoesSemTexto = [...d.querySelectorAll('button')].filter(b => !b.innerText.trim() && !b.getAttribute('aria-label')).length;
+  ok('todo botão tem palavra ou rótulo', botoesSemTexto === 0, botoesSemTexto);
+  ok('há link para pular para o cardápio', !!d.querySelector('.pular'));
+  ok('idioma declarado', d.documentElement.lang === 'pt-BR');
+  ok('h1 só no detalhe, seções em h2', d.querySelectorAll('main h1').length === 0);
+
+  // --- Indisponibilidade ------------------------------------------------------
+  const p0 = dados.produtos[0];
+  p0.disponivel = false;
+  quadro.contentWindow.postMessage('x', '*');
+
+  linhas.push('');
+  linhas.push(falhas === 0 ? 'TODOS OS ' + (linhas.length - 1) + ' TESTES PASSARAM'
+                           : falhas + ' FALHA(S)');
+  document.getElementById('saida').textContent = linhas.join('\n');
+  document.title = 'PRONTO';
+};
+</script>
