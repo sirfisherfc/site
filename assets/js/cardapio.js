@@ -548,10 +548,10 @@
       blocoPrecos('Adicionais', produto.adicionais,
         'Valor somado ao preço do prato, se você pedir.') +
       blocoAlimentar(produto) +
-      '<section class="bloco"><h2>Como pedir</h2><p>Chame o garçom e peça pelo nome: ' +
+      '<section class="bloco"><h2>Como pedir</h2><p>Peça ao garçom pelo nome: ' +
       '<b>' + esc(produto.nome) + '</b>' +
       (produto.descritor ? ' — ' + esc(produto.descritor) : '') +
-      '. Não é preciso mostrar o celular.</p></section>';
+      '.</p></section>';
 
     estado.rolagemGuardada = window.scrollY;
     painel.hidden = false;
@@ -629,9 +629,8 @@
     if (!achados.length) {
       alvo.innerHTML = '<div class="busca-vazia">' +
         '<p><b>Não encontramos esse termo no cardápio.</b></p>' +
-        '<p>Tente o nome de um ingrediente, como <i>camarão</i>, <i>peixe</i> ou ' +
-        '<i>macaxeira</i>. Ou feche a busca e role o cardápio: tudo está na ' +
-        'página, por categoria.</p></div>';
+        '<p>Tente o nome de um ingrediente, como <i>camarão</i> ou <i>peixe</i>. ' +
+        'Você também pode fechar a busca e ver os itens por categoria.</p></div>';
       return;
     }
 
@@ -711,8 +710,8 @@
     $('#catalogo').innerHTML =
       '<div class="estado-falha">' +
       '<h2>Não conseguimos carregar o cardápio</h2>' +
-      '<p>Pode ser a conexão do celular. Tente de novo em instantes — ou peça o ' +
-      'cardápio impresso ao garçom, que tem a mesma informação.</p>' +
+      '<p>Verifique a conexão do celular e tente novamente. O garçom também pode ' +
+      'trazer o cardápio impresso.</p>' +
       '<p><button class="botao" type="button" id="tentar-de-novo">Tentar de novo</button></p>' +
       '</div>';
     $('#tentar-de-novo').addEventListener('click', function () {
