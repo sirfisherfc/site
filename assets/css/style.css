@@ -543,5 +543,15 @@ a { color: inherit; }
 .foot__brand { font-family: var(--font-display); font-style: italic; font-size: 0.92rem; color: var(--on-card); margin-top: 10px; }
 .foot__legal { margin-top: 12px; font-size: 0.78rem; }
 .foot__legal a { color: var(--on-card-soft); text-underline-offset: 2px; }
+.foot__counter {
+  margin: 9px 0 0;
+  color: var(--on-card-soft);
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  opacity: 0.48;
+}
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
