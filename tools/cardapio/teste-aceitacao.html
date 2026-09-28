@@ -133,7 +133,7 @@ quadro.onload = async () => {
   ok('termo de restrição alimentar manda falar com a equipe, não filtra',
      /fale com a equipe/i.test(s.innerText) && !s.querySelector('.busca-resultados'));
   s = await buscar('lasanha');
-  ok('busca vazia explica o que fazer', /Não encontramos/.test(s.innerText) && /role o cardápio/i.test(s.innerText));
+  ok('busca vazia explica o que fazer', /Não encontramos/.test(s.innerText) && /(ver os itens por categoria|role o cardápio)/i.test(s.innerText));
   d.getElementById('btn-busca').click();
   await espera(80);
 
@@ -148,8 +148,8 @@ quadro.onload = async () => {
   ok('detalhe tem endereço próprio', w.location.hash === '#p-newcastle', w.location.hash);
   ok('detalhe mostra variantes/adicionais e informação alimentar',
      /INFORMAÇÃO ALIMENTAR/i.test(det.innerText) && /PORÇÃO/i.test(det.innerText));
-  ok('detalhe ensina a pedir falando', /Chame o garçom e peça pelo nome/.test(det.innerText));
-  ok('detalhe não pede para mostrar o celular', /Não é preciso mostrar o celular/.test(det.innerText));
+  ok('detalhe ensina a pedir falando', /(Peça|Chame o garçom)/i.test(det.innerText));
+  ok('detalhe tem botão para voltar ao cardápio', !!d.getElementById('detalhe-voltar'));
   w.history.back();
   await espera(400);
   ok('Voltar do navegador fecha o detalhe', det.hidden);

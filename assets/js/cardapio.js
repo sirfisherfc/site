@@ -113,6 +113,19 @@
     'CORANTES': '<path d="M5 19a4 4 0 0 0 4-4c0-2 1-3 2-4l7-7 2 2-7 7c-1 1-2 2-4 2a4 4 0 0 0-4 4z"/><circle cx="7" cy="17" r="1"/>'
   };
 
+  var DESCRICOES_ALERGENOS = {
+    'GLÚTEN': 'Trigo, centeio, cevada, aveia e derivados.',
+    'LACTOSE': 'Açúcar natural presente no leite e derivados.',
+    'LEITE': 'Proteínas do leite de vaca e derivados.',
+    'OVO': 'Ovos e preparações derivadas.',
+    'PEIXE': 'Pescados de água doce ou salgada.',
+    'CRUSTÁCEOS': 'Camarão, caranguejo, lagosta e afins.',
+    'SOJA': 'Soja e produtos à base de soja.',
+    'CASTANHAS': 'Castanha-de-caju, do Pará, nozes e afins.',
+    'AMÊNDOAS': 'Amêndoas e derivados.',
+    'CORANTES': 'Corantes artificiais e aditivos alimentares.'
+  };
+
   // Termos que descrevem restricao alimentar, nao ingrediente. Buscar por
   // "gluten" nao pode devolver uma lista que pareca uma classificacao segura:
   // devolve a orientacao correta, que e falar com a equipe.
@@ -266,13 +279,14 @@
   function alergenosCardHTML(produto) {
     var a = produto.alimentar;
     if (!a || !a.declarados || !a.declarados.length) return '';
-    return '<div class="item__alergenos">' + a.declarados.map(function (rotulo) {
-      var glifo = GLIFOS[rotulo] || '<circle cx="12" cy="12" r="8"/>';
-      return '<span class="item__alergeno" title="Contém ' + esc(rotulo) + '">' +
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
-        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + glifo + '</svg>' +
-        '<span>' + esc(rotulo) + '</span></span>';
-    }).join('') + '</div>';
+    return '<div class="item__alergenos" aria-label="Alérgenos: ' + esc(a.declarados.join(', ')) + '">' +
+      a.declarados.map(function (rotulo) {
+        var glifo = GLIFOS[rotulo] || '<circle cx="12" cy="12" r="8"/>';
+        return '<span class="item__alergeno" title="Contém ' + esc(rotulo) + '" aria-label="' + esc(rotulo) + '">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
+          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + glifo + '</svg>' +
+          '</span>';
+      }).join('') + '</div>';
   }
 
   function variantesHTML(produto) {
@@ -384,14 +398,88 @@
       '</div>' + corpo + '</section>';
   }
 
+  function legendaAlergenosHTML() {
+    var itens = Object.keys(GLIFOS).map(function (rotulo) {
+      var glifo = GLIFOS[rotulo];
+      var desc = DESCRICOES_ALERGENOS[rotulo] || '';
+      return '<div class="legenda-alergenos__item">' +
+        '<span class="legenda-alergenos__icone" aria-hidden="true">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
+        'stroke-linecap="round" stroke-linejoin="round">' + glifo + '</svg>' +
+        '</span>' +
+        '<div class="legenda-alergenos__info">' +
+        '<strong>' + esc(rotulo) + '</strong>' +
+        (desc ? '<small>' + esc(desc) + '</small>' : '') +
+        '</div>' +
+        '</div>';
+    }).join('');
+
+    return '<section class="legenda-alergenos" id="legenda-alergenos" aria-labelledby="t-legenda-alergenos">' +
+      '<div class="legenda-alergenos__cabeca">' +
+      '<h2 id="t-legenda-alergenos">Legenda de alérgenos</h2>' +
+      '<p>Identificação dos ícones presentes nos itens do cardápio:</p>' +
+      '</div>' +
+      '<div class="legenda-alergenos__grid">' + itens + '</div>' +
+      '<div class="legenda-alergenos__nota">' +
+      '<p><strong>Importante:</strong> As marcações de cada prato foram transcritas do cardápio impresso e ainda não foram conferidas com a cozinha. Elas não substituem uma ficha técnica. Antes de pedir, informe à equipe sobre quaisquer alergias e restrições alimentares.</p>' +
+      '</div>' +
+      '</section>';
+  }
+
+  var bloqueioRolagemClique = false;
+  var timeoutClique = null;
+
+  function desenharAbasCategorias() {
+    var dados = estado.dados;
+    var trilha = $('#abas-trilha');
+    if (!trilha) return;
+    trilha.innerHTML = dados.categorias.map(function (cat, i) {
+      var ativa = i === 0;
+      return '<a href="#c-' + esc(cat.id) + '" class="aba-cat' + (ativa ? ' aba-cat--ativa' : '') +
+        '" data-cat="' + esc(cat.id) + '" role="tab" aria-selected="' + (ativa ? 'true' : 'false') + '">' +
+        esc(cat.nome) + '</a>';
+    }).join('');
+  }
+
+  function marcarAbaAtiva(catId, rolarAba) {
+    var abas = $$('.aba-cat');
+    var abaAlvo = null;
+    abas.forEach(function (aba) {
+      var ativa = aba.getAttribute('data-cat') === catId;
+      aba.classList.toggle('aba-cat--ativa', ativa);
+      aba.setAttribute('aria-selected', ativa ? 'true' : 'false');
+      if (ativa) abaAlvo = aba;
+    });
+    if (abaAlvo && rolarAba) {
+      abaAlvo.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+    }
+  }
+
+  function rolarParaCategoria(catId) {
+    var secao = $('#c-' + catId);
+    if (!secao) return;
+    bloqueioRolagemClique = true;
+    clearTimeout(timeoutClique);
+    marcarAbaAtiva(catId, true);
+    secao.scrollIntoView({ behavior: 'smooth' });
+    timeoutClique = setTimeout(function () {
+      bloqueioRolagemClique = false;
+    }, 850);
+  }
+
   function desenharCatalogo() {
     var dados = estado.dados;
     var main = $('#catalogo');
     main.innerHTML = dados.categorias.map(function (cat) {
       return secaoHTML(cat, dados.produtos);
     }).join('') +
-      '<a class="voltar-topo" href="#topo">Voltar ao começo do cardápio</a>';
+      legendaAlergenosHTML() +
+      '<a class="voltar-topo" href="#topo" id="btn-voltar-topo">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
+      'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>' +
+      'Voltar ao começo do cardápio</a>';
 
+    desenharAbasCategorias();
     desenharAtalhos();
     desenharAviso();
     desenharRodape();
@@ -441,29 +529,52 @@
     $('#rodape').innerHTML = partes.join('');
   }
 
-  // Nome da secao atual na barra do topo: orientacao continua, sem o cliente
-  // precisar tocar em nada.
-  function observarSecoes() {
-    var rotulo = $('#secao-atual');
-    if (!('IntersectionObserver' in window)) return;
-    var visiveis = new Map();
-    var obs = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (e) {
-        visiveis.set(e.target, e.isIntersecting ? e.boundingClientRect.top : Infinity);
-      });
-      var melhor = null, menor = Infinity;
-      visiveis.forEach(function (topo, alvo) {
-        if (topo < menor && topo !== Infinity) { menor = topo; melhor = alvo; }
-      });
-      if (melhor) {
-        var nome = melhor.getAttribute('data-categoria');
-        if (rotulo.textContent !== nome) {
-          rotulo.textContent = nome;
-          sinal('cardapio_categoria_vista', { categoria_nome: nome });
+  // Nome da secao atual na barra do topo e sincronizacao com a barra de abas estilo iFood
+  var rolagemAgendada = false;
+  function atualizarSecaoAtiva() {
+    rolagemAgendada = false;
+    var secoes = $$('.secao');
+    if (!secoes.length) return;
+    var cabecaOffset = 110;
+    var ativa = null;
+
+    if (window.scrollY < 80) {
+      ativa = secoes[0];
+    } else {
+      for (var i = 0; i < secoes.length; i++) {
+        var rect = secoes[i].getBoundingClientRect();
+        if (rect.top <= cabecaOffset && rect.bottom > cabecaOffset) {
+          ativa = secoes[i];
+          break;
         }
       }
-    }, { rootMargin: '-60px 0px -75% 0px', threshold: 0 });
-    $$('.secao').forEach(function (s) { obs.observe(s); });
+      if (!ativa && (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 60)) {
+        ativa = secoes[secoes.length - 1];
+      }
+    }
+
+    if (ativa) {
+      var nome = ativa.getAttribute('data-categoria');
+      var catId = ativa.id.replace(/^c-/, '');
+      var rotulo = $('#secao-atual');
+      if (rotulo && rotulo.textContent !== nome) {
+        rotulo.textContent = nome;
+        sinal('cardapio_categoria_vista', { categoria_nome: nome });
+      }
+      if (!bloqueioRolagemClique) {
+        marcarAbaAtiva(catId, true);
+      }
+    }
+  }
+
+  function observarSecoes() {
+    window.addEventListener('scroll', function () {
+      if (!rolagemAgendada) {
+        rolagemAgendada = true;
+        requestAnimationFrame(atualizarSecaoAtiva);
+      }
+    }, { passive: true });
+    atualizarSecaoAtiva();
   }
 
   // -------------------------------------------------------------------------
@@ -764,6 +875,35 @@
       campo.value = '';
       buscar('');
       campo.focus();
+    });
+
+    // Clique nas abas de categorias no estilo iFood
+    var trilha = $('#abas-trilha');
+    if (trilha) {
+      trilha.addEventListener('click', function (e) {
+        var aba = e.target.closest ? e.target.closest('.aba-cat') : null;
+        if (!aba) return;
+        e.preventDefault();
+        var catId = aba.getAttribute('data-cat');
+        rolarParaCategoria(catId);
+        sinal('cardapio_aba_clique', { categoria_id: catId });
+      });
+    }
+
+    // Voltar ao topo suave e seguro
+    document.addEventListener('click', function (e) {
+      var voltar = e.target.closest ? e.target.closest('.voltar-topo') : null;
+      if (voltar) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (history.replaceState) {
+          history.replaceState(null, '', location.pathname + location.search);
+        }
+        if (estado.dados && estado.dados.categorias && estado.dados.categorias.length) {
+          marcarAbaAtiva(estado.dados.categorias[0].id, true);
+        }
+        sinal('cardapio_voltar_topo', {});
+      }
     });
 
     // Fechar atalho ou busca ao escolher um destino.
