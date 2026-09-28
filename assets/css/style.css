@@ -555,3 +555,32 @@ a { color: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---------- Desktop ----------
+   No PC a coluna de 460px ficava solta num fundo liso. Em telas largas o
+   pôr do sol da Beira-Mar ocupa o fundo, com um véu na cor da página para
+   a coluna continuar sendo o destaque. Nada muda abaixo de 1024px. */
+@media (min-width: 1024px) {
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-color: var(--page-bg);
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--page-bg) 38%, transparent), color-mix(in srgb, var(--page-bg) 38%, transparent)),
+      url("../img/pordosol-1200.jpg");
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--page-bg) 38%, transparent), color-mix(in srgb, var(--page-bg) 38%, transparent)),
+      image-set(url("../img/pordosol-1200.avif") type("image/avif"), url("../img/pordosol-1200.webp") type("image/webp"), url("../img/pordosol-1200.jpg") type("image/jpeg"));
+    background-size: cover;
+    background-position: center 40%;
+    filter: blur(3px) saturate(1.05);
+    transform: scale(1.03);
+  }
+  .shell {
+    z-index: 1;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 20px 80px rgba(0,0,0,0.38);
+  }
+}
