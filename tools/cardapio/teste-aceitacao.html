@@ -95,11 +95,17 @@ quadro.onload = async () => {
   ok('variante vira faixa de preço na listagem', /R\$ 18,00/.test(cai) && /R\$ 22,00/.test(cai), cai.replace(/\n/g, ' · '));
 
   // --- Desconhecido não vira fato ------------------------------------------
-  ok('porção divergente não exibe número', /Porção em conferência/.test(d.getElementById('item-sir-fisher-fish-n-chips').innerText));
+  ok('porção não informada não exibe texto provisório de conferência',
+     !/conferência/i.test(d.getElementById('item-sir-fisher-fish-n-chips').innerText));
   ok('nenhum "serve N pessoas" inventado', !/serve\s+\d|para\s+\d+\s+pessoas/i.test(d.body.innerText));
   ok('nenhuma etiqueta sem glúten / vegano publicada',
      !/sem gl[uú]ten|sem lactose|vegano|vegetariano/i.test(d.body.innerText));
   ok('alegação "Mais Pedido" não publicada', !/mais pedido/i.test(d.body.innerText));
+
+  // --- Abas de navegação estilo iFood ---------------------------------------
+  const abasCat = d.querySelectorAll('.aba-cat');
+  ok('10 abas de categoria presentes', abasCat.length === 10, abasCat.length);
+  ok('primeira aba ativa por padrão', abasCat[0].classList.contains('aba-cat--ativa'));
 
   // --- Atalhos de categoria -------------------------------------------------
   d.getElementById('btn-categorias').click();
@@ -133,7 +139,7 @@ quadro.onload = async () => {
   ok('termo de restrição alimentar manda falar com a equipe, não filtra',
      /fale com a equipe/i.test(s.innerText) && !s.querySelector('.busca-resultados'));
   s = await buscar('lasanha');
-  ok('busca vazia explica o que fazer', /Não encontramos/.test(s.innerText) && /(ver os itens por categoria|role o cardápio)/i.test(s.innerText));
+  ok('busca vazia explica o que fazer', /Não encontramos/.test(s.innerText) && /categoria/i.test(s.innerText));
   d.getElementById('btn-busca').click();
   await espera(80);
 
@@ -148,12 +154,19 @@ quadro.onload = async () => {
   ok('detalhe tem endereço próprio', w.location.hash === '#p-newcastle', w.location.hash);
   ok('detalhe mostra variantes/adicionais e informação alimentar',
      /INFORMAÇÃO ALIMENTAR/i.test(det.innerText) && /PORÇÃO/i.test(det.innerText));
-  ok('detalhe ensina a pedir falando', /(Peça|Chame o garçom)/i.test(det.innerText));
-  ok('detalhe tem botão para voltar ao cardápio', !!d.getElementById('detalhe-voltar'));
+  ok('bloco "Como pedir" retirado do detalhe', !/Como pedir/i.test(det.innerText));
+  ok('detalhe limpo sem instruções operacionais', !/mostrar o celular/i.test(det.innerText));
   w.history.back();
   await espera(400);
   ok('Voltar do navegador fecha o detalhe', det.hidden);
   ok('lista volta na mesma posição', Math.abs(w.scrollY - antes) < 5, w.scrollY + ' vs ' + antes);
+
+  // --- Legenda de alérgenos e Rodapé institucional -------------------------
+  ok('legenda de alérgenos presente', !!d.getElementById('legenda-alergenos'));
+  ok('aviso de contaminação cruzada presente', /contaminação cruzada/i.test(d.body.innerText));
+  ok('informações institucionais no rodapé (cheque, 10%, DECON)',
+     /Não aceitamos cheques/i.test(d.getElementById('rodape').innerText) &&
+     /DECON-CE/i.test(d.getElementById('rodape').innerText));
 
   // --- Acessibilidade básica -------------------------------------------------
   const semAlt = [...d.querySelectorAll('img')].filter(i => !i.alt).length;

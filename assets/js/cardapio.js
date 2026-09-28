@@ -113,19 +113,6 @@
     'CORANTES': '<path d="M5 19a4 4 0 0 0 4-4c0-2 1-3 2-4l7-7 2 2-7 7c-1 1-2 2-4 2a4 4 0 0 0-4 4z"/><circle cx="7" cy="17" r="1"/>'
   };
 
-  var DESCRICOES_ALERGENOS = {
-    'GLÚTEN': 'Trigo, centeio, cevada, aveia e derivados.',
-    'LACTOSE': 'Açúcar natural presente no leite e derivados.',
-    'LEITE': 'Proteínas do leite de vaca e derivados.',
-    'OVO': 'Ovos e preparações derivadas.',
-    'PEIXE': 'Pescados de água doce ou salgada.',
-    'CRUSTÁCEOS': 'Camarão, caranguejo, lagosta e afins.',
-    'SOJA': 'Soja e produtos à base de soja.',
-    'CASTANHAS': 'Castanha-de-caju, do Pará, nozes e afins.',
-    'AMÊNDOAS': 'Amêndoas e derivados.',
-    'CORANTES': 'Corantes artificiais e aditivos alimentares.'
-  };
-
   // Termos que descrevem restricao alimentar, nao ingrediente. Buscar por
   // "gluten" nao pode devolver uma lista que pareca uma classificacao segura:
   // devolve a orientacao correta, que e falar com a equipe.
@@ -255,11 +242,8 @@
 
   function porcaoHTML(produto) {
     var p = produto.porcao;
-    if (p.estado === 'informada' && p.texto) {
+    if (p && p.texto) {
       return '<span class="item__porcao">' + esc(p.texto) + '</span>';
-    }
-    if (p.estado === 'em_conferencia') {
-      return '<span class="item__porcao item__porcao--conferencia">Porção em conferência</span>';
     }
     return '';
   }
@@ -279,14 +263,13 @@
   function alergenosCardHTML(produto) {
     var a = produto.alimentar;
     if (!a || !a.declarados || !a.declarados.length) return '';
-    return '<div class="item__alergenos" aria-label="Alérgenos: ' + esc(a.declarados.join(', ')) + '">' +
-      a.declarados.map(function (rotulo) {
-        var glifo = GLIFOS[rotulo] || '<circle cx="12" cy="12" r="8"/>';
-        return '<span class="item__alergeno" title="Contém ' + esc(rotulo) + '" aria-label="' + esc(rotulo) + '">' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
-          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + glifo + '</svg>' +
-          '</span>';
-      }).join('') + '</div>';
+    return '<div class="item__alergenos">' + a.declarados.map(function (rotulo) {
+      var glifo = GLIFOS[rotulo] || '<circle cx="12" cy="12" r="8"/>';
+      return '<span class="item__alergeno" title="Contém ' + esc(rotulo) + '">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + glifo + '</svg>' +
+        '<span>' + esc(rotulo) + '</span></span>';
+    }).join('') + '</div>';
   }
 
   function variantesHTML(produto) {
@@ -318,10 +301,8 @@
 
   function itemBebida(produto) {
     var medida = [];
-    if (produto.porcao.estado === 'informada' && produto.porcao.texto) {
+    if (produto.porcao && produto.porcao.texto) {
       medida.push(esc(produto.porcao.texto));
-    } else if (produto.porcao.estado === 'em_conferencia') {
-      medida.push('<span class="item__porcao--conferencia">Volume em conferência</span>');
     }
     if (produto.descritor && produto.descritor !== (produto.porcao.texto || '')) {
       medida.push(esc(produto.descritor));
@@ -398,6 +379,19 @@
       '</div>' + corpo + '</section>';
   }
 
+  var DESCRICOES_ALERGENOS = {
+    'GLÚTEN': 'Presente em massas, empanados (panko), cervejas e pães.',
+    'LACTOSE': 'Presente em derivados de leite (queijos, manteigas, molhos).',
+    'LEITE': 'Presente em queijos, molhos e sobremesas.',
+    'OVO': 'Presente em massas, empanados, maioneses e sobremesas.',
+    'PEIXE': 'Pescada amarela e caldos de peixe.',
+    'CRUSTÁCEOS': 'Camarão e caranguejo.',
+    'SOJA': 'Presente em molhos artesanais e óleos de preparo.',
+    'CASTANHAS': 'Oleaginosas e derivados.',
+    'AMÊNDOAS': 'Frutos secos e preparações.',
+    'CORANTES': 'Colorantes alimentícios em bebidas e xaropes.'
+  };
+
   function legendaAlergenosHTML() {
     var itens = Object.keys(GLIFOS).map(function (rotulo) {
       var glifo = GLIFOS[rotulo];
@@ -417,11 +411,11 @@
     return '<section class="legenda-alergenos" id="legenda-alergenos" aria-labelledby="t-legenda-alergenos">' +
       '<div class="legenda-alergenos__cabeca">' +
       '<h2 id="t-legenda-alergenos">Legenda de alérgenos</h2>' +
-      '<p>Identificação dos ícones presentes nos itens do cardápio:</p>' +
+      '<p>Identificação dos principais ingredientes presentes nos itens do cardápio:</p>' +
       '</div>' +
       '<div class="legenda-alergenos__grid">' + itens + '</div>' +
-      '<div class="legenda-alergenos__nota">' +
-      '<p><strong>Importante:</strong> As marcações de cada prato foram transcritas do cardápio impresso e ainda não foram conferidas com a cozinha. Elas não substituem uma ficha técnica. Antes de pedir, informe à equipe sobre quaisquer alergias e restrições alimentares.</p>' +
+      '<div class="legenda-alergenos__aviso">' +
+      '<p><strong>ALÉRGICOS:</strong> Nossos pratos e bebidas são manipulados em uma mesma cozinha. Mesmo pratos sem os ingredientes listados <strong>podem conter traços de glúten, camarão, peixe, ovos, soja e leite por contaminação cruzada</strong>. Em caso de restrições ou alergias severas, por favor avise nossa equipe antes de fazer seu pedido.</p>' +
       '</div>' +
       '</section>';
   }
@@ -451,7 +445,11 @@
       if (ativa) abaAlvo = aba;
     });
     if (abaAlvo && rolarAba) {
-      abaAlvo.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+      var trilha = abaAlvo.parentElement;
+      if (trilha) {
+        var deslocamento = abaAlvo.offsetLeft - (trilha.clientWidth / 2) + (abaAlvo.clientWidth / 2);
+        trilha.scrollTo({ left: Math.max(0, deslocamento), behavior: 'smooth' });
+      }
     }
   }
 
@@ -510,16 +508,12 @@
 
   function desenharRodape() {
     var partes = [];
-    estado.dados.avisos.forEach(function (a) {
-      partes.push('<h2>' + esc(a.titulo) + '</h2><p>' + esc(a.texto) + '</p>');
-    });
-    var quando = dataCurta(estado.dados.publicado_em);
-    if (estado.origemCopia === 'estatica' && quando) {
-      partes.push('<p>Cardápio carregado da cópia salva em ' + esc(quando) +
-        '. Confirme preços e disponibilidade com a equipe.</p>');
-    } else if (quando) {
-      partes.push('<p>Cardápio publicado em ' + esc(quando) + '.</p>');
-    }
+    partes.push('<div class="rodape__institucional">' +
+      '<p><strong>Informações da casa:</strong> Não aceitamos cheques. &bull; Taxa de serviço (10%) é opcional (Lei Federal nº 13.419/2017).</p>' +
+      '<p><strong>Formas de pagamento:</strong> Dinheiro, PIX, Cartões de Débito e Crédito (Visa, Mastercard, Elo, Hipercard, American Express).</p>' +
+      '<p><strong>Atendimento ao Consumidor:</strong> DECON-CE 0800 275 8001 / (85) 3459-6320 &bull; PROCON Fortaleza 151.</p>' +
+      '</div>');
+
     partes.push('<div class="rodape__links">' +
       '<a href="../">Página do restaurante</a>' +
       '<a href="https://reservas.sirfisher.com.br/" data-evt="click_reservation">Reservar mesa</a>' +
@@ -529,7 +523,6 @@
     $('#rodape').innerHTML = partes.join('');
   }
 
-  // Nome da secao atual na barra do topo e sincronizacao com a barra de abas estilo iFood
   var rolagemAgendada = false;
   function atualizarSecaoAtiva() {
     rolagemAgendada = false;
@@ -600,16 +593,7 @@
 
   function blocoPorcao(produto) {
     var p = produto.porcao;
-    if (p.estado === 'em_conferencia') {
-      return '<section class="bloco bloco--conferencia"><h2>Porção</h2>' +
-        '<p>Esta medida está em conferência com a cozinha. Pergunte ao garçom ' +
-        'antes de pedir.</p></section>';
-    }
-    if (p.estado === 'nao_informada') {
-      return '<section class="bloco bloco--conferencia"><h2>Porção</h2>' +
-        '<p>Ainda não temos a medida cadastrada para este item. A equipe informa ' +
-        'na hora do pedido.</p></section>';
-    }
+    if (!p || (!p.texto && (!p.detalhes || !p.detalhes.length))) return '';
     var linhas = [];
     if (p.texto) linhas.push('<p><b>' + esc(p.texto) + '</b></p>');
     if (p.detalhes && p.detalhes.length) {
@@ -618,25 +602,21 @@
       }).join('') + '</ul>');
     }
     if (p.nota) linhas.push('<p class="nota">' + esc(p.nota) + '</p>');
-    // Peso nao vira numero de pessoas: sao informacoes diferentes e o
-    // rendimento nao foi confirmado por ninguem.
     return '<section class="bloco"><h2>Porção</h2>' + linhas.join('') + '</section>';
   }
 
   function blocoAlimentar(produto) {
     var a = produto.alimentar;
+    if (!a) return '';
     var corpo = '';
-    if (a.declarados.length) {
+    if (a.declarados && a.declarados.length) {
       corpo += '<div class="alergenos">' + a.declarados.map(alergenoHTML).join('') + '</div>';
+      corpo += '<p class="nota">Contém: ' + esc(a.declarados.join(', ')) + '.</p>';
     }
-    corpo += '<p class="nota">' + esc(a.texto) + '</p>';
-    if (a.confirmado.length) {
+    if (a.confirmado && a.confirmado.length) {
       corpo += '<p><b>Confirmado pela cozinha:</b> ' + esc(a.confirmado.join(', ')) + '</p>';
     }
-    if (a.contato_cruzado.length) {
-      corpo += '<p><b>Risco de contato cruzado confirmado:</b> ' +
-        esc(a.contato_cruzado.join(', ')) + '</p>';
-    }
+    corpo += '<p class="nota">Em caso de alergias graves ou restrições alimentares, consulte sempre nossa equipe antes de fazer o pedido.</p>';
     return '<section class="bloco bloco--alimentar"><h2>Informação alimentar</h2>' +
       corpo + '</section>';
   }
@@ -675,11 +655,7 @@
         'Diga ao garçom qual você prefere.') +
       blocoPrecos('Adicionais', produto.adicionais,
         'Valor somado ao preço do prato, se você pedir.') +
-      blocoAlimentar(produto) +
-      '<section class="bloco"><h2>Como pedir</h2><p>Peça ao garçom pelo nome: ' +
-      '<b>' + esc(produto.nome) + '</b>' +
-      (produto.descritor ? ' — ' + esc(produto.descritor) : '') +
-      '.</p></section>';
+      blocoAlimentar(produto);
 
     estado.rolagemGuardada = window.scrollY;
     painel.hidden = false;
@@ -739,10 +715,7 @@
     if (ehTermoDeRestricao(termo)) {
       alvo.innerHTML = '<div class="busca-vazia">' +
         '<p><b>Sobre alergias e restrições, fale com a equipe.</b></p>' +
-        '<p>As marcações que aparecem em cada prato vêm do cardápio impresso e ' +
-        'ainda não foram conferidas com a cozinha. Por isso o cardápio não ' +
-        'separa pratos por restrição alimentar. Chame o garçom: ele consulta ' +
-        'os ingredientes com a cozinha.</p></div>';
+        '<p>Nossos pratos são preparados no mesmo ambiente. Para sua segurança em casos de alergias ou intolerâncias alimentares, consulte nossa equipe diretamente antes de fazer seu pedido.</p></div>';
       sinal('cardapio_busca', { resultados: 0, tipo: 'restricao_alimentar' });
       return;
     }
