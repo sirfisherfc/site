@@ -263,6 +263,18 @@
     return selos.join('');
   }
 
+  function alergenosCardHTML(produto) {
+    var a = produto.alimentar;
+    if (!a || !a.declarados || !a.declarados.length) return '';
+    return '<div class="item__alergenos">' + a.declarados.map(function (rotulo) {
+      var glifo = GLIFOS[rotulo] || '<circle cx="12" cy="12" r="8"/>';
+      return '<span class="item__alergeno" title="Contém ' + esc(rotulo) + '">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + glifo + '</svg>' +
+        '<span>' + esc(rotulo) + '</span></span>';
+    }).join('') + '</div>';
+  }
+
   function variantesHTML(produto) {
     if (!produto.variantes.length) return '';
     return '<ul class="variantes">' + produto.variantes.map(function (v) {
@@ -280,6 +292,7 @@
       (produto.descritor ? '<p class="item__descritor">' + esc(produto.descritor) + '</p>' : '') +
       (produto.descricao ? '<p class="item__descricao">' + esc(produto.descricao) + '</p>' : '') +
       '<div class="item__dados">' + precoHTML(produto) + porcaoHTML(produto) + '</div>' +
+      alergenosCardHTML(produto) +
       variantesHTML(produto) +
       '<div class="item__rodape">' + selosHTML(produto) +
       '<span class="item__abrir">Ver detalhes' +
@@ -307,6 +320,7 @@
       '<h3 class="item__nome">' + esc(produto.nome) + '</h3>' +
       precoHTML(produto) +
       (medida.length ? '<p class="item__medida">' + medida.join(' · ') + '</p>' : '') +
+      alergenosCardHTML(produto) +
       variantesHTML(produto) +
       '</a></li>';
   }
@@ -318,6 +332,7 @@
       '<h3 class="item__nome">' + esc(produto.nome) + '</h3>' +
       precoHTML(produto) +
       (produto.descritor ? '<p class="item__descricao">' + esc(produto.descritor) + '</p>' : '') +
+      alergenosCardHTML(produto) +
       '</a></li>';
   }
 

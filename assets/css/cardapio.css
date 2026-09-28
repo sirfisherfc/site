@@ -520,6 +520,16 @@ main { padding-bottom: 40px; }
 }
 .alergeno svg { width: 18px; height: 18px; flex: none; }
 
+.item__alergenos { display: flex; flex-wrap: wrap; gap: 5px; margin: 6px 0 2px; }
+.item__alergeno {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11.5px; font-weight: 600; line-height: 1;
+  padding: 3px 8px; border-radius: 999px;
+  border: 1px solid var(--hairline-forte); color: var(--on-card-soft);
+  background: var(--page-bg);
+}
+.item__alergeno svg { width: 13px; height: 13px; flex: none; }
+
 .bloco--alimentar { border-left: 4px solid var(--sun); }
 .bloco--conferencia { border-left: 4px solid var(--coral); }
 
