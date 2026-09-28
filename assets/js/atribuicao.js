@@ -1,48 +1,192 @@
-/* Repasse de atribuicao entre o site e o portal de reservas.
-   ---------------------------------------------------------------------------
-   O portal vive em outro subdominio (reservas.sirfisher.com.br) e so registra a
-   origem que chega na propria URL. Sem este repasse, um clique de anuncio que
-   cai numa pagina do site perde a atribuicao no salto para a reserva — e a
-   campanha fica sem como provar que gerou a mesa.
-
-   PRECEDENCIA: quem chega vence quem esta escrito na pagina.
-   Cada pagina ja carrega um padrao no proprio botao, por exemplo
-   utm_source=site&utm_medium=organic&utm_content=almoco_executivo. Esse padrao
-   descreve de onde a pessoa CLICOU, e serve enquanto ela chegou por conta
-   propria. Quando ela chega por um anuncio, a verdade e o anuncio: sobrescrever
-   e o comportamento correto. A versao anterior deste codigo so preenchia chave
-   ausente (`!has(key)`), o que fazia o padrao da pagina vencer o anuncio e
-   registrar trafego pago como organico.
-
-   O utm_content da pagina sobrevive quando o anuncio nao manda o seu, o que da
-   de graca a informacao de qual pagina converteu.
-
-   Os identificadores de clique (fbclid, gclid) viajam junto porque sao o que
-   permite ao Pixel do Meta montar o cookie _fbc no dominio do portal e ao
-   Google Ads reconciliar a conversao mais tarde.
-   --------------------------------------------------------------------------- */
+/* Atribuicao do site e sinais de intencao para o ChatGPT Ads.
+   Mantem a origem entre www.sirfisher.com.br e reservas.sirfisher.com.br,
+   decora os links de reserva e mede acoes sem confundi-las com uma visita. */
 (function () {
+  'use strict';
+
+  var STORAGE_KEY = 'sf_attribution_v1';
+  var COOKIE_KEY = 'sf_attribution_v1';
+  var PIXEL_ID = 'EeuuYrh8KtQu1TPmmwWctv';
   var tracked = [
     'oppref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
     'campaign_id', 'ad_group_id', 'ad_id', 'fbclid', 'gclid'
   ];
 
-  var source = new URLSearchParams(window.location.search);
-  if (!tracked.some(function (key) { return source.get(key); })) return;
+  function readCookie(name) {
+    var prefix = name + '=';
+    var entries = document.cookie ? document.cookie.split('; ') : [];
+    for (var i = 0; i < entries.length; i += 1) {
+      if (entries[i].indexOf(prefix) !== 0) continue;
+      try {
+        return decodeURIComponent(entries[i].slice(prefix.length));
+      } catch (e) {
+        return null;
+      }
+    }
+    return null;
+  }
 
-  document.querySelectorAll('a[href^="https://reservas.sirfisher.com.br/"]').forEach(function (link) {
-    var destination;
+  function parseStored(raw) {
+    if (!raw) return null;
     try {
-      destination = new URL(link.href);
+      var parsed = JSON.parse(raw);
+      return parsed && typeof parsed === 'object' ? parsed : null;
     } catch (e) {
-      return;
+      return null;
+    }
+  }
+
+  function loadStored() {
+    var local = null;
+    try {
+      local = window.localStorage.getItem(STORAGE_KEY);
+    } catch (e) {
+      // O navegador pode bloquear armazenamento local.
+    }
+    return parseStored(local) || parseStored(readCookie(COOKIE_KEY)) || {};
+  }
+
+  function persist(attribution) {
+    var value = JSON.stringify(attribution);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, value);
+    } catch (e) {
+      // O cookie compartilhado ainda pode preservar a origem.
     }
 
+    var secure = window.location.protocol === 'https:' ? '; Secure' : '';
+    var domain = window.location.hostname.endsWith('.sirfisher.com.br')
+      ? '; Domain=.sirfisher.com.br'
+      : '';
+    document.cookie = COOKIE_KEY + '=' + encodeURIComponent(value) +
+      '; Max-Age=7776000; Path=/' + domain + '; SameSite=Lax' + secure;
+  }
+
+  function limited(value, max) {
+    var limit = max || 255;
+    return typeof value === 'string' && value.length <= limit ? value : null;
+  }
+
+  function capture() {
+    var params = new URLSearchParams(window.location.search);
+    var incoming = {};
     tracked.forEach(function (key) {
-      var value = source.get(key);
-      if (value) destination.searchParams.set(key, value);
+      var value = limited(params.get(key), key === 'oppref' ? 1024 : 255);
+      if (value) incoming[key] = value;
     });
 
-    link.href = destination.toString();
-  });
+    var stored = loadStored();
+    if (Object.keys(incoming).length) {
+      var current = Object.assign({}, stored, incoming, {
+        landing_url: window.location.href.slice(0, 2000),
+        referrer: (document.referrer || '').slice(0, 2000) || null,
+        captured_at: new Date().toISOString()
+      });
+      persist(current);
+      return current;
+    }
+
+    if (!stored.captured_at) {
+      stored = {
+        landing_url: window.location.href.slice(0, 2000),
+        referrer: (document.referrer || '').slice(0, 2000) || null,
+        captured_at: new Date().toISOString()
+      };
+      persist(stored);
+    }
+    return stored;
+  }
+
+  function decorateReservationLinks(attribution, root) {
+    var scope = root && root.querySelectorAll ? root : document;
+    scope.querySelectorAll('a[href^="https://reservas.sirfisher.com.br/"]').forEach(function (link) {
+      var destination;
+      try {
+        destination = new URL(link.href);
+      } catch (e) {
+        return;
+      }
+
+      tracked.forEach(function (key) {
+        var value = attribution[key];
+        if (value) destination.searchParams.set(key, value);
+      });
+      link.href = destination.toString();
+    });
+  }
+
+  function initOpenAIAdsPixel() {
+    if (!PIXEL_ID || window.oaiq) return;
+    var queue = function () { queue.q.push(arguments); };
+    queue.q = [];
+    window.oaiq = queue;
+
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://bzrcdn.openai.com/sdk/oaiq.min.js';
+    document.head.appendChild(script);
+    window.oaiq('init', { pixelId: PIXEL_ID });
+  }
+
+  function measurePage() {
+    if (typeof window.oaiq !== 'function') return;
+    var path = window.location.pathname.replace(/^\/+|\/+$/g, '');
+    var pageId = path ? 'sir_fisher_' + path.replace(/[^a-z0-9]+/gi, '_').toLowerCase() : 'sir_fisher_site';
+    var pageName = path === 'cardapio' ? 'Cardapio Sir Fisher' : document.title.slice(0, 100);
+
+    window.oaiq('measure', 'page_viewed', {
+      type: 'contents',
+      contents: [{ id: pageId, name: pageName, content_type: 'page' }]
+    });
+
+    if (path === 'cardapio') {
+      window.oaiq('measure', 'custom', { type: 'custom' }, {
+        custom_event_name: 'menu_opened'
+      });
+    }
+  }
+
+  function measureIntentClicks() {
+    var events = {
+      click_maps: 'directions_requested',
+      click_whatsapp: 'whatsapp_started',
+      click_phone: 'phone_call_started',
+      click_reservation: 'reservation_started'
+    };
+
+    document.addEventListener('click', function (event) {
+      var link = event.target.closest ? event.target.closest('a[data-evt]') : null;
+      if (!link || typeof window.oaiq !== 'function') return;
+      var customName = events[link.getAttribute('data-evt')];
+      if (!customName) return;
+      window.oaiq('measure', 'custom', { type: 'custom' }, {
+        custom_event_name: customName
+      });
+    }, { passive: true });
+  }
+
+  var attribution = capture();
+  decorateReservationLinks(attribution, document);
+
+  if (window.MutationObserver) {
+    new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (node.nodeType !== 1) return;
+          if (node.matches && node.matches('a[href^="https://reservas.sirfisher.com.br/"]')) {
+            decorateReservationLinks(attribution, node.parentNode || document);
+          } else {
+            decorateReservationLinks(attribution, node);
+          }
+        });
+      });
+    }).observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  // A pagina de privacidade explica a medicao, mas nao e parte do funil pago.
+  if (window.location.pathname.replace(/\/+$/, '') !== '/privacidade') {
+    initOpenAIAdsPixel();
+    measurePage();
+    measureIntentClicks();
+  }
 })();

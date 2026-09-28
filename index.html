@@ -119,7 +119,7 @@
     "hasMap": "https://maps.google.com/?cid=11176340545794629736",
     "servesCuisine": ["Seafood", "Brazilian", "British"],
     "priceRange": "$$",
-    "hasMenu": "https://www.hubt.com.br/sir-fisher-praia/",
+    "hasMenu": "https://www.sirfisher.com.br/cardapio/",
     "acceptsReservations": "https://reservas.sirfisher.com.br/",
     "openingHoursSpecification": [
       {
@@ -248,30 +248,6 @@
       linker: { domains: ['sirfisher.com.br', 'www.sirfisher.com.br', 'reservas.sirfisher.com.br'] }
     });
   </script>
-  <script>
-    // Pixel do ChatGPT Ads: o oppref chega automaticamente na URL do anuncio.
-    (function () {
-      if (window.oaiq) return;
-      var queue = function () { queue.q.push(arguments); };
-      queue.q = [];
-      window.oaiq = queue;
-
-      var script = document.createElement('script');
-      script.async = true;
-      script.src = 'https://bzrcdn.openai.com/sdk/oaiq.min.js';
-      document.head.appendChild(script);
-
-      window.oaiq('init', { pixelId: 'EeuuYrh8KtQu1TPmmwWctv' });
-      window.oaiq('measure', 'page_viewed', {
-        type: 'contents',
-        contents: [{
-          id: 'sir_fisher_site',
-          name: 'Site Sir Fisher',
-          content_type: 'page'
-        }]
-      });
-    })();
-  </script>
   <!-- Meta Pixel. O mesmo dataset da Conversions API: os eventos do navegador e
        os do servidor sao unidos pelo event_id, para a reserva nao contar duas
        vezes. Ver supabase/meta-capi.sql no repositorio de reservas. -->
@@ -319,7 +295,7 @@
         <a href="#fim-de-tarde">Pôr do sol</a>
         <a href="#reservar">Reservas</a>
         <a href="#local">Onde estamos</a>
-        <a href="https://www.hubt.com.br/sir-fisher-praia/" target="_blank" rel="noopener" data-evt="click_menu">Cardápio</a>
+        <a href="./cardapio/" data-evt="click_menu">Cardápio</a>
       </nav>
       <a class="btn btn--primary topbar__cta" href="https://reservas.sirfisher.com.br/" target="_blank" rel="noopener" data-evt="click_reservation">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="1"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
@@ -356,7 +332,7 @@
       <div class="actions">
 
         <!-- CARDÁPIO = a própria foto do prato leva ao menu -->
-        <a class="feature" href="https://www.hubt.com.br/sir-fisher-praia/" target="_blank" rel="noopener" data-evt="click_menu" aria-label="Ver o cardápio completo">
+        <a class="feature" href="./cardapio/" data-evt="click_menu" aria-label="Ver o cardápio completo">
           <picture>
             <source type="image/avif" srcset="./assets/img/prato-800.avif 800w, ./assets/img/prato-1200.avif 1200w" sizes="(max-width:460px) 100vw, 460px" />
             <source type="image/webp" srcset="./assets/img/prato-800.webp 800w, ./assets/img/prato-1200.webp 1200w" sizes="(max-width:460px) 100vw, 460px" />
@@ -375,7 +351,7 @@
         </a>
 
         <div class="btn-pair">
-          <a class="btn btn--solid" href="https://www.hubt.com.br/sir-fisher-praia/" target="_blank" rel="noopener" data-evt="click_menu">
+          <a class="btn btn--solid" href="./cardapio/" data-evt="click_menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
             Cardápio
           </a>
@@ -469,7 +445,7 @@
           </figure>
         </div>
 
-        <a class="btn btn--solid" href="https://www.hubt.com.br/sir-fisher-praia/" target="_blank" rel="noopener" data-evt="click_menu">
+        <a class="btn btn--solid" href="./cardapio/" data-evt="click_menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
           Ver cardápio completo
         </a>
@@ -517,6 +493,9 @@
           </a>
           <a class="btn btn--ghost" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">
             WhatsApp
+          </a>
+          <a class="btn btn--ghost" href="tel:+5585988544274" data-evt="click_phone">
+            Ligar
           </a>
         </div>
       </section>
@@ -686,7 +665,8 @@
         // Eventos padrao do Meta: o otimizador entende esses nomes nativamente,
         // ao contrario de eventos customizados.
         var meta = { click_menu: 'ViewContent', click_reservation: 'InitiateCheckout',
-                     click_maps: 'FindLocation', click_whatsapp: 'Contact' }[name];
+                     click_maps: 'FindLocation', click_whatsapp: 'Contact',
+                     click_phone: 'Contact' }[name];
         if (meta && typeof window.fbq === 'function') {
           window.fbq('track', meta, { content_name: payload.link_text });
         }

@@ -420,7 +420,9 @@
     partes.push('<div class="rodape__links">' +
       '<a href="../">Página do restaurante</a>' +
       '<a href="https://reservas.sirfisher.com.br/" data-evt="click_reservation">Reservar mesa</a>' +
-      '<a href="../como-chegar/">Como chegar</a></div>');
+      '<a href="../como-chegar/">Como chegar</a>' +
+      '<a href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">WhatsApp</a>' +
+      '<a href="tel:+5585988544274" data-evt="click_phone">Ligar</a></div>');
     $('#rodape').innerHTML = partes.join('');
   }
 
@@ -753,6 +755,12 @@
     document.addEventListener('click', function (e) {
       var alvo = e.target.closest ? e.target.closest('a') : null;
       if (!alvo) return;
+      var nome = alvo.getAttribute('data-evt');
+      if (nome) {
+        var rotulo = (alvo.getAttribute('aria-label') || alvo.textContent || '')
+          .replace(/\s+/g, ' ').trim().slice(0, 80);
+        sinal(nome, { link_url: alvo.href, link_text: rotulo });
+      }
       if (alvo.closest('#painel-categorias') || alvo.hasAttribute('data-fechar-busca')) {
         $$('.painel').forEach(function (p) { p.hidden = true; });
         $$('.botao-topo').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
