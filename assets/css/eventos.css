@@ -3,6 +3,7 @@
 :root { --event-ink:#12293d; --event-coral:#df5b3b; --event-cream:#fbf7ef; --event-line:#d9d4ca; --event-green:#28734f; --event-yellow:#9d6412; --event-red:#a63b32; }
 * { box-sizing: border-box; }
 .event-page { margin:0; background:var(--event-cream); color:var(--event-ink); font-family:"Work Sans",sans-serif; }
+.event-page::before { content:none!important; display:none!important; }
 .event-topbar { max-width:1120px; margin:auto; padding:18px 20px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
 .event-topbar img { display:block; width:150px; height:auto; }
 .event-topbar span { font-size:.82rem; font-weight:650; color:#52606c; }
