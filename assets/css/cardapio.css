@@ -569,8 +569,8 @@ main { padding-bottom: 40px; }
 /* Variantes na propria lista: nomes e precos legiveis, sem
    seletor, sem caixa de marcacao, sem botao de adicionar. */
 .variantes {
-  list-style: none; margin: 8px 0 0; padding: 8px 0 0;
-  border-top: 1px dashed var(--hairline);
+  list-style: none; margin: 4px 0 0; padding: 0;
+  border: 0;
   font-size: 15px;
 }
 .variantes li {
@@ -620,7 +620,7 @@ main { padding-bottom: 40px; }
   grid-column: 1 / -1; margin: 3px 0 0;
 }
 .item--bebida .variantes {
-  grid-column: 1 / -1; margin: 4px 0 0; padding: 4px 0 0;
+  grid-column: 1 / -1; margin: 4px 0 0; padding: 0;
 }
 
 /* ------------------------------------------------------------
