@@ -77,6 +77,7 @@ button[disabled] { opacity:.6; cursor:wait; }
 .contact-card,.success-card { margin-top:28px; padding:24px; border-radius:18px; background:#f5f2eb; }
 .contact-card h3,.success-card h3 { margin:0 0 6px; font:600 1.55rem/1.15 "Fraunces",serif; }
 .contact-card > p { margin:0 0 20px; color:#5c6972; }
+.success-wa { display:inline-flex; margin-top:12px; border-radius:12px; padding:13px 17px; background:#1d9b55; color:#fff; font-weight:700; text-decoration:none; }
 .submit-button { width:100%; margin-top:22px; }
 .honeypot { position:absolute!important; left:-10000px!important; width:1px!important; height:1px!important; overflow:hidden!important; }
 .event-footer { display:flex; justify-content:center; gap:24px; padding:28px 20px 48px; font-size:.82rem; color:#66747d; }

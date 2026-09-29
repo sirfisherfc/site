@@ -144,7 +144,8 @@
       });
       contactForm.hidden = true;
       var success = document.getElementById('success-card');
-      success.innerHTML = '<h3>Recebemos sua configuração.</h3><p>Código <strong>' + esc(response.publicCode) + '</strong>. A equipe vai validar disponibilidade e condições antes de confirmar qualquer reserva.</p>';
+      success.innerHTML = '<h3>Recebemos sua configuração.</h3><p>Código <strong>' + esc(response.publicCode) + '</strong>. A equipe vai validar disponibilidade e condições antes de confirmar qualquer reserva.</p>' +
+        (response.whatsappUrl ? '<a class="success-wa" href="' + esc(response.whatsappUrl) + '" target="_blank" rel="noopener">Falar agora com a equipe pelo WhatsApp</a>' : '');
       success.hidden = false;
       success.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } catch (error) { alertIn('contact-alert', error.message); }
