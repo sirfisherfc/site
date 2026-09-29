@@ -230,12 +230,8 @@
 
   function precoHTML(produto) {
     var p = produto.preco;
-    if (p.tipo === 'ausente') {
-      return '<span class="item__preco"><small>Preço sob consulta</small></span>';
-    }
-    if (p.tipo === 'faixa') {
-      return '<span class="item__preco">' + dinheiro(p.min) +
-        ' <small>a ' + dinheiro(p.max) + '</small></span>';
+    if (p.tipo === 'ausente' || p.tipo === 'faixa') {
+      return '';
     }
     return '<span class="item__preco">' + dinheiro(p.centavos) + '</span>';
   }
@@ -338,12 +334,7 @@
   }
 
   function faixaHTML(cat) {
-    if (!cat.faixa) return '';
-    var f = cat.faixa;
-    var texto = f.min === f.max
-      ? f.itens + (f.itens === 1 ? ' opção · ' : ' opções · ') + dinheiro(f.min)
-      : f.itens + ' opções · de ' + dinheiro(f.min) + ' a ' + dinheiro(f.max);
-    return '<p class="secao__faixa">' + esc(texto) + '</p>';
+    return '';
   }
 
   function secaoHTML(cat, produtos) {
@@ -375,7 +366,6 @@
       '<div class="secao__cabeca">' +
       '<h2 id="t-' + esc(cat.id) + '">' + esc(cat.nome) + '</h2>' +
       (cat.resumo ? '<p class="secao__resumo">' + esc(cat.resumo) + '</p>' : '') +
-      faixaHTML(cat) +
       '</div>' + corpo + '</section>';
   }
 
@@ -635,7 +625,7 @@
     var corpo = $('#detalhe-corpo');
 
     var preco = produto.preco.tipo === 'faixa'
-      ? dinheiro(produto.preco.min) + ' a ' + dinheiro(produto.preco.max)
+      ? ''
       : (produto.preco.centavos !== null ? dinheiro(produto.preco.centavos) : 'Preço sob consulta');
 
     corpo.innerHTML =
@@ -644,7 +634,7 @@
       '<p class="detalhe__categoria">' + esc(cat.nome) + '</p>' +
       '<h1 id="detalhe-titulo">' + esc(produto.nome) + '</h1>' +
       (produto.descritor ? '<p class="detalhe__descritor">' + esc(produto.descritor) + '</p>' : '') +
-      '<p class="detalhe__preco">' + esc(preco) + '</p>' +
+      (preco ? '<p class="detalhe__preco">' + esc(preco) + '</p>' : '') +
       (!produto.disponivel
         ? '<p><span class="selo selo--esgotado">Hoje não temos este item</span></p>' : '') +
       '</div>' +
@@ -751,11 +741,11 @@
       (achados.length === 1 ? ' item encontrado' : ' itens encontrados') + '</p>' +
       '<ul class="busca-resultados">' + achados.map(function (p) {
         var preco = p.preco.tipo === 'faixa'
-          ? dinheiro(p.preco.min) + ' a ' + dinheiro(p.preco.max)
+          ? ''
           : dinheiro(p.preco.centavos);
         return '<li><a href="#item-' + esc(p.id) + '" data-fechar-busca>' +
           '<span class="nome">' + esc(p.nome) + '</span> ' +
-          '<span class="onde">' + esc(mapa[p.categoria]) + ' · ' + esc(preco) +
+          '<span class="onde">' + esc(mapa[p.categoria]) + (preco ? ' · ' + esc(preco) : '') +
           (p.disponivel ? '' : ' · hoje não temos') + '</span></a></li>';
       }).join('') + '</ul>';
   }
