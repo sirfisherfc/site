@@ -104,7 +104,7 @@
   .shell--home .intro {
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    grid-template-rows: 1fr auto auto auto auto 1fr;
+    grid-template-rows: 1fr auto auto auto auto auto 1fr;
     column-gap: 64px;
     min-height: clamp(560px, calc(100vh - 72px), 800px);
     padding: 28px var(--gut) 8px;
@@ -140,8 +140,11 @@
   .shell--home .actions { display: contents; }
   .shell--home .actions > * { grid-column: 1; max-width: 440px; }
   .shell--home .actions > .btn-pair { grid-row: 3; margin-top: 34px; }
-  .shell--home .actions > .btn--lunch { grid-row: 4; margin-top: 12px; }
-  .shell--home .actions > .btn--ghost { grid-row: 5; margin-top: 12px; }
+  .shell--home .actions > .promo-rv { grid-row: 4; margin-top: 12px; }
+  .shell--home .actions > .btn--lunch { grid-row: 5; margin-top: 12px; }
+  .shell--home .actions > .btn--ghost { grid-row: 6; margin-top: 12px; }
+  .shell--home .promo-rv { transition: transform 0.2s ease; }
+  .shell--home .promo-rv:hover { transform: translateY(-2px); }
   .shell--home .actions > .feature {
     grid-column: 2; grid-row: 1 / -1;
     align-self: end; justify-self: start;

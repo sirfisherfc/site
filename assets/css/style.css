@@ -302,6 +302,47 @@ a { color: inherit; }
 .btn--lunch { background: var(--sun); color: #12293d; box-shadow: 0 6px 16px rgba(240,166,63,0.28); }
 .btn--lunch:hover { filter: brightness(1.05); }
 .btn--lunch[hidden] { display: none; }
+/* Destaque do Réveillon: cartão noturno com cores fixas (igual nos dois temas),
+   para não repetir a foto do pôr do sol do topo. */
+.promo-rv {
+  position: relative;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 18px 18px 18px 20px;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(255,217,160,0.32), transparent 34%),
+    radial-gradient(circle at 70% 70%, rgba(223,91,59,0.22), transparent 36%),
+    linear-gradient(135deg, #0f1f2e 0%, #1a3346 100%);
+  box-shadow: 0 12px 26px rgba(18,41,61,0.28);
+  isolation: isolate;
+}
+.promo-rv__kicker {
+  display: block;
+  font-weight: 600; font-size: 0.68rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: #ffd9a0; margin-bottom: 4px;
+}
+.promo-rv__title {
+  display: block;
+  font-family: var(--font-display); font-weight: 600;
+  font-variation-settings: "opsz" 120;
+  font-size: 1.55rem; line-height: 1.05;
+}
+.promo-rv__sub {
+  display: block; margin-top: 6px;
+  font-weight: 500; font-size: 0.82rem; color: rgba(255,255,255,0.88);
+}
+.promo-rv__go {
+  flex: none; width: 44px; height: 44px; border-radius: 50%;
+  background: #ffd9a0; color: #0f1f2e;
+  display: flex; align-items: center; justify-content: center;
+}
+.promo-rv__go svg { width: 20px; height: 20px; }
+.promo-rv:active { transform: scale(0.992); }
+.promo-rv:focus-visible { outline: 3px solid var(--sea); outline-offset: 3px; }
+
 .btn__pill {
   font-size: 0.78rem; font-weight: 600;
   padding: 3px 9px; border-radius: 999px;
