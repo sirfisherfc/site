@@ -447,7 +447,9 @@
     if (abaAlvo && rolarAba) {
       var trilha = abaAlvo.parentElement;
       if (trilha) {
-        var deslocamento = abaAlvo.offsetLeft - (trilha.clientWidth / 2) + (abaAlvo.clientWidth / 2);
+        var rectAba = abaAlvo.getBoundingClientRect();
+        var rectTrilha = trilha.getBoundingClientRect();
+        var deslocamento = trilha.scrollLeft + (rectAba.left - rectTrilha.left) - (trilha.clientWidth / 2) + (rectAba.width / 2);
         trilha.scrollTo({ left: Math.max(0, deslocamento), behavior: 'smooth' });
       }
     }
@@ -850,9 +852,33 @@
       campo.focus();
     });
 
-    // Clique nas abas de categorias no estilo iFood
+    // Navegação horizontal por abas no estilo iFood
     var trilha = $('#abas-trilha');
+    var btnEsq = $('#abas-nav-esq');
+    var btnDir = $('#abas-nav-dir');
+
+    function atualizarSetasAbas() {
+      if (!trilha || !btnEsq || !btnDir) return;
+      var sobraEsq = trilha.scrollLeft > 6;
+      var sobraDir = trilha.scrollLeft < (trilha.scrollWidth - trilha.clientWidth - 6);
+      btnEsq.style.opacity = sobraEsq ? '1' : '0.25';
+      btnEsq.style.pointerEvents = sobraEsq ? 'auto' : 'none';
+      btnDir.style.opacity = sobraDir ? '1' : '0.25';
+      btnDir.style.pointerEvents = sobraDir ? 'auto' : 'none';
+    }
+
     if (trilha) {
+      trilha.addEventListener('wheel', function (e) {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          trilha.scrollLeft += e.deltaY;
+        }
+      }, { passive: false });
+
+      trilha.addEventListener('scroll', atualizarSetasAbas, { passive: true });
+      window.addEventListener('resize', atualizarSetasAbas, { passive: true });
+      setTimeout(atualizarSetasAbas, 100);
+
       trilha.addEventListener('click', function (e) {
         var aba = e.target.closest ? e.target.closest('.aba-cat') : null;
         if (!aba) return;
@@ -860,6 +886,17 @@
         var catId = aba.getAttribute('data-cat');
         rolarParaCategoria(catId);
         sinal('cardapio_aba_clique', { categoria_id: catId });
+      });
+    }
+
+    if (btnEsq && trilha) {
+      btnEsq.addEventListener('click', function () {
+        trilha.scrollBy({ left: -260, behavior: 'smooth' });
+      });
+    }
+    if (btnDir && trilha) {
+      btnDir.addEventListener('click', function () {
+        trilha.scrollBy({ left: 260, behavior: 'smooth' });
       });
     }
 
