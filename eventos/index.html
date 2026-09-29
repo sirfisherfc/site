@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monte seu evento | Sir Fisher</title>
+  <meta name="description" content="Monte uma pré-proposta de evento no Sir Fisher em poucos passos, com alimentos, bebidas e atendimento incluído." />
+  <link rel="canonical" href="https://www.sirfisher.com.br/eventos/" />
+  <meta name="theme-color" content="#12293d" />
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+  <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260929" />
+  <link rel="stylesheet" href="../assets/css/eventos.css?v=20260929" />
+</head>
+<body class="event-page">
+  <header class="event-topbar">
+    <a href="../" aria-label="Voltar ao site do Sir Fisher">
+      <img src="../assets/img/logo-horizontal.png" alt="Sir Fisher" width="640" height="191" />
+    </a>
+    <span>Eventos de 30 a 100 pessoas</span>
+  </header>
+
+  <main class="event-shell">
+    <section class="event-hero">
+      <div>
+        <p class="eyebrow">Sua experiência, do seu jeito</p>
+        <h1>Monte uma pré-proposta em cerca de dois minutos.</h1>
+        <p>Você escolhe o estilo. A gente dimensiona alimentos, bebidas e atendimento — sem pedir que você calcule porções.</p>
+      </div>
+      <img src="../assets/img/clientes-fim-de-tarde-sir-fisher-660.webp" alt="Grupo reunido no Sir Fisher no fim da tarde" width="660" height="440" />
+    </section>
+
+    <section class="config-card" id="configurator" aria-labelledby="config-title">
+      <div class="progress-wrap">
+        <div class="progress-copy"><span id="step-label">Etapa 1 de 5</span><span id="step-name">Data e horário</span></div>
+        <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+      </div>
+      <h2 id="config-title" class="sr-only">Configurador de eventos</h2>
+
+      <form id="event-form" novalidate>
+        <fieldset class="event-step is-active" data-step="1">
+          <legend>Quando será o encontro?</legend>
+          <p class="step-help">Vamos verificar funcionamento, bloqueios e impacto provável na operação. Isso ainda não confirma a reserva.</p>
+          <div class="field-grid field-grid--3">
+            <label>Data<input type="date" name="date" required /></label>
+            <label>Começa às<input type="time" name="startTime" required /></label>
+            <label>Duração<select name="durationHours" required><option value="3">3 horas</option><option value="4">4 horas</option><option value="5">5 horas</option><option value="6">6 horas</option></select></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="event-step" data-step="2">
+          <legend>Quantas pessoas você espera?</legend>
+          <p class="step-help">A faixa automática atende de 30 a 100 convidados.</p>
+          <div class="field-grid field-grid--2">
+            <label>Convidados<input type="number" name="guests" min="1" max="300" inputmode="numeric" value="40" required /></label>
+            <label>Crianças, se houver<input type="number" name="children" min="0" max="300" inputmode="numeric" value="0" /></label>
+          </div>
+          <label class="check-line"><input type="checkbox" name="dietaryRestriction" /> Há uma restrição alimentar importante no grupo</label>
+        </fieldset>
+
+        <fieldset class="event-step" data-step="3">
+          <legend>Como você imagina a comida?</legend>
+          <p class="step-help">As quantidades serão calculadas pelo sistema.</p>
+          <div class="choice-grid choice-grid--visual">
+            <label class="choice-card"><input type="radio" name="foodStyle" value="petiscos" required /><img src="../assets/img/dadinho-de-tapioca-sir-fisher-440.webp" alt="" /><span><strong>Petiscos para confraternizar</strong><small>Serviço volante e clima informal.</small></span></label>
+            <label class="choice-card"><input type="radio" name="foodStyle" value="petiscos_principal" /><img src="../assets/img/bolinha-de-peixe-cremosa-sir-fisher-440.webp" alt="" /><span><strong>Petiscos com prato principal</strong><small>Recepção leve e uma refeição depois.</small></span></label>
+            <label class="choice-card"><input type="radio" name="foodStyle" value="refeicao" /><img src="../assets/img/peixe-grelhado-sir-fisher-440.webp" alt="" /><span><strong>Almoço ou jantar</strong><small>Experiência centrada na refeição.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="foodStyle" value="recomendacao" checked /><span><strong>Quero uma recomendação</strong><small>Indicaremos o formato mais versátil.</small></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="event-step" data-step="4">
+          <legend>E as bebidas?</legend>
+          <p class="step-help">Priorizamos modelos previsíveis. Open bar sempre passa por validação.</p>
+          <div class="choice-grid">
+            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="individual" required /><span><strong>Cada convidado paga seu consumo</strong><small>Comandas individuais.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="sem_alcool" /><span><strong>Bebidas sem álcool incluídas</strong><small>Água, refrigerante e suco.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="credito" /><span><strong>Quantidade ou crédito contratado</strong><small>Um limite financeiro previsível.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="fichas" /><span><strong>Fichas por convidado</strong><small>Controle simples por pessoa.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="chope" /><span><strong>Chope controlado</strong><small>Quantidade previamente definida.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="selecionado" /><span><strong>Pacote selecionado</strong><small>Bebidas definidas para o grupo.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="open_bar" /><span><strong>Quero avaliar open bar</strong><small>Até três horas, sujeito à validação.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="recomendacao" checked /><span><strong>Quero uma recomendação</strong><small>Começamos pela opção mais previsível.</small></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="event-step" data-step="5">
+          <legend>Qual perfil combina com o evento?</legend>
+          <p class="step-help">O investimento por pessoa é opcional.</p>
+          <div class="choice-grid choice-grid--profiles">
+            <label class="choice-card choice-card--plain"><input type="radio" name="profile" value="essencial" required /><span><strong>Essencial</strong><small>Objetiva, bem servida e sem excessos.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="profile" value="equilibrada" /><span><strong>Equilibrada</strong><small>Variedade e conforto na medida.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="profile" value="completa" /><span><strong>Completa</strong><small>Mais variedade e uma experiência longa.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="profile" value="comparar" checked /><span><strong>Quero comparar</strong><small>Veja até três opções lado a lado.</small></span></label>
+          </div>
+          <label class="budget-field">Faixa de investimento por pessoa <span>(opcional)</span><div><span>R$</span><input type="number" name="budgetPerPerson" min="1" inputmode="decimal" placeholder="Ex.: 90" /></div></label>
+        </fieldset>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+        <div class="step-actions"><button class="back-button" id="back-button" type="button" hidden>Voltar</button><button class="next-button" id="next-button" type="button">Continuar</button><button class="next-button" id="calculate-button" type="submit" hidden>Ver opções</button></div>
+      </form>
+    </section>
+
+    <section class="results" id="results" aria-live="polite" hidden>
+      <div class="results-head"><p class="eyebrow">Pré-proposta</p><h2>Opções para comparar</h2><p id="availability-note"></p></div>
+      <div class="option-grid" id="option-grid"></div>
+      <form class="contact-card" id="contact-form" hidden>
+        <h3>Envie sua escolha para a equipe</h3>
+        <p>Não é uma reserva. Vamos conferir a disponibilidade e retornar pelo WhatsApp.</p>
+        <div class="field-grid field-grid--2"><label>Seu nome<input name="name" maxlength="120" autocomplete="name" required /></label><label>WhatsApp com DDD<input name="phone" maxlength="16" inputmode="tel" autocomplete="tel" required /></label></div>
+        <label class="check-line"><input type="checkbox" name="exclusive" /> Quero avaliar exclusividade do espaço</label>
+        <label class="check-line"><input type="checkbox" name="acceptedPrivacy" required /> Li o <a href="../privacidade/" target="_blank" rel="noopener">aviso de privacidade</a> e autorizo o contato sobre esta solicitação.</label>
+        <label class="honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+        <button class="submit-button" type="submit">Enviar para validação</button>
+        <div class="form-alert" id="contact-alert" role="alert" hidden></div>
+      </form>
+      <div class="success-card" id="success-card" hidden></div>
+    </section>
+  </main>
+
+  <footer class="event-footer"><p>Sir Fisher · Av. Beira Mar, 3421 · Fortaleza</p><a href="../privacidade/">Privacidade</a></footer>
+  <script src="../assets/js/eventos.js?v=20260929" defer></script>
+</body>
+</html>
