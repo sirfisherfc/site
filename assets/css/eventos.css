@@ -72,8 +72,14 @@ button[disabled] { opacity:.6; cursor:wait; }
 .option-price strong { font:600 clamp(1.6rem,2.4vw,2rem)/1 "Fraunces",serif; overflow-wrap:anywhere; }
 .option-price small { color:#66747d; }
 .option-price span { margin-top:4px; font-weight:650; color:var(--event-ink); }
-.option-savings { margin-top:6px; font-style:normal; font-size:.82rem; font-weight:700; color:var(--event-green); }
-.option-savings s { margin-left:4px; font-weight:400; color:#8a949b; }
+.option-savings { display:grid; gap:3px; margin-top:10px; padding:10px 12px; border-radius:12px; background:#e7f3ec; color:var(--event-green); }
+.option-savings strong { font-size:1rem; }
+.option-savings span { margin:0!important; font-size:.8rem!important; font-weight:500!important; color:#3d6b52!important; line-height:1.4; }
+.option-savings s { color:#7c8a83; }
+.saving-chip { padding:6px 10px; border-radius:999px; background:var(--event-green); color:#fff; font-size:.75rem; font-weight:750; white-space:nowrap; }
+.risk-note { font-weight:700; }
+.risk-note--verde { color:var(--event-green); }
+.risk-note--amarelo,.risk-note--vermelho { color:var(--event-yellow); }
 .option-card summary { overflow-wrap:anywhere; font-size:.9rem; cursor:pointer; }
 .option-card details ul { margin:6px 0 10px; }
 .risk-chip { padding:5px 9px; border-radius:999px; font-size:.68rem; font-weight:750; text-transform:uppercase; }

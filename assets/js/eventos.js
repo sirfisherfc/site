@@ -73,11 +73,23 @@
     return body;
   }
 
-  function savings(option) {
+  function saving(option) {
     var menu = Number(option.menuValueTotal) || 0;
-    if (!menu || option.total >= menu) return '';
-    var pct = Math.round((1 - option.total / menu) * 100);
-    return '<em class="option-savings">' + pct + '% abaixo do cardápio <s>' + money.format(menu) + '</s></em>';
+    if (!menu || option.total >= menu) return null;
+    return { menu: menu, total: menu - option.total, perPerson: (menu - option.total) / Math.max(1, option.total / option.pricePerPerson), pct: Math.round((1 - option.total / menu) * 100) };
+  }
+
+  function savings(option) {
+    var s = saving(option);
+    if (!s) return '';
+    var reference = Number(option.durationHours) > 3 ? 'no cardápio, com as horas extras' : 'pedindo os mesmos itens no cardápio';
+    return '<div class="option-savings"><strong>Você economiza ' + money.format(s.total) + '</strong>' +
+      '<span>' + money.format(s.perPerson) + ' a menos por pessoa · ' + reference + ' seria <s>' + money.format(s.menu) + '</s></span></div>';
+  }
+
+  function savingBadge(option) {
+    var s = saving(option);
+    return s ? '<span class="saving-chip">−' + s.pct + '% sobre o cardápio</span>' : '';
   }
 
   function optionCard(option, index) {
@@ -88,14 +100,14 @@
     var label = option.exact ? 'Pré-proposta' : 'Validação necessária';
     var tier = String(option.name).split(' · ').pop();
     return '<article class="option-card' + (index === 1 ? ' is-featured' : '') + '" data-option="' + esc(option.id) + '">' +
-      '<div class="option-top"><span class="option-tier">' + esc(tier) + '</span><span class="risk-chip risk-chip--' + esc(option.riskLevel) + '">' + label + '</span></div>' +
+      '<div class="option-top"><span class="option-tier">' + esc(tier) + '</span>' + savingBadge(option) + '</div>' +
       '<h3>' + esc(option.name) + '</h3>' +
       (option.summary ? '<p class="option-summary">' + esc(option.summary) + '</p>' : '') +
       '<ul class="option-items">' + items + '</ul>' +
       '<div class="option-drinks"><strong>' + esc(option.beverageLabel) + '</strong>' + (option.beverageDetail ? '<span>' + esc(option.beverageDetail) + '</span>' : '') + '</div>' +
       '<p class="option-duration">' + esc(option.durationHours) + ' horas de evento</p>' +
       '<div class="option-price"><strong>' + money.format(option.pricePerPerson) + '</strong><small>por pessoa</small><span>' + money.format(option.total) + ' no total</span>' + savings(option) + '</div>' +
-      '<p class="service-note">Atendimento incluído. ' + esc(option.validationMessage) + '</p>' +
+      '<p class="service-note">Atendimento incluído. <span class="risk-note risk-note--' + esc(option.riskLevel) + '">' + label + ':</span> ' + esc(option.validationMessage) + '</p>' +
       '<details><summary>Adicionais e o que não está incluído</summary>' +
       '<p><strong>Sob consulta</strong></p><ul>' + additions + '</ul>' +
       '<p><strong>Não incluído</strong></p><ul>' + notIncluded + '</ul></details>' +
