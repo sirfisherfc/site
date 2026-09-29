@@ -31,20 +31,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
   <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="../assets/css/cardapio.css?v=20260928_3" />
-  <style>
-    .topo { position: sticky; top: 0; z-index: 40; background: #12293d; color: #f6ecd9; border-bottom: 1px solid rgba(0,0,0,0.25); }
-    :root[data-theme="dark"] .topo, :root:not([data-theme="light"]) .topo { background: #0d1e2d; }
-    .topo__linha { max-width: 640px; margin: 0 auto; min-height: 56px; display: flex; align-items: center; gap: 8px; padding: 6px 12px; }
-    .abas-categorias { width: 100%; border-top: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.12); }
-    .abas-categorias__trilha { max-width: 640px; margin: 0 auto; display: flex; align-items: center; gap: 8px; padding: 8px 12px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; scrollbar-width: none; }
-    .abas-categorias__trilha::-webkit-scrollbar { display: none; }
-    .aba-cat { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; flex: none; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 13.5px; font-weight: 600; line-height: 1.2; text-decoration: none !important; color: rgba(255,255,255,0.82) !important; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 7px 14px; min-height: 34px; box-sizing: border-box; }
-    .aba-cat:hover, .aba-cat:focus-visible { color: #fff !important; background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.32); }
-    .aba-cat--ativa, .aba-cat--ativa:hover { color: #fff !important; background: #df5b3b !important; border-color: #df5b3b !important; box-shadow: 0 2px 8px rgba(223,91,59,0.38); }
-    html { scroll-padding-top: 108px; }
-    .secao { scroll-margin-top: 108px; }
-  </style>
+  <link rel="stylesheet" href="../assets/css/cardapio.css?v=20260928_5" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Sir Fisher" />
@@ -133,38 +120,41 @@
         </button>
       </div>
     </nav>
+
+    <!-- Atalhos: lista vertical comum, com o nome escrito de cada categoria.
+         Ficam suspensos sob o topo fixo, acessíveis em qualquer ponto da rolagem. -->
+    <div class="painel" id="painel-categorias" hidden>
+      <div class="painel__corpo">
+        <h2 class="visivel-so-leitor">Categorias do cardápio</h2>
+        <ul class="atalhos" id="atalhos"></ul>
+      </div>
+    </div>
+
+    <div class="painel" id="painel-busca" hidden>
+      <div class="painel__corpo">
+        <h2 class="visivel-so-leitor">Buscar no cardápio</h2>
+        <form class="busca-campo" id="busca-form" role="search">
+          <input type="search" id="busca" name="busca" autocomplete="off"
+                 placeholder="Nome ou ingrediente. Ex.: camarão"
+                 aria-label="Buscar por nome ou ingrediente" />
+          <button type="button" class="botao botao--claro" id="busca-limpar">Limpar</button>
+        </form>
+        <div id="busca-saida" aria-live="polite">
+          <p class="busca-dica">A busca é opcional. Você pode fechar e rolar a página
+            para ver o cardápio inteiro.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="painel" id="atualizacao" hidden aria-live="polite"></div>
   </header>
+
+  <!-- Fundo escurecido ao abrir a gaveta de categorias ou busca -->
+  <div class="painel-backdrop" id="painel-backdrop" hidden></div>
 
   <!-- Estado do catálogo. Fica junto ao conteúdo, não é pop-up e some sozinho
        quando a operação publicar o catálogo já conferido. -->
   <div class="aviso-estado" id="aviso-estado" hidden></div>
-
-  <!-- Atalhos: lista vertical comum, com o nome escrito de cada categoria.
-       São um caminho a mais, nunca o único: tudo também é alcançável rolando. -->
-  <div class="painel" id="painel-categorias" hidden>
-    <div class="painel__corpo">
-      <h2 class="visivel-so-leitor">Categorias do cardápio</h2>
-      <ul class="atalhos" id="atalhos"></ul>
-    </div>
-  </div>
-
-  <div class="painel" id="painel-busca" hidden>
-    <div class="painel__corpo">
-      <h2 class="visivel-so-leitor">Buscar no cardápio</h2>
-      <form class="busca-campo" id="busca-form" role="search">
-        <input type="search" id="busca" name="busca" autocomplete="off"
-               placeholder="Nome ou ingrediente. Ex.: camarão"
-               aria-label="Buscar por nome ou ingrediente" />
-        <button type="button" class="botao botao--claro" id="busca-limpar">Limpar</button>
-      </form>
-      <div id="busca-saida" aria-live="polite">
-        <p class="busca-dica">A busca é opcional. Você pode fechar e rolar a página
-          para ver o cardápio inteiro.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="painel" id="atualizacao" hidden aria-live="polite"></div>
 
   <main id="catalogo">
     <div class="esqueleto" aria-hidden="true">
@@ -212,7 +202,7 @@
   <!-- CARDAPIO-DADOS:FIM -->
 
   <script src="../assets/js/atribuicao.js" defer></script>
-  <script src="../assets/js/cardapio.js?v=20260928_4" defer></script>
+  <script src="../assets/js/cardapio.js?v=20260928_5" defer></script>
   <script src="../assets/js/contador-visitas.js" defer></script>
 
   <!-- Google tag (gtag.js), igual ao resto do site. Os sinais de consulta do

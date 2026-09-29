@@ -294,24 +294,58 @@ a { color: var(--union); }
 .aviso-estado svg { width: 19px; height: 19px; flex: none; margin-top: 1px; }
 
 /* ------------------------------------------------------------
-   Paineis de atalho e de busca
+   Paineis de atalho e de busca (suspensos sob o topo fixo)
    ------------------------------------------------------------ */
 
 .painel {
-  background: var(--card); border-bottom: 2px solid var(--hairline-forte);
-  box-shadow: 0 6px 14px rgba(18, 41, 61, 0.12);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: calc(100vh - 120px);
+  max-height: calc(100dvh - 120px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--card);
+  border-bottom: 2px solid var(--hairline-forte);
+  box-shadow: 0 18px 40px rgba(18, 41, 61, 0.28);
+  z-index: 50;
+}
+:root[data-theme="dark"] .painel,
+:root:not([data-theme="light"]) .painel {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
 }
 .painel[hidden] { display: none; }
-.painel__corpo { max-width: var(--wrap); margin: 0 auto; padding: 12px 12px 16px; }
+.painel__corpo { max-width: var(--wrap); margin: 0 auto; padding: 12px 14px 20px; }
+
+.painel-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 41, 61, 0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 35;
+}
+.painel-backdrop[hidden] { display: none; }
 
 .atalhos { list-style: none; margin: 0; padding: 0; }
 .atalhos li + li { border-top: 1px solid var(--hairline); }
 .atalhos a {
   display: flex; align-items: baseline; gap: 10px;
-  min-height: var(--alvo); padding: 11px 6px;
+  min-height: var(--alvo); padding: 11px 8px;
   color: var(--on-card); text-decoration: none; font-weight: 600;
+  border-radius: 6px;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
-.atalhos a:hover { color: var(--coral-deep); }
+.atalhos a:hover {
+  color: var(--coral-deep);
+  background: rgba(18, 41, 61, 0.04);
+}
+:root[data-theme="dark"] .atalhos a:hover,
+:root:not([data-theme="light"]) .atalhos a:hover {
+  background: rgba(240, 230, 205, 0.06);
+}
 .atalhos .conta {
   margin-left: auto; font-weight: 500; font-size: 14px;
   color: var(--on-card-soft); white-space: nowrap;
@@ -926,7 +960,7 @@ main { padding-bottom: 40px; }
 
 /* Impressao: a casa pode precisar de uma via em papel. */
 @media print {
-  .topo, .painel, .voltar-topo, .item__abrir, .rodape__links { display: none !important; }
+  .topo, .painel, .painel-backdrop, .voltar-topo, .item__abrir, .rodape__links { display: none !important; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .item { break-inside: avoid; border-color: #999; }
   .secao__cabeca { break-after: avoid; }

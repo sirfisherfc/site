@@ -693,12 +693,20 @@
   // Atalhos e busca
   // -------------------------------------------------------------------------
 
-  function alternarPainel(botao, painel) {
-    var abrindo = painel.hidden;
+  function fecharPaineis() {
     $$('.painel').forEach(function (p) { p.hidden = true; });
     $$('.botao-topo').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+    var backdrop = $('#painel-backdrop');
+    if (backdrop) backdrop.hidden = true;
+  }
+
+  function alternarPainel(botao, painel) {
+    var abrindo = painel.hidden;
+    fecharPaineis();
     painel.hidden = !abrindo;
     botao.setAttribute('aria-expanded', String(abrindo));
+    var backdrop = $('#painel-backdrop');
+    if (backdrop) backdrop.hidden = !abrindo;
     if (abrindo && painel.id === 'painel-busca') $('#busca').focus();
   }
 
@@ -835,6 +843,11 @@
       alternarPainel(this, $('#painel-busca'));
     });
 
+    var backdrop = $('#painel-backdrop');
+    if (backdrop) {
+      backdrop.addEventListener('click', fecharPaineis);
+    }
+
     var campo = $('#busca');
     var atraso;
     campo.addEventListener('input', function () {
@@ -926,9 +939,19 @@
           .replace(/\s+/g, ' ').trim().slice(0, 80);
         sinal(nome, { link_url: alvo.href, link_text: rotulo });
       }
-      if (alvo.closest('#painel-categorias') || alvo.hasAttribute('data-fechar-busca')) {
-        $$('.painel').forEach(function (p) { p.hidden = true; });
-        $$('.botao-topo').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+      if (alvo.closest('#painel-categorias')) {
+        var href = alvo.getAttribute('href') || '';
+        var match = href.match(/^#c-(.+)$/);
+        fecharPaineis();
+        if (match) {
+          e.preventDefault();
+          rolarParaCategoria(match[1]);
+          sinal('cardapio_atalho_clique', { categoria_id: match[1] });
+          return;
+        }
+      }
+      if (alvo.hasAttribute('data-fechar-busca')) {
+        fecharPaineis();
       }
     });
 
@@ -943,11 +966,7 @@
         if (history.length > 1) history.back(); else fecharDetalhe(true);
         return;
       }
-      var aberto = $$('.painel').filter(function (p) { return !p.hidden; })[0];
-      if (aberto) {
-        aberto.hidden = true;
-        $$('.botao-topo').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
-      }
+      fecharPaineis();
     });
 
     window.addEventListener('hashchange', tratarHash);
