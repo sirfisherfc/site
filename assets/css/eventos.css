@@ -16,6 +16,7 @@
 .event-hero p { max-width:600px; font-size:clamp(1rem,2vw,1.14rem); line-height:1.6; }
 .eyebrow { margin:0; font-size:.73rem!important; font-weight:700; letter-spacing:.19em; text-transform:uppercase; color:#f7b99e; }
 .config-card,.results { max-width:980px; margin:28px auto 70px; background:#fff; border:1px solid var(--event-line); border-radius:24px; padding:clamp(20px,4vw,42px); box-shadow:0 14px 40px rgba(18,41,61,.08); }
+.results { max-width:1120px; }
 .progress-copy { display:flex; justify-content:space-between; gap:16px; font-size:.82rem; font-weight:700; }
 .progress-copy span:last-child { color:#63717c; }
 .progress { height:6px; margin:10px 0 34px; overflow:hidden; border-radius:20px; background:#ece8df; }
@@ -57,14 +58,16 @@ button[disabled] { opacity:.6; cursor:wait; }
 .results h2 { margin:6px 0 8px; font:600 clamp(2rem,5vw,3.25rem)/1 "Fraunces",serif; }
 .results-head > p:last-child { color:#5f6b74; }
 .option-grid { display:grid; gap:16px; }
-.option-card { position:relative; display:grid; gap:14px; border:1.5px solid var(--event-line); border-radius:18px; padding:22px; background:#fff; }
+.option-card { position:relative; display:grid; min-width:0; gap:14px; overflow:hidden; border:1.5px solid var(--event-line); border-radius:18px; padding:22px; background:#fff; }
+.option-card > * { min-width:0; }
 .option-card.is-selected { border-color:var(--event-coral); box-shadow:0 0 0 3px rgba(223,91,59,.12); }
 .option-card h3 { margin:0; font:600 1.5rem/1.1 "Fraunces",serif; }
 .option-card p { margin:0; line-height:1.5; color:#596872; }
 .option-card ul { margin:0; padding-left:18px; color:#364954; font-size:.9rem; line-height:1.55; }
-.option-price { display:flex; align-items:end; justify-content:space-between; gap:14px; border-top:1px solid #e5e1da; padding-top:14px; }
-.option-price strong { display:block; font:600 1.65rem/1 "Fraunces",serif; }
+.option-price { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:end; gap:10px; border-top:1px solid #e5e1da; padding-top:14px; }
+.option-price strong { display:block; white-space:nowrap; font:600 clamp(1.15rem,1.75vw,1.45rem)/1 "Fraunces",serif; }
 .option-price small { color:#66747d; }
+.option-card summary { overflow-wrap:anywhere; font-size:.9rem; }
 .risk-chip { justify-self:start; padding:5px 9px; border-radius:999px; font-size:.72rem; font-weight:750; text-transform:uppercase; }
 .risk-chip--verde { color:var(--event-green); background:#e7f3ec; }
 .risk-chip--amarelo { color:var(--event-yellow); background:#fff3d9; }
