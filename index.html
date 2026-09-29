@@ -66,8 +66,9 @@
   <!-- Fontes da primeira dobra: preload evita o texto piscar antes do swap. -->
   <link rel="preload" href="./assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="./assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="./assets/css/style.css" />
-  <link rel="stylesheet" href="./assets/css/desktop.css" media="(min-width: 1024px)" />
+  <!-- ?v= força o celular a baixar o CSS novo junto com o HTML novo. Mude a cada alteração. -->
+  <link rel="stylesheet" href="./assets/css/style.css?v=20260928" />
+  <link rel="stylesheet" href="./assets/css/desktop.css?v=20260928" media="(min-width: 1024px)" />
 
   <!-- "restaurant" nao existe no vocabulario Open Graph; o valor invalido cai
        em "website" de qualquer forma, so que com aviso no validador. -->
