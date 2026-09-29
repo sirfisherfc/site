@@ -72,6 +72,8 @@ button[disabled] { opacity:.6; cursor:wait; }
 .option-price strong { font:600 clamp(1.6rem,2.4vw,2rem)/1 "Fraunces",serif; overflow-wrap:anywhere; }
 .option-price small { color:#66747d; }
 .option-price span { margin-top:4px; font-weight:650; color:var(--event-ink); }
+.option-savings { margin-top:6px; font-style:normal; font-size:.82rem; font-weight:700; color:var(--event-green); }
+.option-savings s { margin-left:4px; font-weight:400; color:#8a949b; }
 .option-card summary { overflow-wrap:anywhere; font-size:.9rem; cursor:pointer; }
 .option-card details ul { margin:6px 0 10px; }
 .risk-chip { padding:5px 9px; border-radius:999px; font-size:.68rem; font-weight:750; text-transform:uppercase; }

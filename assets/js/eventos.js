@@ -73,6 +73,13 @@
     return body;
   }
 
+  function savings(option) {
+    var menu = Number(option.menuValueTotal) || 0;
+    if (!menu || option.total >= menu) return '';
+    var pct = Math.round((1 - option.total / menu) * 100);
+    return '<em class="option-savings">' + pct + '% abaixo do cardápio <s>' + money.format(menu) + '</s></em>';
+  }
+
   function optionCard(option, index) {
     var items = (option.menuItems || option.mainFoods.map(function (name) { return { name: name, detail: '' }; }))
       .map(function (item) { return '<li><strong>' + esc(item.name) + '</strong>' + (item.detail ? '<span>' + esc(item.detail) + '</span>' : '') + '</li>'; }).join('');
@@ -87,7 +94,7 @@
       '<ul class="option-items">' + items + '</ul>' +
       '<div class="option-drinks"><strong>' + esc(option.beverageLabel) + '</strong>' + (option.beverageDetail ? '<span>' + esc(option.beverageDetail) + '</span>' : '') + '</div>' +
       '<p class="option-duration">' + esc(option.durationHours) + ' horas de evento</p>' +
-      '<div class="option-price"><strong>' + money.format(option.pricePerPerson) + '</strong><small>por pessoa</small><span>' + money.format(option.total) + ' no total</span></div>' +
+      '<div class="option-price"><strong>' + money.format(option.pricePerPerson) + '</strong><small>por pessoa</small><span>' + money.format(option.total) + ' no total</span>' + savings(option) + '</div>' +
       '<p class="service-note">Atendimento incluído. ' + esc(option.validationMessage) + '</p>' +
       '<details><summary>Adicionais e o que não está incluído</summary>' +
       '<p><strong>Sob consulta</strong></p><ul>' + additions + '</ul>' +
