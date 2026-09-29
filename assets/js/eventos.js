@@ -10,7 +10,8 @@
   var selectedOptionId = null;
 
   var money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
-  var stepNames = ['Data e horário', 'Convidados', 'Estilo de alimentação', 'Bebidas', 'Perfil da proposta'];
+  var STEPS = 4;
+  var stepNames = ['Data e horário', 'Convidados', 'Comida', 'Bebidas'];
 
   function esc(value) {
     return String(value == null ? '' : value).replace(/[&<>'"]/g, function (char) {
@@ -25,14 +26,14 @@
   }
 
   function showStep(next) {
-    step = Math.max(1, Math.min(5, next));
+    step = Math.max(1, Math.min(STEPS, next));
     steps.forEach(function (node) { node.classList.toggle('is-active', Number(node.dataset.step) === step); });
-    document.getElementById('step-label').textContent = 'Etapa ' + step + ' de 5';
+    document.getElementById('step-label').textContent = 'Etapa ' + step + ' de ' + STEPS;
     document.getElementById('step-name').textContent = stepNames[step - 1];
-    document.getElementById('progress-bar').style.width = (step * 20) + '%';
+    document.getElementById('progress-bar').style.width = (step * 100 / STEPS) + '%';
     document.getElementById('back-button').hidden = step === 1;
-    document.getElementById('next-button').hidden = step === 5;
-    document.getElementById('calculate-button').hidden = step !== 5;
+    document.getElementById('next-button').hidden = step === STEPS;
+    document.getElementById('calculate-button').hidden = step !== STEPS;
     alertIn('form-alert', '');
     document.getElementById('configurator').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -58,8 +59,7 @@
     return {
       date: data.get('date'), startTime: data.get('startTime'), durationHours: Number(data.get('durationHours')),
       guests: Number(data.get('guests')), children: Number(data.get('children') || 0),
-      foodStyle: data.get('foodStyle'), beverageMode: data.get('beverageMode'), profile: data.get('profile'),
-      budgetPerPerson: data.get('budgetPerPerson') ? Number(data.get('budgetPerPerson')) : null,
+      foodStyle: data.get('foodStyle'), beverageMode: data.get('beverageMode'), profile: 'comparar',
       dietaryRestriction: data.get('dietaryRestriction') === 'on', exclusive: false
     };
   }
@@ -74,22 +74,25 @@
   }
 
   function optionCard(option, index) {
-    var foods = option.mainFoods.map(function (food) { return '<li>' + esc(food) + '</li>'; }).join('');
+    var items = (option.menuItems || option.mainFoods.map(function (name) { return { name: name, detail: '' }; }))
+      .map(function (item) { return '<li><strong>' + esc(item.name) + '</strong>' + (item.detail ? '<span>' + esc(item.detail) + '</span>' : '') + '</li>'; }).join('');
     var additions = option.additions.map(function (item) { return '<li>' + esc(item) + '</li>'; }).join('');
     var notIncluded = option.notIncluded.map(function (item) { return '<li>' + esc(item) + '</li>'; }).join('');
     var label = option.exact ? 'Pré-proposta' : 'Validação necessária';
-    return '<article class="option-card" data-option="' + esc(option.id) + '">' +
-      '<span class="risk-chip risk-chip--' + esc(option.riskLevel) + '">' + label + '</span>' +
-      '<h3>' + esc(option.name) + '</h3><p>' + esc(option.description) + '</p>' +
-      '<ul>' + foods + '</ul><p><strong>Bebidas:</strong> ' + esc(option.beverageLabel) + '</p>' +
-      '<p><strong>Duração:</strong> ' + esc(option.durationHours) + ' horas</p>' +
-      '<div class="option-price"><div><strong>' + money.format(option.pricePerPerson) + '</strong><small>por pessoa</small></div><div><strong>' + money.format(option.total) + '</strong><small>total</small></div></div>' +
-      '<p class="service-note">Valor final com atendimento incluído.</p>' +
-      '<p><small>' + esc(option.validationMessage) + '</small></p>' +
-      '<details><summary>Adicionais e itens não incluídos</summary>' +
-      '<p><strong>Adicionais sob consulta</strong></p><ul>' + additions + '</ul>' +
-      '<p><strong>Não incluídos</strong></p><ul>' + notIncluded + '</ul></details>' +
-      '<button class="select-option" type="button" data-select="' + esc(option.id) + '">' + (index === 1 ? 'Escolher esta opção' : 'Selecionar') + '</button></article>';
+    var tier = String(option.name).split(' · ').pop();
+    return '<article class="option-card' + (index === 1 ? ' is-featured' : '') + '" data-option="' + esc(option.id) + '">' +
+      '<div class="option-top"><span class="option-tier">' + esc(tier) + '</span><span class="risk-chip risk-chip--' + esc(option.riskLevel) + '">' + label + '</span></div>' +
+      '<h3>' + esc(option.name) + '</h3>' +
+      (option.summary ? '<p class="option-summary">' + esc(option.summary) + '</p>' : '') +
+      '<ul class="option-items">' + items + '</ul>' +
+      '<div class="option-drinks"><strong>' + esc(option.beverageLabel) + '</strong>' + (option.beverageDetail ? '<span>' + esc(option.beverageDetail) + '</span>' : '') + '</div>' +
+      '<p class="option-duration">' + esc(option.durationHours) + ' horas de evento</p>' +
+      '<div class="option-price"><strong>' + money.format(option.pricePerPerson) + '</strong><small>por pessoa</small><span>' + money.format(option.total) + ' no total</span></div>' +
+      '<p class="service-note">Atendimento incluído. ' + esc(option.validationMessage) + '</p>' +
+      '<details><summary>Adicionais e o que não está incluído</summary>' +
+      '<p><strong>Sob consulta</strong></p><ul>' + additions + '</ul>' +
+      '<p><strong>Não incluído</strong></p><ul>' + notIncluded + '</ul></details>' +
+      '<button class="select-option" type="button" data-select="' + esc(option.id) + '" data-tier="' + esc(tier) + '">Escolher ' + esc(tier) + '</button></article>';
   }
 
   function renderQuote(result) {
@@ -123,7 +126,7 @@
     if (!button) return;
     selectedOptionId = button.dataset.select;
     document.querySelectorAll('.option-card').forEach(function (card) { card.classList.toggle('is-selected', card.dataset.option === selectedOptionId); });
-    document.querySelectorAll('[data-select]').forEach(function (item) { item.textContent = item.dataset.select === selectedOptionId ? 'Opção escolhida' : 'Selecionar'; });
+    document.querySelectorAll('[data-select]').forEach(function (item) { item.textContent = item.dataset.select === selectedOptionId ? 'Opção escolhida' : 'Escolher ' + item.dataset.tier; });
     contactForm.hidden = false;
     contactForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });

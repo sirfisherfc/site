@@ -27,7 +27,7 @@
 .event-step legend { padding:0; font:600 clamp(1.75rem,5vw,2.7rem)/1.08 "Fraunces",serif; }
 .step-help { margin:10px 0 26px; color:#5f6b74; line-height:1.55; }
 .field-grid { display:grid; gap:16px; }
-.field-grid label,.budget-field { display:grid; gap:8px; font-size:.88rem; font-weight:650; }
+.field-grid label { display:grid; gap:8px; font-size:.88rem; font-weight:650; }
 input,select { width:100%; min-height:52px; padding:12px 14px; border:1.5px solid #c9c5bc; border-radius:13px; background:#fff; color:var(--event-ink); font:inherit; }
 input:focus,select:focus { outline:3px solid rgba(223,91,59,.18); border-color:var(--event-coral); }
 .choice-grid { display:grid; gap:12px; }
@@ -43,11 +43,6 @@ input:focus,select:focus { outline:3px solid rgba(223,91,59,.18); border-color:v
 .choice-card--plain span { padding:17px 18px; }
 .check-line { display:flex; align-items:flex-start; gap:10px; margin-top:20px; color:#475762; font-size:.9rem; line-height:1.45; }
 .check-line input { flex:none; width:20px; min-height:20px; margin-top:1px; accent-color:var(--event-coral); }
-.budget-field { margin-top:24px; max-width:340px; }
-.budget-field > span { font-weight:400; color:#68737c; }
-.budget-field > div { display:flex; align-items:center; border:1.5px solid #c9c5bc; border-radius:13px; overflow:hidden; }
-.budget-field > div span { padding-left:14px; }
-.budget-field input { border:0; }
 .step-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:30px; }
 .next-button,.submit-button,.back-button { min-height:50px; border:0; border-radius:13px; padding:0 24px; font:650 1rem "Work Sans",sans-serif; cursor:pointer; }
 .next-button,.submit-button { background:var(--event-coral); color:#fff; }
@@ -58,21 +53,32 @@ button[disabled] { opacity:.6; cursor:wait; }
 .results h2 { margin:6px 0 8px; font:600 clamp(2rem,5vw,3.25rem)/1 "Fraunces",serif; }
 .results-head > p:last-child { color:#5f6b74; }
 .option-grid { display:grid; gap:16px; }
-.option-card { position:relative; display:grid; min-width:0; gap:14px; overflow:hidden; border:1.5px solid var(--event-line); border-radius:18px; padding:22px; background:#fff; }
-.option-card > * { min-width:0; }
+.option-card { position:relative; display:flex; flex-direction:column; min-width:0; gap:14px; border:1.5px solid var(--event-line); border-radius:18px; padding:22px; background:#fff; }
+.option-card > * { min-width:0; max-width:100%; }
+.option-card.is-featured { border-color:#b8925a; }
 .option-card.is-selected { border-color:var(--event-coral); box-shadow:0 0 0 3px rgba(223,91,59,.12); }
-.option-card h3 { margin:0; font:600 1.5rem/1.1 "Fraunces",serif; }
+.option-top { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; }
+.option-tier { font-size:.72rem; font-weight:750; letter-spacing:.16em; text-transform:uppercase; color:#b8925a; }
+.option-card h3 { margin:0; font:600 1.35rem/1.15 "Fraunces",serif; overflow-wrap:anywhere; }
 .option-card p { margin:0; line-height:1.5; color:#596872; }
-.option-card ul { margin:0; padding-left:18px; color:#364954; font-size:.9rem; line-height:1.55; }
-.option-price { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:end; gap:10px; border-top:1px solid #e5e1da; padding-top:14px; }
-.option-price strong { display:block; white-space:nowrap; font:600 clamp(1.15rem,1.75vw,1.45rem)/1 "Fraunces",serif; }
+.option-summary { font-weight:600; color:var(--event-ink)!important; }
+.option-card ul { margin:0; padding-left:18px; color:#364954; font-size:.9rem; line-height:1.5; }
+.option-items { list-style:none; padding:0!important; display:grid; gap:9px; }
+.option-items li { display:grid; gap:2px; }
+.option-items span, .option-drinks span { font-size:.82rem; color:#67737c; line-height:1.4; }
+.option-drinks { display:grid; gap:3px; padding:12px 14px; border-radius:12px; background:#f5f2eb; font-size:.9rem; }
+.option-duration { font-size:.85rem; }
+.option-price { display:grid; gap:2px; margin-top:auto; border-top:1px solid #e5e1da; padding-top:14px; }
+.option-price strong { font:600 clamp(1.6rem,2.4vw,2rem)/1 "Fraunces",serif; overflow-wrap:anywhere; }
 .option-price small { color:#66747d; }
-.option-card summary { overflow-wrap:anywhere; font-size:.9rem; }
-.risk-chip { justify-self:start; padding:5px 9px; border-radius:999px; font-size:.72rem; font-weight:750; text-transform:uppercase; }
+.option-price span { margin-top:4px; font-weight:650; color:var(--event-ink); }
+.option-card summary { overflow-wrap:anywhere; font-size:.9rem; cursor:pointer; }
+.option-card details ul { margin:6px 0 10px; }
+.risk-chip { padding:5px 9px; border-radius:999px; font-size:.68rem; font-weight:750; text-transform:uppercase; }
 .risk-chip--verde { color:var(--event-green); background:#e7f3ec; }
 .risk-chip--amarelo { color:var(--event-yellow); background:#fff3d9; }
 .risk-chip--vermelho { color:var(--event-red); background:#fce6e3; }
-.select-option { width:100%; min-height:46px; border:1.5px solid var(--event-ink); border-radius:12px; background:var(--event-ink); color:#fff; font:650 .95rem "Work Sans",sans-serif; cursor:pointer; }
+.select-option { width:100%; min-height:46px; border:1.5px solid var(--event-ink); border-radius:12px; background:var(--event-ink); color:#fff; font:650 .95rem "Work Sans",sans-serif; cursor:pointer; white-space:normal; }
 .service-note { font-size:.82rem!important; color:var(--event-green)!important; font-weight:700; }
 .contact-card,.success-card { margin-top:28px; padding:24px; border-radius:18px; background:#f5f2eb; }
 .contact-card h3,.success-card h3 { margin:0 0 6px; font:600 1.55rem/1.15 "Fraunces",serif; }
@@ -89,8 +95,7 @@ button[disabled] { opacity:.6; cursor:wait; }
   .field-grid--2 { grid-template-columns:1fr 1fr; }
   .field-grid--3 { grid-template-columns:1.2fr 1fr 1fr; }
   .choice-grid { grid-template-columns:1fr 1fr; }
-  .option-grid { grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; }
-  .option-card { height:100%; }
+  .option-grid { grid-template-columns:repeat(3,minmax(0,1fr)); align-items:stretch; }
 }
 @media (max-width:520px) {
   .event-topbar span { display:none; }

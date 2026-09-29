@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
   <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="../assets/css/eventos.css?v=20260929-4" />
+  <link rel="stylesheet" href="../assets/css/eventos.css?v=20260929-5" />
 </head>
 <body class="event-page">
   <header class="event-topbar">
@@ -32,7 +32,7 @@
 
     <section class="config-card" id="configurator" aria-labelledby="config-title">
       <div class="progress-wrap">
-        <div class="progress-copy"><span id="step-label">Etapa 1 de 5</span><span id="step-name">Data e horário</span></div>
+        <div class="progress-copy"><span id="step-label">Etapa 1 de 4</span><span id="step-name">Data e horário</span></div>
         <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
       </div>
       <h2 id="config-title" class="sr-only">Configurador de eventos</h2>
@@ -60,40 +60,23 @@
 
         <fieldset class="event-step" data-step="3">
           <legend>Como você imagina a comida?</legend>
-          <p class="step-help">As quantidades serão calculadas pelo sistema.</p>
+          <p class="step-help">Você escolhe o formato; as quantidades a gente calcula. No fim, mostramos três níveis para comparar.</p>
           <div class="choice-grid choice-grid--visual">
-            <label class="choice-card"><input type="radio" name="foodStyle" value="petiscos" required /><img src="../assets/img/dadinho-de-tapioca-sir-fisher-440.webp" alt="" /><span><strong>Petiscos para confraternizar</strong><small>Serviço volante e clima informal.</small></span></label>
-            <label class="choice-card"><input type="radio" name="foodStyle" value="petiscos_principal" /><img src="../assets/img/bolinha-de-peixe-cremosa-sir-fisher-440.webp" alt="" /><span><strong>Petiscos com prato principal</strong><small>Recepção leve e uma refeição depois.</small></span></label>
-            <label class="choice-card"><input type="radio" name="foodStyle" value="refeicao" /><img src="../assets/img/peixe-grelhado-sir-fisher-440.webp" alt="" /><span><strong>Almoço ou jantar</strong><small>Experiência centrada na refeição.</small></span></label>
-            <label class="choice-card choice-card--plain"><input type="radio" name="foodStyle" value="recomendacao" checked /><span><strong>Quero uma recomendação</strong><small>Indicaremos o formato mais versátil.</small></span></label>
+            <label class="choice-card"><input type="radio" name="foodStyle" value="petiscos" required /><img src="../assets/img/dadinho-de-tapioca-sir-fisher-440.webp" alt="" /><span><strong>Só petiscos</strong><small>Pastéis, bolinhas, crocantes e outros petiscos da casa circulando durante todo o evento.</small></span></label>
+            <label class="choice-card"><input type="radio" name="foodStyle" value="petiscos_principal" checked /><img src="../assets/img/edimburger-sir-fisher-440.webp" alt="" /><span><strong>Petiscos + lanche</strong><small>Petiscos na recepção e, depois, 1 lanche por pessoa: Edimburger, Fisher Burger ou Fish &amp; Chips.</small></span></label>
+            <label class="choice-card"><input type="radio" name="foodStyle" value="refeicao" /><img src="../assets/img/peixe-grelhado-para-dividir-sir-fisher-440.webp" alt="" /><span><strong>Petiscos + almoço ou jantar</strong><small>Petiscos na recepção e pratos principais em travessas para compartilhar, com acompanhamentos.</small></span></label>
           </div>
         </fieldset>
 
         <fieldset class="event-step" data-step="4">
           <legend>E as bebidas?</legend>
-          <p class="step-help">Priorizamos modelos previsíveis. Open bar sempre passa por validação.</p>
+          <p class="step-help">As bebidas incluídas têm quantidade definida por pessoa. O que passar disso vai para a comanda de cada convidado.</p>
           <div class="choice-grid">
-            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="individual" required /><span><strong>Cada convidado paga seu consumo</strong><small>Comandas individuais.</small></span></label>
-            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="sem_alcool" /><span><strong>Bebidas sem álcool incluídas</strong><small>Água, refrigerante e suco.</small></span></label>
-            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="credito" /><span><strong>Quantidade ou crédito contratado</strong><small>Um limite financeiro previsível.</small></span></label>
-            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="fichas" /><span><strong>Fichas por convidado</strong><small>Controle simples por pessoa.</small></span></label>
-            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="chope" /><span><strong>Chope controlado</strong><small>Quantidade previamente definida.</small></span></label>
-            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="selecionado" /><span><strong>Pacote selecionado</strong><small>Bebidas definidas para o grupo.</small></span></label>
-            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="open_bar" /><span><strong>Quero avaliar open bar</strong><small>Até três horas, sujeito à validação.</small></span></label>
-            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="recomendacao" checked /><span><strong>Quero uma recomendação</strong><small>Começamos pela opção mais previsível.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="individual" required /><span><strong>Sem bebidas incluídas</strong><small>Cada convidado pede e paga o que consumir, na própria comanda.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="sem_alcool" checked /><span><strong>Bebidas sem álcool</strong><small>2 por convidado: água, refrigerante ou suco.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="chope" /><span><strong>Sem álcool + chope</strong><small>3 chopes Brahma por adulto e 1 água ou refrigerante por convidado.</small></span></label>
+            <label class="choice-card choice-card--plain"><input type="radio" name="beverageMode" value="chope_coquetel" /><span><strong>Sem álcool + chope + coquetel</strong><small>2 chopes e 1 caipirinha ou caipiroska por adulto, e 1 água ou refrigerante por convidado.</small></span></label>
           </div>
-        </fieldset>
-
-        <fieldset class="event-step" data-step="5">
-          <legend>Qual perfil combina com o evento?</legend>
-          <p class="step-help">O investimento por pessoa é opcional.</p>
-          <div class="choice-grid choice-grid--profiles">
-            <label class="choice-card choice-card--plain"><input type="radio" name="profile" value="essencial" required /><span><strong>Essencial</strong><small>Objetiva, bem servida e sem excessos.</small></span></label>
-            <label class="choice-card choice-card--plain"><input type="radio" name="profile" value="equilibrada" /><span><strong>Equilibrada</strong><small>Variedade e conforto na medida.</small></span></label>
-            <label class="choice-card choice-card--plain"><input type="radio" name="profile" value="completa" /><span><strong>Completa</strong><small>Mais variedade e uma experiência longa.</small></span></label>
-            <label class="choice-card choice-card--plain"><input type="radio" name="profile" value="comparar" checked /><span><strong>Quero comparar</strong><small>Veja até três opções lado a lado.</small></span></label>
-          </div>
-          <label class="budget-field">Faixa de investimento por pessoa <span>(opcional)</span><div><span>R$</span><input type="number" name="budgetPerPerson" min="1" inputmode="decimal" placeholder="Ex.: 90" /></div></label>
         </fieldset>
 
         <div class="form-alert" id="form-alert" role="alert" hidden></div>
@@ -102,7 +85,7 @@
     </section>
 
     <section class="results" id="results" aria-live="polite" hidden>
-      <div class="results-head"><p class="eyebrow">Pré-proposta</p><h2>Opções para comparar</h2><p id="availability-note"></p></div>
+      <div class="results-head"><p class="eyebrow">Pré-proposta</p><h2>Três níveis para comparar</h2><p>Mesmo formato, com mais variedade a cada nível. Valores finais, com atendimento incluído.</p><p id="availability-note"></p></div>
       <div class="option-grid" id="option-grid"></div>
       <form class="contact-card" id="contact-form" hidden>
         <h3>Envie sua escolha para a equipe</h3>
@@ -119,6 +102,6 @@
   </main>
 
   <footer class="event-footer"><p>Sir Fisher · Av. Beira Mar, 3421 · Fortaleza</p><a href="../privacidade/">Privacidade</a></footer>
-  <script src="../assets/js/eventos.js?v=20260929-2" defer></script>
+  <script src="../assets/js/eventos.js?v=20260929-3" defer></script>
 </body>
 </html>
