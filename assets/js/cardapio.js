@@ -585,9 +585,12 @@
 
   function blocoPorcao(produto) {
     var p = produto.porcao;
-    if (!p || (!p.texto && (!p.detalhes || !p.detalhes.length))) return '';
+    if (!p || (!p.texto && (!p.detalhes || !p.detalhes.length) && !p.nota)) return '';
     var linhas = [];
     if (p.texto) linhas.push('<p><b>' + esc(p.texto) + '</b></p>');
+    if (!p.texto && p.estado === 'em_conferencia') {
+      linhas.push('<p><b>Medida em conferência</b></p>');
+    }
     if (p.detalhes && p.detalhes.length) {
       linhas.push('<ul>' + p.detalhes.map(function (d) {
         return '<li>' + esc(d) + '</li>';
@@ -608,7 +611,8 @@
     if (a.confirmado && a.confirmado.length) {
       corpo += '<p><b>Confirmado pela cozinha:</b> ' + esc(a.confirmado.join(', ')) + '</p>';
     }
-    corpo += '<p class="nota">Em caso de alergias graves ou restrições alimentares, consulte sempre nossa equipe antes de fazer o pedido.</p>';
+    corpo += '<p class="nota">' + esc(a.texto ||
+      'Em caso de alergias graves ou restrições alimentares, consulte sempre nossa equipe antes de fazer o pedido.') + '</p>';
     return '<section class="bloco bloco--alimentar"><h2>Informação alimentar</h2>' +
       corpo + '</section>';
   }

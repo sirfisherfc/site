@@ -69,6 +69,19 @@ quadro.onload = async () => {
   });
   ok('porção confirmada aparece na listagem', porcaoFaltando.length === 0,
      comPorcao.length + ' com porção; faltando: ' + porcaoFaltando.map(p => p.id).join(','));
+  ok('catálogo identifica publicamente o estado de conferência',
+     dados.estado === 'em_conferencia' && /confirme preços e porções/i.test(dados.aviso_estado || ''));
+  const fisherBurger = dados.produtos.find(p => p.id === 'fisher-burger');
+  ok('porção divergente não publica um número como fato',
+     fisherBurger.porcao.estado === 'em_conferencia' && !fisherBurger.porcao.texto);
+  ok('informação alimentar transcrita mantém ressalva de conferência',
+     dados.produtos.filter(p => p.alimentar.estado === 'declarado')
+       .every(p => /não conferidas com a cozinha/i.test(p.alimentar.texto || '')));
+  const basesDividir = dados.produtos.filter(p => p.categoria === 'para-dividir')
+    .map(p => p.foto && p.foto.base).filter(Boolean);
+  ok('fotos de pratos para dividir não colidem com os executivos',
+     basesDividir.length === 6 && basesDividir.every(base => /-para-dividir-sir-fisher$/.test(base)),
+     basesDividir.join(','));
 
   // --- Adicional nunca como preço principal --------------------------------
   let adicionalComoPreco = [];
@@ -154,6 +167,8 @@ quadro.onload = async () => {
   ok('detalhe tem endereço próprio', w.location.hash === '#p-newcastle', w.location.hash);
   ok('detalhe mostra variantes/adicionais e informação alimentar',
      /INFORMAÇÃO ALIMENTAR/i.test(det.innerText) && /PORÇÃO/i.test(det.innerText));
+  ok('detalhe informa que alérgenos transcritos aguardam conferência',
+     /não conferidas com a cozinha/i.test(det.innerText));
   ok('bloco "Como pedir" retirado do detalhe', !/Como pedir/i.test(det.innerText));
   ok('detalhe limpo sem instruções operacionais', !/mostrar o celular/i.test(det.innerText));
   w.history.back();
