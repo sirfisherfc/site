@@ -189,7 +189,6 @@
     if (!contactForm.reportValidity()) return;
     var data = new FormData(contactForm);
     var config = configuration();
-    config.exclusive = data.get('exclusive') === 'on';
     var button = contactForm.querySelector('.submit-button');
     button.disabled = true; button.textContent = 'Enviando…'; alertIn('contact-alert', '');
     try {
