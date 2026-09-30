@@ -38,7 +38,29 @@
     document.getElementById('configurator').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  var MIN_GUESTS = 30;
+  var MAX_GUESTS = 100;
+
+  function guestLimitMessage(guests) {
+    if (guests && guests < MIN_GUESTS) {
+      return 'Para grupos com menos de ' + MIN_GUESTS + ' pessoas, o melhor caminho é reservar mesas e pedir pelo cardápio, sem pagamento antecipado. <a href="https://reservas.sirfisher.com.br/">Fazer uma reserva</a>';
+    }
+    if (guests > MAX_GUESTS) {
+      return 'Nosso espaço comporta eventos de até ' + MAX_GUESTS + ' convidados. Para grupos maiores, <a href="https://api.whatsapp.com/send?phone=5585988544274&text=' + encodeURIComponent('Olá! Quero conversar sobre um evento com ' + guests + ' convidados.') + '" target="_blank" rel="noopener">fale com a equipe pelo WhatsApp</a>.';
+    }
+    return '';
+  }
+
   function validateStep() {
+    if (step === 2) {
+      var limit = guestLimitMessage(Number(new FormData(form).get('guests') || 0));
+      if (limit) {
+        var node = document.getElementById('form-alert');
+        node.innerHTML = limit;
+        node.hidden = false;
+        return false;
+      }
+    }
     var fields = Array.from(steps[step - 1].querySelectorAll('input,select'));
     for (var i = 0; i < fields.length; i++) {
       if (!fields[i].checkValidity()) {
