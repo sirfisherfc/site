@@ -22,6 +22,7 @@
   function alertIn(id, message) {
     var node = document.getElementById(id);
     node.textContent = message || '';
+    node.classList.remove('form-alert--info');
     node.hidden = !message;
   }
 
@@ -41,12 +42,22 @@
   var MIN_GUESTS = 30;
   var MAX_GUESTS = 100;
 
+  function whatsapp(text) {
+    return 'https://api.whatsapp.com/send?phone=5585988544274&text=' + encodeURIComponent(text);
+  }
+
   function guestLimitMessage(guests) {
+    if (guests && guests <= 10) {
+      return '<strong>Para até 10 pessoas, é só reservar uma mesa.</strong> Sem orçamento nem pagamento antecipado: cada um pede o que quiser do cardápio. ' +
+        '<br><a href="https://reservas.sirfisher.com.br/">Reservar mesa</a><a href="../cardapio/">Ver o cardápio</a>';
+    }
     if (guests && guests < MIN_GUESTS) {
-      return 'Para grupos com menos de ' + MIN_GUESTS + ' pessoas, o melhor caminho é reservar mesas e pedir pelo cardápio, sem pagamento antecipado. <a href="https://reservas.sirfisher.com.br/">Fazer uma reserva</a>';
+      return '<strong>Para ' + guests + ' pessoas, você não precisa de pacote.</strong> A gente junta as mesas para o grupo e cada um escolhe do cardápio, sem pagamento antecipado e sem risco de sobrar comida. ' +
+        '<br><a href="' + whatsapp('Olá! Quero reservar mesas para um grupo de ' + guests + ' pessoas.') + '" target="_blank" rel="noopener">Reservar mesas pelo WhatsApp</a><a href="../cardapio/">Ver o cardápio</a>';
     }
     if (guests > MAX_GUESTS) {
-      return 'Nosso espaço comporta eventos de até ' + MAX_GUESTS + ' convidados. Para grupos maiores, <a href="https://api.whatsapp.com/send?phone=5585988544274&text=' + encodeURIComponent('Olá! Quero conversar sobre um evento com ' + guests + ' convidados.') + '" target="_blank" rel="noopener">fale com a equipe pelo WhatsApp</a>.';
+      return '<strong>Montamos eventos de até ' + MAX_GUESTS + ' convidados sentados.</strong> Para grupos maiores ou eventos em pé, a equipe avalia o formato com você. ' +
+        '<br><a href="' + whatsapp('Olá! Quero conversar sobre um evento com ' + guests + ' convidados.') + '" target="_blank" rel="noopener">Falar com a equipe pelo WhatsApp</a>';
     }
     return '';
   }
@@ -57,6 +68,7 @@
       if (limit) {
         var node = document.getElementById('form-alert');
         node.innerHTML = limit;
+        node.classList.add('form-alert--info');
         node.hidden = false;
         return false;
       }

@@ -51,6 +51,10 @@ input:focus,select:focus { outline:3px solid rgba(223,91,59,.18); border-color:v
 .back-button { background:#eef0f1; color:var(--event-ink); }
 button[disabled] { opacity:.6; cursor:wait; }
 .form-alert { margin-top:18px; padding:13px 15px; border-radius:12px; background:#fff0ed; color:#862f25; line-height:1.45; }
+.form-alert--info { padding:18px 20px; background:#f5f2eb; color:var(--event-ink); }
+.form-alert--info strong { display:block; margin-bottom:4px; font:600 1.15rem/1.25 "Fraunces",serif; }
+.form-alert--info a { display:inline-flex; margin:12px 8px 0 0; padding:10px 14px; border-radius:10px; background:var(--event-ink); color:#fff; font-weight:650; text-decoration:none; }
+.form-alert--info a + a { background:transparent; color:var(--event-ink); border:1.5px solid var(--event-ink); }
 .results-head { margin-bottom:24px; }
 .results h2 { margin:6px 0 8px; font:600 clamp(2rem,5vw,3.25rem)/1 "Fraunces",serif; }
 .results-head > p:last-child { color:#5f6b74; }
