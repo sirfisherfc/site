@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Página indexável do Réveillon. A venda (mapa e pré-reserva) fica em
+       reservas.sirfisher.com.br/reveillon.html, que tem noindex para não
+       competir com esta. Os preços aqui são estáticos: na troca de lote ou de
+       desconto do Pix, atualize o texto, o JSON-LD e o reveillon.html do
+       repositório de reservas (ver reservas/docs/HANDOFF_REVEILLON.md). -->
+  <title>Réveillon 2027 na Beira-Mar de Fortaleza | Sir Fisher</title>
+  <meta name="description" content="Réveillon no Sir Fisher: 31/12/2026, das 20h às 2h, de frente para o mar na Av. Beira Mar, 3421. DJ e cantor ao vivo, vista dos fogos da orla e mesas com consumação inclusa, a partir de R$ 800." />
+  <link rel="canonical" href="https://www.sirfisher.com.br/reveillon/" />
+
+  <meta name="theme-color" content="#12293d" />
+
+  <!-- Tema: aplica a escolha salva ANTES da primeira pintura, senao a pagina
+       aparece no tema errado por um instante. Sem escolha salva, o CSS segue
+       o sistema operacional sozinho e nada e gravado. -->
+  <script>
+  (function () {
+    var raiz = document.documentElement;
+    var CHAVE = 'sf-tema';
+
+    try {
+      var salvo = localStorage.getItem(CHAVE);
+      if (salvo === 'dark' || salvo === 'light') raiz.setAttribute('data-theme', salvo);
+    } catch (e) {}
+
+    function atual() {
+      var t = raiz.getAttribute('data-theme');
+      if (t === 'dark' || t === 'light') return t;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function rotular() {
+      var escuro = atual() === 'dark';
+      var b = document.querySelector('.theme-toggle');
+      if (b) {
+        b.setAttribute('aria-label', escuro ? 'Mudar para o tema claro' : 'Mudar para o tema escuro');
+        b.setAttribute('aria-pressed', escuro ? 'true' : 'false');
+      }
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', escuro ? '#0a1622' : '#12293d');
+    }
+
+    document.addEventListener('click', function (ev) {
+      var alvo = ev.target;
+      if (!alvo || !alvo.closest) return;
+      if (!alvo.closest('.theme-toggle')) return;
+      var novo = atual() === 'dark' ? 'light' : 'dark';
+      raiz.setAttribute('data-theme', novo);
+      try { localStorage.setItem(CHAVE, novo); } catch (e) {}
+      rotular();
+    });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', rotular);
+    } else {
+      rotular();
+    }
+  })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Sir Fisher" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://www.sirfisher.com.br/reveillon/" />
+  <meta property="og:title" content="Réveillon 2027 na Beira-Mar de Fortaleza | Sir Fisher" />
+  <meta property="og:description" content="31/12/2026, das 20h às 2h, de frente para o mar. DJ e cantor ao vivo, fogos da orla à vista e consumação inclusa. Escolha sua mesa no mapa." />
+  <meta property="og:image" content="https://www.sirfisher.com.br/assets/img/pordosol-1200.jpg" />
+  <meta property="og:image:alt" content="Pôr do sol na Beira-Mar de Fortaleza, visto do Sir Fisher" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Réveillon 2027 na Beira-Mar de Fortaleza | Sir Fisher" />
+  <meta name="twitter:description" content="31/12/2026, das 20h às 2h, de frente para o mar. Mesas com consumação inclusa." />
+  <meta name="twitter:image" content="https://www.sirfisher.com.br/assets/img/pordosol-1200.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Sir Fisher", "item": "https://www.sirfisher.com.br/" },
+      { "@type": "ListItem", "position": 2, "name": "Réveillon 2027", "item": "https://www.sirfisher.com.br/reveillon/" }
+    ]
+  }
+  </script>
+
+  <!-- Evento (Google Search Central: structured-data/event). Preços do Lote 1
+       (rv_table_types). A disponibilidade é fixa: se esgotar, trocar para SoldOut. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Réveillon 2027 no Sir Fisher Praia",
+    "description": "Virada de 2026 para 2027 no Sir Fisher Praia, na Beira-Mar de Fortaleza, com DJ e cantor ao vivo, vista dos fogos da orla e o cardápio da casa. Venda por mesa, com consumação inclusa.",
+    "startDate": "2026-12-31T20:00:00-03:00",
+    "endDate": "2027-01-01T02:00:00-03:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "inLanguage": "pt-BR",
+    "url": "https://www.sirfisher.com.br/reveillon/",
+    "image": [
+      "https://www.sirfisher.com.br/assets/img/pordosol-1200.jpg",
+      "https://www.sirfisher.com.br/assets/img/festa-reveillon-sir-fisher-660.jpg"
+    ],
+    "location": {
+      "@type": "Place",
+      "name": "Sir Fisher Praia",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Beira Mar, 3421",
+        "addressLocality": "Fortaleza",
+        "addressRegion": "CE",
+        "postalCode": "60165-121",
+        "addressCountry": "BR"
+      }
+    },
+    "organizer": {
+      "@type": "Restaurant",
+      "@id": "https://www.sirfisher.com.br/#restaurante",
+      "name": "Sir Fisher",
+      "url": "https://www.sirfisher.com.br/"
+    },
+    "offers": [
+      { "@type": "Offer", "name": "Mesa lateral (valor da mesa, cobre 8 pessoas)", "price": "2800.00", "priceCurrency": "BRL", "availability": "https://schema.org/InStock", "url": "https://reservas.sirfisher.com.br/reveillon.html" },
+      { "@type": "Offer", "name": "Mesa central (valor da mesa, cobre 4 pessoas)", "price": "1500.00", "priceCurrency": "BRL", "availability": "https://schema.org/InStock", "url": "https://reservas.sirfisher.com.br/reveillon.html" },
+      { "@type": "Offer", "name": "Bistrô (valor da mesa, 2 pessoas)", "price": "800.00", "priceCurrency": "BRL", "availability": "https://schema.org/InStock", "url": "https://reservas.sirfisher.com.br/reveillon.html" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "O valor do Réveillon é por pessoa ou por mesa?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Por mesa. A mesa lateral custa R$ 2.800 para até 8 pessoas, com R$ 800 de consumação. A central custa R$ 1.500 para até 4 pessoas, com R$ 400 de consumação. O bistrô custa R$ 800 para 2 pessoas, com R$ 200 de consumação. Cadeira extra: R$ 350, com R$ 100 de consumação." }
+      },
+      {
+        "@type": "Question",
+        "name": "Dá para ver a queima de fogos do Sir Fisher?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sim. Da nossa orla dá para ver a queima oficial do Aterro e também as de vários clubes e hotéis da Beira-Mar." }
+      },
+      {
+        "@type": "Question",
+        "name": "Como faço o pagamento?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No Pix, com 8% de desconto, ou no cartão, presencialmente no restaurante. A mesa fica garantida com o sinal de 30% em até 48 horas, e o saldo pode ser pago até 20/12/2026." }
+      },
+      {
+        "@type": "Question",
+        "name": "Posso levar crianças?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sim. Crianças de colo não pagam e não contam para o mínimo da mesa. Crianças até 11 anos têm R$ 100 de desconto cada." }
+      },
+      {
+        "@type": "Question",
+        "name": "Qual o horário do Réveillon?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Das 20h do dia 31 de dezembro de 2026 às 2h de 1º de janeiro de 2027." }
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F40Z5Y9QT6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F40Z5Y9QT6', {
+      linker: { domains: ['sirfisher.com.br', 'www.sirfisher.com.br', 'reservas.sirfisher.com.br'] }
+    });
+  </script>
+  <!-- Meta Pixel. O mesmo dataset da Conversions API: os eventos do navegador e
+       os do servidor sao unidos pelo event_id, para a reserva nao contar duas
+       vezes. Ver supabase/meta-capi.sql no repositorio de reservas. -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '948509834960152');
+    fbq('track', 'PageView');
+  </script>
+</head>
+<body>
+
+  <div class="shell">
+    <button class="theme-toggle" type="button" aria-label="Mudar para o tema escuro" aria-pressed="false">
+      <svg class="ico-lua" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="ico-sol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <main>
+
+      <div class="hero">
+        <picture>
+          <source type="image/avif" srcset="../assets/img/pordosol-800.avif 800w, ../assets/img/pordosol-1200.avif 1200w" sizes="(max-width:460px) 100vw, 460px" />
+          <source type="image/webp" srcset="../assets/img/pordosol-800.webp 800w, ../assets/img/pordosol-1200.webp 1200w" sizes="(max-width:460px) 100vw, 460px" />
+          <img class="hero__img" src="../assets/img/pordosol-800.jpg" alt="Pôr do sol na Beira-Mar de Fortaleza, visto das mesas do Sir Fisher" width="800" height="534" fetchpriority="high" />
+        </picture>
+      </div>
+
+      <header class="board">
+        <p class="eyebrow">31 de dezembro · Beira-Mar de Fortaleza</p>
+        <h1>Réveillon 2027 no Sir Fisher, de frente para o mar.</h1>
+        <p class="board__sub">Quinta-feira, <strong>31/12/2026, das 20h às 2h</strong>. DJ e cantor ao vivo, o cardápio da casa e os fogos de toda a orla à sua frente. Venda por mesa, com consumação inclusa.</p>
+      </header>
+
+      <section class="sec">
+        <a class="btn btn--solid" href="https://reservas.sirfisher.com.br/reveillon.html?utm_source=site&amp;utm_medium=organic&amp;utm_content=pagina_reveillon#mapa" data-evt="click_reveillon">
+          Escolher minha mesa no mapa
+        </a>
+      </section>
+
+      <section class="sec" id="a-noite">
+        <h2>A noite</h2>
+        <p>O salão fica à beira da praia, na Av. Beira Mar, 3421, no Meireles, em frente ao Jardim Japonês. Uma escada desce direto para a areia.</p>
+        <p><strong>À meia-noite, os fogos de toda a orla ficam à vista:</strong> a queima oficial do Aterro e as de vários clubes e hotéis da Beira-Mar. Antes e depois, DJ e cantor ao vivo até as 2h, com os peixes, camarões e petiscos do Sir Fisher servidos a noite toda.</p>
+
+        <div class="grid">
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/festa-reveillon-sir-fisher-440.avif 440w, ../assets/img/festa-reveillon-sir-fisher-660.avif 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/festa-reveillon-sir-fisher-440.webp 440w, ../assets/img/festa-reveillon-sir-fisher-660.webp 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/festa-reveillon-sir-fisher-440.jpg" srcset="../assets/img/festa-reveillon-sir-fisher-440.jpg 440w, ../assets/img/festa-reveillon-sir-fisher-660.jpg 660w" sizes="(max-width:500px) 46vw, 205px" alt="Clientes dançando no Réveillon do Sir Fisher Praia" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>Réveillon 2025 no Sir Fisher</figcaption>
+          </figure>
+
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/fogos-orla-reveillon-sir-fisher-440.avif 440w, ../assets/img/fogos-orla-reveillon-sir-fisher-660.avif 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/fogos-orla-reveillon-sir-fisher-440.webp 440w, ../assets/img/fogos-orla-reveillon-sir-fisher-660.webp 660w" sizes="(max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/fogos-orla-reveillon-sir-fisher-440.jpg" srcset="../assets/img/fogos-orla-reveillon-sir-fisher-440.jpg 440w, ../assets/img/fogos-orla-reveillon-sir-fisher-660.jpg 660w" sizes="(max-width:500px) 46vw, 205px" alt="Ilustração dos fogos sobre os prédios da Beira-Mar, a partir de uma foto do Sir Fisher Praia" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+            <!-- Montagem: trocar por foto real da virada quando houver (ver handoff do Réveillon). -->
+            <figcaption>Imagem ilustrativa (montagem sobre foto do local)</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="sec" id="mesas">
+        <h2>As mesas e os valores</h2>
+        <p>O valor é <strong>por mesa</strong>, não por pessoa, e já inclui um crédito de consumação para usar no cardápio durante a noite. Você escolhe o lugar exato no mapa do salão.</p>
+
+        <dl class="hours">
+          <div><dt>Mesa lateral · junto à mureta, até 8 pessoas</dt><dd>R$&nbsp;2.800</dd></div>
+          <div><dt>Mesa central · no salão, até 4 pessoas</dt><dd>R$&nbsp;1.500</dd></div>
+          <div><dt>Bistrô · mesa alta para 2 pessoas</dt><dd>R$&nbsp;800</dd></div>
+          <div><dt>Cadeira extra · lateral ou central</dt><dd>R$&nbsp;350</dd></div>
+        </dl>
+
+        <ul>
+          <li><strong>Consumação inclusa:</strong> R$ 800 na lateral, R$ 400 na central, R$ 200 no bistrô e R$ 100 por cadeira extra.</li>
+          <li><strong>Em todas as mesas:</strong> 1 Chandon, welcome kit e brindes do patrocinador.</li>
+          <li><strong>Grupos grandes:</strong> a lateral recebe até 16 pessoas com cadeiras extras, e a central até 8. Para mais gente, reserve mesas vizinhas no mapa.</li>
+        </ul>
+
+        <div class="offer">
+          <span class="offer__tag">Pix com desconto</span>
+          <p class="offer__title">8% de desconto no Pix</p>
+          <p>A mesa fica garantida com o sinal de 30% em até 48 horas. O saldo pode ser pago até 20/12/2026. Valores do 1º lote.</p>
+        </div>
+
+        <a class="btn btn--solid" href="https://reservas.sirfisher.com.br/reveillon.html?utm_source=site&amp;utm_medium=organic&amp;utm_content=pagina_reveillon_mesas#mapa" data-evt="click_reveillon">
+          Ver mesas livres no mapa
+        </a>
+      </section>
+
+      <section class="sec" id="duvidas">
+        <h2>Perguntas frequentes</h2>
+
+        <h3>Como faço o pagamento?</h3>
+        <p>No Pix, com 8% de desconto, ou no cartão de débito ou crédito, presencialmente no restaurante ou na própria noite. Não enviamos link de pagamento. Sem o sinal em 48 horas, a pré-reserva expira e a mesa volta a ficar livre.</p>
+
+        <h3>Posso levar crianças?</h3>
+        <p>Sim. Crianças de colo não pagam e não contam para o mínimo da mesa. Crianças até 11 anos têm R$ 100 de desconto cada.</p>
+
+        <h3>E se eu desistir?</h3>
+        <p>O reembolso é integral se a desistência for comunicada por escrito em até 7 dias da contratação. Depois disso não há reembolso, mas você pode indicar outras pessoas para usar a mesa. Nenhum reembolso após 25/12/2026.</p>
+
+        <h3>Posso levar bebida?</h3>
+        <p>Só champanhe e espumante. Destilados pagam rolha de R$ 50 por garrafa, e não é permitido trazer alimentos. Fogos e pirotecnia são proibidos.</p>
+
+        <h3>A consumação vale para outro dia?</h3>
+        <p>Não. Ela vale só na noite do evento, sem devolução em dinheiro.</p>
+      </section>
+
+      <section class="sec" id="onde">
+        <h2>Onde fica</h2>
+        <address class="place">
+          <strong>Sir Fisher Praia</strong>
+          Av. Beira Mar, 3421 · Meireles<br />
+          Fortaleza, CE · em frente ao Jardim Japonês
+        </address>
+
+        <dl class="hours">
+          <div><dt>Data</dt><dd>Quinta, 31/12/2026</dd></div>
+          <div><dt>Horário</dt><dd>20h às 2h</dd></div>
+        </dl>
+
+        <div class="btn-pair">
+          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/reveillon.html?utm_source=site&amp;utm_medium=organic&amp;utm_content=pagina_reveillon_fim#mapa" data-evt="click_reveillon">
+            Escolher mesa
+          </a>
+          <a class="btn btn--ghost" href="https://api.whatsapp.com/send?phone=5585988544274&amp;text=Ol%C3%A1!%20Quero%20saber%20sobre%20o%20R%C3%A9veillon%202027." target="_blank" rel="noopener" data-evt="click_whatsapp">
+            WhatsApp
+          </a>
+        </div>
+        <a class="link-row" href="../como-chegar/">Como chegar ao restaurante</a>
+      </section>
+
+      <nav class="links" aria-label="Mais do Sir Fisher">
+        <p class="links__label">Mais do Sir Fisher</p>
+
+        <a class="link-row link-row--sun" href="../eventos/" data-evt="click_eventos">
+          <span class="link-row__label">Eventos e confraternizações<span class="link-row__sub">Simule o seu evento no Sir Fisher</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <a class="link-row link-row--sea" href="../">
+          <span class="link-row__label">O restaurante<span class="link-row__sub">Cardápio, fim de tarde e localização</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </nav>
+
+    </main>
+
+    <footer class="foot">
+      <div class="foot__flag" aria-hidden="true"></div>
+      <address>
+        Av. Beira Mar, 3421 · Meireles<br />
+        Fortaleza · Ceará
+      </address>
+      <p class="foot__brand">Sir Fisher · Beira-Mar de Fortaleza</p>
+      <p class="foot__legal"><a href="../privacidade/">Aviso de privacidade</a></p>
+    </footer>
+
+  </div>
+
+  <script>
+    (function () {
+      window.dataLayer = window.dataLayer || [];
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest ? e.target.closest('a[data-evt]') : null;
+        if (!a) return;
+        var name = a.getAttribute('data-evt');
+        var label = a.getAttribute('aria-label') || a.textContent || '';
+        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80) };
+        window.dataLayer.push(Object.assign({ event: name }, payload));
+        if (typeof window.gtag === 'function') window.gtag('event', name, payload);
+        // Eventos padrao do Meta: o otimizador entende esses nomes nativamente,
+        // ao contrario de eventos customizados.
+        var meta = { click_menu: 'ViewContent', click_reservation: 'InitiateCheckout',
+                     click_maps: 'FindLocation', click_whatsapp: 'Contact' }[name];
+        if (meta && typeof window.fbq === 'function') {
+          window.fbq('track', meta, { content_name: payload.link_text });
+        }
+      }, { passive: true });
+    })();
+  </script>
+
+  <script src="../assets/js/atribuicao.js" defer></script>
+  <script src="../assets/js/contador-visitas.js" defer></script>
+
+</body>
+</html>
