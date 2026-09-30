@@ -62,7 +62,28 @@
     return '';
   }
 
+  function dateMessage(date) {
+    var md = String(date || '').slice(5, 10);
+    if (md === '12-24' || md === '12-25') {
+      return '<strong>Fechamos em 24 e 25 de dezembro.</strong> Escolha outra data para o seu evento.';
+    }
+    if (md === '12-31') {
+      return '<strong>Em 31/12 acontece o Réveillon do Sir Fisher.</strong> Mesas e ingressos estão no site de reservas.<br><a href="https://reservas.sirfisher.com.br/reveillon.html" data-evt="click_reveillon">Ver o Réveillon</a>';
+    }
+    return '';
+  }
+
   function validateStep() {
+    if (step === 1) {
+      var closed = dateMessage(new FormData(form).get('date'));
+      if (closed) {
+        var box = document.getElementById('form-alert');
+        box.innerHTML = closed;
+        box.classList.add('form-alert--info');
+        box.hidden = false;
+        return false;
+      }
+    }
     if (step === 2) {
       var limit = guestLimitMessage(Number(new FormData(form).get('guests') || 0));
       if (limit) {
