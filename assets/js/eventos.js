@@ -94,7 +94,7 @@
       date: data.get('date'), startTime: data.get('startTime'), durationHours: Number(data.get('durationHours')),
       guests: Number(data.get('guests')), children: Number(data.get('children') || 0),
       foodStyle: data.get('foodStyle'), beverageMode: data.get('beverageMode'), profile: 'comparar',
-      dietaryRestriction: data.get('dietaryRestriction') === 'on', exclusive: false
+      exclusive: false
     };
   }
 
