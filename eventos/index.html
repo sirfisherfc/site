@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
   <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="../assets/css/eventos.css?v=20260930-2" />
+  <link rel="stylesheet" href="../assets/css/eventos.css?v=20260930-3" />
 </head>
 <body class="event-page">
   <header class="event-topbar">
@@ -86,13 +86,14 @@
     </section>
 
     <section class="results" id="results" aria-live="polite" hidden>
-      <div class="results-head"><p class="eyebrow">Pré-proposta</p><h2>Três níveis para comparar</h2><p>Contratando antes, você paga menos do que pedindo os mesmos itens no cardápio, e quanto mais completo o pacote, maior a economia. Valores finais, com atendimento incluído.</p><p id="availability-note"></p></div>
+      <div class="results-head"><p class="eyebrow">Estimativa</p><h2>Três níveis para comparar</h2><p>Contratando antes, você paga menos do que pedindo os mesmos itens no cardápio, e quanto mais completo o pacote, maior a economia. Atendimento incluído.</p></div><div class="estimate-notice"><strong>Estes valores são uma estimativa, não uma proposta fechada.</strong><ol><li><b>Você escolhe</b> a opção que mais combina com o evento.</li><li><b>Nossa equipe confere</b> data, espaço, cardápio e valores. Podemos ajustar quantidades ou preço conforme o dia e a operação.</li><li><b>Enviamos a proposta oficial.</b> O evento só fica confirmado com o seu aceite, o contrato e o sinal.</li></ol><p id="availability-note"></p></div>
       <div class="option-grid" id="option-grid"></div>
       <form class="contact-card" id="contact-form" hidden>
         <h3>Envie sua escolha para a equipe</h3>
-        <p>Não é uma reserva. Vamos conferir a disponibilidade e retornar pelo WhatsApp.</p>
+        <p>Ainda não é uma reserva nem uma proposta fechada. Vamos conferir disponibilidade, cardápio e valores e retornar pelo WhatsApp com a proposta oficial.</p>
         <div class="field-grid field-grid--2"><label>Seu nome<input name="name" maxlength="120" autocomplete="name" required /></label><label>WhatsApp com DDD<input name="phone" maxlength="16" inputmode="tel" autocomplete="tel" required /></label></div>
         <label class="check-line"><input type="checkbox" name="exclusive" /> Quero avaliar exclusividade do espaço</label>
+        <label class="check-line"><input type="checkbox" name="acceptedEstimate" required /> Entendo que os valores são uma estimativa e só valem depois da confirmação da equipe e da proposta oficial.</label>
         <label class="check-line"><input type="checkbox" name="acceptedPrivacy" required /> Li o <a href="../privacidade/" target="_blank" rel="noopener">aviso de privacidade</a> e autorizo o contato sobre esta solicitação.</label>
         <label class="honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
         <button class="submit-button" type="submit">Enviar para validação</button>
@@ -103,6 +104,6 @@
   </main>
 
   <footer class="event-footer"><p>Sir Fisher · Av. Beira Mar, 3421 · Fortaleza</p><a href="../privacidade/">Privacidade</a></footer>
-  <script src="../assets/js/eventos.js?v=20260930-3" defer></script>
+  <script src="../assets/js/eventos.js?v=20260930-4" defer></script>
 </body>
 </html>

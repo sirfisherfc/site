@@ -131,7 +131,6 @@
       .map(function (item) { return '<li><strong>' + esc(item.name) + '</strong>' + (item.detail ? '<span>' + esc(item.detail) + '</span>' : '') + '</li>'; }).join('');
     var additions = option.additions.map(function (item) { return '<li>' + esc(item) + '</li>'; }).join('');
     var notIncluded = option.notIncluded.map(function (item) { return '<li>' + esc(item) + '</li>'; }).join('');
-    var label = option.exact ? 'Pré-proposta' : 'Validação necessária';
     var tier = String(option.name).split(' · ').pop();
     return '<article class="option-card' + (index === 1 ? ' is-featured' : '') + '" data-option="' + esc(option.id) + '">' +
       '<div class="option-top"><span class="option-tier">' + esc(tier) + '</span>' + savingBadge(option) + '</div>' +
@@ -140,8 +139,8 @@
       '<ul class="option-items">' + items + '</ul>' +
       '<div class="option-drinks"><strong>' + esc(option.beverageLabel) + '</strong>' + (option.beverageDetail ? '<span>' + esc(option.beverageDetail) + '</span>' : '') + '</div>' +
       '<p class="option-duration">' + esc(option.durationHours) + ' horas de evento</p>' +
-      '<div class="option-price"><strong>' + money.format(option.pricePerPerson) + '</strong><small>por pessoa</small><span>' + money.format(option.total) + ' no total</span>' + savings(option) + '</div>' +
-      '<p class="service-note">Atendimento incluído. <span class="risk-note risk-note--' + esc(option.riskLevel) + '">' + label + ':</span> ' + esc(option.validationMessage) + '</p>' +
+      '<div class="option-price"><strong>' + money.format(option.pricePerPerson) + '</strong><small>valor estimado por pessoa</small><span>' + money.format(option.total) + ' no total, estimado</span>' + savings(option) + '</div>' +
+      '<p class="estimate-note">Atendimento incluído. Estimativa sujeita à confirmação da equipe e à proposta oficial.</p>' +
       '<details><summary>Adicionais e o que não está incluído</summary>' +
       '<p><strong>Sob consulta</strong></p><ul>' + additions + '</ul>' +
       '<p><strong>Não incluído</strong></p><ul>' + notIncluded + '</ul></details>' +
@@ -153,8 +152,8 @@
     selectedOptionId = null;
     document.getElementById('option-grid').innerHTML = result.options.map(optionCard).join('');
     document.getElementById('availability-note').textContent = result.availabilityChecked
-      ? 'Verificamos os dados operacionais disponíveis. A reserva só é confirmada depois da validação interna.'
-      : 'A disponibilidade precisa ser conferida pela equipe antes de qualquer confirmação.';
+      ? 'A data parece disponível, mas a equipe ainda precisa confirmar.'
+      : 'A disponibilidade da data ainda precisa ser conferida pela equipe.';
     document.getElementById('results').hidden = false;
     contactForm.hidden = true;
     document.getElementById('success-card').hidden = true;
@@ -196,11 +195,11 @@
     try {
       var response = await callApi({
         action: 'submit', configuration: config, selectedOptionId: selectedOptionId,
-        name: data.get('name'), phone: data.get('phone'), acceptedPrivacy: data.get('acceptedPrivacy') === 'on', website: data.get('website')
+        name: data.get('name'), phone: data.get('phone'), acceptedPrivacy: data.get('acceptedPrivacy') === 'on', acceptedEstimate: data.get('acceptedEstimate') === 'on', website: data.get('website')
       });
       contactForm.hidden = true;
       var success = document.getElementById('success-card');
-      success.innerHTML = '<h3>Recebemos sua configuração.</h3><p>Código <strong>' + esc(response.publicCode) + '</strong>. A equipe vai validar disponibilidade e condições antes de confirmar qualquer reserva.</p>' +
+      success.innerHTML = '<h3>Recebemos sua escolha.</h3><p>Código <strong>' + esc(response.publicCode) + '</strong>. Nossa equipe vai conferir data, cardápio e valores e enviar a proposta oficial. Até lá, os valores são uma estimativa e a data não está reservada.</p>' +
         (response.whatsappUrl ? '<a class="success-wa" href="' + esc(response.whatsappUrl) + '" target="_blank" rel="noopener">Falar agora com a equipe pelo WhatsApp</a>' : '');
       success.hidden = false;
       success.scrollIntoView({ behavior: 'smooth', block: 'center' });
