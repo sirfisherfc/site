@@ -98,6 +98,13 @@ para sobrescrever o menu. Nunca guardar tokens no payload ou no Git.
 - Bandeiras confirmadas: Visa, Mastercard, Elo, American Express, UnionPay e
   Cabal, além dos principais vales-refeição. As bandeiras dos vales, a entrada
   acessível e o estacionamento acessível ainda precisam de confirmação.
+  O atributo de cartões do Google oferece Visa, Mastercard, American Express
+  e China UnionPay; esses foram mantidos, e Diners/Discover/JCB desmarcados.
+  Elo e Cabal foram informados na descrição, pois não há opções próprias na
+  lista retornada pela API. O Google oferece campos separados para Alelo,
+  Pluxee, Ticket Restaurante e VR: não marcar todos a partir da expressão
+  genérica “principais vales-refeição”. A descrição enviada aguarda processamento
+  quando `getGoogleUpdated` informa `pendingMask=profile.description`.
 - Comparar descoberta comercial, cliques, rotas, contatos, reservas e visitas
   em períodos fechados. Não atribuir causalidade ou melhora de ranking a uma
   publicação isolada. Esta rotina não cria envios nem automações agendadas.
