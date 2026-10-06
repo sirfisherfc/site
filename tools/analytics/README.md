@@ -77,6 +77,9 @@ para sobrescrever o menu. Nunca guardar tokens no payload ou no Git.
   e site juntos. Em 31/12/2026, a abertura foi confirmada das 9h às 2h de 01/01.
 - Entrega exclusivamente pelo 99Food; sem sala privativa; mesas acessíveis,
   banheiro sem acessibilidade, conforme confirmação do proprietário.
+- Bandeiras confirmadas: Visa, Mastercard, Elo, American Express, UnionPay e
+  Cabal, além dos principais vales-refeição. As bandeiras dos vales, a entrada
+  acessível e o estacionamento acessível ainda precisam de confirmação.
 - Comparar descoberta comercial, cliques, rotas, contatos, reservas e visitas
   em períodos fechados. Não atribuir causalidade ou melhora de ranking a uma
   publicação isolada. Esta rotina não cria envios nem automações agendadas.
