@@ -40,6 +40,24 @@ o início. Testes verificam preservação de PageView e ausência de SDK duplica
 Essa priorização pode afetar usuários que saem antes de qualquer SDK carregar;
 não comparar pixels e sessões GA4 como se tivessem cobertura idêntica.
 
+## Verificação móvel de 06/10/2026
+
+PageSpeed Insights autenticado, home em produção, estratégia móvel:
+acessibilidade 100 (antes 96), SEO 100 e desempenho 66. O teste anterior à
+publicação marcou 68; execuções intermediárias variaram de 60 a 66. Não há
+evidência de ganho consistente de desempenho pelo escore sintético. A última
+execução mediu LCP 7,1 s, FCP 2,6 s, bloqueio total 160 ms e CLS zero.
+
+Dados de campo CrUX retornados para a URL: LCP 1.419 ms, INP 152 ms e CLS zero,
+todos na faixa boa. São dados de uma janela histórica, não efeito comprovado
+da publicação de hoje. O próximo diagnóstico de velocidade deve comparar
+várias execuções sob condições equivalentes e investigar o atraso da imagem
+principal; não remover medição para melhorar artificialmente o escore.
+
+Foram corrigidos contraste de textos/botões e nome acessível do link do menu.
+A captura móvel do Lighthouse foi inspecionada. O navegador integrado não
+estava disponível: não houve teste manual completo de navegação ou reserva.
+
 ## Cardápio do Perfil da Empresa
 
 O arquivo público `cardapio/dados/cardapio.json` é a fonte dos itens e preços.
