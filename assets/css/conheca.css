@@ -1,53 +1,78 @@
-/* A descoberta pelo anuncio tem um percurso proprio; a home continua para o QR. */
+/* Destino dos anuncios. A home e os estilos do QR permanecem intactos. */
 .shell--discovery { max-width: 1120px; }
-.discovery-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px; }
+.discovery-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; }
 .discovery-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; }
 .discovery-brand img { width: 32px; height: auto; }
 .discovery-header .theme-toggle { position: static; flex: none; background: var(--card-2); color: var(--on-card); border-color: var(--hairline); }
-.discovery-intro { padding: 0 22px 28px; }
-.discovery-intro .eyebrow { margin-top: 8px; }
-.discovery-intro h1 { font: 600 clamp(1.9rem, 5vw, 3.2rem)/1.1 var(--font-display); text-wrap: balance; margin: 0 0 14px; }
-.discovery-intro p { color: var(--on-card-soft); line-height: 1.55; }
-.discovery-intro .btn-pair { margin-top: 18px; }
-.discovery-photo { margin: 0 0 20px; }
-.discovery-photo img { display: block; width: 100%; height: clamp(200px, 30vh, 280px); object-fit: cover; object-position: center 66%; border-radius: 18px; }
-.discovery-intro .discovery-price { color: var(--on-card); font-size: 0.88rem; }
-.discovery-link { font-weight: 600; text-underline-offset: 3px; }
-.discovery-intro .discovery-rating { color: var(--on-card); font-size: 0.88rem; margin: 0 0 12px; }
-.discovery-rating a { text-decoration: none; border-bottom: 1px solid var(--hairline); }
-.discovery-award { border-left: 3px solid var(--sea); background: var(--card-2); padding: 18px 20px; border-radius: 0 16px 16px 0; }
-.discovery-award .eyebrow { margin-top: 0; }
-.discovery-award h3 { font: 600 1.4rem/1.25 var(--font-display); text-wrap: balance; margin: 0 0 12px; }
-.discovery-award a { font-size: 0.9rem; text-underline-offset: 3px; }
-.discovery-benefits, .discovery-reviews { display: grid; gap: 16px; margin: 20px 0; }
-.discovery-benefits article, .discovery-reviews figure { margin: 0; padding: 18px; background: var(--card-2); border-radius: 16px; }
-.discovery-benefits h3 { font: 600 1.2rem/1.3 var(--font-display); margin: 0 0 10px; }
-.discovery-benefits p { margin: 0; }
-.discovery-reviews blockquote { margin: 0 0 12px; font: 500 1.15rem/1.5 var(--font-display); }
-.discovery-reviews blockquote p { margin: 0; }
-.discovery-reviews figcaption { color: var(--on-card-soft); font-size: 0.8rem; line-height: 1.5; }
-.shell--discovery .sec { margin: 0; padding: 28px 22px; border-top: 1px solid var(--hairline); }
-.shell--discovery h2 { font-family: var(--font-display); text-wrap: balance; }
-.discovery-dishes { display: grid; gap: 20px; }
-.discovery-dishes figure { margin: 0; }
-.discovery-dishes img { display: block; width: 100%; height: 220px; object-fit: cover; border-radius: 16px; }
-.discovery-dishes figcaption { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-top: 10px; font-weight: 600; }
-.discovery-dishes figcaption strong { white-space: nowrap; }
-.discovery-place { display: grid; gap: 18px; }
-.discovery-place img { display: block; width: 100%; max-height: 380px; object-fit: cover; border-radius: 18px; }
+.discovery-intro { padding: 0 22px 24px; }
+.discovery-visual { display: grid; grid-template-columns: 1.6fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; height: clamp(210px, 30vh, 280px); margin-bottom: 20px; }
+.discovery-visual picture { display: block; min-height: 0; overflow: hidden; border-radius: 14px; }
+.discovery-visual__main { grid-row: 1 / 3; }
+.discovery-visual img { width: 100%; height: 100%; object-fit: cover; }
+.discovery-visual__main img { object-position: center 65%; }
+.discovery-intro .eyebrow { margin: 0 0 10px; }
+.discovery-intro h1 { font: 600 clamp(1.9rem, 5vw, 3.2rem)/1.08 var(--font-display); letter-spacing: -0.025em; margin: 0 0 12px; }
+.discovery-tagline { color: var(--on-card-soft); font-size: 0.94rem; max-width: 35ch; margin: 0 0 18px; }
+.discovery-reserve { font-size: 0.85rem; margin: 12px 0 18px; }
+.discovery-reserve a { text-underline-offset: 3px; }
+.discovery-proof { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; border-top: 1px solid var(--hairline); padding-top: 14px; }
+.discovery-proof a { text-decoration: none; text-align: center; padding: 2px; }
+.discovery-proof strong { display: block; font: 600 1.2rem/1.2 var(--font-display); }
+.discovery-proof span { display: block; font-size: 0.68rem; line-height: 1.4; margin-top: 4px; color: var(--on-card-soft); }
+.shell--discovery .sec { margin: 0; padding: 24px 22px; border-top: 1px solid var(--hairline); }
+.shell--discovery h2 { font: 600 1.7rem/1.15 var(--font-display); text-wrap: balance; margin: 0 0 18px; }
+.discovery-section-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 20px; justify-content: space-between; margin-bottom: 18px; }
+.discovery-section-head h2 { margin: 0; }
+.discovery-section-head a { font-size: 0.86rem; text-underline-offset: 3px; }
+.discovery-dishes, .discovery-moments { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.discovery-dishes > a { min-width: 0; text-decoration: none; }
+.discovery-dishes img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; }
+.discovery-dish-label { display: flex; flex-direction: column; gap: 3px; font-size: 0.77rem; line-height: 1.3; margin-top: 9px; }
+.discovery-dish-label strong { white-space: nowrap; font-size: 0.93rem; }
+.discovery-moments figure { margin: 0; min-width: 0; }
+.discovery-moments img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 12px; }
+.discovery-moments figcaption { margin-top: 8px; font-size: 0.76rem; line-height: 1.4; }
+.discovery-award-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.discovery-award-photos a { display: block; overflow: hidden; border-radius: 12px; background: var(--card-2); }
+.discovery-award-photos img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.discovery-award-photos a:first-child img { object-position: center 56%; }
+.discovery-award-photos a:nth-child(2) img { object-position: center 35%; }
+.discovery-award-photos a:last-child img { object-position: center 43%; }
+.discovery-reviews { display: grid; gap: 14px; }
+.discovery-reviews figure { margin: 0; padding: 18px; background: var(--card-2); border-radius: 14px; }
+.discovery-reviews blockquote { margin: 0 0 12px; font: 500 1.1rem/1.45 var(--font-display); }
+.discovery-reviews figcaption { color: var(--on-card-soft); font-size: 0.75rem; }
+.discovery-small { font-size: 0.82rem; color: var(--on-card-soft); }
 .shell--discovery .btn-pair { flex-wrap: wrap; }
 .shell--discovery .btn-pair .btn { min-width: 0; }
-.shell--discovery .hours { margin-bottom: 18px; }
+.discovery-visit p { margin: 0 0 12px; }
+.discovery-details { margin-top: 24px; font-size: 0.88rem; color: var(--on-card-soft); }
+.discovery-details summary { cursor: pointer; padding: 10px 0; color: var(--on-card); text-decoration: underline; text-underline-offset: 3px; }
+.discovery-details p { margin: 14px 0; }
+.shell--discovery a:focus-visible, .discovery-details summary:focus-visible { outline: 3px solid var(--sea); outline-offset: 4px; border-radius: 4px; }
+@media (max-width: 359px) {
+  .discovery-header { padding: 12px 16px; }
+  .discovery-intro { padding-right: 16px; padding-left: 16px; }
+  .shell--discovery .sec { padding-right: 16px; padding-left: 16px; }
+  .discovery-proof strong { font-size: 1.07rem; }
+  .discovery-intro h1 { font-size: 1.7rem; }
+}
 @media (min-width: 760px) {
   .shell--discovery { margin: 24px auto; border-radius: 24px; overflow: hidden; }
   .discovery-header { padding: 20px 36px; }
   .discovery-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; padding: 12px 36px 36px; }
-  .discovery-photo { grid-column: 2; grid-row: 1; margin: 0; }
-  .discovery-photo img { height: 450px; }
+  .discovery-visual { grid-column: 2; grid-row: 1; margin: 0; height: 430px; gap: 12px; }
   .discovery-copy { grid-column: 1; grid-row: 1; }
-  .shell--discovery .sec { padding: 36px; }
-  .discovery-dishes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .discovery-benefits { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .shell--discovery .sec { padding: 30px 36px; }
+  .shell--discovery h2 { font-size: 2rem; }
+  .discovery-dishes, .discovery-moments, .discovery-award-photos { gap: 18px; }
+  .discovery-dishes img { aspect-ratio: 4 / 3; }
+  .discovery-moments img { aspect-ratio: 4 / 3; }
+  .discovery-dish-label { flex-direction: row; justify-content: space-between; font-size: 1rem; }
+  .discovery-dish-label strong { font-size: 1rem; }
+  .discovery-moments figcaption { font-size: 0.92rem; }
+  .discovery-award-photos img { max-height: 340px; }
+  .discovery-proof strong { font-size: 1.5rem; }
+  .discovery-proof span { font-size: 0.78rem; }
   .discovery-reviews { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .discovery-place { grid-template-columns: 1fr 1fr; align-items: center; gap: 32px; }
 }

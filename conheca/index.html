@@ -67,7 +67,7 @@
   <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
   <!-- ?v= força o celular a baixar o CSS novo junto com o HTML novo. Mude a cada alteração. -->
   <link rel="stylesheet" href="../assets/css/style.css?v=20261006" />
-  <link rel="stylesheet" href="../assets/css/conheca.css?v=20261006b" />
+  <link rel="stylesheet" href="../assets/css/conheca.css?v=20261006c" />
 
   <!-- "restaurant" nao existe no vocabulario Open Graph; o valor invalido cai
        em "website" de qualquer forma, so que com aviso no validador. -->
@@ -218,133 +218,137 @@
     </header>
     <main>
       <section class="discovery-intro" aria-labelledby="titulo">
-        <figure class="discovery-photo">
-          <picture>
+        <div class="discovery-visual">
+          <picture class="discovery-visual__main">
             <source type="image/avif" srcset="../assets/img/mesa-cheia-vista-mar-sir-fisher-660.avif" />
             <source type="image/webp" srcset="../assets/img/mesa-cheia-vista-mar-sir-fisher-660.webp" />
-            <img src="../assets/img/mesa-cheia-vista-mar-sir-fisher-660.jpg" alt="Peixes, camarões e petiscos na mesa do Sir Fisher, de frente para o mar" width="660" height="825" fetchpriority="high" />
+            <img src="../assets/img/mesa-cheia-vista-mar-sir-fisher-660.jpg" alt="Mesa com peixes, camarões e petiscos de frente para o mar no Sir Fisher" width="660" height="825" fetchpriority="high" />
           </picture>
-        </figure>
+          <picture>
+            <source type="image/avif" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.avif" />
+            <source type="image/webp" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.webp" />
+            <img src="../assets/img/camarao-alho-e-oleo-sir-fisher-440.jpg" alt="Camarão alho e óleo da casa" width="440" height="550" loading="lazy" decoding="async" />
+          </picture>
+          <picture>
+            <source type="image/avif" srcset="../assets/img/por-do-sol-beira-mar-fortaleza-460.avif" />
+            <source type="image/webp" srcset="../assets/img/por-do-sol-beira-mar-fortaleza-460.webp" />
+            <img src="../assets/img/por-do-sol-beira-mar-fortaleza-460.jpg" alt="Pôr do sol da Beira-Mar visto do Sir Fisher" width="460" height="307" loading="lazy" decoding="async" />
+          </picture>
+        </div>
         <div class="discovery-copy">
-          <p class="eyebrow">Beira-Mar · Meireles · Fortaleza</p>
-          <p class="discovery-rating"><a href="#avaliacoes"><strong>4,7/5 no Google</strong> · 787 avaliações</a></p>
-          <h1 id="titulo">Peixes, camarões e uma mesa de frente para o mar.</h1>
-          <p>Conheça o Sir Fisher: um quiosque com mesas ao ar livre, em frente ao Jardim Japonês. Para almoçar, dividir petiscos ou aproveitar o fim de tarde na orla.</p>
-          <p class="discovery-price">Fish &amp; chips <strong>R$45</strong> · Camarão alho e óleo <strong>R$47</strong></p>
+          <p class="eyebrow">Beira-Mar · Fortaleza</p>
+          <h1 id="titulo">Peixes, camarões<br />e vista pro mar.</h1>
+          <p class="discovery-tagline">Uma mesa ao ar livre, em frente ao Jardim Japonês.</p>
           <div class="btn-pair">
             <a class="btn btn--solid" href="../cardapio/" data-evt="click_menu">Ver cardápio</a>
             <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps">Como chegar</a>
           </div>
-          <p><a class="discovery-link" href="#reservar">Já quer planejar a visita? Veja as reservas.</a></p>
+          <p class="discovery-reserve"><a href="https://reservas.sirfisher.com.br/?sf_origin=conheca" target="_blank" rel="noopener" data-evt="click_reservation">Prefere planejar? Reserve sua mesa.</a></p>
+          <div class="discovery-proof" aria-label="Reconhecimento e avaliações">
+            <a href="#avaliacoes"><strong>4,7/5</strong><span>Google · 787 avaliações</span></a>
+            <a href="#reconhecimento"><strong>Diamante</strong><span>Selo Sebrae</span></a>
+            <a href="https://www.instagram.com/sirfisherfc/" target="_blank" rel="noopener" data-evt="click_instagram"><strong>41,2 mil</strong><span>No Instagram</span></a>
+          </div>
         </div>
-      </section>
-      <section class="sec" aria-labelledby="diferenciais">
-        <h2 id="diferenciais">O jeito Sir Fisher de receber</h2>
-        <div class="discovery-award">
-          <p class="eyebrow">Selo Sebrae de Qualidade · Categoria Diamante</p>
-          <h3>Quatro anos seguidos de reconhecimento Diamante.</h3>
-          <p>Um reconhecimento que faz parte da nossa história e do cuidado com a experiência de quem visita a casa.</p>
-          <a href="https://sebrae.com.br/sites/PortalSebrae/ufs/ce/sebraeaz/selo-de-qualidade-em-servicos%2Cdcd521e1d685e510VgnVCM1000004c00210aRCRD" target="_blank" rel="noopener">Conheça o programa de qualidade do Sebrae/CE</a>
-        </div>
-        <div class="discovery-benefits">
-          <article><h3>Inspiração britânica, pescada amarela</h3><p>Nosso fish &amp; chips leva pescada amarela e batatas. Uma identidade própria ao lado dos camarões, petiscos e sabores brasileiros da casa.</p></article>
-          <article><h3>Uma mesa para compartilhar</h3><p>Do almoço aos petiscos com amigos, o cardápio reúne opções individuais e pratos para dividir. Fotos e preços ajudam você a escolher antes de vir.</p></article>
-          <article><h3>A vista acompanha a conversa</h3><p>Mesas ao ar livre, de frente para o mar, em frente ao Jardim Japonês. A casa faz parte do seu passeio pela orla do Meireles.</p></article>
-        </div>
-      </section>
-      <section class="sec" id="avaliacoes" aria-labelledby="clientes">
-        <h2 id="clientes">Quem esteve aqui conta</h2>
-        <p><strong>4,7 de 5 em 787 avaliações no Google.</strong> Consultado em <time datetime="2026-10-06">06/10/2026</time>; a nota e a quantidade podem mudar.</p>
-        <div class="discovery-reviews">
-          <figure>
-            <blockquote><p>“Ambiente agradável, tranquilo e com uma vista deslumbrante.”</p></blockquote>
-            <figcaption>Trecho de avaliação pública no Google · <time datetime="2026-09-07">07/09/2026</time></figcaption>
-          </figure>
-          <figure>
-            <blockquote><p>“comida extremamente deliciosa e no preço.”</p></blockquote>
-            <figcaption>Trecho de avaliação pública no Google · <time datetime="2026-09-16">16/09/2026</time></figcaption>
-          </figure>
-        </div>
-        <a class="btn btn--ghost" href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews">Ler as avaliações no Google</a>
       </section>
       <section class="sec" aria-labelledby="comida">
-        <h2 id="comida">Um pouco do que chega à mesa</h2>
+        <div class="discovery-section-head"><h2 id="comida">Deu vontade?</h2><a href="../cardapio/" data-evt="click_menu">Cardápio completo →</a></div>
         <div class="discovery-dishes">
-          <figure>
+          <a href="../cardapio/" data-evt="click_menu">
             <picture>
               <source type="image/avif" srcset="../assets/img/prato-800.avif" />
               <source type="image/webp" srcset="../assets/img/prato-800.webp" />
-              <img src="../assets/img/prato-800.jpg" alt="Fish and chips: peixe empanado com batatas fritas" width="800" height="640" loading="lazy" decoding="async" />
+              <img src="../assets/img/prato-800.jpg" alt="Fish and chips de pescada amarela com fritas" width="800" height="640" loading="lazy" decoding="async" />
             </picture>
-            <figcaption><span>Sir Fisher — Fish &amp; chips</span><strong>R$45</strong></figcaption>
-          </figure>
-          <figure>
+            <span class="discovery-dish-label"><span>Fish &amp; chips</span><strong>R$45</strong></span>
+          </a>
+          <a href="../cardapio/" data-evt="click_menu">
             <picture>
               <source type="image/avif" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.avif" />
               <source type="image/webp" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.webp" />
-              <img src="../assets/img/camarao-alho-e-oleo-sir-fisher-440.jpg" alt="Camarões ao alho e óleo com limão" width="440" height="550" loading="lazy" decoding="async" />
+              <img src="../assets/img/camarao-alho-e-oleo-sir-fisher-440.jpg" alt="Travessa de camarões ao alho e óleo" width="440" height="550" loading="lazy" decoding="async" />
             </picture>
-            <figcaption><span>Camarão alho e óleo</span><strong>R$47</strong></figcaption>
-          </figure>
-          <figure>
+            <span class="discovery-dish-label"><span>Camarão alho e óleo</span><strong>R$47</strong></span>
+          </a>
+          <a href="../cardapio/" data-evt="click_menu">
             <picture>
               <source type="image/avif" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-440.avif" />
               <source type="image/webp" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-440.webp" />
-              <img src="../assets/img/newcastle-camarao-empanado-sir-fisher-440.jpg" alt="Camarões empanados no panko com fritas e molho" width="440" height="550" loading="lazy" decoding="async" />
+              <img src="../assets/img/newcastle-camarao-empanado-sir-fisher-440.jpg" alt="Newcastle: camarões empanados no panko com fritas" width="440" height="550" loading="lazy" decoding="async" />
             </picture>
-            <figcaption><span>Newcastle, camarões no panko</span><strong>R$60</strong></figcaption>
+            <span class="discovery-dish-label"><span>Camarão no panko</span><strong>R$60</strong></span>
+          </a>
+        </div>
+      </section>
+      <section class="sec" aria-labelledby="espaco">
+        <h2 id="espaco">Do almoço ao pôr do sol.</h2>
+        <div class="discovery-moments">
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/almoco-executivo-sir-fisher-440.avif" />
+              <source type="image/webp" srcset="../assets/img/almoco-executivo-sir-fisher-440.webp" />
+              <img src="../assets/img/almoco-executivo-sir-fisher-440.jpg" alt="Almoço nas mesas de frente para o mar" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>Almoço com vista</figcaption>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/clientes-fim-de-tarde-sir-fisher-440.avif" />
+              <source type="image/webp" srcset="../assets/img/clientes-fim-de-tarde-sir-fisher-440.webp" />
+              <img src="../assets/img/clientes-fim-de-tarde-sir-fisher-440.jpg" alt="Clientes conversando nas mesas ao ar livre com vista para o mar" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>Fim de tarde na orla</figcaption>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/festa-reveillon-sir-fisher-440.avif" />
+              <source type="image/webp" srcset="../assets/img/festa-reveillon-sir-fisher-440.webp" />
+              <img src="../assets/img/festa-reveillon-sir-fisher-440.jpg" alt="Registro de uma celebração de Réveillon no Sir Fisher" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>Para celebrar · Réveillon</figcaption>
           </figure>
         </div>
-        <p>Esses são os preços dos pratos. Veja as demais opções e os detalhes no cardápio completo.</p>
-        <a class="btn btn--solid" href="../cardapio/" data-evt="click_menu">Ver fotos e cardápio completo</a>
-        <p><a class="discovery-link" href="../almoco-executivo/" data-evt="click_menu">Almoço executivo a partir de R$31</a> · De segunda a sexta, das 10h às 14h, exceto feriados.</p>
+        <p class="discovery-small"><a href="../eventos/" data-evt="click_eventos">Vai reunir um grupo? Veja as opções.</a></p>
       </section>
-      <section class="sec discovery-place" aria-labelledby="espaco">
-        <div>
-          <h2 id="espaco">A orla faz parte do passeio</h2>
-          <p>Mesas ao ar livre, com vista para o mar e para o movimento da Beira-Mar. Venha depois de caminhar na orla ou escolha a casa para encontrar amigos e dividir algo para a mesa.</p>
-          <p>No fim de tarde, dá para acompanhar o pôr do sol. <a href="../por-do-sol/">Consulte o horário</a> para planejar a chegada.</p>
+      <section class="sec" id="reconhecimento" aria-labelledby="selo">
+        <div class="discovery-section-head"><h2 id="selo">Qualidade reconhecida.</h2><span class="discovery-small">Sebrae · Diamante</span></div>
+        <div class="discovery-award-photos">
+          <a href="../assets/img/sebrae-certificado-2024-original.webp" target="_blank" rel="noopener" aria-label="Abrir foto original do certificado Diamante Sir Fisher 2024">
+            <img src="../assets/img/sebrae-certificado-2024-660.webp" alt="Certificado real do Sebrae/CE com Sir Fisher, categoria Diamante e ano 2024" width="1080" height="1920" loading="lazy" decoding="async" />
+          </a>
+          <a href="../assets/img/sebrae-entrega-original.jpg" target="_blank" rel="noopener" aria-label="Abrir foto original da entrega do reconhecimento Sebrae">
+            <img src="../assets/img/sebrae-entrega-660.webp" alt="Registro da entrega do certificado Diamante ao Sir Fisher" width="899" height="1599" loading="lazy" decoding="async" />
+          </a>
+          <a href="../assets/img/sebrae-trofeu-2025-2026-original.jpg" target="_blank" rel="noopener" aria-label="Abrir foto original do troféu Sebrae Sir Fisher 2025/2026">
+            <img src="../assets/img/sebrae-trofeu-2025-2026-660.webp" alt="Troféu original com as inscrições Selo Sebrae Qualidade Empresarial, 2025/2026 e Sir Fisher" width="1868" height="4000" loading="lazy" decoding="async" />
+          </a>
         </div>
-        <picture>
-          <source type="image/avif" srcset="../assets/img/clientes-fim-de-tarde-sir-fisher-660.avif" />
-          <source type="image/webp" srcset="../assets/img/clientes-fim-de-tarde-sir-fisher-660.webp" />
-          <img src="../assets/img/clientes-fim-de-tarde-sir-fisher-660.jpg" alt="Clientes nas mesas ao ar livre do Sir Fisher, com o mar ao fundo" width="660" height="825" loading="lazy" decoding="async" />
-        </picture>
+        <p class="discovery-small">Registros de 2024 e 2025/2026. Toque nas fotos para ampliar.</p>
       </section>
-      <section class="sec discovery-place" aria-labelledby="celebracoes">
-        <picture>
-          <source type="image/avif" srcset="../assets/img/festa-reveillon-sir-fisher-660.avif" />
-          <source type="image/webp" srcset="../assets/img/festa-reveillon-sir-fisher-660.webp" />
-          <img src="../assets/img/festa-reveillon-sir-fisher-660.jpg" alt="Registro de uma celebração de Réveillon no Sir Fisher, com clientes nas mesas ao ar livre" width="660" height="825" loading="lazy" decoding="async" />
-        </picture>
-        <div>
-          <h2 id="celebracoes">Também há espaço para celebrar</h2>
-          <p>Um registro de Réveillon na casa. Para um aniversário ou encontro de grupo, converse com a equipe e confira as opções para sua data.</p>
-          <a class="btn btn--ghost" href="../eventos/" data-evt="click_eventos">Conhecer as opções para grupos</a>
-          <p><a href="https://www.instagram.com/sirfisherfc/" target="_blank" rel="noopener" data-evt="click_instagram">Veja mais momentos reais no Instagram @sirfisherfc</a></p>
+      <section class="sec" id="avaliacoes" aria-labelledby="clientes">
+        <div class="discovery-section-head"><h2 id="clientes">Quem veio, conta.</h2><a href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews">4,7/5 no Google →</a></div>
+        <div class="discovery-reviews">
+          <figure><blockquote>“Ambiente agradável, tranquilo e com uma vista deslumbrante.”</blockquote><figcaption>Google · 07/09/2026 · Trecho</figcaption></figure>
+          <figure><blockquote>“comida extremamente deliciosa e no preço.”</blockquote><figcaption>Google · 16/09/2026 · Trecho</figcaption></figure>
         </div>
       </section>
-      <section class="sec" id="reservar" aria-labelledby="visita">
-        <h2 id="visita">Você pode vir sem reserva</h2>
-        <p>Parte das mesas funciona por ordem de chegada. Se prefere planejar, consulte a disponibilidade de reservas. Para grupos acima de 10 pessoas, fale com a equipe pelo WhatsApp.</p>
+      <section class="sec discovery-visit" id="reservar" aria-labelledby="local">
+        <h2 id="local">Sua mesa na Beira-Mar.</h2>
+        <p>Av. Beira Mar, 3421 · Em frente ao Jardim Japonês</p>
+        <p class="discovery-small">Dom–qui: 9h–22h15 · Sex–sáb: 9h–23h</p>
         <div class="btn-pair">
-          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?sf_origin=conheca" target="_blank" rel="noopener" data-evt="click_reservation">Consultar e reservar mesa</a>
-          <a class="btn btn--ghost" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">Falar com a equipe</a>
+          <a class="btn btn--solid" href="../cardapio/" data-evt="click_menu">Ver cardápio</a>
+          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?sf_origin=conheca" target="_blank" rel="noopener" data-evt="click_reservation">Reservar mesa</a>
+          <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps">Como chegar</a>
         </div>
-      </section>
-      <section class="sec" aria-labelledby="local">
-        <h2 id="local">Encontre o Sir Fisher</h2>
-        <address class="place"><strong>Av. Beira Mar, 3421 · Meireles</strong>Fortaleza · Em frente ao Jardim Japonês</address>
-        <dl class="hours">
-          <div><dt>Domingo a quinta</dt><dd>9h às 22h15</dd></div>
-          <div><dt>Sexta e sábado</dt><dd>9h às 23h</dd></div>
-        </dl>
-        <div class="btn-pair">
-          <a class="btn btn--solid" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps">Abrir rota no Google Maps</a>
-          <a class="btn btn--ghost" href="../cardapio/" data-evt="click_menu">Ver cardápio</a>
-        </div>
-        <p>Mesas acessíveis para cadeirantes; o banheiro não é acessível. Aceitamos Pix, dinheiro, Visa, Mastercard, Elo, American Express, UnionPay, Cabal e os principais vales-refeição. Confirme a bandeira do vale com a equipe.</p>
-        <p><a href="../como-chegar/">Mais informações sobre acesso e estacionamento</a></p>
+        <details class="discovery-details">
+          <summary>Informações para a visita</summary>
+          <p>Parte das mesas funciona por ordem de chegada. Para grupos acima de 10 pessoas, <a href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">fale com a equipe</a>.</p>
+          <p>Mesas acessíveis para cadeirantes; banheiro não acessível. <a href="../como-chegar/">Acesso e estacionamento</a>.</p>
+          <p>Pix, dinheiro, Visa, Mastercard, Elo, American Express, UnionPay, Cabal e principais vales-refeição. Confirme a bandeira do vale com a equipe.</p>
+          <p><a href="../almoco-executivo/" data-evt="click_menu">Executivo a partir de R$31</a>: seg–sex, 10h–14h, exceto feriados.</p>
+          <p>Nota Google, 787 avaliações e 41,2 mil seguidores no Instagram: referência de 06/10/2026; números podem mudar.</p>
+        </details>
       </section>
     </main>
     <footer class="foot">

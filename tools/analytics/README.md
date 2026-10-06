@@ -79,6 +79,52 @@ edições e conferir preços. Atualizar FoodMenus com OAuth autorizado e ler
 novamente para comparar preços, itens e variantes. Não usar PriceList legado
 para sobrescrever o menu. Nunca guardar tokens no payload ou no Git.
 
+## Entrada dos anúncios e prova de confiança
+
+Desde 06/10/2026, a home continua atendendo ao QR das mesas. A página
+`/conheca/` apresenta a casa a quem chega pelo anúncio: fotos reais, preços
+conferidos no cardápio, rota, horários e reserva opcional. O anúncio aponta
+para ela com campanha `sir_fisher_outubro_2026`; os links de reserva recebem
+a origem e o identificador pelo mesmo `atribuicao.js` das demais páginas.
+Cliques no cardápio e no Maps continuam sendo intenção, não venda ou visita.
+
+A nova página usa `noindex,follow` por ser um destino de mídia paga, mantendo
+a home como entrada orgânica. A falha `is-crawlable` e a nota SEO 69 no
+Lighthouse são esperadas nessa página; não remover a diretiva apenas para
+elevar o escore. A validação final marcou desempenho 72 no celular e 88 no
+desktop, acessibilidade 100 nos dois e CLS zero. Uma execução anterior marcou
+73/98; variação de laboratório não comprova mudança de desempenho. Capturas
+dos dois formatos foram inspecionadas. O navegador integrado não está
+disponível, portanto não houve uma nova reserva de teste ponta a ponta.
+
+A prova de confiança usa nota 4,7/5 e 787 avaliações, consultadas pela API do
+Google em 06/10/2026. Os dois trechos são de avaliações públicas de 07 e 16/09,
+reproduzidos como trechos e ligados ao perfil. A média contempla o conjunto;
+os depoimentos destacados são selecionados. O usuário pediu substituí-los por
+prints reais com os nomes dos autores: arquivos ainda solicitados. O cache de
+leitura anterior omitiu nomes e a nova consulta retornou OAuth 401; não associar
+nomes encontrados em outras fontes a esses comentários nem simular um print.
+Atualizar data/nota/quantidade após nova consulta antes de futuras alterações.
+
+O proprietário forneceu fotos de reconhecimento pelo Sebrae no OneDrive
+pessoal. Foram inspecionadas: certificado Diamante com o ano 2024, registro
+da entrega e troféu com 2025/2026. A página mostra as datas legíveis nas fotos;
+nomes de arquivos com 2023/2024 não definem o ciclo do selo. A contagem de
+quatro anos consecutivos, inicialmente informada pelo proprietário, deixou
+de ser necessária no texto. Não inventar quatro premiações anuais.
+
+O mosaico usa fotografias reais, miniaturas WebP sem retoque e links para
+ampliar os originais. Nenhum texto, rosto, certificado ou data foi reconstruído
+por IA. O proprietário informou 41,2 mil seguidores no Instagram em 06/10;
+esse número tem data de referência, sem alegar leitura direta da API Meta.
+A foto da celebração é o registro de Réveillon já utilizado no site, com legenda
+que não promete essa programação musical no atendimento normal.
+
+Após o pedido de menos texto e mais imagens, o conteúdo aparente passou de
+534 para 154 palavras e de 6 para 12 imagens. Galerias e três indicadores
+substituem os blocos explicativos. Detalhes de acesso, cartões, horários do
+executivo e datas das métricas ficam em `details`, acessível sem JavaScript.
+
 ## Rotina da equipe
 
 - Oferecer o QR de avaliações a todos os clientes, sem seleção por satisfação,
