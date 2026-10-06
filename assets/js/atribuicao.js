@@ -139,7 +139,11 @@
     var script = document.createElement('script');
     script.async = true;
     script.src = 'https://bzrcdn.openai.com/sdk/oaiq.min.js';
-    document.head.appendChild(script);
+    if (typeof window.sfAfterFirstPaint === 'function') {
+      window.sfAfterFirstPaint(function () { document.head.appendChild(script); });
+    } else {
+      document.head.appendChild(script);
+    }
     window.oaiq('init', { pixelId: PIXEL_ID });
   }
 

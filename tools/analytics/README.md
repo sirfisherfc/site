@@ -33,6 +33,13 @@ sendo coletado como evento de intenção. Reservas, comparecimentos e eventos
 de contato existentes foram preservados. A mudança afeta comparações futuras
 de engajamento; não altera retroativamente os relatórios antigos.
 
+Na home em português e inglês, SDKs de marketing aguardam a primeira pintura.
+As filas Meta/OpenAI são criadas imediatamente; a primeira interação antecipa
+o carregamento, com limite de espera de 1,5 s. GA4 continua assíncrono desde
+o início. Testes verificam preservação de PageView e ausência de SDK duplicado.
+Essa priorização pode afetar usuários que saem antes de qualquer SDK carregar;
+não comparar pixels e sessões GA4 como se tivessem cobertura idêntica.
+
 ## Cardápio do Perfil da Empresa
 
 O arquivo público `cardapio/dados/cardapio.json` é a fonte dos itens e preços.
