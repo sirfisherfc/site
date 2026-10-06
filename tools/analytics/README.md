@@ -91,19 +91,31 @@ Cliques no cardápio e no Maps continuam sendo intenção, não venda ou visita.
 A nova página usa `noindex,follow` por ser um destino de mídia paga, mantendo
 a home como entrada orgânica. A falha `is-crawlable` e a nota SEO 69 no
 Lighthouse são esperadas nessa página; não remover a diretiva apenas para
-elevar o escore. A validação final marcou desempenho 72 no celular e 88 no
-desktop, acessibilidade 100 nos dois e CLS zero. Uma execução anterior marcou
-73/98; variação de laboratório não comprova mudança de desempenho. Capturas
-dos dois formatos foram inspecionadas. O navegador integrado não está
-disponível, portanto não houve uma nova reserva de teste ponta a ponta.
+elevar o escore. Após as galerias, a validação marcou desempenho 65 no celular
+e 94 no desktop, acessibilidade 100 nos dois e CLS zero. Antes, execuções
+marcaram 72/88 e 73/98; variação de laboratório não comprova ganho de velocidade.
+Capturas dos dois formatos foram inspecionadas. O navegador integrado não está
+disponível; a consulta pública em navegador separado exibiu Maps limitado e
+verificação na Busca. Não foi criada uma nova reserva de teste ponta a ponta.
 
 A prova de confiança usa nota 4,7/5 e 787 avaliações, consultadas pela API do
-Google em 06/10/2026. Os dois trechos são de avaliações públicas de 07 e 16/09,
-reproduzidos como trechos e ligados ao perfil. A média contempla o conjunto;
-os depoimentos destacados são selecionados. O usuário pediu substituí-los por
-prints reais com os nomes dos autores: arquivos ainda solicitados. O cache de
-leitura anterior omitiu nomes e a nova consulta retornou OAuth 401; não associar
-nomes encontrados em outras fontes a esses comentários nem simular um print.
+Google em 06/10/2026. A média contempla o conjunto; os destaques são selecionados.
+Os trechos anônimos de setembro foram substituídos por recortes de notificações
+originais do Google, com nomes e estrelas: Iago Fontes (10/02/2025, comida/preço)
+e Marcos Nunes (28/04/2025, comida/atendimento). A conexão do Gmail forneceu as
+mensagens; seus links confirmam a mesma unidade da Beira-Mar, com o mesmo CID
+da ficha pública. O nome antigo “Sir Fisher - Barra Sol” identifica essa unidade.
+As notificações foram renderizadas com seu HTML e estilos originais, incluindo
+a tradução e a truncagem feitas pelo Google. Captura limitada a autor, foto,
+estrelas e comentário; destinatários, cabeçalhos, controles e links privados
+ficaram fora dos assets publicados. WebP é uma conversão do PNG, sem reconstrução
+por IA. A legenda identifica notificações, sem simular a interface do Maps.
+O cache da API omitiu autores, a nova consulta retornou OAuth 401 e o Google
+bloqueou o login no navegador automatizado. A janela foi fechada; nenhuma
+restrição foi contornada. Fontes brutas e scripts de captura estão apenas no
+`tmp/` local fora dos repositórios. Conferir a presença dos comentários no perfil
+antes de futuras reutilizações; as notificações comprovam seu recebimento,
+mas não garantem que uma avaliação permaneça publicada indefinidamente.
 Atualizar data/nota/quantidade após nova consulta antes de futuras alterações.
 
 O proprietário forneceu fotos de reconhecimento pelo Sebrae no OneDrive
@@ -121,7 +133,8 @@ A foto da celebração é o registro de Réveillon já utilizado no site, com le
 que não promete essa programação musical no atendimento normal.
 
 Após o pedido de menos texto e mais imagens, o conteúdo aparente passou de
-534 para 154 palavras e de 6 para 12 imagens. Galerias e três indicadores
+534 para cerca de 150 palavras e de 6 para 14 imagens, incluindo os recortes
+de avaliações. Galerias e três indicadores
 substituem os blocos explicativos. Detalhes de acesso, cartões, horários do
 executivo e datas das métricas ficam em `details`, acessível sem JavaScript.
 
