@@ -76,6 +76,12 @@
     });
 
     var stored = loadStored();
+    if (stored.utm_source === 'site' && stored.utm_medium === 'organic') {
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (key) {
+        delete stored[key];
+      });
+      persist(stored);
+    }
     if (Object.keys(incoming).length) {
       var current = Object.assign({}, stored, incoming, {
         landing_url: window.location.href.slice(0, 2000),
@@ -107,6 +113,15 @@
         return;
       }
 
+      // Um link interno não inicia uma campanha. Limpa os UTMs legados para
+      // não transformar Google/Instagram em "site / organic" na reserva.
+      if (destination.searchParams.get('utm_source') === 'site') {
+        var origin = destination.searchParams.get('utm_content');
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (key) {
+          destination.searchParams.delete(key);
+        });
+        if (origin) destination.searchParams.set('sf_origin', origin);
+      }
       tracked.forEach(function (key) {
         var value = attribution[key];
         if (value) destination.searchParams.set(key, value);

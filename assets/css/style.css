@@ -28,9 +28,10 @@
   --paper: #f6ecd9;
   --paper-2: #efe2c9;
   --sun: #f0a63f;
-  --coral: #df5b3b;
+  --coral: #b64226;
+  --button-primary: #b64226;
   --coral-deep: #c14424;
-  --sea: #2c7a72;
+  --sea: #267168;
   --union: #1a4f8a;
 
   --page-bg: #ece0c8;
@@ -68,8 +69,8 @@
   --ink: #12293d; --ink-soft: #4c6274;
   --page-bg: #ece0c8; --card: #f6ecd9; --card-2: #efe2c9;
   --on-card: #12293d; --on-card-soft: #4c6274;
-  --sun: #f0a63f; --coral: #df5b3b; --coral-deep: #c14424;
-  --sea: #2c7a72; --union: #1a4f8a;
+  --sun: #f0a63f; --coral: #b64226; --coral-deep: #c14424;
+  --sea: #267168; --union: #1a4f8a;
   --hairline: rgba(18, 41, 61, 0.16);
 }
 
@@ -272,7 +273,7 @@ a { color: inherit; }
 }
 .feature__go {
   flex: none; width: 44px; height: 44px; border-radius: 50%;
-  background: var(--coral); color: #fff;
+  background: var(--button-primary); color: #fff;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
@@ -289,8 +290,8 @@ a { color: inherit; }
 }
 .btn svg { width: 19px; height: 19px; }
 .btn:active { transform: scale(0.985); }
-.btn--primary { background: var(--coral); color: #fff; box-shadow: 0 6px 16px rgba(223,91,59,0.3); }
-.btn--primary:hover { background: var(--coral-deep); }
+.btn--primary { background: var(--button-primary); color: #fff; box-shadow: 0 6px 16px rgba(223,91,59,0.3); }
+.btn--primary:hover { background: #96341f; }
 .btn--solid { background: var(--ink); color: var(--card); }
 .btn--ghost { background: transparent; border-color: var(--hairline); color: var(--on-card); }
 .btn--ghost:hover { border-color: var(--on-card); }
@@ -588,11 +589,11 @@ a { color: inherit; }
   margin: 9px 0 0;
   color: var(--on-card-soft);
   font-family: var(--font-ui);
-  font-size: 0.40rem;
+  font-size: 0.65rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.06em;
   line-height: 1;
-  opacity: 0.48;
+  opacity: 1;
 }
 
 /* Pecas que so existem no desktop (barra do topo, botoes extras). O layout

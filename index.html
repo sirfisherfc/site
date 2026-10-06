@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Sir Fisher | Restaurante na Beira-Mar de Fortaleza</title>
-  <meta name="description" content="Restaurante na Beira-Mar de Fortaleza, de frente para o mar. Peixes, frutos do mar, sabores brasileiros e um pôr do sol que vale a visita." />
+  <meta name="description" content="Sir Fisher na Beira-Mar de Fortaleza, em frente ao Jardim Japonês. Peixes, camarões e almoço executivo de frente para o mar. Veja o cardápio e como chegar." />
   <link rel="canonical" href="https://www.sirfisher.com.br/" />
 
   <link rel="alternate" hreflang="pt-BR" href="https://www.sirfisher.com.br/" />
@@ -64,10 +64,11 @@
   <link rel="icon" type="image/png" href="./assets/img/favicon.png" />
 
   <!-- Fontes da primeira dobra: preload evita o texto piscar antes do swap. -->
+  <link rel="preload" as="image" type="image/avif" href="./assets/img/pordosol-800.avif" imagesrcset="./assets/img/pordosol-800.avif 800w, ./assets/img/pordosol-1200.avif 1200w" imagesizes="(min-width:1024px) 70vw, (max-width:460px) 100vw, 460px" fetchpriority="high" />
   <link rel="preload" href="./assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="./assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
   <!-- ?v= força o celular a baixar o CSS novo junto com o HTML novo. Mude a cada alteração. -->
-  <link rel="stylesheet" href="./assets/css/style.css?v=20260928" />
+  <link rel="stylesheet" href="./assets/css/style.css?v=20261006" />
   <link rel="stylesheet" href="./assets/css/desktop.css?v=20260928" media="(min-width: 1024px)" />
 
   <!-- "restaurant" nao existe no vocabulario Open Graph; o valor invalido cai
@@ -136,6 +137,9 @@
         "closes": "23:00"
       }
     ],
+    "specialOpeningHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "opens": "09:00", "closes": "02:00", "validFrom": "2026-12-31", "validThrough": "2026-12-31" }
+    ],
     "sameAs": [
       "https://www.instagram.com/sirfisherfc",
       "https://www.facebook.com/SirFisherfc/",
@@ -150,7 +154,8 @@
       { "@type": "LocationFeatureSpecification", "name": "Aceita reservas", "value": true },
       { "@type": "LocationFeatureSpecification", "name": "Bom para grupos", "value": true },
       { "@type": "LocationFeatureSpecification", "name": "Pet friendly", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Acessibilidade para cadeira de rodas", "value": true }
+      { "@type": "LocationFeatureSpecification", "name": "Mesas acessíveis para cadeira de rodas", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Banheiro acessível para cadeira de rodas", "value": false }
     ]
   }
   </script>
@@ -325,15 +330,15 @@
           </picture>
         </div>
         <p class="eyebrow">Av. Beira Mar · Fortaleza</p>
-        <h1>Um restaurante na Beira-Mar para entrar no seu roteiro.</h1>
-        <p class="board__sub">Peixes, frutos do mar, sabores brasileiros, vista pro mar e um pôr do sol que já vale a parada.</p>
+        <h1>Restaurante na Beira-Mar de Fortaleza, de frente para o mar.</h1>
+        <p class="board__sub">Peixes, camarões e pratos para compartilhar, na orla do Meireles, em frente ao Jardim Japonês. Do almoço ao pôr do sol.</p>
       </header>
 
       <!-- Ações principais: o cardápio é a primeira coisa alcançável (QR Code) -->
       <div class="actions">
 
         <!-- CARDÁPIO = a própria foto do prato leva ao menu -->
-        <a class="feature" href="./cardapio/" data-evt="click_menu" aria-label="Ver o cardápio completo">
+        <a class="feature" href="./cardapio/" data-evt="click_menu">
           <picture>
             <source type="image/avif" srcset="./assets/img/prato-800.avif 800w, ./assets/img/prato-1200.avif 1200w" sizes="(max-width:460px) 100vw, 460px" />
             <source type="image/webp" srcset="./assets/img/prato-800.webp 800w, ./assets/img/prato-1200.webp 1200w" sizes="(max-width:460px) 100vw, 460px" />
@@ -516,6 +521,7 @@
       <section class="sec sec--split sec--local" id="local">
         <h2>Na Beira-Mar de Fortaleza</h2>
         <p>De frente para o mar, na orla do Meireles, em frente ao Jardim Japonês. Veja <a href="./como-chegar/">como chegar a pé, de aplicativo ou de carro</a>, e onde estacionar.</p>
+        <p>Há mesas acessíveis para cadeirantes. O banheiro não é acessível. Entregas exclusivamente pelo 99Food.</p>
         <p>Se você ainda está decidindo o passeio, consulte nosso <a href="./guia/beira-mar/">guia da Beira-Mar</a>, com atrações e horários de cada trecho.</p>
         <address class="place">
           <strong>Sir Fisher</strong>
@@ -526,6 +532,7 @@
         <dl class="hours">
           <div><dt>Domingo a quinta</dt><dd>9h às 22h15</dd></div>
           <div><dt>Sexta e sábado</dt><dd>9h às 23h</dd></div>
+          <div><dt>31/12/2026 · Réveillon</dt><dd>9h às 2h de 01/01</dd></div>
         </dl>
 
         <div class="btn-pair">
@@ -604,7 +611,7 @@
           <span class="link-row__stamp">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9 6.8 19l1-5.8L3.6 9.1l5.8-.8L12 3z"/></svg>
           </span>
-          <span class="link-row__label">Avalie sua visita<span class="link-row__sub">Deixe seu review no Google</span></span>
+          <span class="link-row__label">Como foi sua visita?<span class="link-row__sub">Conte sua experiência no Google</span></span>
           <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
 
