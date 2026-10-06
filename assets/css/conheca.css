@@ -13,6 +13,19 @@
 .discovery-photo img { display: block; width: 100%; height: clamp(200px, 30vh, 280px); object-fit: cover; object-position: center 66%; border-radius: 18px; }
 .discovery-intro .discovery-price { color: var(--on-card); font-size: 0.88rem; }
 .discovery-link { font-weight: 600; text-underline-offset: 3px; }
+.discovery-intro .discovery-rating { color: var(--on-card); font-size: 0.88rem; margin: 0 0 12px; }
+.discovery-rating a { text-decoration: none; border-bottom: 1px solid var(--hairline); }
+.discovery-award { border-left: 3px solid var(--sea); background: var(--card-2); padding: 18px 20px; border-radius: 0 16px 16px 0; }
+.discovery-award .eyebrow { margin-top: 0; }
+.discovery-award h3 { font: 600 1.4rem/1.25 var(--font-display); text-wrap: balance; margin: 0 0 12px; }
+.discovery-award a { font-size: 0.9rem; text-underline-offset: 3px; }
+.discovery-benefits, .discovery-reviews { display: grid; gap: 16px; margin: 20px 0; }
+.discovery-benefits article, .discovery-reviews figure { margin: 0; padding: 18px; background: var(--card-2); border-radius: 16px; }
+.discovery-benefits h3 { font: 600 1.2rem/1.3 var(--font-display); margin: 0 0 10px; }
+.discovery-benefits p { margin: 0; }
+.discovery-reviews blockquote { margin: 0 0 12px; font: 500 1.15rem/1.5 var(--font-display); }
+.discovery-reviews blockquote p { margin: 0; }
+.discovery-reviews figcaption { color: var(--on-card-soft); font-size: 0.8rem; line-height: 1.5; }
 .shell--discovery .sec { margin: 0; padding: 28px 22px; border-top: 1px solid var(--hairline); }
 .shell--discovery h2 { font-family: var(--font-display); text-wrap: balance; }
 .discovery-dishes { display: grid; gap: 20px; }
@@ -34,5 +47,7 @@
   .discovery-copy { grid-column: 1; grid-row: 1; }
   .shell--discovery .sec { padding: 36px; }
   .discovery-dishes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .discovery-benefits { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .discovery-reviews { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .discovery-place { grid-template-columns: 1fr 1fr; align-items: center; gap: 32px; }
 }
