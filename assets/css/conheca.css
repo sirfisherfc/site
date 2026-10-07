@@ -6,7 +6,7 @@
 .discovery-header .theme-toggle { position: static; flex: none; background: var(--card-2); color: var(--on-card); border-color: var(--hairline); }
 .discovery-intro { display: flex; flex-direction: column; padding: 16px 22px 24px; }
 .discovery-copy { order: 0; }
-.discovery-visual { order: 1; width: 100%; max-width: 416px; height: auto; overflow: hidden; border-radius: 18px; margin: 22px auto 0; }
+.discovery-visual { order: 1; width: 100%; max-width: 500px; height: auto; overflow: hidden; border-radius: 18px; margin: 22px auto 0; }
 .discovery-visual picture { display: block; width: 100%; }
 .discovery-visual img { width: 100%; height: auto; }
 .discovery-intro .eyebrow { margin: 0 0 10px; }

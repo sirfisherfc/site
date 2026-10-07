@@ -62,12 +62,12 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
 
   <!-- Fontes da primeira dobra: preload evita o texto piscar antes do swap. -->
-  <link rel="preload" as="image" type="image/avif" href="../assets/img/mesa-cheia-vista-mar-sir-fisher-660.avif" fetchpriority="high" />
+  <link rel="preload" as="image" type="image/avif" href="../assets/img/terraco-por-do-sol-sir-fisher-960.avif" imagesrcset="../assets/img/terraco-por-do-sol-sir-fisher-640.avif 640w, ../assets/img/terraco-por-do-sol-sir-fisher-960.avif 960w" imagesizes="(min-width: 760px) 500px, (max-width: 359px) calc(100vw - 32px), calc(100vw - 44px)" fetchpriority="high" />
   <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
   <!-- ?v= força o celular a baixar o CSS novo junto com o HTML novo. Mude a cada alteração. -->
   <link rel="stylesheet" href="../assets/css/style.css?v=20261006" />
-  <link rel="stylesheet" href="../assets/css/conheca.css?v=20261007g" />
+  <link rel="stylesheet" href="../assets/css/conheca.css?v=20261007h" />
 
   <!-- "restaurant" nao existe no vocabulario Open Graph; o valor invalido cai
        em "website" de qualquer forma, so que com aviso no validador. -->
@@ -96,7 +96,7 @@
     "url": "https://www.sirfisher.com.br/",
     "logo": "https://www.sirfisher.com.br/assets/img/logo-emblem.png",
     "image": [
-      "https://www.sirfisher.com.br/assets/img/og-sir-fisher-beira-mar-fortaleza.jpg",
+      "https://www.sirfisher.com.br/assets/img/terraco-por-do-sol-sir-fisher-960.webp",
       "https://www.sirfisher.com.br/assets/img/por-do-sol-beira-mar-fortaleza-720.jpg",
       "https://www.sirfisher.com.br/assets/img/camarao-alho-e-oleo-sir-fisher-660.jpg"
     ],
@@ -222,9 +222,8 @@
       <section class="discovery-intro" aria-labelledby="titulo">
         <div class="discovery-visual">
           <picture class="discovery-visual__main">
-            <source type="image/avif" srcset="../assets/img/mesa-cheia-vista-mar-sir-fisher-660.avif" />
-            <source type="image/webp" srcset="../assets/img/mesa-cheia-vista-mar-sir-fisher-660.webp" />
-            <img src="../assets/img/mesa-cheia-vista-mar-sir-fisher-660.jpg" alt="Mesa com peixes, camarões e petiscos de frente para o mar no Sir Fisher" width="660" height="825" fetchpriority="high" />
+            <source type="image/avif" srcset="../assets/img/terraco-por-do-sol-sir-fisher-640.avif 640w, ../assets/img/terraco-por-do-sol-sir-fisher-960.avif 960w" sizes="(min-width: 760px) 500px, (max-width: 359px) calc(100vw - 32px), calc(100vw - 44px)" />
+            <img src="../assets/img/terraco-por-do-sol-sir-fisher-960.webp" srcset="../assets/img/terraco-por-do-sol-sir-fisher-640.webp 640w, ../assets/img/terraco-por-do-sol-sir-fisher-960.webp 960w" sizes="(min-width: 760px) 500px, (max-width: 359px) calc(100vw - 32px), calc(100vw - 44px)" alt="Mesas do Sir Fisher de frente para o mar, com guarda-sóis e luz do pôr do sol" width="960" height="858" fetchpriority="high" decoding="async" />
           </picture>
         </div>
         <div class="discovery-copy">

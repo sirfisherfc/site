@@ -176,9 +176,14 @@ mais alta. Fonte primária vinculada ao lado da explicação:
 [Agência Sebrae/CE](https://ce.agenciasebrae.com.br/cultura-empreendedora/empresas-cearenses-recebem-certificacao-do-sebrae-pela-excelencia-da-qualidade-dos-servicos-oferecidos/).
 Não confundir com o Selo de Referência em Atendimento das Salas do Empreendedor.
 As informações práticas ficam em um `details`, acessível sem JavaScript.
-A home do QR não foi alterada. A foto de terraço enviada em Downloads tem
-prévia apenas local; sua origem e fidelidade ao espaço aguardam confirmação
-antes de usá-la como fotografia real na página pública.
+A home do QR não foi alterada. Em 07/10, o proprietário confirmou que a
+foto de terraço enviada em Downloads mostra o espaço real e foi fotografada
+por ele, com tratamento de cores, nitidez e contraste. Foi publicada na capa
+de `/conheca/`, em sua proporção original e sem novos retoques. Variantes
+AVIF/WebP de 640 e 960 px, seleção responsiva e preload da imagem efetivamente
+exibida evitam servir o PNG de 4 MB. O original continua em Downloads, fora
+do Git; versões otimizadas em `assets/img/terraco-por-do-sol-sir-fisher-*`.
+A galeria da casa mantém a foto anterior do almoço com vista para o mar.
 
 ## Rotina da equipe
 
