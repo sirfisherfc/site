@@ -34,8 +34,9 @@ de contato existentes foram preservados. A mudança afeta comparações futuras
 de engajamento; não altera retroativamente os relatórios antigos.
 
 Na home em português e inglês, SDKs de marketing aguardam a primeira pintura.
-As filas Meta/OpenAI são criadas imediatamente; a primeira interação antecipa
-o carregamento, com limite de espera de 1,5 s. GA4 continua assíncrono desde
+As filas Meta/OpenAI são criadas imediatamente; os SDKs esperam o `load`
+da página (a primeira interação antecipa), com limite de espera de 3 s
+(desde 07/10/2026). GA4 continua assíncrono desde
 o início. Testes verificam preservação de PageView e ausência de SDK duplicado.
 Essa priorização pode afetar usuários que saem antes de qualquer SDK carregar;
 não comparar pixels e sessões GA4 como se tivessem cobertura idêntica.
