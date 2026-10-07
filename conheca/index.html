@@ -67,7 +67,7 @@
   <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
   <!-- ?v= força o celular a baixar o CSS novo junto com o HTML novo. Mude a cada alteração. -->
   <link rel="stylesheet" href="../assets/css/style.css?v=20261006" />
-  <link rel="stylesheet" href="../assets/css/conheca.css?v=20261006e" />
+  <link rel="stylesheet" href="../assets/css/conheca.css?v=20261007f" />
 
   <!-- "restaurant" nao existe no vocabulario Open Graph; o valor invalido cai
        em "website" de qualquer forma, so que com aviso no validador. -->
@@ -226,16 +226,6 @@
             <source type="image/webp" srcset="../assets/img/mesa-cheia-vista-mar-sir-fisher-660.webp" />
             <img src="../assets/img/mesa-cheia-vista-mar-sir-fisher-660.jpg" alt="Mesa com peixes, camarões e petiscos de frente para o mar no Sir Fisher" width="660" height="825" fetchpriority="high" />
           </picture>
-          <picture>
-            <source type="image/avif" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.avif" />
-            <source type="image/webp" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.webp" />
-            <img src="../assets/img/camarao-alho-e-oleo-sir-fisher-440.jpg" alt="Camarão alho e óleo da casa" width="440" height="550" loading="lazy" decoding="async" />
-          </picture>
-          <picture>
-            <source type="image/avif" srcset="../assets/img/por-do-sol-beira-mar-fortaleza-460.avif" />
-            <source type="image/webp" srcset="../assets/img/por-do-sol-beira-mar-fortaleza-460.webp" />
-            <img src="../assets/img/por-do-sol-beira-mar-fortaleza-460.jpg" alt="Pôr do sol da Beira-Mar visto do Sir Fisher" width="460" height="307" loading="lazy" decoding="async" />
-          </picture>
         </div>
         <div class="discovery-copy">
           <p class="eyebrow">Beira-Mar · Fortaleza</p>
@@ -313,19 +303,25 @@
         <p class="discovery-small"><a href="../eventos/" data-evt="click_eventos">Vai reunir um grupo? Veja as opções.</a></p>
       </section>
       <section class="sec" id="reconhecimento" aria-labelledby="selo">
-        <div class="discovery-section-head"><h2 id="selo">Qualidade reconhecida.</h2><span class="discovery-small">Sebrae · Diamante</span></div>
-        <div class="discovery-award-photos">
+        <div class="discovery-award-heading">
+          <svg class="discovery-diamond" width="48" height="48" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 14h36l10 16-28 29L4 30Z M4 30h56 M14 14l9 16 9 29 9-29 9-16 M23 30l9-16 9 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" /></svg>
+          <div><h2 id="selo">Sebrae · Diamante</h2><p class="discovery-small">Registros de 2024 e 2025/2026</p></div>
+        </div>
+        <details class="discovery-award-details">
+          <summary>Ver certificados e premiação</summary>
+          <div class="discovery-award-photos">
           <a href="../assets/img/sebrae-certificado-2024-original.webp" target="_blank" rel="noopener" aria-label="Abrir foto original do certificado Diamante Sir Fisher 2024">
-            <img src="../assets/img/sebrae-certificado-2024-660.webp" alt="Certificado real do Sebrae/CE com Sir Fisher, categoria Diamante e ano 2024" width="1080" height="1920" loading="lazy" decoding="async" />
+            <img src="../assets/img/sebrae-certificado-2024-660.webp" alt="Certificado real do Sebrae/CE com Sir Fisher, categoria Diamante e ano 2024" width="562" height="1000" style="height:140px;max-height:140px;width:100%;object-fit:contain" loading="lazy" decoding="async" />
           </a>
           <a href="../assets/img/sebrae-entrega-original.jpg" target="_blank" rel="noopener" aria-label="Abrir foto original da entrega do reconhecimento Sebrae">
-            <img src="../assets/img/sebrae-entrega-660.webp" alt="Registro da entrega do certificado Diamante ao Sir Fisher" width="899" height="1599" loading="lazy" decoding="async" />
+            <img src="../assets/img/sebrae-entrega-660.webp" alt="Registro da entrega do certificado Diamante ao Sir Fisher" width="562" height="1000" style="height:140px;max-height:140px;width:100%;object-fit:contain" loading="lazy" decoding="async" />
           </a>
           <a href="../assets/img/sebrae-trofeu-2025-2026-original.jpg" target="_blank" rel="noopener" aria-label="Abrir foto original do troféu Sebrae Sir Fisher 2025/2026">
-            <img src="../assets/img/sebrae-trofeu-2025-2026-660.webp" alt="Troféu original com as inscrições Selo Sebrae Qualidade Empresarial, 2025/2026 e Sir Fisher" width="1868" height="4000" loading="lazy" decoding="async" />
+            <img src="../assets/img/sebrae-trofeu-2025-2026-660.webp" alt="Troféu original com as inscrições Selo Sebrae Qualidade Empresarial, 2025/2026 e Sir Fisher" width="467" height="1000" style="height:140px;max-height:140px;width:100%;object-fit:contain" loading="lazy" decoding="async" />
           </a>
-        </div>
-        <p class="discovery-small">Registros de 2024 e 2025/2026. Toque nas fotos para ampliar.</p>
+          </div>
+          <p class="discovery-small">Toque em um registro para ampliar.</p>
+        </details>
       </section>
       <section class="sec" id="avaliacoes" aria-labelledby="clientes">
         <div class="discovery-section-head"><h2 id="clientes">Quem veio, conta.</h2><a href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews">4,7/5 no Google →</a></div>

@@ -2,6 +2,22 @@
 
 ## Relatório reproduzível
 
+Para acessar o Perfil da Empresa, verificar primeiro a autorização persistente
+do projeto de gestão, usando o Python local:
+
+```powershell
+python site/tools/analytics/google_oauth_helper.py --verificar
+```
+
+O comando reutiliza `gestao/scripts/gbp/gbp.py` e as credenciais `GOOGLE_OAUTH_*`
+do ambiente ou de `gestao/.env` ignorado pelo Git. Em 07/10, a renovação por
+refresh token e leituras da ficha/avaliações funcionaram sem login manual.
+Não pedir um novo Access token de uma hora enquanto esse acesso funcionar.
+O modo sem `--verificar` gera uma URL de consentimento somente quando uma nova
+conexão for necessária. Não salvar os segredos no site ou no repositório.
+
+Referência: [acesso offline ao Perfil Google](https://developers.google.com/my-business/content/implement-oauth#offline-access).
+
 Execute com o Python do ambiente local de analytics:
 
 ```powershell
@@ -117,8 +133,10 @@ a tradução e a truncagem feitas pelo Google. Captura limitada a autor, foto,
 estrelas e comentário; destinatários, cabeçalhos, controles e links privados
 ficaram fora dos assets publicados. WebP é uma conversão do PNG, sem reconstrução
 por IA. A legenda identifica notificações, sem simular a interface do Maps.
-O cache da API omitiu autores, a nova consulta retornou OAuth 401 e o Google
-bloqueou o login no navegador automatizado. A janela foi fechada; nenhuma
+Na sessão anterior, o cache da API omitiu autores, o token temporário retornou
+OAuth 401 e o Google bloqueou o login no navegador automatizado. Em 07/10,
+a credencial persistente do painel foi reutilizada com sucesso; nomes e
+avaliações podem ser lidos por essa API. A janela foi fechada; nenhuma
 restrição foi contornada. Fontes brutas e scripts de captura estão apenas no
 `tmp/` local fora dos repositórios. Conferir a presença dos comentários no perfil
 antes de futuras reutilizações; as notificações comprovam seu recebimento,
@@ -132,18 +150,22 @@ nomes de arquivos com 2023/2024 não definem o ciclo do selo. A contagem de
 quatro anos consecutivos, inicialmente informada pelo proprietário, deixou
 de ser necessária no texto. Não inventar quatro premiações anuais.
 
-O mosaico usa fotografias reais, miniaturas WebP sem retoque e links para
+As fotografias reais usam miniaturas WebP sem retoque e links para
 ampliar os originais. Nenhum texto, rosto, certificado ou data foi reconstruído
 por IA. O proprietário informou 41,2 mil seguidores no Instagram em 06/10;
 esse número tem data de referência, sem alegar leitura direta da API Meta.
 A foto da celebração é o registro de Réveillon já utilizado no site, com legenda
 que não promete essa programação musical no atendimento normal.
 
-Após o pedido de menos texto e mais imagens, o conteúdo aparente passou de
-534 para cerca de 150 palavras e de 6 para 14 imagens, incluindo os recortes
-de avaliações. Galerias e três indicadores
-substituem os blocos explicativos. Detalhes de acesso, cartões, horários do
-executivo e datas das métricas ficam em `details`, acessível sem JavaScript.
+Após o pedido de menos texto e mais imagens, os blocos explicativos foram
+substituídos por fotos e indicadores. Em 07/10, uma segunda revisão tirou o
+mosaico da capa: foto única em sua proporção, galerias de imagens maiores que
+deslizam no celular e três colunas no desktop. Sebrae virou uma faixa curta;
+certificados e entrega ficam em `details` fechado por padrão. Cada miniatura
+tem altura máxima de 140 px também no HTML, impedindo que a imagem de origem
+com 4.000 px alongue a seção quando houver falha/cache do CSS específico.
+Os registros completos continuam disponíveis por clique. Informações práticas
+ficam em outro `details`, acessível sem JavaScript. A home do QR não foi alterada.
 
 ## Rotina da equipe
 

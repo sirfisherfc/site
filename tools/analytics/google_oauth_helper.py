@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Gera a URL OAuth do Google Business Profile sem gravar credenciais no Git.
+"""Verifica o OAuth persistente do Perfil Google ou gera uma URL de consentimento.
+
+Use --verificar primeiro para reutilizar a autorizacao salva em gestao.
 
 Defina localmente GOOGLE_OAUTH_CLIENT_ID e GOOGLE_OAUTH_REDIRECT_URI antes de
 executar. O segredo OAuth nunca e necessario para gerar a URL de autorizacao e
@@ -8,7 +10,11 @@ nao deve ser incluido em arquivos versionados.
 
 from __future__ import annotations
 
+import argparse
+import importlib.util
 import os
+from pathlib import Path
+import urllib.error
 from urllib.parse import urlencode
 
 
@@ -29,6 +35,24 @@ def configuracao_local() -> tuple[str, str]:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description="OAuth do Perfil Google: verificar acesso salvo ou gerar URL de consentimento.")
+    parser.add_argument("--verificar", action="store_true", help="Testar a renovacao automatica ja configurada no projeto gestao, sem mostrar tokens.")
+    args = parser.parse_args()
+    if args.verificar:
+        modulo = Path(__file__).resolve().parents[3] / "gestao" / "scripts" / "gbp" / "gbp.py"
+        if not modulo.exists():
+            raise SystemExit("A rotina gestao/scripts/gbp/gbp.py nao esta neste workspace.")
+        spec = importlib.util.spec_from_file_location("sirfisher_gbp", modulo)
+        gbp = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(gbp)
+        try:
+            ficha = gbp.ler_local()
+        except urllib.error.HTTPError as erro:
+            raise SystemExit(f"Renovacao OAuth recusada pelo Google (HTTP {erro.code}).") from None
+        except gbp.ErroApi as erro:
+            raise SystemExit(f"Leitura do Perfil Google recusada (HTTP {erro.status}).") from None
+        print(f"Renovacao automatica OK; ficha: {ficha.get('title', 'Sir Fisher')}.")
+        return 0
     client_id, redirect_uri = configuracao_local()
     parametros = urlencode(
         {
