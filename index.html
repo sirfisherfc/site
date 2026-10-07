@@ -68,7 +68,7 @@
   <link rel="preload" href="./assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="./assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
   <!-- ?v= força o celular a baixar o CSS novo junto com o HTML novo. Mude a cada alteração. -->
-  <link rel="stylesheet" href="./assets/css/style.css?v=20261006" />
+  <link rel="stylesheet" href="./assets/css/style.css?v=20261007" />
   <link rel="stylesheet" href="./assets/css/desktop.css?v=20260928" media="(min-width: 1024px)" />
 
   <!-- "restaurant" nao existe no vocabulario Open Graph; o valor invalido cai
@@ -176,18 +176,18 @@
       },
       {
         "@type": "Question",
-        "name": "A que horas e o por do sol visto do Sir Fisher?",
+        "name": "A que horas é o pôr do sol visto do Sir Fisher?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Entre 17h25 e 17h56, dependendo do mes: Fortaleza fica perto do Equador e o horario quase nao muda ao longo do ano. A luz comeca a virar cerca de 40 minutos antes, e quem quer mesa voltada para a orla costuma chegar por volta das 16h. A tabela mes a mes esta em sirfisher.com.br/por-do-sol/."
+          "text": "Entre 17h25 e 17h56, dependendo do mês: Fortaleza fica perto do Equador e o horário quase não muda ao longo do ano. A luz começa a virar cerca de 40 minutos antes, e quem quer mesa voltada para a orla costuma chegar por volta das 16h. A tabela mês a mês está em sirfisher.com.br/por-do-sol/."
         }
       },
       {
         "@type": "Question",
-        "name": "O Sir Fisher tem almoco executivo?",
+        "name": "O Sir Fisher tem almoço executivo?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sim, de segunda a sexta, das 10h as 14h, com cardapio proprio de almoco a partir de R$ 31. As tercas-feiras temos promocao de executivo em dobro das 11h as 14h."
+          "text": "Sim, de segunda a sexta, das 10h às 14h, com cardápio próprio de almoço a partir de R$ 31. Às terças-feiras temos promoção de executivo em dobro das 11h às 14h."
         }
       },
       {
@@ -195,7 +195,7 @@
         "name": "O Sir Fisher tem fish and chips?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sim. O fish and chips da casa e feito com pescada amarela, e faz parte da inspiracao britanica do cardapio, ao lado de peixes, camaroes e petiscos."
+          "text": "Sim. O fish and chips da casa é feito com pescada amarela, e faz parte da inspiração britânica do cardápio, ao lado de peixes, camarões e petiscos."
         }
       },
       {
@@ -203,7 +203,7 @@
         "name": "Onde fica o Sir Fisher e como chegar?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Na Av. Beira Mar, 3421, Meireles, Fortaleza - CE, de frente para o mar, em frente ao Jardim Japones."
+          "text": "Na Av. Beira Mar, 3421, Meireles, Fortaleza - CE, de frente para o mar, em frente ao Jardim Japonês."
         }
       },
       {
@@ -211,31 +211,31 @@
         "name": "O Sir Fisher aceita grupos grandes?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "O portal de reservas atende grupos de ate 10 pessoas. Acima disso, o atendimento e feito pelo WhatsApp (85) 98854-4274, para conferir disponibilidade."
+          "text": "O portal de reservas atende grupos de até 10 pessoas. Acima disso, o atendimento é feito pelo WhatsApp (85) 98854-4274, para conferir disponibilidade."
         }
       },
       {
         "@type": "Question",
-        "name": "O Sir Fisher e pet friendly?",
+        "name": "O Sir Fisher é pet friendly?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sim! Nosso espaco e na orla e conta com mesas em area aberta e arejada, onde pets de pequeno e medio porte sao muito bem-vindos nas mesas externas."
+          "text": "Sim! Nosso espaço é na orla e conta com mesas em área aberta e arejada, onde pets de pequeno e médio porte são muito bem-vindos nas mesas externas."
         }
       },
       {
         "@type": "Question",
-        "name": "O restaurante serve lagosta, caranguejada ou rodizio?",
+        "name": "O restaurante serve lagosta, caranguejada ou rodízio?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Nao servimos lagosta, caranguejo ou rodizio. Nosso cardapio e a la carte, focado em peixes frescos, camarao, carnes nobres, petiscos e culinaria de inspiracao britanica."
+          "text": "Não servimos lagosta, caranguejada ou rodízio. Nosso cardápio é à la carte, focado em peixes frescos, camarão, carnes nobres, petiscos e culinária de inspiração britânica."
         }
       },
       {
         "@type": "Question",
-        "name": "Quais sao as formas de pagamento aceitas?",
+        "name": "Quais são as formas de pagamento aceitas?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Aceitamos Pix, dinheiro, Visa, Mastercard, Elo, American Express, UnionPay, Cabal e os principais vales-refeicao. Consulte a equipe para confirmar a bandeira do seu vale."
+          "text": "Aceitamos Pix, dinheiro, Visa, Mastercard, Elo, American Express, UnionPay, Cabal e os principais vales-refeição. Consulte a equipe para confirmar a bandeira do seu vale."
         }
       }
     ]
@@ -261,7 +261,7 @@
     // Queue events immediately; give the first paint priority over marketing SDKs.
     window.sfAfterFirstPaint = function (load) {
       var done = false;
-      var timer = setTimeout(run, 1500);
+      var timer = setTimeout(run, 3000);
       function run() {
         if (done) return;
         done = true;
@@ -276,8 +276,10 @@
       }
       document.addEventListener('pointerdown', run, { once: true });
       document.addEventListener('keydown', run, { once: true });
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready, { once: true });
-      else ready();
+      // Espera o load (foto de capa ja baixada) para o pixel nao disputar
+      // banda com a primeira dobra; o timer acima e o teto.
+      if (document.readyState === 'complete') ready();
+      else window.addEventListener('load', ready, { once: true });
     };
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -293,7 +295,7 @@
   <div class="shell shell--home">
     <!-- A bandeira mostra o destino do clique, nao o idioma atual: quem esta
          nesta pagina ja sabe que ela esta em portugues. -->
-    <a class="lang-toggle" href="./en/" hreflang="en" lang="en" aria-label="Read this page in English">
+    <a class="lang-toggle" href="./en/" hreflang="en" lang="en" aria-label="EN: read this page in English">
       <svg class="flag" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <defs><clipPath id="bandeira-gb"><circle cx="12" cy="12" r="12"/></clipPath></defs>
         <g clip-path="url(#bandeira-gb)">
@@ -353,7 +355,16 @@
         <p class="eyebrow">Av. Beira Mar · Fortaleza</p>
         <h1>Restaurante na Beira-Mar de Fortaleza, de frente para o mar.</h1>
         <p class="board__sub">Peixes, camarões e pratos para compartilhar, na orla do Meireles, em frente ao Jardim Japonês. Do almoço ao pôr do sol.</p>
+        <p class="board__proof"><a href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews"><strong>★ 4,7</strong> no Google · 787 avaliações</a></p>
       </header>
+
+      <!-- Navegador em ingles: sugere a versao em ingles sem redirecionar
+           (o Google e quem compartilha o link continuam vendo esta pagina).
+           Some ao fechar e a escolha fica salva. -->
+      <p class="lang-hint" id="lang-hint" lang="en" hidden>
+        <span>Visiting from abroad? <a href="./en/" hreflang="en" data-evt="click_lang_hint">See this page in English</a></span>
+        <button type="button" id="lang-hint-close" aria-label="Dismiss">×</button>
+      </p>
 
       <!-- Ações principais: o cardápio é a primeira coisa alcançável (QR Code) -->
       <div class="actions">
@@ -736,6 +747,21 @@
 
   <script src="./assets/js/atribuicao.js" defer></script>
   <script src="./assets/js/contador-visitas.js" defer></script>
+  <script>
+    (function () {
+      var CHAVE = 'sf-lang-hint';
+      var dica = document.getElementById('lang-hint');
+      if (!dica) return;
+      var idiomas = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+      if (!/^en(-|$)/i.test(idiomas[0] || '')) return;
+      try { if (localStorage.getItem(CHAVE)) return; } catch (e) {}
+      dica.hidden = false;
+      document.getElementById('lang-hint-close').addEventListener('click', function () {
+        dica.hidden = true;
+        try { localStorage.setItem(CHAVE, '1'); } catch (e) {}
+      });
+    })();
+  </script>
 
 </body>
 </html>

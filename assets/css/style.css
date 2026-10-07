@@ -227,6 +227,31 @@ a { color: inherit; }
   text-wrap: pretty;
 }
 
+/* Nota no Google logo abaixo do texto de abertura: prova social para quem
+   nunca ouviu falar da casa (sobretudo turistas). */
+.board__proof { margin: 10px 0 0; font-size: 0.9rem; }
+.board__proof a {
+  display: inline-block; padding: 6px 2px; color: var(--on-card);
+  text-decoration: none; border-bottom: 1px solid var(--hairline);
+}
+.board__proof a:hover, .board__proof a:focus-visible { border-bottom-color: var(--on-card); }
+.board__proof strong { color: var(--coral); }
+.hours-note { margin: 8px 0 0; font-size: 0.85rem; color: var(--on-card-soft); }
+
+/* Sugestao de versao em ingles para navegador em ingles (index.html). */
+.lang-hint {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  margin: 12px 22px 0; padding: 10px 12px 10px 16px; border-radius: 14px;
+  background: var(--ink); color: var(--card); font-size: 0.9rem;
+}
+.lang-hint[hidden] { display: none; }
+.lang-hint a { color: inherit; font-weight: 600; }
+.lang-hint button {
+  flex: none; min-width: 44px; min-height: 44px; border: 0; border-radius: 10px;
+  background: transparent; color: inherit; font-size: 1.2rem; cursor: pointer;
+}
+
+
 /* ---------- Botão principal: CARDÁPIO (a foto do prato) ---------- */
 .actions { padding: 22px 18px 4px; display: flex; flex-direction: column; gap: 12px; }
 

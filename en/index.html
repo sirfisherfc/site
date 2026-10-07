@@ -66,8 +66,8 @@
   <!-- Fontes da primeira dobra: preload evita o texto piscar antes do swap. -->
   <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="../assets/css/style.css" />
-  <link rel="stylesheet" href="../assets/css/desktop.css" media="(min-width: 1024px)" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=20261007" />
+  <link rel="stylesheet" href="../assets/css/desktop.css?v=20261007" media="(min-width: 1024px)" />
 
   <!-- "restaurant" nao existe no vocabulario Open Graph; o valor invalido cai
        em "website" de qualquer forma, so que com aviso no validador. -->
@@ -123,8 +123,8 @@
     "hasMap": "https://maps.google.com/?cid=11176340545794629736",
     "servesCuisine": ["Seafood", "Brazilian", "British"],
     "priceRange": "$$",
-    "hasMenu": "https://www.hubt.com.br/sir-fisher-praia/",
-    "acceptsReservations": "https://reservas.sirfisher.com.br/",
+    "hasMenu": "https://www.sirfisher.com.br/en/menu/",
+    "acceptsReservations": "https://reservas.sirfisher.com.br/?lang=en",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
@@ -190,7 +190,7 @@
         "name": "Is English spoken at Sir Fisher?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Service is mainly in Portuguese. The menu has photographs, and visitors can message +55 85 98854-4274 on WhatsApp before arriving."
+          "text": "Service is mainly in Portuguese. The menu is available in English at sirfisher.com.br/en/menu/, the booking site works in English, and visitors can message +55 85 98854-4274 on WhatsApp before arriving."
         }
       },
       {
@@ -198,7 +198,7 @@
         "name": "How much does it cost?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Prices are in Brazilian reais and listed on the online menu. As a reference, the weekday set lunch runs from R$ 31 to R$ 52, roughly US$ 6 to US$ 10 at recent exchange rates."
+          "text": "Prices are in Brazilian reais and listed on the English menu at sirfisher.com.br/en/menu/. As a guide, small plates and sandwiches cost R$ 27 to R$ 60 and platters to share R$ 62 to R$ 99. The weekday set lunch runs from R$ 31 to R$ 52, roughly US$ 6 to US$ 10 at recent exchange rates. A 10% service charge is added to the bill and is optional."
         }
       },
       {
@@ -248,7 +248,7 @@
     // Queue events immediately; give the first paint priority over marketing SDKs.
     window.sfAfterFirstPaint = function (load) {
       var done = false;
-      var timer = setTimeout(run, 1500);
+      var timer = setTimeout(run, 3000);
       function run() {
         if (done) return;
         done = true;
@@ -263,8 +263,10 @@
       }
       document.addEventListener('pointerdown', run, { once: true });
       document.addEventListener('keydown', run, { once: true });
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready, { once: true });
-      else ready();
+      // Espera o load (foto de capa ja baixada) para o pixel nao disputar
+      // banda com a primeira dobra; o timer acima e o teto.
+      if (document.readyState === 'complete') ready();
+      else window.addEventListener('load', ready, { once: true });
     };
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -280,7 +282,7 @@
   <div class="shell shell--home">
     <!-- A bandeira mostra o destino do clique, nao o idioma atual: quem esta
          nesta pagina ja sabe que ela esta em ingles. -->
-    <a class="lang-toggle" href="../" hreflang="pt-BR" lang="pt-BR" aria-label="Ler esta página em português">
+    <a class="lang-toggle" href="../" hreflang="pt-BR" lang="pt-BR" aria-label="PT: ler esta página em português">
       <svg class="flag" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <defs>
           <clipPath id="bandeira-br"><circle cx="12" cy="12" r="12"/></clipPath>
@@ -311,9 +313,9 @@
         <a href="#sunset">Sunset</a>
         <a href="#booking">Booking</a>
         <a href="#where">Where we are</a>
-        <a href="https://www.hubt.com.br/sir-fisher-praia/" target="_blank" rel="noopener" data-evt="click_menu">Menu</a>
+        <a href="./menu/" data-evt="click_menu">Menu</a>
       </nav>
-      <a class="btn btn--primary topbar__cta" href="https://reservas.sirfisher.com.br/" target="_blank" rel="noopener" data-evt="click_reservation">
+      <a class="btn btn--primary topbar__cta" href="https://reservas.sirfisher.com.br/?lang=en" target="_blank" rel="noopener" data-evt="click_reservation">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="1"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
         Book a table
       </a>
@@ -342,13 +344,14 @@
         <p class="eyebrow">Av. Beira Mar · Fortaleza, Brazil</p>
         <h1>A seafront restaurant worth a stop on the Beira-Mar.</h1>
         <p class="board__sub">Fish, prawns, Brazilian cooking, a view of the sea and a sunset that earns the table on its own.</p>
+        <p class="board__proof"><a href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews"><strong>★ 4.7</strong> on Google · 787 reviews</a></p>
       </header>
 
       <!-- Ações principais: o cardápio é a primeira coisa alcançável (QR Code) -->
       <div class="actions">
 
         <!-- CARDÁPIO = a própria foto do prato leva ao menu -->
-        <a class="feature" href="https://www.hubt.com.br/sir-fisher-praia/" target="_blank" rel="noopener" data-evt="click_menu">
+        <a class="feature" href="./menu/" data-evt="click_menu">
           <picture>
             <source type="image/avif" srcset="../assets/img/prato-800.avif 800w, ../assets/img/prato-1200.avif 1200w" sizes="(max-width:460px) 100vw, 460px" />
             <source type="image/webp" srcset="../assets/img/prato-800.webp 800w, ../assets/img/prato-1200.webp 1200w" sizes="(max-width:460px) 100vw, 460px" />
@@ -358,7 +361,7 @@
             <div>
               <span class="feature__kicker">The menu</span>
               <span class="feature__title">See the menu</span>
-              <span class="feature__sub">Tap to open it · prices in reais</span>
+              <span class="feature__sub">In English · prices in reais</span>
             </div>
             <span class="feature__go" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -367,11 +370,11 @@
         </a>
 
         <div class="btn-pair">
-          <a class="btn btn--solid" href="https://www.hubt.com.br/sir-fisher-praia/" target="_blank" rel="noopener" data-evt="click_menu">
+          <a class="btn btn--solid" href="./menu/" data-evt="click_menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
             Menu
           </a>
-          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/" target="_blank" rel="noopener" data-evt="click_reservation">
+          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?lang=en" target="_blank" rel="noopener" data-evt="click_reservation">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="1"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
             Book a table
           </a>
@@ -404,7 +407,7 @@
       <section class="sec sec--split" id="food">
         <h2>What comes to the table</h2>
         <p>Prawns, fish, cuts of meat to share and small plates for the table. Our <a href="./fish-and-chips/">fish and chips</a> is made with pescada amarela, or acoupa weakfish, caught off the coast of Ceará. Read more on the <a href="./fish-and-chips/">English fish and chips page</a>.</p>
-        <p>Prices are in Brazilian reais. As a reference, the weekday set lunch runs from R$ 31 to R$ 52, roughly US$ 6 to US$ 10.</p>
+        <p>Prices are in Brazilian reais. As a guide, small plates and sandwiches cost R$ 27 to R$ 60, platters to share R$ 62 to R$ 99, cocktails R$ 18 to R$ 30 and beers R$ 11 to R$ 24. The weekday set lunch runs from R$ 31 to R$ 52, roughly US$ 6 to US$ 10. A 10% service charge is added to the bill and is optional.</p>
 
         <div class="grid">
           <figure>
@@ -462,7 +465,7 @@
           </figure>
         </div>
 
-        <a class="btn btn--solid" href="https://www.hubt.com.br/sir-fisher-praia/" target="_blank" rel="noopener" data-evt="click_menu">
+        <a class="btn btn--solid" href="./menu/" data-evt="click_menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
           See the full menu
         </a>
@@ -506,7 +509,7 @@
         <p>For groups larger than ten, message us on WhatsApp instead, so we can check the room first.</p>
 
         <div class="btn-pair">
-          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/" target="_blank" rel="noopener" data-evt="click_reservation">
+          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?lang=en" target="_blank" rel="noopener" data-evt="click_reservation">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="1"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
             Book a table
           </a>
@@ -518,7 +521,7 @@
 
       <section class="sec sec--split" id="english">
         <h2>Is English spoken?</h2>
-        <p>Service is mainly in Portuguese. The menu has photographs, and you can message us on WhatsApp before you come.</p>
+        <p>Service is mainly in Portuguese. The <a href="./menu/">menu is available in English</a>, with the Portuguese name of each dish to point to, and the booking site works in English. You can also message us on WhatsApp before you come.</p>
         <p>We accept Visa, Mastercard, Elo, American Express, UnionPay and Cabal, including foreign cards and contactless payments. Cash, Pix and major meal vouchers are accepted too. Check your meal voucher brand with the team.</p>
       </section>
 
@@ -537,6 +540,7 @@
           <div><dt>Friday and Saturday</dt><dd>9:00 am – 11:00 pm</dd></div>
           <div><dt>31 December 2026</dt><dd>9:00 am – 2:00 am on 1 January</dd></div>
         </dl>
+        <p class="hours-note">Times are Fortaleza local time (UTC−3, no daylight saving).</p>
 
         <div class="btn-pair">
           <a class="btn btn--solid" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps">

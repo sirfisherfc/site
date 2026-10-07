@@ -179,7 +179,7 @@
     // Queue events immediately; give the first paint priority over marketing SDKs.
     window.sfAfterFirstPaint = function (load) {
       var done = false;
-      var timer = setTimeout(run, 1500);
+      var timer = setTimeout(run, 3000);
       function run() {
         if (done) return;
         done = true;
@@ -194,8 +194,10 @@
       }
       document.addEventListener('pointerdown', run, { once: true });
       document.addEventListener('keydown', run, { once: true });
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready, { once: true });
-      else ready();
+      // Espera o load (foto de capa ja baixada) para o pixel nao disputar
+      // banda com a primeira dobra; o timer acima e o teto.
+      if (document.readyState === 'complete') ready();
+      else window.addEventListener('load', ready, { once: true });
     };
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;

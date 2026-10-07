@@ -965,3 +965,7 @@ main { padding-bottom: 40px; }
   .item { break-inside: avoid; border-color: #999; }
   .secao__cabeca { break-after: avoid; }
 }
+
+/* Atalho para o cardapio em ingles (turista que escaneou o QR da mesa). */
+.aviso-idioma { max-width: var(--wrap); margin: 10px auto 0; padding: 0 16px; text-align: right; font-size: 14px; }
+.aviso-idioma a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
