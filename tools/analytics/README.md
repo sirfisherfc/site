@@ -92,12 +92,18 @@ Cliques no cardápio e no Maps continuam sendo intenção, não venda ou visita.
 A nova página usa `noindex,follow` por ser um destino de mídia paga, mantendo
 a home como entrada orgânica. A falha `is-crawlable` e a nota SEO 69 no
 Lighthouse são esperadas nessa página; não remover a diretiva apenas para
-elevar o escore. Após as galerias, a validação marcou desempenho 65 no celular
-e 94 no desktop, acessibilidade 100 nos dois e CLS zero. Antes, execuções
-marcaram 72/88 e 73/98; variação de laboratório não comprova ganho de velocidade.
+elevar o escore. A validação publicada em 07/10 marcou desempenho 77 no celular
+e 100 no desktop, acessibilidade 100 nos dois e CLS zero; LCP 4,4 s e 0,8 s.
+Antes, execuções marcaram 65/94, 72/88 e 73/98; variação de laboratório não
+comprova ganho de velocidade para visitantes reais. O LCP móvel ainda merece
+atenção ao acompanhar os dados de campo.
 Capturas dos dois formatos foram inspecionadas. O navegador integrado não está
 disponível; a consulta pública em navegador separado exibiu Maps limitado e
 verificação na Busca. Não foi criada uma nova reserva de teste ponta a ponta.
+O navegador separado validou 320/390/1440 px, temas claro/escuro, ausência de
+overflow/erros, proporções e carregamento das galerias, origem nos links de
+reserva e expansão das informações práticas. HTML/CSS/imagens publicados
+foram comparados com os arquivos locais; a home do QR permanece idêntica.
 
 A prova de confiança usa nota 4,7/5 e 787 avaliações, consultadas pela API do
 Google em 06/10/2026. A média contempla o conjunto; os destaques são selecionados.
