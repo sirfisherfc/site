@@ -1,23 +1,18 @@
 /* ===========================================================================
-   Sir Fisher | Menu in English
+   Sir Fisher | Cardapio em ingles
    ---------------------------------------------------------------------------
-   Le os MESMOS dados do cardapio em portugues (copia estatica e, depois, a
-   publicacao ativa do painel) e troca so os textos, por id do produto. Preco,
-   porcao, disponibilidade e foto vem sempre da publicacao: a versao em ingles
-   nunca guarda preco proprio, entao nao tem como ficar desatualizada.
+   Traducao do MESMO cardapio de /cardapio/, aberto com ?lang=en. Aqui ficam
+   so textos: preco, porcao, foto, disponibilidade e ordem continuam vindo da
+   publicacao do painel, entao a versao em ingles nunca fica desatualizada.
 
-   Produto novo sem traducao aparece com o nome em portugues e o aviso
-   "Name in Portuguese". Para traduzir, acrescente o id em PRODUTOS abaixo.
-   O nome original vai sempre embaixo, para o cliente pedir ao garcom.
+   Produto novo sem traducao aparece com o texto em portugues. Para traduzir,
+   acrescente o id em PRODUTOS (nome, descritor, descricao e, se houver,
+   inclui/opcoes na mesma ordem dos dados, variantes/adicionais pelo nome em
+   portugues). O nome original aparece sempre junto, para pedir ao garcom.
    =========================================================================== */
 
 (function () {
   'use strict';
-
-  var CAMINHO_ESTATICO = '../../cardapio/dados/cardapio.json';
-  var SUPABASE_URL = 'https://lucpxoynpvogkvzepagi.supabase.co';
-  // Mesma chave anonima e de leitura do cardapio em portugues (cardapio.js).
-  var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1Y3B4b3lucHZvZ2t2emVwYWdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2MDYxNzQsImV4cCI6MjA5OTE4MjE3NH0.r0XGYX1KqAXQA4g9uoUAFLFTEaWUEXobWqyKVe0_SnE';
 
   var CATEGORIAS = {
     'fish-and-chips': { nome: 'Fish & Chips', resumo: 'The house dish, in two different batters.' },
@@ -133,197 +128,126 @@
     'embalagem-viagem': { nome: 'Take-away Container', descritor: 'container to take food home' }
   };
 
+  // Rotulos de alergeno: a chave continua a do cardapio impresso (escolhe o
+  // icone); so o texto exibido muda.
   var ALERGENOS = {
-    'PEIXE': 'fish', 'GLÚTEN': 'gluten', 'OVO': 'egg', 'LACTOSE': 'lactose',
-    'CRUSTÁCEOS': 'crustaceans', 'CORANTES': 'food colouring'
+    'GLÚTEN': 'GLUTEN', 'LACTOSE': 'LACTOSE', 'LEITE': 'MILK', 'OVO': 'EGG',
+    'PEIXE': 'FISH', 'CRUSTÁCEOS': 'CRUSTACEANS', 'SOJA': 'SOY',
+    'CASTANHAS': 'TREE NUTS', 'AMÊNDOAS': 'ALMONDS', 'CORANTES': 'COLOURINGS'
   };
 
-  // Porcoes: termos que aparecem no campo de texto livre.
-  var TERMOS_PORCAO = [
+  var ALERGENOS_DESCRICAO = {
+    'GLÚTEN': 'Found in pasta, breaded dishes (panko), beer and bread.',
+    'LACTOSE': 'Found in dairy products (cheese, butter, sauces).',
+    'LEITE': 'Found in cheese, sauces and desserts.',
+    'OVO': 'Found in batters, breaded dishes, mayonnaise and desserts.',
+    'PEIXE': 'Pescada amarela and fish broth.',
+    'CRUSTÁCEOS': 'Prawns and crab.',
+    'SOJA': 'Found in house sauces and cooking oils.',
+    'CASTANHAS': 'Nuts and nut products.',
+    'AMÊNDOAS': 'Dried fruit and preparations.',
+    'CORANTES': 'Food colourings in drinks and syrups.'
+  };
+
+  // Frases fixas que vem dos dados publicados (texto exato -> ingles).
+  var FRASES = {
+    'Cardápio em conferência. Confirme preços e porções com a equipe.': 'Menu under review. Please confirm prices and portions with the team.',
+    'Peso em conferência com a cozinha.': 'Weight being confirmed with the kitchen.',
+    'O cardápio impresso informa “peso in natura”. Alcance por prato ainda em conferência.': 'The printed menu gives the raw weight. The cooked portion is still being confirmed.',
+    'Marcações transcritas do cardápio impresso, ainda não conferidas com a cozinha. Consulte a equipe sobre alérgenos.': 'Markings copied from the printed menu and not yet checked by the kitchen. Please ask the team about allergens.',
+    'O cardápio impresso informa “peso in natura”. Alcance por prato ainda em conferência. O impresso não delimita se os 300 g são da carne ou do prato montado.': 'The printed menu gives the raw weight. The cooked portion is still being confirmed, and the printed menu does not say whether the 300 g refers to the meat or the whole plate.',
+    'O cardápio impresso informa “peso in natura”. Alcance por prato ainda em conferência. O impresso não delimita se os 250 g são da calabresa ou do prato montado.': 'The printed menu gives the raw weight. The cooked portion is still being confirmed, and the printed menu does not say whether the 250 g refers to the sausage or the whole plate.',
+    'O cardápio impresso informa “peso in natura”. Alcance por prato ainda em conferência. O impresso não informa quantas pessoas o prato serve.': 'The printed menu gives the raw weight. The cooked portion is still being confirmed, and the printed menu does not say how many people it serves.',
+    'Nenhuma fonte informa peso ou quantidade.': 'Weight or quantity not yet listed.',
+    'Nenhuma fonte informa o volume deste coquetel.': 'The volume of this cocktail is not yet listed.',
+    'Este item não tem marcações no cardápio impresso. Isso não significa ausência de alérgenos. Consulte a equipe.': 'This item has no markings on the printed menu. That does not mean it is free of allergens. Please ask the team.',
+    'Informação alimentar ainda não revisada para este item. Consulte a equipe.': 'Dietary information not yet reviewed for this item. Please ask the team.'
+  };
+  var AVISO_ESTADO_PADRAO = 'Menu under review. Please confirm prices and portions with the team.';
+
+  // Medidas em texto livre.
+  var PORCAO = [
     [/Dose de (\d+) mL/g, '$1 mL shot'],
     [/Copo (\d+) mL/g, '$1 mL glass'],
     [/(\d+) unidades/g, '$1 pieces'],
+    [/(\d+) bolinhos/g, '$1 croquettes'],
+    [/ no total/g, ' in total'],
     [/ de proteína/g, ' of protein'],
     [/ de carne/g, ' of meat']
   ];
 
-  function $(sel) { return document.querySelector(sel); }
+  var UI = {
+    titulo: 'Sir Fisher menu | Fortaleza seafront',
+    descricao: 'The full Sir Fisher menu in English, with current prices in Brazilian reais: fish and chips, prawns, sharing plates, cocktails and drinks on the Beira-Mar in Fortaleza, Brazil.',
+    pular: 'Skip to the menu',
+    secaoPadrao: 'Menu',
+    categorias: 'Sections',
+    buscar: 'Search',
+    abasRotulo: 'Menu sections',
+    abasEsq: 'Scroll sections left',
+    abasDir: 'Scroll sections right',
+    categoriasTitulo: 'Menu sections',
+    buscaTitulo: 'Search the menu',
+    buscaPlaceholder: 'Dish or ingredient, e.g. prawn',
+    buscaRotulo: 'Search by dish or ingredient',
+    limpar: 'Clear',
+    buscaInicial: 'Search is optional. You can close it and scroll through the whole menu.',
+    carregando: 'Loading the menu…',
+    voltarCardapio: 'Back to the menu',
+    trocarIdioma: 'Cardápio em português →',
+    semEstoque: 'Not available today',
+    semEstoqueItem: 'This item is not available today',
+    contem: 'Contains',
+    verDetalhes: 'See details',
+    item: 'item',
+    itens: 'items',
+    legendaTitulo: 'Allergen key',
+    legendaIntro: 'Main ingredients found in the menu items:',
+    legendaAviso: '<p><strong>ALLERGIES:</strong> All our dishes and drinks are prepared in the same kitchen. Even dishes without the listed ingredients <strong>may contain traces of gluten, prawns, fish, egg, soy and milk through cross-contact</strong>. If you have a severe allergy or dietary restriction, please tell our team before ordering.</p>',
+    voltarTopo: 'Back to the top of the menu',
+    rodapeCasa: '<p><strong>Good to know:</strong> Prices are in Brazilian reais (R$). We do not accept cheques. &bull; The 10% service charge is optional (Brazilian Federal Law 13,419/2017).</p>' +
+      '<p><strong>Payment:</strong> Cash, Pix, debit and credit cards (Visa, Mastercard, Elo, Hipercard, American Express), including foreign cards.</p>' +
+      '<p><strong>Consumer protection:</strong> DECON-CE 0800 275 8001 / +55 85 3459-6320 &bull; PROCON Fortaleza 151.</p>',
+    linkRestaurante: 'Restaurant page',
+    linkReservar: 'Book a table',
+    linkChegar: 'Directions',
+    linkLigar: 'Call',
+    medidaConferencia: 'Portion being confirmed',
+    porcao: 'Portion',
+    contemLista: 'Contains: ',
+    confirmadoCozinha: 'Confirmed by the kitchen:',
+    alimentarPadrao: 'If you have a severe allergy or dietary restriction, always ask our team before ordering.',
+    alimentarTitulo: 'Dietary information',
+    precoConsulta: 'Ask for the price',
+    jaVemCom: 'Comes with',
+    voceEscolhe: 'You choose',
+    opcoesPrecos: 'Options and prices',
+    opcoesNota: 'Tell your server which one you prefer.',
+    adicionais: 'Add-ons',
+    adicionaisNota: 'Added to the price of the dish if you order it.',
+    nomeOriginal: 'On the Portuguese menu:',
+    buscaCurta: 'Type at least two letters. You can also close the search and scroll through the whole menu.',
+    buscaRestricao: '<p><b>For allergies and dietary restrictions, please talk to the team.</b></p><p>All our dishes are prepared in the same kitchen. For your safety, if you have an allergy or food intolerance, ask our team before ordering.</p>',
+    buscaVazia: '<p><b>We couldn’t find that on the menu.</b></p><p>Try an ingredient, such as <i>prawn</i> or <i>fish</i>. You can also close the search and browse by section.</p>',
+    encontrado: 'item found',
+    encontrados: 'items found',
+    hojeNaoTemos: 'not available today',
+    atualizado: 'The restaurant has updated the menu.',
+    verAtualizado: 'See the updated menu',
+    falhaTitulo: 'We couldn’t load the menu',
+    falhaTexto: 'Check your phone’s connection and try again. Your server can also bring the printed menu.',
+    tentarDeNovo: 'Try again'
+  };
 
-  function esc(texto) {
-    return String(texto === null || texto === undefined ? '' : texto)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-  }
-
-  function reais(centavos) {
-    if (centavos === null || centavos === undefined) return '';
-    return 'R$ ' + (centavos / 100).toFixed(2);
-  }
-
-  function porcaoEN(texto) {
-    if (!texto) return '';
-    var s = String(texto);
-    TERMOS_PORCAO.forEach(function (par) { s = s.replace(par[0], par[1]); });
-    return s;
-  }
-
-  function precoEN(p) {
-    if (!p.preco) return '';
-    if (p.preco.tipo === 'faixa') return reais(p.preco.min) + ' – ' + reais(p.preco.max);
-    if (p.preco.centavos === null || p.preco.centavos === undefined) return 'Ask the team';
-    return reais(p.preco.centavos);
-  }
-
-  function fotoHTML(produto) {
-    var f = produto.foto;
-    if (!f) return '';
-    var alt = 'Photo of ' + produto._nomeEN;
-    if (f.url) {
-      return '<div class="mi__foto"><img src="' + esc(f.url) + '" alt="' + esc(alt) + '" loading="lazy" decoding="async"></div>';
-    }
-    if (!f.base || !f.larguras || !f.larguras.length) return '';
-    var base = '../../assets/img/' + f.base + '-';
-    var w = f.larguras[0];
-    return '<div class="mi__foto"><picture>' +
-      '<source type="image/avif" srcset="' + esc(base + w + '.avif') + '">' +
-      '<source type="image/webp" srcset="' + esc(base + w + '.webp') + '">' +
-      '<img src="' + esc(base + w + '.jpg') + '" alt="' + esc(alt) + '" loading="lazy" decoding="async" width="96" height="96">' +
-      '</picture></div>';
-  }
-
-  function itemHTML(p) {
-    var tr = PRODUTOS[p.id] || {};
-    p._nomeEN = tr.nome || p.nome;
-    var linhas = [];
-    var descritor = tr.descritor || (tr.nome ? '' : p.descritor);
-    var descricao = tr.descricao || (tr.nome ? '' : p.descricao);
-    if (descritor) linhas.push('<p class="mi__descritor">' + esc(descritor) + '</p>');
-    if (descricao) linhas.push('<p class="mi__texto">' + esc(descricao) + '</p>');
-
-    var inclui = tr.inclui || p.inclui || [];
-    if (inclui.length) linhas.push('<p class="mi__meta"><b>Includes:</b> ' + esc(inclui.join(', ')) + '</p>');
-    var opcoes = tr.opcoes || (p.opcoes || []).map(function (o) { return o.texto; });
-    if (opcoes.length) linhas.push('<p class="mi__meta"><b>Options:</b> ' + esc(opcoes.join('; ')) + '</p>');
-
-    if (p.variantes && p.variantes.length) {
-      linhas.push('<ul class="mi__var">' + p.variantes.map(function (v) {
-        var nome = (tr.variantes && tr.variantes[v.nome]) || v.nome;
-        return '<li><span>' + esc(nome) + '</span><b>' + reais(v.preco_centavos) + '</b></li>';
-      }).join('') + '</ul>');
-    }
-    if (p.adicionais && p.adicionais.length) {
-      linhas.push('<p class="mi__meta">' + p.adicionais.map(function (a) {
-        var nome = (tr.adicionais && tr.adicionais[a.nome]) || a.nome;
-        return esc(nome) + ': +' + reais(a.preco_centavos);
-      }).join(' · ') + '</p>');
-    }
-
-    var alerg = (p.alimentar && p.alimentar.declarados) || [];
-    if (alerg.length) {
-      linhas.push('<p class="mi__alerg">Contains (per printed menu): ' +
-        esc(alerg.map(function (a) { return ALERGENOS[a] || a.toLowerCase(); }).join(', ')) + '</p>');
-    }
-
-    var medida = porcaoEN(p.porcao && p.porcao.texto);
-    var original = tr.nome && tr.nome !== p.nome
-      ? '<p class="mi__original" lang="pt-BR">Ask for: <i>' + esc(p.nome) + '</i></p>'
-      : (!tr.nome ? '<p class="mi__original">Name in Portuguese</p>' : '');
-
-    return '<li class="mi' + (p.disponivel === false ? ' mi--off' : '') + '">' +
-      fotoHTML(p) +
-      '<div class="mi__corpo">' +
-        '<div class="mi__topo"><h3 class="mi__nome"' + (tr.nome ? '' : ' lang="pt-BR"') + '>' + esc(p._nomeEN) + '</h3>' +
-        '<span class="mi__preco">' + esc(precoEN(p)) + '</span></div>' +
-        (medida ? '<p class="mi__medida">' + esc(medida) + '</p>' : '') +
-        (p.disponivel === false ? '<p class="mi__off">Not available today</p>' : '') +
-        linhas.join('') + original +
-      '</div></li>';
-  }
-
-  function desenhar(dados) {
-    var cats = (dados.categorias || []).filter(function (c) {
-      return dados.produtos.some(function (p) { return p.categoria === c.id; });
-    });
-
-    $('#mn-nav').innerHTML = cats.map(function (c) {
-      var nome = (CATEGORIAS[c.id] && CATEGORIAS[c.id].nome) || c.nome;
-      return '<a href="#m-' + esc(c.id) + '">' + esc(nome) + '</a>';
-    }).join('');
-
-    $('#mn-lista').innerHTML = cats.map(function (c) {
-      var tc = CATEGORIAS[c.id] || {};
-      var produtos = dados.produtos
-        .filter(function (p) { return p.categoria === c.id; })
-        .sort(function (a, b) { return (a.ordem || 0) - (b.ordem || 0); });
-      var grupos = (c.subgrupos && c.subgrupos.length)
-        ? c.subgrupos.map(function (s) {
-            return { titulo: SUBGRUPOS[s.id] || s.nome, itens: produtos.filter(function (p) { return p.subgrupo === s.id; }) };
-          }).concat([{ titulo: '', itens: produtos.filter(function (p) {
-            return !c.subgrupos.some(function (s) { return s.id === p.subgrupo; });
-          }) }])
-        : [{ titulo: '', itens: produtos }];
-      return '<section class="mn-cat" id="m-' + esc(c.id) + '">' +
-        '<h2>' + esc(tc.nome || c.nome) + '</h2>' +
-        ((tc.resumo || c.resumo) ? '<p class="mn-cat__resumo">' + esc(tc.resumo || c.resumo) + '</p>' : '') +
-        grupos.filter(function (g) { return g.itens.length; }).map(function (g) {
-          return (g.titulo ? '<h3 class="mn-sub">' + esc(g.titulo) + '</h3>' : '') +
-            '<ul class="mn-itens">' + g.itens.map(itemHTML).join('') + '</ul>';
-        }).join('') +
-        '</section>';
-    }).join('');
-
-    var conferencia = dados.estado === 'em_conferencia';
-    $('#mn-estado').hidden = !conferencia;
-    if (dados.publicado_em) {
-      var d = new Date(dados.publicado_em);
-      if (!isNaN(d)) {
-        $('#mn-data').textContent = 'Menu published on ' + d.toLocaleDateString('en-US', {
-          timeZone: 'America/Fortaleza', day: 'numeric', month: 'long', year: 'numeric'
-        }) + '.';
-      }
-    }
-  }
-
-  function lerEstatico() {
-    return fetch(CAMINHO_ESTATICO, { cache: 'no-cache' }).then(function (r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    });
-  }
-
-  function lerAoVivo() {
-    var controle = new AbortController();
-    var prazo = setTimeout(function () { controle.abort(); }, 6000);
-    return fetch(SUPABASE_URL + '/rest/v1/cardapio_publico?select=versao,publicado_em,conteudo', {
-      headers: { apikey: SUPABASE_ANON, Authorization: 'Bearer ' + SUPABASE_ANON },
-      signal: controle.signal,
-      cache: 'no-store'
-    }).then(function (r) {
-      clearTimeout(prazo);
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    }).then(function (linhas) {
-      if (!linhas || !linhas.length) throw new Error('no active menu');
-      var c = linhas[0].conteudo;
-      c.versao = linhas[0].versao;
-      c.publicado_em = linhas[0].publicado_em;
-      return c;
-    });
-  }
-
-  var desenhado = null;
-  function talvezDesenhar(dados) {
-    if (!dados || !dados.produtos) return;
-    if (desenhado && new Date(desenhado.publicado_em) >= new Date(dados.publicado_em)) return;
-    desenhado = dados;
-    desenhar(dados);
-  }
-
-  lerEstatico().then(talvezDesenhar).catch(function () {})
-    .then(function () { return lerAoVivo(); })
-    .then(talvezDesenhar)
-    .catch(function () {
-      if (!desenhado) $('#mn-lista').innerHTML = '<p class="mn-erro">The menu could not be loaded. ' +
-        '<a href="../../cardapio/" hreflang="pt-BR">Open the menu in Portuguese</a>.</p>';
-    });
+  window.SF_CARDAPIO_EN = {
+    categorias: CATEGORIAS,
+    subgrupos: SUBGRUPOS,
+    produtos: PRODUTOS,
+    alergenos: ALERGENOS,
+    alergenosDescricao: ALERGENOS_DESCRICAO,
+    frases: FRASES,
+    avisoEstadoPadrao: AVISO_ESTADO_PADRAO,
+    porcao: PORCAO,
+    ui: UI
+  };
 })();

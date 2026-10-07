@@ -7,9 +7,6 @@
   <title>Cardápio do Sir Fisher | Beira-Mar de Fortaleza</title>
   <meta name="description" content="Cardápio completo do Sir Fisher, na Beira-Mar de Fortaleza: fish and chips de pescada amarela, petiscos, pratos para compartilhar, sanduíches, cervejas e coquetéis, com preços e porções." />
   <link rel="canonical" href="https://www.sirfisher.com.br/cardapio/" />
-  <link rel="alternate" hreflang="pt-BR" href="https://www.sirfisher.com.br/cardapio/" />
-  <link rel="alternate" hreflang="en" href="https://www.sirfisher.com.br/en/menu/" />
-  <link rel="alternate" hreflang="x-default" href="https://www.sirfisher.com.br/cardapio/" />
   <meta name="theme-color" content="#12293d" />
 
   <!-- Mesma preferência de tema do resto do site. Aplicada antes da primeira
@@ -31,10 +28,26 @@
   })();
   </script>
 
+  <!-- Idioma: ingles so com ?lang=en ou com a escolha salva pelo link de
+       troca. Nunca pelo idioma do navegador, para o Google (que le com
+       navegador em ingles) continuar vendo o cardapio em portugues. -->
+  <script>
+  (function () {
+    var l = 'pt';
+    try {
+      var q = new URLSearchParams(location.search).get('lang');
+      if (q === 'en' || q === 'pt') { l = q; localStorage.setItem('sf-lang', q); }
+      else if (localStorage.getItem('sf-lang') === 'en') l = 'en';
+    } catch (e) {}
+    document.documentElement.setAttribute('data-lang', l);
+    if (l === 'en') document.documentElement.setAttribute('lang', 'en');
+  })();
+  </script>
+
   <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
   <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="../assets/css/cardapio.css?v=20261007" />
+  <link rel="stylesheet" href="../assets/css/cardapio.css?v=20261007b" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Sir Fisher" />
@@ -69,7 +82,7 @@
 </head>
 <body>
 
-  <a class="pular" href="#catalogo">Ir direto para o cardápio</a>
+  <a class="pular" href="#catalogo" data-i18n="pular">Ir direto para o cardápio</a>
 
   <header class="topo" id="topo">
     <div class="topo__linha">
@@ -81,7 +94,7 @@
         </svg>
         <div style="min-width:0">
           <span class="topo__titulo">Sir Fisher</span>
-          <span class="topo__secao" id="secao-atual">Cardápio</span>
+          <span class="topo__secao" id="secao-atual" data-i18n="secaoPadrao">Cardápio</span>
         </div>
       </div>
 
@@ -89,21 +102,21 @@
               aria-expanded="false" aria-controls="painel-categorias">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-        Categorias
+        <span data-i18n="categorias">Categorias</span>
       </button>
 
       <button type="button" class="botao-topo" id="btn-busca"
               aria-expanded="false" aria-controls="painel-busca">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        Buscar
+        <span data-i18n="buscar">Buscar</span>
       </button>
     </div>
 
     <!-- Navegação horizontal por abas no estilo iFood: rola suavemente para a direita -->
-    <nav class="abas-categorias" id="abas-categorias" aria-label="Categorias do cardápio">
+    <nav class="abas-categorias" id="abas-categorias" aria-label="Categorias do cardápio" data-i18n-aria="abasRotulo">
       <div class="abas-categorias__envelope">
-        <button type="button" class="abas-nav abas-nav--esq" id="abas-nav-esq" aria-label="Rolar categorias para a esquerda" tabindex="-1">
+        <button type="button" class="abas-nav abas-nav--esq" id="abas-nav-esq" aria-label="Rolar categorias para a esquerda" data-i18n-aria="abasEsq" tabindex="-1">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
         </button>
         <div class="abas-categorias__trilha" id="abas-trilha" role="tablist">
@@ -118,7 +131,7 @@
           <a href="#c-doses" class="aba-cat" data-cat="doses" role="tab" aria-selected="false">Doses e aperitivos</a>
           <a href="#c-extras" class="aba-cat" data-cat="extras" role="tab" aria-selected="false">Extras e serviços</a>
         </div>
-        <button type="button" class="abas-nav abas-nav--dir" id="abas-nav-dir" aria-label="Rolar categorias para a direita" tabindex="-1">
+        <button type="button" class="abas-nav abas-nav--dir" id="abas-nav-dir" aria-label="Rolar categorias para a direita" data-i18n-aria="abasDir" tabindex="-1">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </div>
@@ -128,22 +141,23 @@
          Ficam suspensos sob o topo fixo, acessíveis em qualquer ponto da rolagem. -->
     <div class="painel" id="painel-categorias" hidden>
       <div class="painel__corpo">
-        <h2 class="visivel-so-leitor">Categorias do cardápio</h2>
+        <h2 class="visivel-so-leitor" data-i18n="categoriasTitulo">Categorias do cardápio</h2>
         <ul class="atalhos" id="atalhos"></ul>
       </div>
     </div>
 
     <div class="painel" id="painel-busca" hidden>
       <div class="painel__corpo">
-        <h2 class="visivel-so-leitor">Buscar no cardápio</h2>
+        <h2 class="visivel-so-leitor" data-i18n="buscaTitulo">Buscar no cardápio</h2>
         <form class="busca-campo" id="busca-form" role="search">
           <input type="search" id="busca" name="busca" autocomplete="off"
                  placeholder="Nome ou ingrediente. Ex.: camarão"
-                 aria-label="Buscar por nome ou ingrediente" />
-          <button type="button" class="botao botao--claro" id="busca-limpar">Limpar</button>
+                 aria-label="Buscar por nome ou ingrediente"
+                 data-i18n-placeholder="buscaPlaceholder" data-i18n-aria="buscaRotulo" />
+          <button type="button" class="botao botao--claro" id="busca-limpar" data-i18n="limpar">Limpar</button>
         </form>
         <div id="busca-saida" aria-live="polite">
-          <p class="busca-dica">A busca é opcional. Você pode fechar e rolar a página
+          <p class="busca-dica" data-i18n="buscaInicial">A busca é opcional. Você pode fechar e rolar a página
             para ver o cardápio inteiro.</p>
         </div>
       </div>
@@ -158,7 +172,7 @@
   <!-- Estado do catálogo. Fica junto ao conteúdo, não é pop-up e some sozinho
        quando a operação publicar o catálogo já conferido. -->
   <div class="aviso-estado" id="aviso-estado" hidden></div>
-  <p class="aviso-idioma" lang="en"><a href="../en/menu/" hreflang="en" data-evt="click_menu_en">Menu in English →</a></p>
+  <p class="aviso-idioma"><a id="trocar-idioma" href="?lang=en" hreflang="en" lang="en" data-evt="click_menu_lang">Menu in English →</a></p>
 
   <main id="catalogo">
     <div class="esqueleto" aria-hidden="true">
@@ -169,7 +183,7 @@
       <span class="esqueleto__foto"></span>
       <span class="esqueleto__linhas"><span></span><span></span><span></span></span>
     </div>
-    <p class="estado-carga">Carregando o cardápio…</p>
+    <p class="estado-carga" data-i18n="carregando">Carregando o cardápio…</p>
   </main>
 
   <noscript>
@@ -191,7 +205,7 @@
         <button type="button" class="detalhe__voltar" id="detalhe-voltar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-          Voltar ao cardápio
+          <span data-i18n="voltarCardapio">Voltar ao cardápio</span>
         </button>
       </div>
     </div>
@@ -206,7 +220,8 @@
   <!-- CARDAPIO-DADOS:FIM -->
 
   <script src="../assets/js/atribuicao.js" defer></script>
-  <script src="../assets/js/cardapio.js?v=20260929_1" defer></script>
+  <script src="../assets/js/cardapio-en.js?v=20261007" defer></script>
+  <script src="../assets/js/cardapio.js?v=20261007" defer></script>
   <script src="../assets/js/contador-visitas.js" defer></script>
 
   <!-- Google tag (gtag.js), igual ao resto do site. Os sinais de consulta do

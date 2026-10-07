@@ -71,7 +71,154 @@
 
   function dinheiro(centavos) {
     if (centavos === null || centavos === undefined) return '';
-    return 'R$ ' + (centavos / 100).toFixed(2).replace('.', ',');
+    var valor = (centavos / 100).toFixed(2);
+    return 'R$ ' + (LANG === 'en' ? valor : valor.replace('.', ','));
+  }
+
+  // -------------------------------------------------------------------------
+  // Idioma
+  // -------------------------------------------------------------------------
+  // Portugues e o padrao. Ingles so com ?lang=en ou com a escolha salva (o
+  // script do <head> decide e marca data-lang), nunca pelo idioma do
+  // navegador: o Google le esta pagina com navegador em ingles e precisa
+  // continuar vendo o cardapio em portugues. Os textos em ingles ficam em
+  // cardapio-en.js; preco, porcao, foto e ordem sao sempre os da publicacao.
+  var EN = window.SF_CARDAPIO_EN || null;
+  var LANG = (EN && document.documentElement.getAttribute('data-lang') === 'en') ? 'en' : 'pt';
+
+  var UI_PT = {
+    secaoPadrao: 'Cardápio',
+    trocarIdioma: 'Menu in English →',
+    semEstoque: 'Hoje não temos',
+    semEstoqueItem: 'Hoje não temos este item',
+    contem: 'Contém',
+    verDetalhes: 'Ver detalhes',
+    item: 'item',
+    itens: 'itens',
+    legendaTitulo: 'Legenda de alérgenos',
+    legendaIntro: 'Identificação dos principais ingredientes presentes nos itens do cardápio:',
+    legendaAviso: '<p><strong>ALÉRGICOS:</strong> Nossos pratos e bebidas são manipulados em uma mesma cozinha. Mesmo pratos sem os ingredientes listados <strong>podem conter traços de glúten, camarão, peixe, ovos, soja e leite por contaminação cruzada</strong>. Em caso de restrições ou alergias severas, por favor avise nossa equipe antes de fazer seu pedido.</p>',
+    voltarTopo: 'Voltar ao começo do cardápio',
+    rodapeCasa: '<p><strong>Informações da casa:</strong> Não aceitamos cheques. &bull; Taxa de serviço (10%) é opcional (Lei Federal nº 13.419/2017).</p>' +
+      '<p><strong>Formas de pagamento:</strong> Dinheiro, PIX, Cartões de Débito e Crédito (Visa, Mastercard, Elo, Hipercard, American Express).</p>' +
+      '<p><strong>Atendimento ao Consumidor:</strong> DECON-CE 0800 275 8001 / (85) 3459-6320 &bull; PROCON Fortaleza 151.</p>',
+    linkRestaurante: 'Página do restaurante',
+    linkReservar: 'Reservar mesa',
+    linkChegar: 'Como chegar',
+    linkLigar: 'Ligar',
+    medidaConferencia: 'Medida em conferência',
+    porcao: 'Porção',
+    contemLista: 'Contém: ',
+    confirmadoCozinha: 'Confirmado pela cozinha:',
+    alimentarPadrao: 'Em caso de alergias graves ou restrições alimentares, consulte sempre nossa equipe antes de fazer o pedido.',
+    alimentarTitulo: 'Informação alimentar',
+    precoConsulta: 'Preço sob consulta',
+    jaVemCom: 'Já vem com',
+    voceEscolhe: 'Você escolhe',
+    opcoesPrecos: 'Opções e preços',
+    opcoesNota: 'Diga ao garçom qual você prefere.',
+    adicionais: 'Adicionais',
+    adicionaisNota: 'Valor somado ao preço do prato, se você pedir.',
+    nomeOriginal: '',
+    buscaCurta: 'Digite ao menos duas letras. Você também pode fechar a busca e rolar o cardápio inteiro.',
+    buscaRestricao: '<p><b>Sobre alergias e restrições, fale com a equipe.</b></p><p>Nossos pratos são preparados no mesmo ambiente. Para sua segurança em casos de alergias ou intolerâncias alimentares, consulte nossa equipe diretamente antes de fazer seu pedido.</p>',
+    buscaVazia: '<p><b>Não encontramos esse termo no cardápio.</b></p><p>Tente o nome de um ingrediente, como <i>camarão</i> ou <i>peixe</i>. Você também pode fechar a busca e ver os itens por categoria.</p>',
+    encontrado: 'item encontrado',
+    encontrados: 'itens encontrados',
+    hojeNaoTemos: 'hoje não temos',
+    atualizado: 'O cardápio foi atualizado pelo restaurante.',
+    verAtualizado: 'Ver o cardápio atualizado',
+    falhaTitulo: 'Não conseguimos carregar o cardápio',
+    falhaTexto: 'Verifique a conexão do celular e tente novamente. O garçom também pode trazer o cardápio impresso.',
+    tentarDeNovo: 'Tentar de novo'
+  };
+
+  function T(chave) {
+    if (LANG === 'en' && EN.ui[chave] !== undefined) return EN.ui[chave];
+    return UI_PT[chave] !== undefined ? UI_PT[chave] : '';
+  }
+
+  function rotuloAlergeno(rotulo) {
+    return LANG === 'en' ? (EN.alergenos[rotulo] || rotulo) : rotulo;
+  }
+
+  function traduzirFrase(texto) {
+    return texto && EN.frases[texto] ? EN.frases[texto] : texto;
+  }
+
+  function traduzirPorcao(texto) {
+    if (!texto) return texto;
+    var s = String(texto);
+    EN.porcao.forEach(function (par) { s = s.replace(par[0], par[1]); });
+    return s;
+  }
+
+  // Devolve uma copia dos dados com os textos em ingles. Lista traduzida so
+  // vale se tiver o mesmo tamanho da original; senao fica o portugues, que
+  // e melhor do que um item trocado.
+  function localizar(dados) {
+    if (LANG !== 'en' || !dados || !dados.produtos) return dados;
+    var d = JSON.parse(JSON.stringify(dados));
+    if (d.aviso_estado) d.aviso_estado = EN.frases[d.aviso_estado] || EN.avisoEstadoPadrao;
+    (d.categorias || []).forEach(function (c) {
+      var tc = EN.categorias[c.id];
+      if (tc) {
+        c.nome = tc.nome || c.nome;
+        if (tc.resumo) c.resumo = tc.resumo;
+      }
+      (c.subgrupos || []).forEach(function (sub) {
+        if (EN.subgrupos[sub.id]) sub.nome = EN.subgrupos[sub.id];
+      });
+    });
+    d.produtos.forEach(function (p) {
+      if (p.porcao) {
+        p.porcao.texto = traduzirPorcao(p.porcao.texto);
+        p.porcao.detalhes = (p.porcao.detalhes || []).map(traduzirPorcao);
+        p.porcao.nota = traduzirFrase(p.porcao.nota);
+      }
+      if (p.alimentar) p.alimentar.texto = traduzirFrase(p.alimentar.texto);
+      var tp = EN.produtos[p.id];
+      if (!tp) return;
+      if (tp.nome && tp.nome !== p.nome) p.nome_original = p.nome;
+      p.nome = tp.nome || p.nome;
+      if (tp.descritor !== undefined) p.descritor = tp.descritor;
+      if (tp.descricao !== undefined) p.descricao = tp.descricao;
+      // O texto longo do detalhe so existe em portugues: no ingles vale a
+      // descricao traduzida.
+      p.detalhe = tp.descricao || '';
+      if (tp.inclui && p.inclui && tp.inclui.length === p.inclui.length) p.inclui = tp.inclui.slice();
+      if (tp.opcoes && p.opcoes && tp.opcoes.length === p.opcoes.length) {
+        p.opcoes = p.opcoes.map(function (o, i) { return Object.assign({}, o, { texto: tp.opcoes[i] }); });
+      }
+      (p.variantes || []).forEach(function (v) {
+        if (tp.variantes && tp.variantes[v.nome]) v.nome = tp.variantes[v.nome];
+      });
+      (p.adicionais || []).forEach(function (a) {
+        if (tp.adicionais && tp.adicionais[a.nome]) a.nome = tp.adicionais[a.nome];
+      });
+      if (p.foto) p.foto.alt = p.nome;
+      // Busca em ingles: acrescenta as palavras traduzidas ao indice.
+      p.busca = (p.busca || '') + ' ' + semAcento([p.nome, p.descritor, p.descricao]
+        .concat(p.inclui || [], (p.opcoes || []).map(function (o) { return o.texto; })).join(' '));
+    });
+    return d;
+  }
+
+  function aplicarIdiomaEstatico() {
+    var troca = $('#trocar-idioma');
+    if (troca) {
+      troca.textContent = T('trocarIdioma');
+      troca.setAttribute('href', '?lang=' + (LANG === 'en' ? 'pt' : 'en'));
+      troca.setAttribute('hreflang', LANG === 'en' ? 'pt-BR' : 'en');
+      troca.setAttribute('lang', LANG === 'en' ? 'pt-BR' : 'en');
+    }
+    if (LANG !== 'en') return;
+    document.title = T('titulo');
+    var meta = $('meta[name="description"]');
+    if (meta) meta.setAttribute('content', T('descricao'));
+    $$('[data-i18n]').forEach(function (el) { el.textContent = T(el.getAttribute('data-i18n')); });
+    $$('[data-i18n-aria]').forEach(function (el) { el.setAttribute('aria-label', T(el.getAttribute('data-i18n-aria'))); });
+    $$('[data-i18n-placeholder]').forEach(function (el) { el.setAttribute('placeholder', T(el.getAttribute('data-i18n-placeholder'))); });
   }
 
   function dataCurta(iso) {
@@ -120,7 +267,11 @@
     'gluten', 'lactose', 'alergia', 'alergias', 'alergico', 'alergica',
     'alergenos', 'alergeno', 'celiaco', 'celiaca', 'intolerancia',
     'intolerante', 'vegano', 'vegana', 'vegetariano', 'vegetariana',
-    'sem gluten', 'sem lactose', 'sem leite', 'zero gluten', 'diabetico'
+    'sem gluten', 'sem lactose', 'sem leite', 'zero gluten', 'diabetico',
+    'allergy', 'allergies', 'allergic', 'allergen', 'celiac', 'coeliac',
+    'intolerance', 'intolerant', 'vegan', 'vegetarian', 'gluten free',
+    'gluten-free', 'dairy free', 'dairy-free', 'lactose free', 'nut', 'nuts',
+    'diabetic'
   ];
 
   function ehTermoDeRestricao(consulta) {
@@ -135,7 +286,7 @@
     return '<span class="alergeno">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +
       'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + glifo + '</svg>' +
-      esc(rotulo) + '</span>';
+      esc(rotuloAlergeno(rotulo)) + '</span>';
   }
 
   // -------------------------------------------------------------------------
@@ -247,7 +398,7 @@
   function selosHTML(produto) {
     var selos = [];
     if (!produto.disponivel) {
-      selos.push('<span class="selo selo--esgotado">Hoje não temos</span>');
+      selos.push('<span class="selo selo--esgotado">' + esc(T('semEstoque')) + '</span>');
     }
     produto.adicionais.forEach(function (a) {
       selos.push('<span class="selo selo--adicional">' + esc(a.nome) + ' + ' +
@@ -261,10 +412,10 @@
     if (!a || !a.declarados || !a.declarados.length) return '';
     return '<div class="item__alergenos">' + a.declarados.map(function (rotulo) {
       var glifo = GLIFOS[rotulo] || '<circle cx="12" cy="12" r="8"/>';
-      return '<span class="item__alergeno" title="Contém ' + esc(rotulo) + '">' +
+      return '<span class="item__alergeno" title="' + esc(T('contem') + ' ' + rotuloAlergeno(rotulo)) + '">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + glifo + '</svg>' +
-        '<span>' + esc(rotulo) + '</span></span>';
+        '<span>' + esc(rotuloAlergeno(rotulo)) + '</span></span>';
     }).join('') + '</div>';
   }
 
@@ -275,6 +426,12 @@
     }).join('') + '</ul>';
   }
 
+  // No ingles, o nome do cardapio impresso vai junto, para pedir ao garcom.
+  function nomeOriginalHTML(produto) {
+    if (!produto.nome_original) return '';
+    return '<p class="item__original" lang="pt-BR">' + esc(produto.nome_original) + '</p>';
+  }
+
   function itemPrato(produto) {
     return '<li class="item item--prato' + (produto.disponivel ? '' : ' item--indisponivel') +
       '" id="item-' + esc(produto.id) + '">' +
@@ -282,13 +439,14 @@
       fotoHTML(produto, false) +
       '<div class="item__texto">' +
       '<h3 class="item__nome">' + esc(produto.nome) + '</h3>' +
+      nomeOriginalHTML(produto) +
       (produto.descritor ? '<p class="item__descritor">' + esc(produto.descritor) + '</p>' : '') +
       (produto.descricao ? '<p class="item__descricao">' + esc(produto.descricao) + '</p>' : '') +
       '<div class="item__dados">' + precoHTML(produto) + porcaoHTML(produto) + '</div>' +
       alergenosCardHTML(produto) +
       variantesHTML(produto) +
       '<div class="item__rodape">' + selosHTML(produto) +
-      '<span class="item__abrir">Ver detalhes' +
+      '<span class="item__abrir">' + esc(T('verDetalhes')) +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
       'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>' +
       '</span></div>' +
@@ -304,11 +462,12 @@
       medida.push(esc(produto.descritor));
     }
     if (produto.descricao) medida.push(esc(produto.descricao));
-    if (!produto.disponivel) medida.unshift('<b>Hoje não temos</b>');
+    if (!produto.disponivel) medida.unshift('<b>' + esc(T('semEstoque')) + '</b>');
     return '<li class="item item--bebida' + (produto.disponivel ? '' : ' item--indisponivel') +
       '" id="item-' + esc(produto.id) + '">' +
       '<a class="item__link" href="#p-' + esc(produto.id) + '">' +
       '<h3 class="item__nome">' + esc(produto.nome) + '</h3>' +
+      nomeOriginalHTML(produto) +
       precoHTML(produto) +
       (medida.length ? '<p class="item__medida">' + medida.join(' · ') + '</p>' : '') +
       alergenosCardHTML(produto) +
@@ -385,14 +544,14 @@
   function legendaAlergenosHTML() {
     var itens = Object.keys(GLIFOS).map(function (rotulo) {
       var glifo = GLIFOS[rotulo];
-      var desc = DESCRICOES_ALERGENOS[rotulo] || '';
+      var desc = (LANG === 'en' ? EN.alergenosDescricao[rotulo] : DESCRICOES_ALERGENOS[rotulo]) || '';
       return '<div class="legenda-alergenos__item">' +
         '<span class="legenda-alergenos__icone" aria-hidden="true">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
         'stroke-linecap="round" stroke-linejoin="round">' + glifo + '</svg>' +
         '</span>' +
         '<div class="legenda-alergenos__info">' +
-        '<strong>' + esc(rotulo) + '</strong>' +
+        '<strong>' + esc(rotuloAlergeno(rotulo)) + '</strong>' +
         (desc ? '<small>' + esc(desc) + '</small>' : '') +
         '</div>' +
         '</div>';
@@ -400,12 +559,12 @@
 
     return '<section class="legenda-alergenos" id="legenda-alergenos" aria-labelledby="t-legenda-alergenos">' +
       '<div class="legenda-alergenos__cabeca">' +
-      '<h2 id="t-legenda-alergenos">Legenda de alérgenos</h2>' +
-      '<p>Identificação dos principais ingredientes presentes nos itens do cardápio:</p>' +
+      '<h2 id="t-legenda-alergenos">' + esc(T('legendaTitulo')) + '</h2>' +
+      '<p>' + esc(T('legendaIntro')) + '</p>' +
       '</div>' +
       '<div class="legenda-alergenos__grid">' + itens + '</div>' +
       '<div class="legenda-alergenos__aviso">' +
-      '<p><strong>ALÉRGICOS:</strong> Nossos pratos e bebidas são manipulados em uma mesma cozinha. Mesmo pratos sem os ingredientes listados <strong>podem conter traços de glúten, camarão, peixe, ovos, soja e leite por contaminação cruzada</strong>. Em caso de restrições ou alergias severas, por favor avise nossa equipe antes de fazer seu pedido.</p>' +
+      T('legendaAviso') +
       '</div>' +
       '</section>';
   }
@@ -467,7 +626,7 @@
       '<a class="voltar-topo" href="#topo" id="btn-voltar-topo">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
       'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>' +
-      'Voltar ao começo do cardápio</a>';
+      esc(T('voltarTopo')) + '</a>';
 
     desenharAbasCategorias();
     desenharAtalhos();
@@ -476,9 +635,13 @@
     observarSecoes();
   }
 
+  // O aviso de estado da publicacao ("Cardapio em conferencia...") deixou de
+  // aparecer para o cliente por decisao do restaurante (07/10/2026). A faixa
+  // continua existindo para a pre-visualizacao do painel, desenhada em
+  // ligarPrevia().
   function desenharAviso() {
     var alvo = $('#aviso-estado');
-    if (!estado.dados.aviso_estado) { alvo.hidden = true; return; }
+    if (estado.origemCopia !== 'previa' || !estado.dados.aviso_estado) { alvo.hidden = true; return; }
     alvo.hidden = false;
     alvo.innerHTML = '<div>' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
@@ -494,24 +657,22 @@
       var n = dados.produtos.filter(function (p) { return p.categoria === cat.id; }).length;
       if (!n) return '';
       return '<li><a href="#c-' + esc(cat.id) + '">' + esc(cat.nome) +
-        '<span class="conta">' + n + (n === 1 ? ' item' : ' itens') + '</span></a></li>';
+        '<span class="conta">' + n + ' ' + (n === 1 ? T('item') : T('itens')) + '</span></a></li>';
     }).join('');
   }
 
   function desenharRodape() {
     var partes = [];
-    partes.push('<div class="rodape__institucional">' +
-      '<p><strong>Informações da casa:</strong> Não aceitamos cheques. &bull; Taxa de serviço (10%) é opcional (Lei Federal nº 13.419/2017).</p>' +
-      '<p><strong>Formas de pagamento:</strong> Dinheiro, PIX, Cartões de Débito e Crédito (Visa, Mastercard, Elo, Hipercard, American Express).</p>' +
-      '<p><strong>Atendimento ao Consumidor:</strong> DECON-CE 0800 275 8001 / (85) 3459-6320 &bull; PROCON Fortaleza 151.</p>' +
-      '</div>');
+    partes.push('<div class="rodape__institucional">' + T('rodapeCasa') + '</div>');
 
+    var en = LANG === 'en';
     partes.push('<div class="rodape__links">' +
-      '<a href="../">Página do restaurante</a>' +
-      '<a href="https://reservas.sirfisher.com.br/" data-evt="click_reservation">Reservar mesa</a>' +
-      '<a href="../como-chegar/">Como chegar</a>' +
+      '<a href="' + (en ? '../en/' : '../') + '">' + esc(T('linkRestaurante')) + '</a>' +
+      '<a href="https://reservas.sirfisher.com.br/' + (en ? '?lang=en' : '') + '" data-evt="click_reservation">' + esc(T('linkReservar')) + '</a>' +
+      '<a href="' + (en ? 'https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE' : '../como-chegar/') + '"' +
+      (en ? ' target="_blank" rel="noopener" data-evt="click_maps"' : '') + '>' + esc(T('linkChegar')) + '</a>' +
       '<a href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">WhatsApp</a>' +
-      '<a href="tel:+5585988544274" data-evt="click_phone">Ligar</a></div>');
+      '<a href="tel:+5585988544274" data-evt="click_phone">' + esc(T('linkLigar')) + '</a></div>');
     $('#rodape').innerHTML = partes.join('');
   }
 
@@ -589,7 +750,7 @@
     var linhas = [];
     if (p.texto) linhas.push('<p><b>' + esc(p.texto) + '</b></p>');
     if (!p.texto && p.estado === 'em_conferencia') {
-      linhas.push('<p><b>Medida em conferência</b></p>');
+      linhas.push('<p><b>' + esc(T('medidaConferencia')) + '</b></p>');
     }
     if (p.detalhes && p.detalhes.length) {
       linhas.push('<ul>' + p.detalhes.map(function (d) {
@@ -597,7 +758,7 @@
       }).join('') + '</ul>');
     }
     if (p.nota) linhas.push('<p class="nota">' + esc(p.nota) + '</p>');
-    return '<section class="bloco"><h2>Porção</h2>' + linhas.join('') + '</section>';
+    return '<section class="bloco"><h2>' + esc(T('porcao')) + '</h2>' + linhas.join('') + '</section>';
   }
 
   function blocoAlimentar(produto) {
@@ -606,14 +767,13 @@
     var corpo = '';
     if (a.declarados && a.declarados.length) {
       corpo += '<div class="alergenos">' + a.declarados.map(alergenoHTML).join('') + '</div>';
-      corpo += '<p class="nota">Contém: ' + esc(a.declarados.join(', ')) + '.</p>';
+      corpo += '<p class="nota">' + esc(T('contemLista')) + esc(a.declarados.map(rotuloAlergeno).join(', ')) + '.</p>';
     }
     if (a.confirmado && a.confirmado.length) {
-      corpo += '<p><b>Confirmado pela cozinha:</b> ' + esc(a.confirmado.join(', ')) + '</p>';
+      corpo += '<p><b>' + esc(T('confirmadoCozinha')) + '</b> ' + esc(a.confirmado.map(rotuloAlergeno).join(', ')) + '</p>';
     }
-    corpo += '<p class="nota">' + esc(a.texto ||
-      'Em caso de alergias graves ou restrições alimentares, consulte sempre nossa equipe antes de fazer o pedido.') + '</p>';
-    return '<section class="bloco bloco--alimentar"><h2>Informação alimentar</h2>' +
+    corpo += '<p class="nota">' + esc(a.texto || T('alimentarPadrao')) + '</p>';
+    return '<section class="bloco bloco--alimentar"><h2>' + esc(T('alimentarTitulo')) + '</h2>' +
       corpo + '</section>';
   }
 
@@ -630,27 +790,28 @@
 
     var preco = produto.preco.tipo === 'faixa'
       ? ''
-      : (produto.preco.centavos !== null ? dinheiro(produto.preco.centavos) : 'Preço sob consulta');
+      : (produto.preco.centavos !== null ? dinheiro(produto.preco.centavos) : T('precoConsulta'));
 
     corpo.innerHTML =
       fotoHTML(produto, true) +
       '<div class="detalhe__cabeca">' +
       '<p class="detalhe__categoria">' + esc(cat.nome) + '</p>' +
       '<h1 id="detalhe-titulo">' + esc(produto.nome) + '</h1>' +
+      (produto.nome_original
+        ? '<p class="detalhe__original">' + esc(T('nomeOriginal')) + ' <i lang="pt-BR">' + esc(produto.nome_original) + '</i></p>'
+        : '') +
       (produto.descritor ? '<p class="detalhe__descritor">' + esc(produto.descritor) + '</p>' : '') +
       (preco ? '<p class="detalhe__preco">' + esc(preco) + '</p>' : '') +
       (!produto.disponivel
-        ? '<p><span class="selo selo--esgotado">Hoje não temos este item</span></p>' : '') +
+        ? '<p><span class="selo selo--esgotado">' + esc(T('semEstoqueItem')) + '</span></p>' : '') +
       '</div>' +
       '<div class="detalhe__texto"><p>' +
       esc(produto.detalhe || produto.descricao || '') + '</p></div>' +
       blocoPorcao(produto) +
-      blocoLista('Já vem com', produto.inclui) +
-      blocoLista('Você escolhe', produto.opcoes.map(function (o) { return o.texto; })) +
-      blocoPrecos('Opções e preços', produto.variantes,
-        'Diga ao garçom qual você prefere.') +
-      blocoPrecos('Adicionais', produto.adicionais,
-        'Valor somado ao preço do prato, se você pedir.') +
+      blocoLista(T('jaVemCom'), produto.inclui) +
+      blocoLista(T('voceEscolhe'), produto.opcoes.map(function (o) { return o.texto; })) +
+      blocoPrecos(T('opcoesPrecos'), produto.variantes, T('opcoesNota')) +
+      blocoPrecos(T('adicionais'), produto.adicionais, T('adicionaisNota')) +
       blocoAlimentar(produto);
 
     estado.rolagemGuardada = window.scrollY;
@@ -709,17 +870,14 @@
     var termo = consulta.trim();
 
     if (termo.length < 2) {
-      alvo.innerHTML = '<p class="busca-dica">Digite ao menos duas letras. ' +
-        'Você também pode fechar a busca e rolar o cardápio inteiro.</p>';
+      alvo.innerHTML = '<p class="busca-dica">' + esc(T('buscaCurta')) + '</p>';
       return;
     }
 
     // Restricao alimentar nao e filtro de produto. O portal nao classifica
     // nada como seguro: manda falar com quem tem a ficha.
     if (ehTermoDeRestricao(termo)) {
-      alvo.innerHTML = '<div class="busca-vazia">' +
-        '<p><b>Sobre alergias e restrições, fale com a equipe.</b></p>' +
-        '<p>Nossos pratos são preparados no mesmo ambiente. Para sua segurança em casos de alergias ou intolerâncias alimentares, consulte nossa equipe diretamente antes de fazer seu pedido.</p></div>';
+      alvo.innerHTML = '<div class="busca-vazia">' + T('buscaRestricao') + '</div>';
       sinal('cardapio_busca', { resultados: 0, tipo: 'restricao_alimentar' });
       return;
     }
@@ -732,17 +890,14 @@
     sinal('cardapio_busca', { resultados: achados.length, tipo: 'produto' });
 
     if (!achados.length) {
-      alvo.innerHTML = '<div class="busca-vazia">' +
-        '<p><b>Não encontramos esse termo no cardápio.</b></p>' +
-        '<p>Tente o nome de um ingrediente, como <i>camarão</i> ou <i>peixe</i>. ' +
-        'Você também pode fechar a busca e ver os itens por categoria.</p></div>';
+      alvo.innerHTML = '<div class="busca-vazia">' + T('buscaVazia') + '</div>';
       return;
     }
 
     var mapa = {};
     estado.dados.categorias.forEach(function (c) { mapa[c.id] = c.nome; });
     alvo.innerHTML = '<p class="busca-dica">' + achados.length +
-      (achados.length === 1 ? ' item encontrado' : ' itens encontrados') + '</p>' +
+      ' ' + (achados.length === 1 ? T('encontrado') : T('encontrados')) + '</p>' +
       '<ul class="busca-resultados">' + achados.map(function (p) {
         var preco = p.preco.tipo === 'faixa'
           ? ''
@@ -750,7 +905,7 @@
         return '<li><a href="#item-' + esc(p.id) + '" data-fechar-busca>' +
           '<span class="nome">' + esc(p.nome) + '</span> ' +
           '<span class="onde">' + esc(mapa[p.categoria]) + (preco ? ' · ' + esc(preco) : '') +
-          (p.disponivel ? '' : ' · hoje não temos') + '</span></a></li>';
+          (p.disponivel ? '' : ' · ' + T('hojeNaoTemos')) + '</span></a></li>';
       }).join('') + '</ul>';
   }
 
@@ -763,8 +918,8 @@
     var barra = $('#atualizacao');
     barra.hidden = false;
     barra.innerHTML = '<div class="painel__corpo">' +
-      '<p style="margin:0 0 10px">O cardápio foi atualizado pelo restaurante.</p>' +
-      '<button class="botao" id="aplicar-atualizacao" type="button">Ver o cardápio atualizado</button>' +
+      '<p style="margin:0 0 10px">' + esc(T('atualizado')) + '</p>' +
+      '<button class="botao" id="aplicar-atualizacao" type="button">' + esc(T('verAtualizado')) + '</button>' +
       '</div>';
     $('#aplicar-atualizacao').addEventListener('click', function () {
       estado.dados = estado.pendente;
@@ -778,7 +933,7 @@
   }
 
   function conferirAoVivo() {
-    lerAoVivo().then(function (novo) {
+    lerAoVivo().then(localizar).then(function (novo) {
       estado.carregadoEm = Date.now();
       if (!estado.dados) {
         estado.dados = novo;
@@ -814,10 +969,9 @@
   function mostrarFalha() {
     $('#catalogo').innerHTML =
       '<div class="estado-falha">' +
-      '<h2>Não conseguimos carregar o cardápio</h2>' +
-      '<p>Verifique a conexão do celular e tente novamente. O garçom também pode ' +
-      'trazer o cardápio impresso.</p>' +
-      '<p><button class="botao" type="button" id="tentar-de-novo">Tentar de novo</button></p>' +
+      '<h2>' + esc(T('falhaTitulo')) + '</h2>' +
+      '<p>' + esc(T('falhaTexto')) + '</p>' +
+      '<p><button class="botao" type="button" id="tentar-de-novo">' + esc(T('tentarDeNovo')) + '</button></p>' +
       '</div>';
     $('#tentar-de-novo').addEventListener('click', function () {
       location.reload();
@@ -984,7 +1138,7 @@
       if (ev.origin !== ORIGEM_PREVIA) return;
       var msg = ev.data;
       if (!msg || msg.tipo !== 'cardapio-previa' || !msg.dados) return;
-      estado.dados = msg.dados;
+      estado.dados = localizar(msg.dados);
       estado.origemCopia = 'previa';
       desenharCatalogo();
       var aviso = $('#aviso-estado');
@@ -1001,14 +1155,16 @@
   }
 
   function iniciar() {
+    aplicarIdiomaEstatico();
     ligarControles();
     ligarPrevia();
     sinal('cardapio_aberto', {
-      origem: new URLSearchParams(location.search).get('utm_source') || 'direto'
+      origem: new URLSearchParams(location.search).get('utm_source') || 'direto',
+      idioma: LANG
     });
 
     lerEstatico().then(function (dados) {
-      estado.dados = dados;
+      estado.dados = localizar(dados);
       estado.origemCopia = 'estatica';
       estado.carregadoEm = Date.now();
       desenharCatalogo();
@@ -1017,7 +1173,7 @@
       else setTimeout(conferirAoVivo, 1200);
     }).catch(function () {
       lerAoVivo().then(function (dados) {
-        estado.dados = dados;
+        estado.dados = localizar(dados);
         estado.origemCopia = 'aovivo';
         estado.carregadoEm = Date.now();
         desenharCatalogo();

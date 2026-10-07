@@ -969,3 +969,7 @@ main { padding-bottom: 40px; }
 /* Atalho para o cardapio em ingles (turista que escaneou o QR da mesa). */
 .aviso-idioma { max-width: var(--wrap); margin: 10px auto 0; padding: 0 16px; text-align: right; font-size: 14px; }
 .aviso-idioma a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
+
+/* Cardapio em ingles: nome do cardapio impresso, para pedir ao garcom. */
+.item__original { margin: 1px 0 2px; font-size: 13px; font-style: italic; color: var(--ink-soft); }
+.detalhe__original { margin: 4px 0 0; font-size: 14px; color: var(--ink-soft); }
