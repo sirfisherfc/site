@@ -106,7 +106,6 @@
     linkReservar: 'Reservar mesa',
     linkChegar: 'Como chegar',
     linkLigar: 'Ligar',
-    medidaConferencia: 'Medida em conferência',
     porcao: 'Porção',
     contemLista: 'Contém: ',
     confirmadoCozinha: 'Confirmado pela cozinha:',
@@ -746,18 +745,16 @@
 
   function blocoPorcao(produto) {
     var p = produto.porcao;
-    if (!p || (!p.texto && (!p.detalhes || !p.detalhes.length) && !p.nota)) return '';
+    // As notas de conferencia da porcao ("Peso em conferencia...") nao
+    // aparecem mais para o cliente, por decisao do restaurante (07/10/2026).
+    if (!p || (!p.texto && (!p.detalhes || !p.detalhes.length))) return '';
     var linhas = [];
     if (p.texto) linhas.push('<p><b>' + esc(p.texto) + '</b></p>');
-    if (!p.texto && p.estado === 'em_conferencia') {
-      linhas.push('<p><b>' + esc(T('medidaConferencia')) + '</b></p>');
-    }
     if (p.detalhes && p.detalhes.length) {
       linhas.push('<ul>' + p.detalhes.map(function (d) {
         return '<li>' + esc(d) + '</li>';
       }).join('') + '</ul>');
     }
-    if (p.nota) linhas.push('<p class="nota">' + esc(p.nota) + '</p>');
     return '<section class="bloco"><h2>' + esc(T('porcao')) + '</h2>' + linhas.join('') + '</section>';
   }
 
@@ -772,7 +769,9 @@
     if (a.confirmado && a.confirmado.length) {
       corpo += '<p><b>' + esc(T('confirmadoCozinha')) + '</b> ' + esc(a.confirmado.map(rotuloAlergeno).join(', ')) + '</p>';
     }
-    corpo += '<p class="nota">' + esc(a.texto || T('alimentarPadrao')) + '</p>';
+    // Sempre a orientacao padrao de seguranca: as notas de conferencia dos
+    // dados ("ainda nao conferidas com a cozinha") nao vao para o cliente.
+    corpo += '<p class="nota">' + esc(T('alimentarPadrao')) + '</p>';
     return '<section class="bloco bloco--alimentar"><h2>' + esc(T('alimentarTitulo')) + '</h2>' +
       corpo + '</section>';
   }

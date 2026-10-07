@@ -212,7 +212,6 @@
     linkReservar: 'Book a table',
     linkChegar: 'Directions',
     linkLigar: 'Call',
-    medidaConferencia: 'Portion being confirmed',
     porcao: 'Portion',
     contemLista: 'Contains: ',
     confirmadoCozinha: 'Confirmed by the kitchen:',
