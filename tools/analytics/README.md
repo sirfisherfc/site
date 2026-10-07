@@ -121,27 +121,31 @@ overflow/erros, proporções e carregamento das galerias, origem nos links de
 reserva e expansão das informações práticas. HTML/CSS/imagens publicados
 foram comparados com os arquivos locais; a home do QR permanece idêntica.
 
-A prova de confiança usa nota 4,7/5 e 787 avaliações, consultadas pela API do
-Google em 06/10/2026. A média contempla o conjunto; os destaques são selecionados.
-Os trechos anônimos de setembro foram substituídos por recortes de notificações
-originais do Google, com nomes e estrelas: Iago Fontes (10/02/2025, comida/preço)
-e Marcos Nunes (28/04/2025, comida/atendimento). A conexão do Gmail forneceu as
-mensagens; seus links confirmam a mesma unidade da Beira-Mar, com o mesmo CID
-da ficha pública. O nome antigo “Sir Fisher - Barra Sol” identifica essa unidade.
-As notificações foram renderizadas com seu HTML e estilos originais, incluindo
-a tradução e a truncagem feitas pelo Google. Captura limitada a autor, foto,
-estrelas e comentário; destinatários, cabeçalhos, controles e links privados
-ficaram fora dos assets publicados. WebP é uma conversão do PNG, sem reconstrução
-por IA. A legenda identifica notificações, sem simular a interface do Maps.
-Na sessão anterior, o cache da API omitiu autores, o token temporário retornou
-OAuth 401 e o Google bloqueou o login no navegador automatizado. Em 07/10,
-a credencial persistente do painel foi reutilizada com sucesso; nomes e
-avaliações podem ser lidos por essa API. A janela foi fechada; nenhuma
-restrição foi contornada. Fontes brutas e scripts de captura estão apenas no
-`tmp/` local fora dos repositórios. Conferir a presença dos comentários no perfil
-antes de futuras reutilizações; as notificações comprovam seu recebimento,
-mas não garantem que uma avaliação permaneça publicada indefinidamente.
-Atualizar data/nota/quantidade após nova consulta antes de futuras alterações.
+A prova de confiança usa nota 4,7/5 e 787 avaliações, consultadas novamente
+pela API do Google em 07/10/2026. A média contempla o conjunto; os seis
+destaques são selecionados, não representam a distribuição das notas.
+Os recortes de notificações do Gmail, traduzidos e truncados pelo Google,
+foram substituídos por cards HTML com trechos originais em português,
+nomes públicos, datas e estrelas confirmados pela API: Rafael Morais,
+Daniel Vendramin, Daniella Gonçalves, Juliene Pereira, Daniele Rodrigues
+e Dante Dola. A seleção cobre pratos, porções para compartilhar, vista,
+atendimento e retorno à casa. Cada trecho é uma sequência literal do
+comentário original, com até 25 palavras; não corrigir grafia, traduzir,
+atribuir frases a outros autores ou simular capturas de tela do Maps.
+Os cards são republicações identificadas, não prints do Google. Iniciais
+identificam os autores sem inventar retratos. Texto de 16 px sobre fundo
+branco sólido nos dois temas; seis cards em três colunas no desktop e
+galeria horizontal no celular, sem ocultar o texto por truncagem.
+O link leva à ficha pública da mesma unidade da Beira-Mar (CID confirmado).
+
+A credencial persistente do painel é reutilizada com sucesso por
+`gestao/scripts/gbp/gbp.py`; nomes e avaliações podem ser lidos pela API
+sem pedir tokens temporários. A rotina `google_oauth_helper.py --verificar`
+confere esse acesso sem exibir segredos. A resposta bruta e os scripts
+temporários ficam apenas no `tmp/` local, fora dos repositórios. Conferir
+a presença dos comentários no perfil antes de futuras reutilizações e
+atualizar data/nota/quantidade após nova consulta. Instagram continua sendo
+o número informado pelo proprietário em 06/10, não uma leitura da API Meta.
 
 O proprietário forneceu fotos de reconhecimento pelo Sebrae no OneDrive
 pessoal. Foram inspecionadas: certificado Diamante com o ano 2024, registro
@@ -158,14 +162,23 @@ A foto da celebração é o registro de Réveillon já utilizado no site, com le
 que não promete essa programação musical no atendimento normal.
 
 Após o pedido de menos texto e mais imagens, os blocos explicativos foram
-substituídos por fotos e indicadores. Em 07/10, uma segunda revisão tirou o
-mosaico da capa: foto única em sua proporção, galerias de imagens maiores que
-deslizam no celular e três colunas no desktop. Sebrae virou uma faixa curta;
-certificados e entrega ficam em `details` fechado por padrão. Cada miniatura
-tem altura máxima de 140 px também no HTML, impedindo que a imagem de origem
-com 4.000 px alongue a seção quando houver falha/cache do CSS específico.
-Os registros completos continuam disponíveis por clique. Informações práticas
-ficam em outro `details`, acessível sem JavaScript. A home do QR não foi alterada.
+substituídos por fotos e indicadores. A capa usa uma foto única em sua
+proporção original; as galerias deslizam no celular e têm três colunas no
+desktop. A revisão de 07/10 removeu a seção fechada do Sebrae: certificado,
+entrega e troféu ficam visíveis por padrão, com legendas e links para ampliar.
+Fotos com 300 px de altura, também limitadas no HTML, enquadradas por imagem
+para preservar o certificado completo, os rostos da entrega e o troféu.
+No celular, a galeria lateral evita três fotos altas empilhadas. A seção
+mediu 635–653 px em 320/390 px e 397 px no desktop de 1440 px.
+O texto explica o Selo Sebrae de Qualidade Empresarial, concedido pelo
+Sebrae/CE para gestão e qualidade dos serviços, e que Diamante é a categoria
+mais alta. Fonte primária vinculada ao lado da explicação:
+[Agência Sebrae/CE](https://ce.agenciasebrae.com.br/cultura-empreendedora/empresas-cearenses-recebem-certificacao-do-sebrae-pela-excelencia-da-qualidade-dos-servicos-oferecidos/).
+Não confundir com o Selo de Referência em Atendimento das Salas do Empreendedor.
+As informações práticas ficam em um `details`, acessível sem JavaScript.
+A home do QR não foi alterada. A foto de terraço enviada em Downloads tem
+prévia apenas local; sua origem e fidelidade ao espaço aguardam confirmação
+antes de usá-la como fotografia real na página pública.
 
 ## Rotina da equipe
 

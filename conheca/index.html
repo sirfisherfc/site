@@ -67,7 +67,7 @@
   <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
   <!-- ?v= força o celular a baixar o CSS novo junto com o HTML novo. Mude a cada alteração. -->
   <link rel="stylesheet" href="../assets/css/style.css?v=20261006" />
-  <link rel="stylesheet" href="../assets/css/conheca.css?v=20261007f" />
+  <link rel="stylesheet" href="../assets/css/conheca.css?v=20261007g" />
 
   <!-- "restaurant" nao existe no vocabulario Open Graph; o valor invalido cai
        em "website" de qualquer forma, so que com aviso no validador. -->
@@ -303,43 +303,66 @@
         <p class="discovery-small"><a href="../eventos/" data-evt="click_eventos">Vai reunir um grupo? Veja as opções.</a></p>
       </section>
       <section class="sec" id="reconhecimento" aria-labelledby="selo">
-        <div class="discovery-award-heading">
-          <svg class="discovery-diamond" width="48" height="48" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 14h36l10 16-28 29L4 30Z M4 30h56 M14 14l9 16 9 29 9-29 9-16 M23 30l9-16 9 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" /></svg>
-          <div><h2 id="selo">Sebrae · Diamante</h2><p class="discovery-small">Registros de 2024 e 2025/2026</p></div>
+        <div class="discovery-award-copy">
+          <p class="eyebrow">Selo Sebrae de Qualidade Empresarial</p>
+          <h2 id="selo">Categoria máxima: Diamante.</h2>
+          <p>O Sebrae/CE reconhece empresas que se destacam pela gestão e pela qualidade dos serviços. <strong>Diamante é a classificação mais alta do programa.</strong></p>
+          <a class="discovery-award-program" href="https://ce.agenciasebrae.com.br/cultura-empreendedora/empresas-cearenses-recebem-certificacao-do-sebrae-pela-excelencia-da-qualidade-dos-servicos-oferecidos/" target="_blank" rel="noopener">Entenda o reconhecimento ↗</a>
         </div>
-        <details class="discovery-award-details">
-          <summary>Ver certificados e premiação</summary>
-          <div class="discovery-award-photos">
-          <a href="../assets/img/sebrae-certificado-2024-original.webp" target="_blank" rel="noopener" aria-label="Abrir foto original do certificado Diamante Sir Fisher 2024">
-            <img src="../assets/img/sebrae-certificado-2024-660.webp" alt="Certificado real do Sebrae/CE com Sir Fisher, categoria Diamante e ano 2024" width="562" height="1000" style="height:140px;max-height:140px;width:100%;object-fit:contain" loading="lazy" decoding="async" />
-          </a>
-          <a href="../assets/img/sebrae-entrega-original.jpg" target="_blank" rel="noopener" aria-label="Abrir foto original da entrega do reconhecimento Sebrae">
-            <img src="../assets/img/sebrae-entrega-660.webp" alt="Registro da entrega do certificado Diamante ao Sir Fisher" width="562" height="1000" style="height:140px;max-height:140px;width:100%;object-fit:contain" loading="lazy" decoding="async" />
-          </a>
-          <a href="../assets/img/sebrae-trofeu-2025-2026-original.jpg" target="_blank" rel="noopener" aria-label="Abrir foto original do troféu Sebrae Sir Fisher 2025/2026">
-            <img src="../assets/img/sebrae-trofeu-2025-2026-660.webp" alt="Troféu original com as inscrições Selo Sebrae Qualidade Empresarial, 2025/2026 e Sir Fisher" width="467" height="1000" style="height:140px;max-height:140px;width:100%;object-fit:contain" loading="lazy" decoding="async" />
-          </a>
-          </div>
-          <p class="discovery-small">Toque em um registro para ampliar.</p>
-        </details>
+        <div class="discovery-award-photos" role="region" aria-label="Certificado, premiação e troféu do Sir Fisher" tabindex="0">
+          <figure>
+            <a href="../assets/img/sebrae-certificado-2024-original.webp" target="_blank" rel="noopener" aria-label="Ampliar certificado Diamante de 2024">
+              <img src="../assets/img/sebrae-certificado-2024-660.webp" alt="Certificado Sebrae com o nome Sir Fisher, categoria Diamante e ano 2024" width="562" height="1000" style="max-height:300px" loading="lazy" decoding="async" />
+            </a><figcaption>Certificado Diamante · 2024</figcaption>
+          </figure>
+          <figure>
+            <a href="../assets/img/sebrae-entrega-original.jpg" target="_blank" rel="noopener" aria-label="Ampliar registro da entrega do reconhecimento">
+              <img src="../assets/img/sebrae-entrega-660.webp" alt="Representantes do Sir Fisher recebendo o reconhecimento Diamante do Sebrae" width="562" height="1000" style="max-height:300px" loading="lazy" decoding="async" />
+            </a><figcaption>Entrega do reconhecimento</figcaption>
+          </figure>
+          <figure>
+            <a href="../assets/img/sebrae-trofeu-2025-2026-original.jpg" target="_blank" rel="noopener" aria-label="Ampliar troféu de 2025/2026">
+              <img src="../assets/img/sebrae-trofeu-2025-2026-660.webp" alt="Troféu Sebrae de Qualidade Empresarial com as inscrições Sir Fisher e 2025/2026" width="467" height="1000" style="max-height:300px" loading="lazy" decoding="async" />
+            </a><figcaption>Troféu · 2025/2026</figcaption>
+          </figure>
+        </div>
       </section>
       <section class="sec" id="avaliacoes" aria-labelledby="clientes">
-        <div class="discovery-section-head"><h2 id="clientes">Quem veio, conta.</h2><a href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews">4,7/5 no Google →</a></div>
-        <div class="discovery-reviews">
-          <figure>
-            <a href="../assets/img/google-notificacao-iago-fontes.png" target="_blank" rel="noopener" aria-label="Ampliar avaliação de Iago Fontes">
-              <img src="../assets/img/google-notificacao-iago-fontes.webp" alt="Notificação original do Google: Iago Fontes, cinco estrelas. Comida boa e preço justo." width="800" height="316" loading="lazy" decoding="async" />
-            </a>
-            <figcaption>Iago Fontes · Google · 10/02/2025</figcaption>
+        <div class="discovery-section-head"><h2 id="clientes">Quem veio, conta.</h2><a href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews">4,7/5 · 787 avaliações no Google →</a></div>
+        <p class="discovery-review-intro">6 experiências de clientes: comida, atendimento e vista.</p>
+        <div class="discovery-reviews" role="region" aria-label="Seis avaliações selecionadas do Google" tabindex="0">
+          <figure class="discovery-review">
+            <figcaption class="discovery-review-author"><span class="discovery-review-initials" aria-hidden="true">RM</span><span><strong>Rafael Morais</strong><time datetime="2026-04-20">20/04/2026</time></span></figcaption>
+            <p class="discovery-review-stars"><span aria-label="5 de 5 estrelas">★★★★★</span><span>Google</span></p>
+            <blockquote>“Fui para almoço e o prato escolhido estava delicioso, bem servido para duas pessoas. A cerveja bem gelada e a sobremesa também muito boa.”</blockquote>
           </figure>
-          <figure>
-            <a href="../assets/img/google-notificacao-marcos-nunes.png" target="_blank" rel="noopener" aria-label="Ampliar avaliação de Marcos Nunes">
-              <img src="../assets/img/google-notificacao-marcos-nunes.webp" alt="Notificação original do Google: Marcos Nunes, cinco estrelas. Elogio à comida e ao atendimento; trecho exibido pela notificação." width="800" height="364" loading="lazy" decoding="async" />
-            </a>
-            <figcaption>Marcos Nunes · Google · 28/04/2025</figcaption>
+          <figure class="discovery-review">
+            <figcaption class="discovery-review-author"><span class="discovery-review-initials" aria-hidden="true">DV</span><span><strong>Daniel Vendramin</strong><time datetime="2026-03-10">10/03/2026</time></span></figcaption>
+            <p class="discovery-review-stars"><span aria-label="5 de 5 estrelas">★★★★★</span><span>Google</span></p>
+            <blockquote>“O fish and chips estava ótimo, atendimento ótimo e vista para o mar. Não podia ser melhor.”</blockquote>
+          </figure>
+          <figure class="discovery-review">
+            <figcaption class="discovery-review-author"><span class="discovery-review-initials" aria-hidden="true">DG</span><span><strong>Daniella Gonçalves</strong><time datetime="2026-05-06">06/05/2026</time></span></figcaption>
+            <p class="discovery-review-stars"><span aria-label="5 de 5 estrelas">★★★★★</span><span>Google</span></p>
+            <blockquote>“Lugar agradável e vista linda.  Drink Melancita top e Camarões com batatas fritas gostosos.”</blockquote>
+          </figure>
+          <figure class="discovery-review">
+            <figcaption class="discovery-review-author"><span class="discovery-review-initials" aria-hidden="true">JP</span><span><strong>Juliene Pereira</strong><time datetime="2026-08-25">25/08/2026</time></span></figcaption>
+            <p class="discovery-review-stars"><span aria-label="5 de 5 estrelas">★★★★★</span><span>Google</span></p>
+            <blockquote>“A comida é muito boa, o valor é acessível e condiz com a qualidade apresentada, tanto da comida, quanto do ambiente e do atendimento.”</blockquote>
+          </figure>
+          <figure class="discovery-review">
+            <figcaption class="discovery-review-author"><span class="discovery-review-initials" aria-hidden="true">DR</span><span><strong>Daniele Rodrigues</strong><time datetime="2026-08-16">16/08/2026</time></span></figcaption>
+            <p class="discovery-review-stars"><span aria-label="5 de 5 estrelas">★★★★★</span><span>Google</span></p>
+            <blockquote>“Experiência a beira mar e se vc for no por do sol, torna tudo ainda mais especial. Local ideal para fotos que ficam lindíssimas!!!”</blockquote>
+          </figure>
+          <figure class="discovery-review">
+            <figcaption class="discovery-review-author"><span class="discovery-review-initials" aria-hidden="true">DD</span><span><strong>Dante Dola</strong><time datetime="2026-09-16">16/09/2026</time></span></figcaption>
+            <p class="discovery-review-stars"><span aria-label="5 de 5 estrelas">★★★★★</span><span>Google</span></p>
+            <blockquote>“estive lá várias vezes e a satisfação é sempre a mesma, comida extremamente deliciosa e no preço.”</blockquote>
           </figure>
         </div>
-        <p class="discovery-small discovery-review-source">Recortes de notificações originais do Google.</p>
+        <p class="discovery-review-source">Trechos originais de avaliações do Google. No celular, deslize para ver os seis relatos.</p>
       </section>
       <section class="sec discovery-visit" id="reservar" aria-labelledby="local">
         <h2 id="local">Sua mesa na Beira-Mar.</h2>
@@ -356,7 +379,7 @@
           <p>Mesas acessíveis para cadeirantes; banheiro não acessível. <a href="../como-chegar/">Acesso e estacionamento</a>.</p>
           <p>Pix, dinheiro, Visa, Mastercard, Elo, American Express, UnionPay, Cabal e principais vales-refeição. Confirme a bandeira do vale com a equipe.</p>
           <p><a href="../almoco-executivo/" data-evt="click_menu">Executivo a partir de R$31</a>: seg–sex, 10h–14h, exceto feriados.</p>
-          <p>Nota Google, 787 avaliações e 41,2 mil seguidores no Instagram: referência de 06/10/2026; números podem mudar.</p>
+          <p>Google: 4,7/5 e 787 avaliações em 07/10/2026. Instagram: 41,2 mil seguidores informados em 06/10/2026. Números podem mudar.</p>
         </details>
       </section>
     </main>
