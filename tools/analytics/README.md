@@ -51,7 +51,7 @@ de engajamento; não altera retroativamente os relatórios antigos.
 
 Na home em português e inglês e na página Conheça, os SDKs de marketing
 (GA4, Meta e OpenAI) esperam a primeira interação (toque, rolagem, tecla ou
-mouse) ou 4 s depois do `load`, com teto de 15 s (desde 13/10/2026; antes,
+mouse) ou 7 s depois do `load`, com teto de 15 s (desde 13/10/2026; antes,
 Meta/OpenAI esperavam só o `load` e o GA4 carregava de imediato). As filas
 `dataLayer`, `fbq` e `oaiq` são criadas na hora, então nenhum evento se perde.
 `marketing_loader_test.mjs` (Deno) verifica fila, ausência de SDK duplicado e
@@ -94,6 +94,20 @@ Depois da publicação (commit 4f6d0cb, duas execuções): desktop 100/100/100/1
 (LCP 0,7 s, TBT 0) e celular 88 e 93 em desempenho, 100 nas demais (LCP 3,0 a
 3,2 s, TBT 0 a 130 ms). Surgiu CLS de ~0,02 pela troca das fontes web, agora
 que o texto pinta antes delas; segue na faixa boa (< 0,1).
+
+Segunda rodada (commits 05e2aed e 57e5935): o texto corrido passou da Work
+Sans para a fonte do sistema em todo o site, o rodapé da home deixou o
+itálico (a home só baixa a Fraunces, 66 KB, contra 156 KB antes), o contador
+de visitas espera o `load` e a página ociosa, e os SDKs passaram a esperar
+7 s (o PageSpeed mede até ~5,25 s após o `load`; com 4 s, às vezes entravam
+na medição). Celular: 99 com `www` (LCP 1,8 s) e 93 a 95 sem `www`, pelo
+redirecionamento. Desktop: 100 nos dois.
+
+Cache: todo CSS e JS é referenciado com `?v=`; mude o valor a cada alteração.
+Imagens e fontes não têm versão: se o conteúdo mudar, publique com nome
+novo em vez de sobrescrever o arquivo, para quem já tem a versão antiga em
+cache (necessário quando o Cloudflare passar a servir `/assets/` com cache
+longo).
 
 Fora do código: o GitHub Pages fixa `Cache-Control: max-age=600` e o
 redirecionamento `sirfisher.com.br` → `www`. O teste do Search Console usa o
