@@ -4,9 +4,12 @@ name: Monitorar velocidade e qualidade
 # principais no PageSpeed e le os dados reais do Google; se algo piorar, o
 # job falha e o GitHub avisa por e-mail. Precisa do segredo PAGESPEED_API_KEY
 # (Settings > Secrets and variables > Actions).
+#
+# DESATIVADO em 13/10/2026 a pedido do Rogerio: so roda sob demanda (aba
+# Actions > Run workflow). Para reativar, devolva o bloco schedule abaixo.
+#   schedule:
+#     - cron: "0 12 * * 1"
 on:
-  schedule:
-    - cron: "0 12 * * 1"
   workflow_dispatch:
 
 jobs:

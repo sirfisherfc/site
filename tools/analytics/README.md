@@ -150,8 +150,10 @@ Ferramentas (Playwright em `tools/analytics/.venv`):
   console; GA, Meta, OpenAI e contador funcionando (envios interceptados).
   `SITE_BASE=https://www.sirfisher.com.br/` testa o site publicado.
 - `tools/analytics/monitorar.py`: PageSpeed das páginas principais + dados
-  reais; roda toda segunda no workflow `monitorar-velocidade` (segredo
-  `PAGESPEED_API_KEY`) e falha, com e-mail do GitHub, se algo piorar.
+  reais; sai com erro se algo piorar. Roda localmente (chave do gestao/.env).
+  O workflow `monitorar-velocidade` está desativado desde 13/10/2026 (só
+  manual; reativar devolvendo o `schedule` e cadastrando o segredo
+  `PAGESPEED_API_KEY`).
 
 ## Cardápio do Perfil da Empresa
 
