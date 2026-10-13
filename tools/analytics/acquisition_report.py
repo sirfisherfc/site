@@ -12,6 +12,7 @@ from google.analytics.data_v1beta import BetaAnalyticsDataClient
 from google.analytics.data_v1beta.types import DateRange, Dimension, Filter, FilterExpression, Metric, OrderBy, RunReportRequest
 from google.auth.transport.requests import Request as AuthRequest
 from google.oauth2 import service_account
+from supabase_credentials import access_token
 
 PROPERTY_ID = "properties/353205396"
 WORKSPACE = Path(__file__).resolve().parents[3]
@@ -62,14 +63,7 @@ def search_report(credentials, start, end, dimensions):
 
 
 def operations_report(start, end):
-    token = os.environ.get("SUPABASE_ACCESS_TOKEN")
-    local_env = WORKSPACE / "reservas/.env.local"
-    if not token and local_env.exists():
-        for line in local_env.read_text(encoding="utf-8").splitlines():
-            if line.startswith("SUPABASE_ACCESS_TOKEN="):
-                token = line.split("=", 1)[1].strip().strip("\"'")
-    if not token:
-        raise ValueError("Acesso local de leitura do Supabase indisponível.")
+    token = access_token()
     query = """
       with first_visits as (
         select customer_id, min(reservation_date) as first_date

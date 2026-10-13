@@ -1,9 +1,9 @@
 const source = await Deno.readTextFile(new URL('../../assets/js/atribuicao.js', import.meta.url));
 
-function run({ search = '', stored = null, blocked = false } = {}) {
+function run({ search = '', stored = null, cookieStored = stored, blocked = false } = {}) {
   const link = { href: 'https://reservas.sirfisher.com.br/reveillon.html?utm_source=site&utm_medium=organic&utm_content=por_do_sol#mapa' };
   const document = {
-    cookie: stored ? 'sf_attribution_v1=' + encodeURIComponent(JSON.stringify(stored)) : '',
+    cookie: cookieStored ? 'sf_attribution_v1=' + encodeURIComponent(JSON.stringify(cookieStored)) : '',
     title: 'Sir Fisher', referrer: 'https://www.google.com/',
     querySelectorAll() { return [link]; }, addEventListener() {},
   };
@@ -37,4 +37,26 @@ Deno.test('cookie compartilhado preserva Instagram com storage bloqueado', () =>
 Deno.test('campanha interna legada no cookie nao volta ao link', () => {
   const url = run({ stored: { utm_source: 'site', utm_medium: 'organic', captured_at: '2026-10-06T12:00:00Z' } });
   if (url.searchParams.has('utm_source') || url.searchParams.has('utm_medium')) throw new Error('Reintroduziu campanha interna');
+});
+
+Deno.test('nova origem nao herda clique nem identificadores da campanha anterior', () => {
+  const url = run({ search: '?utm_source=google&utm_medium=cpc&utm_campaign=nova', stored: {
+    utm_source: 'chatgpt', utm_medium: 'paid', utm_campaign: 'antiga',
+    oppref: 'old-click', campaign_id: 'old-campaign', ad_id: 'old-ad', fbclid: 'old-meta',
+    captured_at: '2026-10-06T12:00:00Z',
+  } });
+  if (url.searchParams.get('utm_source') !== 'google') throw new Error('Perdeu nova origem');
+  for (const key of ['oppref', 'campaign_id', 'ad_id', 'fbclid']) {
+    if (url.searchParams.has(key)) throw new Error('Herdou identificador: ' + key);
+  }
+});
+
+Deno.test('cookie atualizado no portal prevalece sobre storage antigo do site', () => {
+  const url = run({
+    stored: { utm_source: 'chatgpt', oppref: 'old-click', captured_at: '2026-10-06T12:00:00Z' },
+    cookieStored: { utm_source: 'instagram', captured_at: '2026-10-13T12:00:00Z' },
+  });
+  if (url.searchParams.get('utm_source') !== 'instagram' || url.searchParams.has('oppref')) {
+    throw new Error('Storage antigo ressuscitou origem anterior');
+  }
 });

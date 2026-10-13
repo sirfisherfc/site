@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-mIG1f0OJ4zLvPXeSaB5wjvqegDEvhFb3nG0djdMKNno=' 'sha256-l453rb+k3KBdGyxc2gpeqnX2nCdqBRnJah1ub8Jxhx0=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-aNjaVLI++yziKytBgwPWcKxqgzsGx6MnwlS7ouFImbc=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-mIG1f0OJ4zLvPXeSaB5wjvqegDEvhFb3nG0djdMKNno=' 'sha256-lq9MhjkkLMuc1h5Ue7l6Pe7KIBWlR5GBRBgNTC31sQ8=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -178,10 +178,9 @@
 
   <!-- Marketing: Google tag, Meta Pixel e o pixel da OpenAI (atribuicao.js).
        Os eventos entram na fila na hora; os SDKs so baixam na primeira
-       interacao (toque, rolagem, tecla, mouse) ou 7 s depois do load, para nao
-       disputar CPU e banda com a primeira dobra no celular (o PageSpeed
-       mede ate ~5,25 s apos o load; 4 s caia dentro da medicao). Quem sai antes
-       disso sem tocar na tela nao chega a ser medido. -->
+       interacao ou 7 s depois do load nas visitas sem campanha. Em chegadas
+       pagas, carregam depois da primeira pintura, com teto de 1 s, para
+       medir tambem acessos curtos sem esperar as imagens terminarem. -->
   <script>
     window.sfAfterFirstPaint = (function (w, d) {
       var fila = [], pronto = false, espera, teto;
@@ -203,10 +202,17 @@
       }
       GATILHOS.forEach(function (n) { w.addEventListener(n, gatilho, { capture: true, passive: true }); });
       function depoisDoLoad() { espera = setTimeout(run, 7000); }
-      if (d.readyState === 'complete') depoisDoLoad();
-      else w.addEventListener('load', depoisDoLoad, { once: true });
-      // Se o load nunca chegar (uma foto travada), a visita ainda e medida.
-      teto = setTimeout(run, 15000);
+      var params = new URLSearchParams(w.location ? w.location.search : '');
+      var pago = params.has('oppref') || /^(paid|cpc|ppc|paid_social|display)$/i.test(params.get('utm_medium') || '');
+      if (pago) {
+        teto = setTimeout(run, 1000);
+        if (w.requestAnimationFrame) w.requestAnimationFrame(function () { w.requestAnimationFrame(run); });
+      } else {
+        if (d.readyState === 'complete') depoisDoLoad();
+        else w.addEventListener('load', depoisDoLoad, { once: true });
+        // Se o load nunca chegar, a visita ainda e medida.
+        teto = setTimeout(run, 15000);
+      }
       return function (load) { if (pronto) load(); else fila.push(load); };
     })(window, document);
   </script>
@@ -447,7 +453,7 @@
        que um bloco confiavel inserir. async=false mantem a ordem; no fim do
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
-    ['../assets/js/atribuicao.js?v=b382f8fb6e'].forEach(function (src) {
+    ['../assets/js/atribuicao.js?v=088591595a'].forEach(function (src) {
       var s = document.createElement('script');
       s.src = src;
       s.async = false;

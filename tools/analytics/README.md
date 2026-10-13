@@ -1,5 +1,19 @@
 # Presença no Google e medição
 
+## Acesso ao Supabase portal
+
+Antes de solicitar reconexao, executar no workspace:
+
+```powershell
+python site/tools/analytics/supabase_credentials.py
+```
+
+A rotina verifica o projeto esperado sem imprimir credenciais. Reutiliza
+`SUPABASE_ACCESS_TOKEN` do ambiente ou de `reservas/.env.local`, mantido no
+OneDrive entre os dois PCs e ignorado pelo Git. Scripts podem importar
+`access_token()` desse modulo. Nao imprimir seu retorno. Consultas de auditoria
+continuam usando a rota de leitura da Management API.
+
 ## Relatório reproduzível
 
 Para acessar o Perfil da Empresa, verificar primeiro a autorização persistente

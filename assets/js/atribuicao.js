@@ -30,7 +30,7 @@
     if (!raw) return null;
     try {
       var parsed = JSON.parse(raw);
-      return parsed && typeof parsed === 'object' ? parsed : null;
+      return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : null;
     } catch (e) {
       return null;
     }
@@ -43,7 +43,13 @@
     } catch (e) {
       // O navegador pode bloquear armazenamento local.
     }
-    return parseStored(local) || parseStored(readCookie(COOKIE_KEY)) || {};
+    var localValue = parseStored(local);
+    var sharedValue = parseStored(readCookie(COOKIE_KEY));
+    // Cada dominio tem seu storage; o cookie pode ter uma campanha mais nova.
+    if (!localValue) return sharedValue || {};
+    if (!sharedValue) return localValue;
+    return (Date.parse(sharedValue.captured_at) || 0) > (Date.parse(localValue.captured_at) || 0)
+      ? sharedValue : localValue;
   }
 
   function persist(attribution) {
@@ -83,7 +89,13 @@
       persist(stored);
     }
     if (Object.keys(incoming).length) {
-      var current = Object.assign({}, stored, incoming, {
+      if (Object.keys(incoming).every(function (key) { return incoming[key] === stored[key]; })) {
+        // Um link interno decorado nao e um novo clique de anuncio.
+        persist(stored);
+        return stored;
+      }
+      // Novo toque: nao herda identificadores de outro canal ou campanha.
+      var current = Object.assign({}, incoming, {
         landing_url: window.location.href.slice(0, 2000),
         referrer: (document.referrer || '').slice(0, 2000) || null,
         captured_at: new Date().toISOString()

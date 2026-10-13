@@ -12,12 +12,15 @@ async function blocoMarketing(pagina) {
     .join('\n');
 }
 
-function setup(block, readyState = 'loading') {
+function setup(block, readyState = 'loading', search = '') {
   const listeners = new Map();
   const timers = [];
   const scripts = [];
   const dataLayer = [];
+  const frames = [];
   const window = {
+    location: { search },
+    requestAnimationFrame(callback) { frames.push(callback); },
     dataLayer,
     addEventListener(name, callback) { listeners.set(name, callback); },
     removeEventListener(name) { listeners.delete(name); },
@@ -33,8 +36,33 @@ function setup(block, readyState = 'loading') {
   new Function('window', 'document', 'setTimeout', 'clearTimeout', 'fbq', 'dataLayer', block)(
     window, document, setTimeout, clearTimeout, (...args) => window.fbq(...args), dataLayer);
   const disparar = (ms) => timers.filter((t) => t.ativo && t.ms === ms).forEach((t) => { t.ativo = false; t.callback(); });
-  return { listeners, timers, scripts, window, dataLayer, disparar };
+  return { listeners, timers, scripts, window, dataLayer, disparar, frames };
 }
+
+const paidBlock = await blocoMarketing('../../conheca/index.html');
+for (const search of ['?utm_source=chatgpt&utm_medium=paid', '?oppref=test-click']) {
+  Deno.test(`pagina do anuncio: ${search} mede depois da pintura antes do load`, () => {
+    const s = setup(paidBlock, 'loading', search);
+    if (s.scripts.length) throw new Error('SDK antes da pintura');
+    s.frames.shift()();
+    if (s.scripts.length) throw new Error('SDK antes da primeira pintura');
+    s.frames.shift()();
+    if (s.scripts.length !== 2) throw new Error('Nao mediu trafego pago sem load');
+    s.disparar(1000);
+    if (s.scripts.length !== 2) throw new Error('SDK duplicado');
+    let executed = false;
+    s.window.sfAfterFirstPaint(() => { executed = true; });
+    if (!executed) throw new Error('Pixel OpenAI tardio ficou bloqueado');
+  });
+}
+
+Deno.test('pagina do anuncio: teto de 1 s mede campanha em aba sem animacao', () => {
+  const s = setup(paidBlock, 'loading', '?utm_medium=cpc');
+  s.disparar(1000);
+  if (s.scripts.length !== 2) throw new Error('Campanha nao medida no teto');
+  s.frames.shift()(); s.frames.shift()();
+  if (s.scripts.length !== 2) throw new Error('SDK duplicado');
+});
 
 for (const pagina of PAGINAS) {
   const block = await blocoMarketing(pagina);
