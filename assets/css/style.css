@@ -8,12 +8,12 @@
 
 @font-face {
   font-family: "Fraunces";
-  src: url("../fonts/fraunces.woff2") format("woff2");
+  src: url("../fonts/fraunces.woff2?v=7234ed860a") format("woff2");
   font-weight: 100 900; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: "Fraunces";
-  src: url("../fonts/fraunces-italic.woff2") format("woff2");
+  src: url("../fonts/fraunces-italic.woff2?v=13cd664e0f") format("woff2");
   font-weight: 100 900; font-style: italic; font-display: swap;
 }
 
@@ -641,10 +641,10 @@ a { color: inherit; }
     background-color: var(--page-bg);
     background-image:
       linear-gradient(color-mix(in srgb, var(--page-bg) 38%, transparent), color-mix(in srgb, var(--page-bg) 38%, transparent)),
-      url("../img/pordosol-1200.jpg");
+      url("../img/pordosol-1200.jpg?v=8253d78c67");
     background-image:
       linear-gradient(color-mix(in srgb, var(--page-bg) 38%, transparent), color-mix(in srgb, var(--page-bg) 38%, transparent)),
-      image-set(url("../img/pordosol-1200.avif") type("image/avif"), url("../img/pordosol-1200.webp") type("image/webp"), url("../img/pordosol-1200.jpg") type("image/jpeg"));
+      image-set(url("../img/pordosol-1200.avif?v=26acfdb7fa") type("image/avif"), url("../img/pordosol-1200.webp?v=83a0a78e6f") type("image/webp"), url("../img/pordosol-1200.jpg?v=8253d78c67") type("image/jpeg"));
     background-size: cover;
     background-position: center 40%;
     filter: blur(3px) saturate(1.05);

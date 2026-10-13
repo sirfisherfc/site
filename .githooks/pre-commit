@@ -1,0 +1,10 @@
+#!/bin/sh
+# Antes de cada commit: grava em cada referencia a /assets/ o hash do arquivo
+# (?v=...), para o cache longo do Cloudflare nunca servir versao velha.
+# Ativado no clone com: git config core.hooksPath .githooks
+PY=$(command -v python || command -v python3) || { echo "pre-commit: python nao encontrado" >&2; exit 1; }
+alterados=$("$PY" tools/cache/versionar_assets.py --listar | tr -d '\r') || exit 1
+[ -z "$alterados" ] && exit 0
+echo "$alterados" | while IFS= read -r arquivo; do git add -- "$arquivo"; done
+echo "pre-commit: versoes de assets atualizadas e incluidas no commit:"
+echo "$alterados" | sed 's/^/  /'

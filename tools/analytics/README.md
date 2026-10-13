@@ -106,11 +106,14 @@ redirecionamento. Desktop: 100 nos dois.
 
 Cache: desde 13/10/2026 o Cloudflare fica na frente do GitHub Pages (proxy
 em `www` e no domínio sem `www`; ferramenta em `gestao/scripts/cloudflare/cf.py`).
-`/assets/` sai com `max-age` de um ano; HTML e `cardapio/dados/` seguem com
-10 minutos. Todo CSS e JS é referenciado com `?v=`: mude o valor a cada
-alteração. Imagens e fontes não têm versão: se o conteúdo mudar, publique
-com nome novo em vez de sobrescrever o arquivo, e rode
-`python gestao/scripts/cloudflare/cf.py purgar --aplicar`. O domínio sem
+Endereços de `/assets/` com `?v=` saem com `max-age` de um ano; o resto
+(HTML, `cardapio/dados/`, fotos montadas pelo `cardapio.js`) segue com 10
+minutos. O `?v=` é o hash do conteúdo, gravado por
+`tools/cache/versionar_assets.py`: o gancho `.githooks/pre-commit` roda o
+script em todo commit (ativo no clone por `git config core.hooksPath
+.githooks`) e o workflow `verificar-assets` confere no GitHub. Trocar uma
+foto, fonte, CSS ou JS, mesmo mantendo o nome, já muda o endereço; não há
+regra para lembrar nem cache para limpar. O domínio sem
 `www` é redirecionado na borda do Cloudflare. Com isso, o celular marcou 100
 (duas de três execuções; 96 com o cache da borda ainda frio) e o desktop 100.
 
