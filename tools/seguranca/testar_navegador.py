@@ -80,6 +80,7 @@ def main() -> int:
             page = ctx.new_page()
             page.on("console", lambda m: erros.append(m.text[:160]) if m.type == "error" else None)
             page.on("pageerror", lambda e: erros.append("pageerror: " + str(e)[:160]))
+            page.on("response", lambda r: erros.append(f"HTTP {r.status}: {r.url[:120]}") if r.status >= 500 else None)
             page.on("request", lambda r: sdks.add(nome) if (nome := next(
                 (n for n, t in (("gtag", "googletagmanager.com/gtag/js"), ("fbevents", "fbevents.js"),
                                 ("oaiq", "oaiq.min.js")) if t in r.url), None)) else None)

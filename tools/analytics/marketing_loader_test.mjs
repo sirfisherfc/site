@@ -58,12 +58,20 @@ for (const pagina of PAGINAS) {
   Deno.test(`${pagina}: primeira interacao antecipa os SDKs sem duplicar`, () => {
     const s = setup(block);
     if (pixel) s.window.fbq('track', 'Contact');
-    s.listeners.get('touchstart')();
+    s.listeners.get('touchstart')({ type: 'touchstart' });
     if (s.scripts.length !== sdks || (pixel && s.window.fbq.queue.length !== 3)) throw new Error('Perdeu evento ou nao carregou');
     s.listeners.get('load')?.();
     s.disparar(7000);
     s.disparar(15000);
     if (s.scripts.length !== sdks) throw new Error('SDK duplicado');
+  });
+
+  Deno.test(`${pagina}: pointermove sem deslocamento (sintetico) nao conta como interacao`, () => {
+    const s = setup(block);
+    s.listeners.get('pointermove')({ type: 'pointermove', movementX: 0, movementY: 0 });
+    if (s.scripts.length) throw new Error('SDK baixado por pointermove sintetico');
+    s.listeners.get('pointermove')({ type: 'pointermove', movementX: 3, movementY: 1 });
+    if (s.scripts.length !== sdks) throw new Error('Movimento real do mouse nao carregou os SDKs');
   });
 
   Deno.test(`${pagina}: teto carrega SDKs mesmo sem load`, () => {

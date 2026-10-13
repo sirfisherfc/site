@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Mo2mJEoNyxeuBofdZet2aV06ZPpr7jMuf4ZxvIG9W5U=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-4EzY5b76q7VNgDbqPQrtd5vjWibBeR715uh36wKjAfM=' 'sha256-+p/dHoxAygGH5ZHXdTdPxeFt/zFXrh2G03pQUMYmZgM=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-4EzY5b76q7VNgDbqPQrtd5vjWibBeR715uh36wKjAfM=' 'sha256-+p/dHoxAygGH5ZHXdTdPxeFt/zFXrh2G03pQUMYmZgM=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -205,10 +205,17 @@
         pronto = true;
         clearTimeout(espera);
         clearTimeout(teto);
-        GATILHOS.forEach(function (n) { w.removeEventListener(n, run, true); });
+        GATILHOS.forEach(function (n) { w.removeEventListener(n, gatilho, true); });
         while (fila.length) fila.shift()();
       }
-      GATILHOS.forEach(function (n) { w.addEventListener(n, run, { capture: true, passive: true, once: true }); });
+      function gatilho(e) {
+        // Quando o layout muda sob o cursor parado, o navegador gera um
+        // pointermove sem deslocamento; o PageSpeed provoca isso ao ajustar a
+        // tela. So movimento de verdade conta como interacao.
+        if (e.type === 'pointermove' && !e.movementX && !e.movementY) return;
+        run();
+      }
+      GATILHOS.forEach(function (n) { w.addEventListener(n, gatilho, { capture: true, passive: true }); });
       function depoisDoLoad() { espera = setTimeout(run, 7000); }
       if (d.readyState === 'complete') depoisDoLoad();
       else w.addEventListener('load', depoisDoLoad, { once: true });
