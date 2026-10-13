@@ -14,17 +14,12 @@
                      com prato.
 
    Paleta e tipografia sao as do site (brasao, azul-marinho,
-   areia, coral, verde-mar, Fraunces e Work Sans).
+   areia, coral, verde-mar, Fraunces e a fonte do sistema).
    ============================================================ */
 
 @font-face {
   font-family: "Fraunces";
   src: url("../fonts/fraunces.woff2") format("woff2");
-  font-weight: 100 900; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: "Work Sans";
-  src: url("../fonts/worksans.woff2") format("woff2");
   font-weight: 100 900; font-style: normal; font-display: swap;
 }
 
@@ -50,7 +45,10 @@
   --foco: #1a4f8a;
 
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-ui: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Texto corrido na fonte do sistema (Roboto, San Francisco, Segoe): zero
+     download, e a primeira pintura nao espera nem troca de fonte. A
+     identidade fica nos titulos em Fraunces. */
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   --wrap: 640px;
   --alvo: 44px;          /* meta de projeto para alvos de toque */
