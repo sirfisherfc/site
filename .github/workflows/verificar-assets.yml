@@ -15,3 +15,5 @@ jobs:
           python-version: "3.12"
       - name: Hashes ?v= em dia com o conteudo dos assets
         run: python tools/cache/versionar_assets.py --verificar
+      - name: CSP com o hash de todos os scripts de cada pagina
+        run: python tools/seguranca/csp.py --verificar

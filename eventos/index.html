@@ -3,6 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
+       Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-15gCguZDCySFVHusQrdASUwnmHmbKeqlv6xrd6kO4oQ=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <script>
+    // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
+    if (window.trustedTypes && window.trustedTypes.createPolicy) {
+      window.trustedTypes.createPolicy('default', {
+        createHTML: function (s) { return s; },
+        createScript: function (s) { return s; },
+        createScriptURL: function (u) {
+          var url = new URL(u, location.href);
+          if (url.protocol === 'https:' || url.protocol === 'blob:' || url.origin === location.origin) return u;
+          throw new TypeError('Script bloqueado pela politica do site: ' + url.protocol);
+        }
+      });
+    }
+  </script>
   <title>Monte seu evento | Sir Fisher</title>
   <meta name="description" content="Simule o valor do seu evento no Sir Fisher em poucos passos, com alimentos, bebidas e atendimento incluído." />
   <link rel="canonical" href="https://www.sirfisher.com.br/eventos/" />
@@ -101,6 +118,16 @@
   </main>
 
   <footer class="event-footer"><p>Sir Fisher · Av. Beira Mar, 3421 · Fortaleza</p><a href="../privacidade/">Privacidade</a></footer>
-  <script src="../assets/js/eventos.js?v=acab170fbe" defer></script>
+  <!-- Scripts do site (assets/js), inseridos por este bloco: a CSP aceita o
+       que um bloco confiavel inserir. async=false mantem a ordem; no fim do
+       body o DOM ja esta pronto, como antes com defer. -->
+  <script>
+    ['../assets/js/eventos.js?v=acab170fbe'].forEach(function (src) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = false;
+      document.body.appendChild(s);
+    });
+  </script>
 </body>
 </html>

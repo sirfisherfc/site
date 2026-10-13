@@ -3,6 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
+       Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-U0t1pesVpyFwaf4CWUrHTsRVDOV5T1ymN6b+J5n/7N0=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <script>
+    // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
+    if (window.trustedTypes && window.trustedTypes.createPolicy) {
+      window.trustedTypes.createPolicy('default', {
+        createHTML: function (s) { return s; },
+        createScript: function (s) { return s; },
+        createScriptURL: function (u) {
+          var url = new URL(u, location.href);
+          if (url.protocol === 'https:' || url.protocol === 'blob:' || url.origin === location.origin) return u;
+          throw new TypeError('Script bloqueado pela politica do site: ' + url.protocol);
+        }
+      });
+    }
+  </script>
   <title>Menu in English | Sir Fisher</title>
   <!-- O cardapio em ingles agora e o proprio /cardapio/ com ?lang=en (mesmo
        layout, fotos e busca). Este endereco ficou so para links antigos. -->

@@ -1,10 +1,15 @@
 #!/bin/sh
-# Antes de cada commit: grava em cada referencia a /assets/ o hash do arquivo
-# (?v=...), para o cache longo do Cloudflare nunca servir versao velha.
+# Antes de cada commit, sem nada para lembrar:
+#  1. grava em cada referencia a /assets/ o hash do arquivo (?v=...), para o
+#     cache longo do Cloudflare nunca servir versao velha;
+#  2. recalcula a CSP de cada pagina (hash dos blocos <script>).
 # Ativado no clone com: git config core.hooksPath .githooks
 PY=$(command -v python || command -v python3) || { echo "pre-commit: python nao encontrado" >&2; exit 1; }
-alterados=$("$PY" tools/cache/versionar_assets.py --listar | tr -d '\r') || exit 1
-[ -z "$alterados" ] && exit 0
-echo "$alterados" | while IFS= read -r arquivo; do git add -- "$arquivo"; done
-echo "pre-commit: versoes de assets atualizadas e incluidas no commit:"
-echo "$alterados" | sed 's/^/  /'
+for passo in tools/cache/versionar_assets.py tools/seguranca/csp.py; do
+  alterados=$("$PY" "$passo" --listar | tr -d '\r') || { echo "pre-commit: $passo falhou" >&2; exit 1; }
+  [ -z "$alterados" ] && continue
+  echo "$alterados" | while IFS= read -r arquivo; do git add -- "$arquivo"; done
+  echo "pre-commit: $passo atualizou e incluiu no commit:"
+  echo "$alterados" | sed 's/^/  /'
+done
+exit 0

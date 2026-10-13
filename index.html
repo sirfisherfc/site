@@ -3,6 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
+       Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Mo2mJEoNyxeuBofdZet2aV06ZPpr7jMuf4ZxvIG9W5U=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-9mu3EBaxFWLfwahr0CYbKXsekSpp8nT1EGKVtsGTAKQ=' 'sha256-17zZWDetCtNgsHBRNuQ41D5T2bShkE9iLwlMD8kXyYc=' 'sha256-89ajo0B4xRnurQmwXGkj2YSp5QrC93F2UkQ/Z7t7zJQ=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <script>
+    // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
+    if (window.trustedTypes && window.trustedTypes.createPolicy) {
+      window.trustedTypes.createPolicy('default', {
+        createHTML: function (s) { return s; },
+        createScript: function (s) { return s; },
+        createScriptURL: function (u) {
+          var url = new URL(u, location.href);
+          if (url.protocol === 'https:' || url.protocol === 'blob:' || url.origin === location.origin) return u;
+          throw new TypeError('Script bloqueado pela politica do site: ' + url.protocol);
+        }
+      });
+    }
+  </script>
 
   <title>Sir Fisher | Restaurante na Beira-Mar de Fortaleza</title>
   <meta name="description" content="Sir Fisher na Beira-Mar de Fortaleza, em frente ao Jardim Japonês. Peixes, camarões e almoço executivo de frente para o mar. Veja o cardápio e como chegar." />
@@ -754,8 +771,6 @@
 
   </script>
 
-  <script src="./assets/js/atribuicao.js?v=b382f8fb6e" defer></script>
-  <script src="./assets/js/contador-visitas.js?v=b52f8d7f9e" defer></script>
   <script>
     (function () {
       var CHAVE = 'sf-lang-hint';
@@ -772,5 +787,17 @@
     })();
   </script>
 
+  <!-- Scripts do site (assets/js), inseridos por este bloco: a CSP aceita o
+       que um bloco confiavel inserir. async=false mantem a ordem; no fim do
+       body o DOM ja esta pronto, como antes com defer. -->
+  <script>
+    ['./assets/js/atribuicao.js?v=b382f8fb6e',
+     './assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = false;
+      document.body.appendChild(s);
+    });
+  </script>
 </body>
 </html>

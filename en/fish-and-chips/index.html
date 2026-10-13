@@ -3,6 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
+       Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-wbHCAaZTh2PwiSTkIJtRaRceIaUDYUa8ZyAmjrga3Yw=' 'sha256-Mo2mJEoNyxeuBofdZet2aV06ZPpr7jMuf4ZxvIG9W5U=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-4EzY5b76q7VNgDbqPQrtd5vjWibBeR715uh36wKjAfM=' 'sha256-LSe/jKrDg+us9fUko0s2vluVOyPzBD3iOgwGykshXTI=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <script>
+    // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
+    if (window.trustedTypes && window.trustedTypes.createPolicy) {
+      window.trustedTypes.createPolicy('default', {
+        createHTML: function (s) { return s; },
+        createScript: function (s) { return s; },
+        createScriptURL: function (u) {
+          var url = new URL(u, location.href);
+          if (url.protocol === 'https:' || url.protocol === 'blob:' || url.origin === location.origin) return u;
+          throw new TypeError('Script bloqueado pela politica do site: ' + url.protocol);
+        }
+      });
+    }
+  </script>
 
   <title>Fish and Chips in Fortaleza, Brazil | Sir Fisher, on the Beira-Mar</title>
   <meta name="description" content="British-style fish and chips on Fortaleza's seafront, made with local pescada amarela. See the address, opening hours and current prices." />
@@ -409,8 +426,18 @@
     })();
   </script>
 
-  <script src="../../assets/js/atribuicao.js?v=b382f8fb6e" defer></script>
-  <script src="../../assets/js/contador-visitas.js?v=b52f8d7f9e" defer></script>
 
+  <!-- Scripts do site (assets/js), inseridos por este bloco: a CSP aceita o
+       que um bloco confiavel inserir. async=false mantem a ordem; no fim do
+       body o DOM ja esta pronto, como antes com defer. -->
+  <script>
+    ['../../assets/js/atribuicao.js?v=b382f8fb6e',
+     '../../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = false;
+      document.body.appendChild(s);
+    });
+  </script>
 </body>
 </html>
