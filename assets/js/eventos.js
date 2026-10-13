@@ -26,7 +26,15 @@
     node.hidden = !message;
   }
 
-  function showStep(next) {
+  // Leva o foco ao conteudo que acabou de aparecer: quem usa teclado ou
+  // leitor de tela nao fica preso num botao que sumiu ou ficou para tras.
+  function focar(node) {
+    if (!node) return;
+    if (!node.hasAttribute('tabindex')) node.setAttribute('tabindex', '-1');
+    node.focus({ preventScroll: true });
+  }
+
+  function showStep(next, moverFoco) {
     step = Math.max(1, Math.min(STEPS, next));
     steps.forEach(function (node) { node.classList.toggle('is-active', Number(node.dataset.step) === step); });
     document.getElementById('step-label').textContent = 'Etapa ' + step + ' de ' + STEPS;
@@ -37,6 +45,7 @@
     document.getElementById('calculate-button').hidden = step !== STEPS;
     alertIn('form-alert', '');
     document.getElementById('configurator').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (moverFoco) focar(steps[step - 1].querySelector('legend'));
   }
 
   var MIN_GUESTS = 30;
@@ -179,10 +188,11 @@
     contactForm.hidden = true;
     document.getElementById('success-card').hidden = true;
     document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    focar(document.querySelector('#results .results-head h2'));
   }
 
-  document.getElementById('next-button').addEventListener('click', function () { if (validateStep()) showStep(step + 1); });
-  document.getElementById('back-button').addEventListener('click', function () { showStep(step - 1); });
+  document.getElementById('next-button').addEventListener('click', function () { if (validateStep()) showStep(step + 1, true); });
+  document.getElementById('back-button').addEventListener('click', function () { showStep(step - 1, true); });
 
   form.addEventListener('submit', async function (event) {
     event.preventDefault();
@@ -202,6 +212,7 @@
     document.querySelectorAll('[data-select]').forEach(function (item) { item.textContent = item.dataset.select === selectedOptionId ? 'Opção escolhida' : 'Escolher ' + item.dataset.tier; });
     contactForm.hidden = false;
     contactForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    focar(contactForm.elements.name);
   });
 
   contactForm.addEventListener('submit', async function (event) {
@@ -223,6 +234,7 @@
         (response.whatsappUrl ? '<a class="success-wa" href="' + esc(response.whatsappUrl) + '" target="_blank" rel="noopener">Falar agora com a equipe pelo WhatsApp</a>' : '');
       success.hidden = false;
       success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      focar(success.querySelector('h3'));
     } catch (error) { alertIn('contact-alert', error.message); }
     finally { button.disabled = false; button.textContent = 'Enviar para validação'; }
   });
