@@ -66,7 +66,7 @@
   <!-- Fontes da primeira dobra: preload evita o texto piscar antes do swap. -->
   <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="../assets/fonts/worksans.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="../assets/css/style.css?v=20261007" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=20261013" />
   <link rel="stylesheet" href="../assets/css/desktop.css?v=20261007" media="(min-width: 1024px)" />
 
   <!-- "restaurant" nao existe no vocabulario Open Graph; o valor invalido cai
@@ -229,10 +229,34 @@
   }
   </script>
 
-  <!-- Google tag (gtag.js). O async garante que nao bloqueia a renderizacao
-       nem o toque no botao do cardapio. Os eventos de saida disparados no
-       fim do body chegam aqui por gtag('event', ...). -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F40Z5Y9QT6"></script>
+  <!-- Marketing: Google tag, Meta Pixel e o pixel da OpenAI (atribuicao.js).
+       Os eventos entram na fila na hora; os SDKs so baixam na primeira
+       interacao (toque, rolagem, tecla, mouse) ou 4 s depois do load, para nao
+       disputar CPU e banda com a primeira dobra no celular. Quem sai antes
+       disso sem tocar na tela nao chega a ser medido. -->
+  <script>
+    window.sfAfterFirstPaint = (function (w, d) {
+      var fila = [], pronto = false, espera, teto;
+      var GATILHOS = ['pointerdown', 'pointermove', 'keydown', 'touchstart', 'scroll', 'wheel'];
+      function run() {
+        if (pronto) return;
+        pronto = true;
+        clearTimeout(espera);
+        clearTimeout(teto);
+        GATILHOS.forEach(function (n) { w.removeEventListener(n, run, true); });
+        while (fila.length) fila.shift()();
+      }
+      GATILHOS.forEach(function (n) { w.addEventListener(n, run, { capture: true, passive: true, once: true }); });
+      function depoisDoLoad() { espera = setTimeout(run, 4000); }
+      if (d.readyState === 'complete') depoisDoLoad();
+      else w.addEventListener('load', depoisDoLoad, { once: true });
+      // Se o load nunca chegar (uma foto travada), a visita ainda e medida.
+      teto = setTimeout(run, 15000);
+      return function (load) { if (pronto) load(); else fila.push(load); };
+    })(window, document);
+  </script>
+  <!-- Google tag (gtag.js). Os eventos de saida disparados no fim do body
+       chegam aqui por gtag('event', ...) e esperam o SDK na dataLayer. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -240,34 +264,17 @@
     gtag('config', 'G-F40Z5Y9QT6', {
       linker: { domains: ['sirfisher.com.br', 'www.sirfisher.com.br', 'reservas.sirfisher.com.br'] }
     });
+    window.sfAfterFirstPaint(function () {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-F40Z5Y9QT6';
+      document.head.appendChild(s);
+    });
   </script>
   <!-- Meta Pixel. O mesmo dataset da Conversions API: os eventos do navegador e
        os do servidor sao unidos pelo event_id, para a reserva nao contar duas
        vezes. Ver supabase/meta-capi.sql no repositorio de reservas. -->
   <script>
-    // Queue events immediately; give the first paint priority over marketing SDKs.
-    window.sfAfterFirstPaint = function (load) {
-      var done = false;
-      var timer = setTimeout(run, 3000);
-      function run() {
-        if (done) return;
-        done = true;
-        clearTimeout(timer);
-        document.removeEventListener('pointerdown', run);
-        document.removeEventListener('keydown', run);
-        load();
-      }
-      function ready() {
-        if (document.hidden || !window.requestAnimationFrame) { run(); return; }
-        window.requestAnimationFrame(function () { window.requestAnimationFrame(run); });
-      }
-      document.addEventListener('pointerdown', run, { once: true });
-      document.addEventListener('keydown', run, { once: true });
-      // Espera o load (foto de capa ja baixada) para o pixel nao disputar
-      // banda com a primeira dobra; o timer acima e o teto.
-      if (document.readyState === 'complete') ready();
-      else window.addEventListener('load', ready, { once: true });
-    };
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
     n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
@@ -305,7 +312,7 @@
          No celular fica com display:none, fora da tela e dos leitores. -->
     <div class="topbar">
       <a class="topbar__brand" href="./">
-        <span class="topbar__emblem"><img src="../assets/img/logo-emblem-256.webp" alt="" width="256" height="274" loading="lazy" decoding="async" /></span>
+        <span class="topbar__emblem"><img src="../assets/img/logo-emblem-64.webp" alt="" width="64" height="68" loading="lazy" decoding="async" /></span>
         <span class="topbar__name">Sir Fisher<span>Beira-Mar · Fortaleza</span></span>
       </a>
       <nav class="topbar__nav" aria-label="Page sections">
@@ -337,6 +344,7 @@
       <header class="board">
         <div class="board__medallion">
           <picture>
+            <source type="image/avif" srcset="../assets/img/logo-emblem-256.avif 256w, ../assets/img/logo-emblem-384.avif 384w" sizes="128px" />
             <source type="image/webp" srcset="../assets/img/logo-emblem-256.webp 256w, ../assets/img/logo-emblem-384.webp 384w" sizes="128px" />
             <img src="../assets/img/logo-emblem.png" alt="Sir Fisher" width="654" height="700" />
           </picture>
@@ -353,8 +361,8 @@
         <!-- CARDÁPIO = a própria foto do prato leva ao menu -->
         <a class="feature" href="../cardapio/?lang=en" data-evt="click_menu">
           <picture>
-            <source type="image/avif" srcset="../assets/img/prato-800.avif 800w, ../assets/img/prato-1200.avif 1200w" sizes="(max-width:460px) 100vw, 460px" />
-            <source type="image/webp" srcset="../assets/img/prato-800.webp 800w, ../assets/img/prato-1200.webp 1200w" sizes="(max-width:460px) 100vw, 460px" />
+            <source type="image/avif" srcset="../assets/img/prato-480.avif 480w, ../assets/img/prato-800.avif 800w, ../assets/img/prato-1200.avif 1200w" sizes="(min-width:1024px) 340px, (max-width:460px) 100vw, 460px" />
+            <source type="image/webp" srcset="../assets/img/prato-480.webp 480w, ../assets/img/prato-800.webp 800w, ../assets/img/prato-1200.webp 1200w" sizes="(min-width:1024px) 340px, (max-width:460px) 100vw, 460px" />
             <img class="feature__img" src="../assets/img/prato-800.jpg" alt="Fish and chips served at Sir Fisher" width="800" height="640" />
           </picture>
           <div class="feature__body">
@@ -412,54 +420,54 @@
         <div class="grid">
           <figure>
             <picture>
-              <source type="image/avif" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.avif 440w, ../assets/img/camarao-alho-e-oleo-sir-fisher-660.avif 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" />
-              <source type="image/webp" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.webp 440w, ../assets/img/camarao-alho-e-oleo-sir-fisher-660.webp 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" />
-              <img src="../assets/img/camarao-alho-e-oleo-sir-fisher-440.jpg" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.jpg 440w, ../assets/img/camarao-alho-e-oleo-sir-fisher-660.jpg 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" alt="Dish of garlic prawns with lemon, served over the Sir Fisher newspaper print" width="440" height="550" loading="lazy" decoding="async" />
+              <source type="image/avif" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-340.avif 340w, ../assets/img/camarao-alho-e-oleo-sir-fisher-440.avif 440w, ../assets/img/camarao-alho-e-oleo-sir-fisher-660.avif 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-340.webp 340w, ../assets/img/camarao-alho-e-oleo-sir-fisher-440.webp 440w, ../assets/img/camarao-alho-e-oleo-sir-fisher-660.webp 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/camarao-alho-e-oleo-sir-fisher-440.jpg" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-340.jpg 340w, ../assets/img/camarao-alho-e-oleo-sir-fisher-440.jpg 440w, ../assets/img/camarao-alho-e-oleo-sir-fisher-660.jpg 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" alt="Dish of garlic prawns with lemon, served over the Sir Fisher newspaper print" width="440" height="550" loading="lazy" decoding="async" />
             </picture>
             <figcaption>Garlic prawns</figcaption>
           </figure>
 
           <figure>
             <picture>
-              <source type="image/avif" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-440.avif 440w, ../assets/img/newcastle-camarao-empanado-sir-fisher-660.avif 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" />
-              <source type="image/webp" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-440.webp 440w, ../assets/img/newcastle-camarao-empanado-sir-fisher-660.webp 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" />
-              <img src="../assets/img/newcastle-camarao-empanado-sir-fisher-440.jpg" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-440.jpg 440w, ../assets/img/newcastle-camarao-empanado-sir-fisher-660.jpg 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" alt="Panko-breaded prawns with chips and dipping sauce, on a wooden board" width="440" height="550" loading="lazy" decoding="async" />
+              <source type="image/avif" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-340.avif 340w, ../assets/img/newcastle-camarao-empanado-sir-fisher-440.avif 440w, ../assets/img/newcastle-camarao-empanado-sir-fisher-660.avif 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-340.webp 340w, ../assets/img/newcastle-camarao-empanado-sir-fisher-440.webp 440w, ../assets/img/newcastle-camarao-empanado-sir-fisher-660.webp 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/newcastle-camarao-empanado-sir-fisher-440.jpg" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-340.jpg 340w, ../assets/img/newcastle-camarao-empanado-sir-fisher-440.jpg 440w, ../assets/img/newcastle-camarao-empanado-sir-fisher-660.jpg 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" alt="Panko-breaded prawns with chips and dipping sauce, on a wooden board" width="440" height="550" loading="lazy" decoding="async" />
             </picture>
             <figcaption>Newcastle, panko-breaded prawns</figcaption>
           </figure>
 
           <figure>
             <picture>
-              <source type="image/avif" srcset="../assets/img/isca-de-peixe-sir-fisher-440.avif 440w, ../assets/img/isca-de-peixe-sir-fisher-660.avif 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" />
-              <source type="image/webp" srcset="../assets/img/isca-de-peixe-sir-fisher-440.webp 440w, ../assets/img/isca-de-peixe-sir-fisher-660.webp 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" />
-              <img src="../assets/img/isca-de-peixe-sir-fisher-440.jpg" srcset="../assets/img/isca-de-peixe-sir-fisher-440.jpg 440w, ../assets/img/isca-de-peixe-sir-fisher-660.jpg 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" alt="Breaded strips of pescada amarela with lemon and house sauce, on a wooden board" width="440" height="550" loading="lazy" decoding="async" />
+              <source type="image/avif" srcset="../assets/img/isca-de-peixe-sir-fisher-340.avif 340w, ../assets/img/isca-de-peixe-sir-fisher-440.avif 440w, ../assets/img/isca-de-peixe-sir-fisher-660.avif 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/isca-de-peixe-sir-fisher-340.webp 340w, ../assets/img/isca-de-peixe-sir-fisher-440.webp 440w, ../assets/img/isca-de-peixe-sir-fisher-660.webp 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/isca-de-peixe-sir-fisher-440.jpg" srcset="../assets/img/isca-de-peixe-sir-fisher-340.jpg 340w, ../assets/img/isca-de-peixe-sir-fisher-440.jpg 440w, ../assets/img/isca-de-peixe-sir-fisher-660.jpg 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" alt="Breaded strips of pescada amarela with lemon and house sauce, on a wooden board" width="440" height="550" loading="lazy" decoding="async" />
             </picture>
             <figcaption>Fish strips, pescada amarela</figcaption>
           </figure>
 
           <figure>
             <picture>
-              <source type="image/avif" srcset="../assets/img/marine-sandwich-sir-fisher-440.avif 440w, ../assets/img/marine-sandwich-sir-fisher-660.avif 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" />
-              <source type="image/webp" srcset="../assets/img/marine-sandwich-sir-fisher-440.webp 440w, ../assets/img/marine-sandwich-sir-fisher-660.webp 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" />
-              <img src="../assets/img/marine-sandwich-sir-fisher-440.jpg" srcset="../assets/img/marine-sandwich-sir-fisher-440.jpg 440w, ../assets/img/marine-sandwich-sir-fisher-660.jpg 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" alt="Marine Sandwich at Sir Fisher: brioche bun with sauteed prawns over breaded cream cheese" width="440" height="550" loading="lazy" decoding="async" />
+              <source type="image/avif" srcset="../assets/img/marine-sandwich-sir-fisher-340.avif 340w, ../assets/img/marine-sandwich-sir-fisher-440.avif 440w, ../assets/img/marine-sandwich-sir-fisher-660.avif 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/marine-sandwich-sir-fisher-340.webp 340w, ../assets/img/marine-sandwich-sir-fisher-440.webp 440w, ../assets/img/marine-sandwich-sir-fisher-660.webp 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/marine-sandwich-sir-fisher-440.jpg" srcset="../assets/img/marine-sandwich-sir-fisher-340.jpg 340w, ../assets/img/marine-sandwich-sir-fisher-440.jpg 440w, ../assets/img/marine-sandwich-sir-fisher-660.jpg 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" alt="Marine Sandwich at Sir Fisher: brioche bun with sauteed prawns over breaded cream cheese" width="440" height="550" loading="lazy" decoding="async" />
             </picture>
             <figcaption>Marine Sandwich, with sautéed prawns</figcaption>
           </figure>
 
           <figure>
             <picture>
-              <source type="image/avif" srcset="../assets/img/dadinho-de-tapioca-sir-fisher-440.avif 440w, ../assets/img/dadinho-de-tapioca-sir-fisher-660.avif 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" />
-              <source type="image/webp" srcset="../assets/img/dadinho-de-tapioca-sir-fisher-440.webp 440w, ../assets/img/dadinho-de-tapioca-sir-fisher-660.webp 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" />
-              <img src="../assets/img/dadinho-de-tapioca-sir-fisher-440.jpg" srcset="../assets/img/dadinho-de-tapioca-sir-fisher-440.jpg 440w, ../assets/img/dadinho-de-tapioca-sir-fisher-660.jpg 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" alt="Golden fried tapioca cubes served with chilli jam, on a wooden board" width="440" height="550" loading="lazy" decoding="async" />
+              <source type="image/avif" srcset="../assets/img/dadinho-de-tapioca-sir-fisher-340.avif 340w, ../assets/img/dadinho-de-tapioca-sir-fisher-440.avif 440w, ../assets/img/dadinho-de-tapioca-sir-fisher-660.avif 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/dadinho-de-tapioca-sir-fisher-340.webp 340w, ../assets/img/dadinho-de-tapioca-sir-fisher-440.webp 440w, ../assets/img/dadinho-de-tapioca-sir-fisher-660.webp 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/dadinho-de-tapioca-sir-fisher-440.jpg" srcset="../assets/img/dadinho-de-tapioca-sir-fisher-340.jpg 340w, ../assets/img/dadinho-de-tapioca-sir-fisher-440.jpg 440w, ../assets/img/dadinho-de-tapioca-sir-fisher-660.jpg 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" alt="Golden fried tapioca cubes served with chilli jam, on a wooden board" width="440" height="550" loading="lazy" decoding="async" />
             </picture>
             <figcaption>Dadinho de tapioca, fried tapioca cubes</figcaption>
           </figure>
 
           <figure>
             <picture>
-              <source type="image/avif" srcset="../assets/img/almoco-executivo-sir-fisher-440.avif 440w, ../assets/img/almoco-executivo-sir-fisher-660.avif 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" />
-              <source type="image/webp" srcset="../assets/img/almoco-executivo-sir-fisher-440.webp 440w, ../assets/img/almoco-executivo-sir-fisher-660.webp 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" />
-              <img src="../assets/img/almoco-executivo-sir-fisher-440.jpg" srcset="../assets/img/almoco-executivo-sir-fisher-440.jpg 440w, ../assets/img/almoco-executivo-sir-fisher-660.jpg 660w" sizes="(min-width:1024px) 300px, (max-width:500px) 46vw, 205px" alt="Guest having the Sir Fisher set lunch, served with rice and chips, at a table facing the sea" width="440" height="550" loading="lazy" decoding="async" />
+              <source type="image/avif" srcset="../assets/img/almoco-executivo-sir-fisher-340.avif 340w, ../assets/img/almoco-executivo-sir-fisher-440.avif 440w, ../assets/img/almoco-executivo-sir-fisher-660.avif 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" />
+              <source type="image/webp" srcset="../assets/img/almoco-executivo-sir-fisher-340.webp 340w, ../assets/img/almoco-executivo-sir-fisher-440.webp 440w, ../assets/img/almoco-executivo-sir-fisher-660.webp 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" />
+              <img src="../assets/img/almoco-executivo-sir-fisher-440.jpg" srcset="../assets/img/almoco-executivo-sir-fisher-340.jpg 340w, ../assets/img/almoco-executivo-sir-fisher-440.jpg 440w, ../assets/img/almoco-executivo-sir-fisher-660.jpg 660w" sizes="(min-width:1024px) 260px, (max-width:500px) 46vw, 205px" alt="Guest having the Sir Fisher set lunch, served with rice and chips, at a table facing the sea" width="440" height="550" loading="lazy" decoding="async" />
             </picture>
             <figcaption>The set lunch, Monday to Friday</figcaption>
           </figure>

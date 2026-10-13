@@ -15,21 +15,21 @@ def create_ad_with_token(token):
             'hash': 'ae8299d1109fedc839005c6fce9175b0',
             'title': 'Almoço Executivo na Beira-Mar',
             'body': 'Pratos executivos completos com entrada, prato principal e vista para a orla de Fortaleza. De terça a sexta, das 12h às 16h. Reserve sua mesa.',
-            'url': 'https://sirfisher.com.br/?utm_source=meta&utm_medium=paid&utm_campaign=almoco_executivo&utm_content=ad01_almoco#reservas'
+            'url': 'https://www.sirfisher.com.br/?utm_source=meta&utm_medium=paid&utm_campaign=almoco_executivo&utm_content=ad01_almoco#reservas'
         },
         {
             'name': 'AD02 - Foto Camarão Alho e Óleo',
             'hash': 'cf8ff3f26fff3ce95ddfe83d5a00b408',
             'title': 'Camarão na Beira-Mar de Fortaleza',
             'body': 'Camarão alho e óleo servido fresco de frente para o mar. O melhor da gastronomia cearense na Av. Beira Mar, 3421. Venha conferir.',
-            'url': 'https://sirfisher.com.br/?utm_source=meta&utm_medium=paid&utm_campaign=almoco_executivo&utm_content=ad02_camarao#reservas'
+            'url': 'https://www.sirfisher.com.br/?utm_source=meta&utm_medium=paid&utm_campaign=almoco_executivo&utm_content=ad02_camarao#reservas'
         },
         {
             'name': 'AD03 - Foto Filé Mignon',
             'hash': '3f5681cc1f267064161d9485265931d7',
             'title': 'Almoço Premium com Vista Pro Mar',
             'body': 'Cortes nobres, ambiente climatizado e ao ar livre na melhor localização da Beira-Mar. Garanta sua experiência no Sir Fisher.',
-            'url': 'https://sirfisher.com.br/?utm_source=meta&utm_medium=paid&utm_campaign=almoco_executivo&utm_content=ad03_file#reservas'
+            'url': 'https://www.sirfisher.com.br/?utm_source=meta&utm_medium=paid&utm_campaign=almoco_executivo&utm_content=ad03_file#reservas'
         }
     ]
 

@@ -49,13 +49,14 @@ sendo coletado como evento de intenção. Reservas, comparecimentos e eventos
 de contato existentes foram preservados. A mudança afeta comparações futuras
 de engajamento; não altera retroativamente os relatórios antigos.
 
-Na home em português e inglês, SDKs de marketing aguardam a primeira pintura.
-As filas Meta/OpenAI são criadas imediatamente; os SDKs esperam o `load`
-da página (a primeira interação antecipa), com limite de espera de 3 s
-(desde 07/10/2026). GA4 continua assíncrono desde
-o início. Testes verificam preservação de PageView e ausência de SDK duplicado.
-Essa priorização pode afetar usuários que saem antes de qualquer SDK carregar;
-não comparar pixels e sessões GA4 como se tivessem cobertura idêntica.
+Na home em português e inglês e na página Conheça, os SDKs de marketing
+(GA4, Meta e OpenAI) esperam a primeira interação (toque, rolagem, tecla ou
+mouse) ou 4 s depois do `load`, com teto de 15 s (desde 13/10/2026; antes,
+Meta/OpenAI esperavam só o `load` e o GA4 carregava de imediato). As filas
+`dataLayer`, `fbq` e `oaiq` são criadas na hora, então nenhum evento se perde.
+`marketing_loader_test.mjs` (Deno) verifica fila, ausência de SDK duplicado e
+teto. Visitas que saem antes disso sem interagir não chegam a ser medidas:
+a partir de 13/10/2026 as sessões e PageViews de rejeição imediata caem.
 
 ## Verificação móvel de 06/10/2026
 
@@ -74,6 +75,25 @@ principal; não remover medição para melhorar artificialmente o escore.
 Foram corrigidos contraste de textos/botões e nome acessível do link do menu.
 A captura móvel do Lighthouse foi inspecionada. O navegador integrado não
 estava disponível: não houve teste manual completo de navegação ou reserva.
+
+## PageSpeed de 13/10/2026
+
+Consulta pela API com `PAGESPEED_API_KEY` (chave dedicada, em `gestao/.env`
+ignorado; a cota anônima vive esgotada e o OAuth do Perfil da Empresa não
+tem escopo para o PageSpeed). Antes das correções: desktop 89/96/100/100,
+celular 64/100/100/100 (desempenho, acessibilidade, boas práticas, SEO).
+CrUX de campo no celular: LCP 1,6 s, INP 155 ms, CLS 0, todos bons.
+
+Correções publicadas: SDKs de marketing adiados (acima); CSS da home embutido
+e minificado por `tools/css/embutir_css.py` (rodar após editar `style.css`
+ou `desktop.css`; `--verificar` acusa bloco velho); `--sea` clara passou a
+#226861 (contraste 4,5:1 sobre todos os fundos claros); variantes 340 px das
+seis fotos da galeria, `prato-480` e emblema 64 px/AVIF.
+
+Fora do código: o GitHub Pages fixa `Cache-Control: max-age=600` e o
+redirecionamento `sirfisher.com.br` → `www`. O teste do Search Console usa o
+domínio sem `www` e paga esse redirecionamento (0,8 s no celular); visitantes
+vindos do Google, do Perfil e dos anúncios já chegam pelo `www`.
 
 ## Cardápio do Perfil da Empresa
 
