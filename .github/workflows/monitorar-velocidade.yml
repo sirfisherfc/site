@@ -1,0 +1,31 @@
+name: Monitorar velocidade e qualidade
+
+# Toda segunda as 9h de Fortaleza (12h UTC) e sob demanda. Mede as paginas
+# principais no PageSpeed e le os dados reais do Google; se algo piorar, o
+# job falha e o GitHub avisa por e-mail. Precisa do segredo PAGESPEED_API_KEY
+# (Settings > Secrets and variables > Actions).
+on:
+  schedule:
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+jobs:
+  medir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Conferir o segredo
+        env:
+          PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
+        run: |
+          if [ -z "$PAGESPEED_API_KEY" ]; then
+            echo "::error::Cadastre o segredo PAGESPEED_API_KEY em Settings > Secrets and variables > Actions (valor em gestao/.env)."
+            exit 1
+          fi
+      - name: Medir paginas e dados reais
+        env:
+          PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
+        run: python tools/analytics/monitorar.py

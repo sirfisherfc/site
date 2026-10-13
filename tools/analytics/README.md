@@ -122,6 +122,37 @@ redirecionamento `sirfisher.com.br` → `www`. O teste do Search Console usa o
 domínio sem `www` e paga esse redirecionamento (0,8 s no celular); visitantes
 vindos do Google, do Perfil e dos anúncios já chegam pelo `www`.
 
+## Velocidade, acessibilidade e segurança em todas as páginas (13/10/2026)
+
+Resultado (celular, `monitorar.py`): todas as páginas entre 98 e 100 em
+desempenho e 100 em acessibilidade, boas práticas e SEO (a Conheça tem
+`noindex` de propósito). Dados reais da origem: LCP 1,4 s, INP 145 ms, CLS 0.
+
+- Marketing: as 12 páginas com GA/Meta usam o carregador adiado (interação
+  real ou 7 s após o `load`). `pointermove` sem deslocamento é ignorado: o
+  PageSpeed redimensiona a tela e o navegador gera esse evento sob o cursor
+  parado, o que antes carregava os SDKs no meio da medição.
+- Cardápio: miniaturas com versões de 240 px (`assets/img/*-240.*`).
+- Contraste: `--coral-texto` (#a33a20) nas etiquetas de oferta; aba ativa
+  do cardápio e botão de Eventos em #b64226.
+- Segurança: `tools/seguranca/csp.py` grava em cada página a CSP com hash
+  dos scripts + `strict-dynamic` e Trusted Types (pre-commit e workflow).
+  Scripts de `assets/js` entram por um bloco no fim do body; `<script src>`
+  no HTML, `on*=` e `javascript:` são recusados. No Cloudflare (`cf.py site`):
+  HSTS de 1 ano com subdomínios, `X-Frame-Options`, `frame-ancestors`, COOP,
+  `Referrer-Policy` e `Permissions-Policy`.
+
+Ferramentas (Playwright em `tools/analytics/.venv`):
+
+- `tools/acessibilidade/auditar.py`: axe-core + teclado, todas as páginas,
+  celular/desktop, claro/escuro.
+- `tools/seguranca/testar_navegador.py`: sem violação de CSP nem erro de
+  console; GA, Meta, OpenAI e contador funcionando (envios interceptados).
+  `SITE_BASE=https://www.sirfisher.com.br/` testa o site publicado.
+- `tools/analytics/monitorar.py`: PageSpeed das páginas principais + dados
+  reais; roda toda segunda no workflow `monitorar-velocidade` (segredo
+  `PAGESPEED_API_KEY`) e falha, com e-mail do GitHub, se algo piorar.
+
 ## Cardápio do Perfil da Empresa
 
 O arquivo público `cardapio/dados/cardapio.json` é a fonte dos itens e preços.
