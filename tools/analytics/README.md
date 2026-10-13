@@ -78,7 +78,8 @@ estava disponível: não houve teste manual completo de navegação ou reserva.
 
 ## PageSpeed de 13/10/2026
 
-Consulta pela API com `PAGESPEED_API_KEY` (chave dedicada, em `gestao/.env`
+Medir com `python site/tools/analytics/pagespeed.py` (padrão: home com `www`,
+celular e desktop). Consulta pela API com `PAGESPEED_API_KEY` (chave dedicada, em `gestao/.env`
 ignorado; a cota anônima vive esgotada e o OAuth do Perfil da Empresa não
 tem escopo para o PageSpeed). Antes das correções: desktop 89/96/100/100,
 celular 64/100/100/100 (desempenho, acessibilidade, boas práticas, SEO).
