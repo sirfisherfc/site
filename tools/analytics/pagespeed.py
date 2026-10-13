@@ -52,7 +52,9 @@ def medir(url: str, estrategia: str) -> dict:
 def resumir(dados: dict, estrategia: str) -> None:
     lh = dados["lighthouseResult"]
     a = lh["audits"]
-    notas = " · ".join(f"{k} {round(v['score'] * 100)}" for k, v in lh["categories"].items())
+    # O PageSpeed as vezes devolve score nulo numa execucao instavel: repetir.
+    notas = " · ".join(f"{k} {'n/d' if v['score'] is None else round(v['score'] * 100)}"
+                       for k, v in lh["categories"].items())
     print(f"== {estrategia}: {notas}")
     print("   " + " · ".join(f"{a[m]['title']} {a[m].get('displayValue', '')}".replace("\xa0", " ") for m in METRICAS))
     campo = dados.get("loadingExperience", {}).get("metrics", {})
