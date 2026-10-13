@@ -37,13 +37,13 @@ function setup(block, readyState = 'loading') {
 for (const pagina of PAGINAS) {
   const block = await blocoMarketing(pagina);
 
-  Deno.test(`${pagina}: enfileira eventos e so baixa SDKs 4 s depois do load`, () => {
+  Deno.test(`${pagina}: enfileira eventos e so baixa SDKs 7 s depois do load`, () => {
     const s = setup(block);
     if (s.scripts.length) throw new Error('SDK baixado antes do load');
     if (s.window.fbq.queue.length !== 2 || s.dataLayer.length !== 2) throw new Error('Perdeu a fila inicial');
     s.listeners.get('load')();
     if (s.scripts.length) throw new Error('SDK baixado junto com o load');
-    s.disparar(4000);
+    s.disparar(7000);
     if (s.scripts.length !== 2) throw new Error(`Esperava gtag e Pixel, veio ${s.scripts}`);
     s.disparar(15000);
     if (s.scripts.length !== 2) throw new Error('SDK duplicado');
@@ -55,7 +55,7 @@ for (const pagina of PAGINAS) {
     s.listeners.get('touchstart')();
     if (s.scripts.length !== 2 || s.window.fbq.queue.length !== 3) throw new Error('Perdeu evento ou nao carregou');
     s.listeners.get('load')?.();
-    s.disparar(4000);
+    s.disparar(7000);
     s.disparar(15000);
     if (s.scripts.length !== 2) throw new Error('SDK duplicado');
   });
@@ -68,7 +68,7 @@ for (const pagina of PAGINAS) {
 
   Deno.test(`${pagina}: carregador pedido depois de pronto roda na hora`, () => {
     const s = setup(block, 'complete');
-    s.disparar(4000);
+    s.disparar(7000);
     let rodou = false;
     s.window.sfAfterFirstPaint(() => { rodou = true; });
     if (!rodou) throw new Error('atribuicao.js ficaria sem o pixel');

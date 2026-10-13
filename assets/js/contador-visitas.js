@@ -29,26 +29,38 @@
     sessionId = newId();
   }
 
-  fetch(SUPABASE_URL + '/rest/v1/rpc/register_site_visit', {
-    method: 'POST',
-    headers: {
-      apikey: SUPABASE_ANON,
-      Authorization: 'Bearer ' + SUPABASE_ANON,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ p_session_id: sessionId })
-  })
-    .then(function (response) {
-      if (!response.ok) throw new Error('visit counter unavailable');
-      return response.json();
+  // So depois do load e com a pagina ociosa: a chamada ao Supabase nao
+  // disputa rede nem CPU com a foto de capa e a primeira pintura.
+  function registrar() {
+    fetch(SUPABASE_URL + '/rest/v1/rpc/register_site_visit', {
+      method: 'POST',
+      headers: {
+        apikey: SUPABASE_ANON,
+        Authorization: 'Bearer ' + SUPABASE_ANON,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ p_session_id: sessionId })
     })
-    .then(function (total) {
-      var counter = document.querySelector('[data-site-visits]');
-      if (!counter || !Number.isFinite(Number(total))) return;
-      counter.textContent = new Intl.NumberFormat('pt-BR').format(Number(total));
-      counter.hidden = false;
-    })
-    .catch(function () {
-      // O contador e decorativo; uma falha nunca interfere na pagina.
-    });
+      .then(function (response) {
+        if (!response.ok) throw new Error('visit counter unavailable');
+        return response.json();
+      })
+      .then(function (total) {
+        var counter = document.querySelector('[data-site-visits]');
+        if (!counter || !Number.isFinite(Number(total))) return;
+        counter.textContent = new Intl.NumberFormat('pt-BR').format(Number(total));
+        counter.hidden = false;
+      })
+      .catch(function () {
+        // O contador e decorativo; uma falha nunca interfere na pagina.
+      });
+  }
+
+  function quandoOcioso() {
+    if (window.requestIdleCallback) window.requestIdleCallback(registrar, { timeout: 3000 });
+    else setTimeout(registrar, 1);
+  }
+
+  if (document.readyState === 'complete') quandoOcioso();
+  else window.addEventListener('load', quandoOcioso, { once: true });
 })();

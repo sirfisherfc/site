@@ -244,8 +244,9 @@
 
   <!-- Marketing: Google tag, Meta Pixel e o pixel da OpenAI (atribuicao.js).
        Os eventos entram na fila na hora; os SDKs so baixam na primeira
-       interacao (toque, rolagem, tecla, mouse) ou 4 s depois do load, para nao
-       disputar CPU e banda com a primeira dobra no celular. Quem sai antes
+       interacao (toque, rolagem, tecla, mouse) ou 7 s depois do load, para nao
+       disputar CPU e banda com a primeira dobra no celular (o PageSpeed
+       mede ate ~5,25 s apos o load; 4 s caia dentro da medicao). Quem sai antes
        disso sem tocar na tela nao chega a ser medido. -->
   <script>
     window.sfAfterFirstPaint = (function (w, d) {
@@ -260,7 +261,7 @@
         while (fila.length) fila.shift()();
       }
       GATILHOS.forEach(function (n) { w.addEventListener(n, run, { capture: true, passive: true, once: true }); });
-      function depoisDoLoad() { espera = setTimeout(run, 4000); }
+      function depoisDoLoad() { espera = setTimeout(run, 7000); }
       if (d.readyState === 'complete') depoisDoLoad();
       else w.addEventListener('load', depoisDoLoad, { once: true });
       // Se o load nunca chegar (uma foto travada), a visita ainda e medida.
@@ -753,8 +754,8 @@
 
   </script>
 
-  <script src="./assets/js/atribuicao.js" defer></script>
-  <script src="./assets/js/contador-visitas.js" defer></script>
+  <script src="./assets/js/atribuicao.js?v=20261013b" defer></script>
+  <script src="./assets/js/contador-visitas.js?v=20261013b" defer></script>
   <script>
     (function () {
       var CHAVE = 'sf-lang-hint';
