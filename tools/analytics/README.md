@@ -90,6 +90,11 @@ ou `desktop.css`; `--verificar` acusa bloco velho); `--sea` clara passou a
 #226861 (contraste 4,5:1 sobre todos os fundos claros); variantes 340 px das
 seis fotos da galeria, `prato-480` e emblema 64 px/AVIF.
 
+Depois da publicação (commit 4f6d0cb, duas execuções): desktop 100/100/100/100
+(LCP 0,7 s, TBT 0) e celular 88 e 93 em desempenho, 100 nas demais (LCP 3,0 a
+3,2 s, TBT 0 a 130 ms). Surgiu CLS de ~0,02 pela troca das fontes web, agora
+que o texto pinta antes delas; segue na faixa boa (< 0,1).
+
 Fora do código: o GitHub Pages fixa `Cache-Control: max-age=600` e o
 redirecionamento `sirfisher.com.br` → `www`. O teste do Search Console usa o
 domínio sem `www` e paga esse redirecionamento (0,8 s no celular); visitantes
