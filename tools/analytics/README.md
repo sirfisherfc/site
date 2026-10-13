@@ -104,11 +104,15 @@ de visitas espera o `load` e a página ociosa, e os SDKs passaram a esperar
 na medição). Celular: 99 com `www` (LCP 1,8 s) e 93 a 95 sem `www`, pelo
 redirecionamento. Desktop: 100 nos dois.
 
-Cache: todo CSS e JS é referenciado com `?v=`; mude o valor a cada alteração.
-Imagens e fontes não têm versão: se o conteúdo mudar, publique com nome
-novo em vez de sobrescrever o arquivo, para quem já tem a versão antiga em
-cache (necessário quando o Cloudflare passar a servir `/assets/` com cache
-longo).
+Cache: desde 13/10/2026 o Cloudflare fica na frente do GitHub Pages (proxy
+em `www` e no domínio sem `www`; ferramenta em `gestao/scripts/cloudflare/cf.py`).
+`/assets/` sai com `max-age` de um ano; HTML e `cardapio/dados/` seguem com
+10 minutos. Todo CSS e JS é referenciado com `?v=`: mude o valor a cada
+alteração. Imagens e fontes não têm versão: se o conteúdo mudar, publique
+com nome novo em vez de sobrescrever o arquivo, e rode
+`python gestao/scripts/cloudflare/cf.py purgar --aplicar`. O domínio sem
+`www` é redirecionado na borda do Cloudflare. Com isso, o celular marcou 100
+(duas de três execuções; 96 com o cache da borda ainda frio) e o desktop 100.
 
 Fora do código: o GitHub Pages fixa `Cache-Control: max-age=600` e o
 redirecionamento `sirfisher.com.br` → `www`. O teste do Search Console usa o
