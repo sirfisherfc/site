@@ -366,8 +366,11 @@
     }
     var base = '../assets/img/' + f.base + '-';
     var larguras = f.larguras;
+    // A miniatura tem 112 px: toda foto antiga de 440 tem tambem uma versao de
+    // 240 (assets/img/*-240.*), que o navegador escolhe pelo sizes abaixo.
+    var candidatas = !grande && larguras[0] === 440 ? [240].concat(larguras) : larguras;
     function conj(ext) {
-      return larguras.map(function (w) { return base + w + '.' + ext + ' ' + w + 'w'; }).join(', ');
+      return candidatas.map(function (w) { return base + w + '.' + ext + ' ' + w + 'w'; }).join(', ');
     }
     var tamanhos = grande ? '(max-width: 880px) 100vw, 880px' : '112px';
     return '<div class="' + classe + '"><picture>' +

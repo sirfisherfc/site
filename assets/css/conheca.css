@@ -31,6 +31,7 @@
 .discovery-dish-label { display: flex; flex-direction: column; gap: 3px; font-size: 0.77rem; line-height: 1.3; margin-top: 9px; }
 .discovery-dish-label strong { white-space: nowrap; font-size: 0.93rem; }
 .discovery-moments figure { margin: 0; min-width: 0; }
+.discovery-moments:focus-visible { outline: 3px solid var(--sea); outline-offset: 4px; border-radius: 14px; }
 .discovery-moments img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
 .discovery-moments figcaption { margin-top: 8px; font-size: 0.76rem; line-height: 1.4; }
 .discovery-award-copy .eyebrow { margin: 0 0 8px; font-size: 0.72rem; }

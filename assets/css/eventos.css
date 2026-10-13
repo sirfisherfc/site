@@ -1,5 +1,5 @@
 @font-face { font-family: "Fraunces"; src: url("../fonts/fraunces.woff2?v=7234ed860a") format("woff2"); font-display: swap; }
-:root { --event-ink:#12293d; --event-coral:#df5b3b; --event-cream:#fbf7ef; --event-line:#d9d4ca; --event-green:#28734f; --event-yellow:#9d6412; --event-red:#a63b32; }
+:root { --event-ink:#12293d; --event-coral:#b64226; --event-cream:#fbf7ef; --event-line:#d9d4ca; --event-green:#28734f; --event-yellow:#9d6412; --event-red:#a63b32; }
 * { box-sizing: border-box; }
 .event-page { margin:0; background:var(--event-cream); color:var(--event-ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
 .event-page::before { content:none!important; display:none!important; }
@@ -30,11 +30,11 @@
 .field-grid { display:grid; gap:16px; }
 .field-grid label { display:grid; gap:8px; font-size:.88rem; font-weight:650; }
 input,select { width:100%; min-height:52px; padding:12px 14px; border:1.5px solid #c9c5bc; border-radius:13px; background:#fff; color:var(--event-ink); font:inherit; }
-input:focus,select:focus { outline:3px solid rgba(223,91,59,.18); border-color:var(--event-coral); }
+input:focus,select:focus { outline:3px solid rgba(182,66,38,.18); border-color:var(--event-coral); }
 .choice-grid { display:grid; gap:12px; }
 .choice-card { position:relative; display:grid; grid-template-columns:92px 1fr; align-items:center; min-height:92px; overflow:hidden; border:1.5px solid var(--event-line); border-radius:16px; background:#fff; cursor:pointer; transition:border-color .15s,transform .15s,box-shadow .15s; }
 .choice-card:hover { transform:translateY(-1px); border-color:#9da7ae; box-shadow:0 8px 20px rgba(18,41,61,.07); }
-.choice-card:has(input:checked) { border-color:var(--event-coral); box-shadow:0 0 0 3px rgba(223,91,59,.13); }
+.choice-card:has(input:checked) { border-color:var(--event-coral); box-shadow:0 0 0 3px rgba(182,66,38,.13); }
 .choice-card img { width:92px; height:100%; min-height:92px; object-fit:cover; }
 .choice-card input { position:absolute; opacity:0; pointer-events:none; }
 .choice-card span { display:grid; gap:4px; padding:15px; }
@@ -61,7 +61,7 @@ button[disabled] { opacity:.6; cursor:wait; }
 .option-card { position:relative; display:flex; flex-direction:column; min-width:0; gap:14px; border:1.5px solid var(--event-line); border-radius:18px; padding:22px; background:#fff; }
 .option-card > * { min-width:0; max-width:100%; }
 .option-card.is-featured { border-color:#b8925a; }
-.option-card.is-selected { border-color:var(--event-coral); box-shadow:0 0 0 3px rgba(223,91,59,.12); }
+.option-card.is-selected { border-color:var(--event-coral); box-shadow:0 0 0 3px rgba(182,66,38,.12); }
 .option-top { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; }
 .option-tier { font-size:.72rem; font-weight:750; letter-spacing:.16em; text-transform:uppercase; color:#b8925a; }
 .option-card h3 { margin:0; font:600 1.35rem/1.15 "Fraunces",serif; overflow-wrap:anywhere; }

@@ -1,10 +1,12 @@
 // deno test tools/analytics/marketing_loader_test.mjs
-const PAGINAS = ['../../index.html', '../../en/index.html', '../../conheca/index.html'];
+const PAGINAS = ['index.html', 'en/index.html', 'conheca/index.html', 'almoco-executivo/index.html',
+  'cardapio/index.html', 'como-chegar/index.html', 'en/fish-and-chips/index.html', 'fish-and-chips/index.html',
+  'guia/beira-mar/index.html', 'por-do-sol/index.html', 'reservas/index.html', 'reveillon/index.html']
+  .map((p) => '../../' + p);
 
 async function blocoMarketing(pagina) {
   const html = await Deno.readTextFile(new URL(pagina, import.meta.url));
-  const head = html.slice(0, html.indexOf('</head>'));
-  return [...head.matchAll(/<script>([\s\S]*?)<\/script>/g)]
+  return [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)]
     .map((m) => m[1])
     .filter((s) => /sfAfterFirstPaint|gtag\('config'|fbq\('init'/.test(s))
     .join('\n');
@@ -37,33 +39,37 @@ function setup(block, readyState = 'loading') {
 for (const pagina of PAGINAS) {
   const block = await blocoMarketing(pagina);
 
+  // O cardapio nao tem o Pixel da Meta: so o gtag entra.
+  const pixel = block.includes("fbq('init'");
+  const sdks = pixel ? 2 : 1;
+
   Deno.test(`${pagina}: enfileira eventos e so baixa SDKs 7 s depois do load`, () => {
     const s = setup(block);
     if (s.scripts.length) throw new Error('SDK baixado antes do load');
-    if (s.window.fbq.queue.length !== 2 || s.dataLayer.length !== 2) throw new Error('Perdeu a fila inicial');
+    if (s.dataLayer.length !== 2 || (pixel && s.window.fbq.queue.length !== 2)) throw new Error('Perdeu a fila inicial');
     s.listeners.get('load')();
     if (s.scripts.length) throw new Error('SDK baixado junto com o load');
     s.disparar(7000);
-    if (s.scripts.length !== 2) throw new Error(`Esperava gtag e Pixel, veio ${s.scripts}`);
+    if (s.scripts.length !== sdks) throw new Error(`Esperava ${sdks} SDK(s), veio ${s.scripts}`);
     s.disparar(15000);
-    if (s.scripts.length !== 2) throw new Error('SDK duplicado');
+    if (s.scripts.length !== sdks) throw new Error('SDK duplicado');
   });
 
   Deno.test(`${pagina}: primeira interacao antecipa os SDKs sem duplicar`, () => {
     const s = setup(block);
-    s.window.fbq('track', 'Contact');
+    if (pixel) s.window.fbq('track', 'Contact');
     s.listeners.get('touchstart')();
-    if (s.scripts.length !== 2 || s.window.fbq.queue.length !== 3) throw new Error('Perdeu evento ou nao carregou');
+    if (s.scripts.length !== sdks || (pixel && s.window.fbq.queue.length !== 3)) throw new Error('Perdeu evento ou nao carregou');
     s.listeners.get('load')?.();
     s.disparar(7000);
     s.disparar(15000);
-    if (s.scripts.length !== 2) throw new Error('SDK duplicado');
+    if (s.scripts.length !== sdks) throw new Error('SDK duplicado');
   });
 
   Deno.test(`${pagina}: teto carrega SDKs mesmo sem load`, () => {
     const s = setup(block);
     s.disparar(15000);
-    if (s.scripts.length !== 2) throw new Error('SDK permaneceu bloqueado');
+    if (s.scripts.length !== sdks) throw new Error('SDK permaneceu bloqueado');
   });
 
   Deno.test(`${pagina}: carregador pedido depois de pronto roda na hora`, () => {

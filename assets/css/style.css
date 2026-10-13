@@ -24,6 +24,7 @@
   --paper-2: #efe2c9;
   --sun: #f0a63f;
   --coral: #b64226;
+  --coral-texto: #a33a20; /* coral para texto pequeno sobre fundo coral claro */
   --button-primary: #b64226;
   --coral-deep: #c14424;
   --sea: #226861;
@@ -50,7 +51,7 @@
     --ink: #ece2c4; --ink-soft: #a7b6bf;
     --page-bg: #0a1622; --card: #14283a; --card-2: #1c3247;
     --on-card: #f0e6cd; --on-card-soft: #a9b8c1;
-    --sun: #f4b559; --coral: #ef6d4c; --coral-deep: #d6512f;
+    --sun: #f4b559; --coral: #ef6d4c; --coral-texto: #ef6d4c; --coral-deep: #d6512f;
     --sea: #52a89f; --union: #4f8fce;
     --hairline: rgba(240, 230, 205, 0.16);
   }
@@ -59,7 +60,7 @@
   --ink: #ece2c4; --ink-soft: #a7b6bf;
   --page-bg: #0a1622; --card: #14283a; --card-2: #1c3247;
   --on-card: #f0e6cd; --on-card-soft: #a9b8c1;
-  --sun: #f4b559; --coral: #ef6d4c; --coral-deep: #d6512f;
+  --sun: #f4b559; --coral: #ef6d4c; --coral-texto: #ef6d4c; --coral-deep: #d6512f;
   --sea: #52a89f; --union: #4f8fce;
   --hairline: rgba(240, 230, 205, 0.16);
 }
@@ -67,7 +68,7 @@
   --ink: #12293d; --ink-soft: #4c6274;
   --page-bg: #ece0c8; --card: #f6ecd9; --card-2: #efe2c9;
   --on-card: #12293d; --on-card-soft: #4c6274;
-  --sun: #f0a63f; --coral: #b64226; --coral-deep: #c14424;
+  --sun: #f0a63f; --coral: #b64226; --coral-texto: #a33a20; --coral-deep: #c14424;
   --sea: #226861; --union: #1a4f8a;
   --hairline: rgba(18, 41, 61, 0.16);
 }
@@ -479,7 +480,7 @@ a { color: inherit; }
 }
 .offer__tag {
   display: inline-block; font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral); margin-bottom: 5px;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral-texto); margin-bottom: 5px;
 }
 .offer__title { font-family: var(--font-display); font-weight: 600; font-size: 1.12rem; color: var(--on-card); margin: 0 0 6px; }
 .offer p { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--on-card-soft); }

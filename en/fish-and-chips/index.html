@@ -64,7 +64,7 @@
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png?v=f76e7675f5" />
 
   <link rel="preload" href="../../assets/fonts/fraunces.woff2?v=7234ed860a" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="../../assets/css/style.css?v=dfe0df1fb1" />
+  <link rel="stylesheet" href="../../assets/css/style.css?v=b14e1ca871" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Sir Fisher" />
@@ -158,13 +158,47 @@
   }
   </script>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F40Z5Y9QT6"></script>
+  <!-- Marketing: Google tag, Meta Pixel e o pixel da OpenAI (atribuicao.js).
+       Os eventos entram na fila na hora; os SDKs so baixam na primeira
+       interacao (toque, rolagem, tecla, mouse) ou 7 s depois do load, para nao
+       disputar CPU e banda com a primeira dobra no celular (o PageSpeed
+       mede ate ~5,25 s apos o load; 4 s caia dentro da medicao). Quem sai antes
+       disso sem tocar na tela nao chega a ser medido. -->
+  <script>
+    window.sfAfterFirstPaint = (function (w, d) {
+      var fila = [], pronto = false, espera, teto;
+      var GATILHOS = ['pointerdown', 'pointermove', 'keydown', 'touchstart', 'scroll', 'wheel'];
+      function run() {
+        if (pronto) return;
+        pronto = true;
+        clearTimeout(espera);
+        clearTimeout(teto);
+        GATILHOS.forEach(function (n) { w.removeEventListener(n, run, true); });
+        while (fila.length) fila.shift()();
+      }
+      GATILHOS.forEach(function (n) { w.addEventListener(n, run, { capture: true, passive: true, once: true }); });
+      function depoisDoLoad() { espera = setTimeout(run, 7000); }
+      if (d.readyState === 'complete') depoisDoLoad();
+      else w.addEventListener('load', depoisDoLoad, { once: true });
+      // Se o load nunca chegar (uma foto travada), a visita ainda e medida.
+      teto = setTimeout(run, 15000);
+      return function (load) { if (pronto) load(); else fila.push(load); };
+    })(window, document);
+  </script>
+  <!-- Google tag (gtag.js). Os eventos de saida disparados no fim do body
+       chegam aqui por gtag('event', ...) e esperam o SDK na dataLayer. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-F40Z5Y9QT6', {
       linker: { domains: ['sirfisher.com.br', 'www.sirfisher.com.br', 'reservas.sirfisher.com.br'] }
+    });
+    window.sfAfterFirstPaint(function () {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-F40Z5Y9QT6';
+      document.head.appendChild(s);
     });
   </script>
   <!-- Meta Pixel. O mesmo dataset da Conversions API: os eventos do navegador e
@@ -174,7 +208,7 @@
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
     n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    t.src=v;s=b.getElementsByTagName(e)[0];f.sfAfterFirstPaint(function(){s.parentNode.insertBefore(t,s)})}(window,
     document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '948509834960152');
     fbq('track', 'PageView');
