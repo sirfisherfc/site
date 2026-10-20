@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-jfYF8858cU3x6nTN1a0mC7//98FYiSIUpJk88KtJlDY=' 'sha256-nG0XpnmbrR/fDHgk0vcR7xBndxlKv68RHZTay8FnfbE=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-jfYF8858cU3x6nTN1a0mC7//98FYiSIUpJk88KtJlDY=' 'sha256-5TMf36xDTAOOu+Z+zSEYpZjZUK8J5QS7H36PqLSkQIA=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -78,7 +78,7 @@
 
   <link rel="preload" href="../assets/fonts/fraunces.woff2?v=7234ed860a" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="../assets/css/style.css?v=b14e1ca871" />
-  <link rel="stylesheet" href="../assets/css/por-do-sol.css?v=4d9884ec0c" />
+  <link rel="stylesheet" href="../assets/css/por-do-sol.css?v=1eb4d7c43d" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Sir Fisher" />
@@ -231,43 +231,43 @@
     <main>
 
       <div class="sunset-intro">
-      <div class="hero">
-        <picture>
-          <source type="image/avif" srcset="../assets/img/pordosol-800.avif?v=ae3841463e 800w, ../assets/img/pordosol-1200.avif?v=26acfdb7fa 1200w" sizes="(min-width:1000px) 532px, (min-width:700px) calc(100vw - 64px), (max-width:460px) 100vw, 460px" />
-          <source type="image/webp" srcset="../assets/img/pordosol-800.webp?v=872e42d8d9 800w, ../assets/img/pordosol-1200.webp?v=83a0a78e6f 1200w" sizes="(min-width:1000px) 532px, (min-width:700px) calc(100vw - 64px), (max-width:460px) 100vw, 460px" />
-          <img class="hero__img" src="../assets/img/pordosol-800.jpg?v=6b87fb4ed3" alt="Pôr do sol na Avenida Beira Mar, em Fortaleza, visto das mesas do Sir Fisher" width="800" height="534" fetchpriority="high" />
-        </picture>
-      </div>
-
       <header class="board">
-        <p class="eyebrow">Beira-Mar · Fortaleza</p>
         <h1>A que horas é o pôr do sol em Fortaleza.</h1>
-        <p class="board__sub">Entre <strong>17h25 e 17h56</strong>, o ano inteiro. Consulte os horários de cada mês e veja quando chegar e para onde olhar.</p>
       </header>
 
       <section class="sunset-today" aria-label="Horário aproximado do pôr do sol">
-        <p class="sunset-today__label" data-sunset-label>Horário do pôr do sol em Fortaleza</p>
-        <span class="sunset-today__date" data-sunset-date>Horário local · UTC−3</span>
+        <div class="sunset-today__context">
+          <p class="sunset-today__label" data-sunset-date>Horário em Fortaleza</p>
+          <span class="sunset-today__date">Aproximadamente · Fortaleza (UTC−3)</span>
+        </div>
         <strong class="sunset-today__time" data-sunset-time>17h25 – 17h56</strong>
-        <p class="sunset-today__note">Horário aproximado para um horizonte livre. Nuvens e prédios podem encobrir o sol.</p>
         <p class="sunset-today__next" data-sunset-next hidden></p>
-        <a class="sunset-today__table" href="#tabela">Consultar a tabela mês a mês ↓</a>
       </section>
 
+      <figure class="hero">
+        <picture>
+          <source type="image/avif" srcset="../assets/img/terraco-por-do-sol-sir-fisher-640.avif?v=f82929df8f 640w, ../assets/img/terraco-por-do-sol-sir-fisher-960.avif?v=6eae7d1a09 960w" sizes="(min-width:1000px) 532px, (min-width:700px) 600px, (max-width:460px) calc(100vw - 44px), 416px" />
+          <source type="image/webp" srcset="../assets/img/terraco-por-do-sol-sir-fisher-640.webp?v=de5325d8a5 640w, ../assets/img/terraco-por-do-sol-sir-fisher-960.webp?v=3bc929848c 960w" sizes="(min-width:1000px) 532px, (min-width:700px) 600px, (max-width:460px) calc(100vw - 44px), 416px" />
+          <img class="hero__img" src="../assets/img/terraco-por-do-sol-sir-fisher-640.webp?v=de5325d8a5" alt="Mesas do Sir Fisher e vista para o mar no fim de tarde" width="960" height="858" fetchpriority="high" />
+        </picture>
+        <figcaption>Fim de tarde no Sir Fisher, na Beira-Mar.</figcaption>
+      </figure>
+
       <section class="sec sunset-invite" aria-labelledby="convite">
-        <h2 id="convite">Seu fim de tarde no Sir Fisher.</h2>
-        <p>Peixes, camarões e petiscos de frente para a orla, em frente ao Jardim Japonês. Planeje chegar entre <strong>16h e 16h30</strong> para aproveitar com calma.</p>
+        <h2 id="convite">O fim de tarde, visto da mesa.</h2>
+        <p>Peixes, camarões e petiscos, em frente ao Jardim Japonês. Venha aproveitar esse momento no Sir Fisher.</p>
         <div class="btn-pair">
           <a class="btn btn--primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps" data-position="abertura" aria-label="Como chegar ao Sir Fisher">Como chegar</a>
           <a class="btn btn--ghost" href="../cardapio/" data-evt="click_menu" data-position="abertura">Ver cardápio</a>
         </div>
-        <p class="sunset-invite__note">Pode vir sem reserva, por ordem de chegada. <a href="#daqui">Veja as mesas e como planejar a visita ↓</a></p>
+        <p class="sunset-invite__note">Pode vir sem reserva, por ordem de chegada.</p>
       </section>
       </div>
 
       <div class="sunset-guide">
       <section class="sec" id="tabela">
         <h2>A tabela, mês a mês</h2>
+        <p>Entre <strong>17h25 e 17h56</strong>, o ano inteiro. Consulte os horários de cada mês e veja quando chegar e para onde olhar.</p>
         <p>Cada linha mostra o horário no <strong>primeiro e no último dia</strong> do mês. Os valores foram calculados para a Beira-Mar de Fortaleza, no horário de Brasília. O Ceará não adota horário de verão.</p>
 
         <dl class="hours">
@@ -329,11 +329,11 @@
           <div>
             <figure class="sunset-venue__photo">
               <picture>
-                <source type="image/avif" srcset="../assets/img/terraco-por-do-sol-sir-fisher-640.avif?v=f82929df8f 640w, ../assets/img/terraco-por-do-sol-sir-fisher-960.avif?v=6eae7d1a09 960w" sizes="(min-width:1000px) 532px, (min-width:700px) 45vw, (max-width:460px) calc(100vw - 44px), 416px" />
-                <source type="image/webp" srcset="../assets/img/terraco-por-do-sol-sir-fisher-640.webp?v=de5325d8a5 640w, ../assets/img/terraco-por-do-sol-sir-fisher-960.webp?v=3bc929848c 960w" sizes="(min-width:1000px) 532px, (min-width:700px) 45vw, (max-width:460px) calc(100vw - 44px), 416px" />
-                <img src="../assets/img/terraco-por-do-sol-sir-fisher-640.webp?v=de5325d8a5" alt="Mesas do Sir Fisher ao ar livre, de frente para a orla, no fim de tarde" width="960" height="858" loading="lazy" decoding="async" />
+                <source type="image/avif" srcset="../assets/img/pordosol-800.avif?v=ae3841463e 800w, ../assets/img/pordosol-1200.avif?v=26acfdb7fa 1200w" sizes="(min-width:1000px) 532px, (min-width:700px) 45vw, (max-width:460px) calc(100vw - 44px), 416px" />
+                <source type="image/webp" srcset="../assets/img/pordosol-800.webp?v=872e42d8d9 800w, ../assets/img/pordosol-1200.webp?v=83a0a78e6f 1200w" sizes="(min-width:1000px) 532px, (min-width:700px) 45vw, (max-width:460px) calc(100vw - 44px), 416px" />
+                <img src="../assets/img/pordosol-800.jpg?v=6b87fb4ed3" alt="Pôr do sol na Avenida Beira Mar, em Fortaleza, visto das mesas do Sir Fisher" width="800" height="534" loading="lazy" decoding="async" />
               </picture>
-              <figcaption>O espaço do Sir Fisher, em frente ao Jardim Japonês.</figcaption>
+              <figcaption>O pôr do sol na Beira-Mar, visto do Sir Fisher.</figcaption>
             </figure>
           </div>
           <div class="sunset-venue__copy">
@@ -452,7 +452,7 @@
        que um bloco confiavel inserir. async=false mantem a ordem; no fim do
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
-    ['../assets/js/por-do-sol.js?v=226db0fb7a',
+    ['../assets/js/por-do-sol.js?v=debf5c9c44',
      '../assets/js/atribuicao.js?v=088591595a',
      '../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
       var s = document.createElement('script');

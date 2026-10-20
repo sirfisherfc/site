@@ -115,6 +115,12 @@ O foco para quem decide vir hoje é a rota. Reservas online para o mesmo dia
 encerram às 15h30; depois, atendimento por chegada. Não prometer posição de
 mesa, primeira fila, ausência de espera, clima ou vista do disco solar.
 
+Após a revisão aprovada em 20/10, a abertura segue a ordem título, horário
+compacto, foto real das mesas/mar, convite, rota e cardápio. O resumo anual foi
+mantido junto à tabela e a foto anterior de paisagem passou ao bloco da visita.
+No desktop, a foto fica ao lado do título/horário/ações. O quadro diário e as
+linhas de horário se adaptam também ao texto ampliado, sem sobreposição.
+
 ## Verificação móvel de 06/10/2026
 
 PageSpeed Insights autenticado, home em produção, estratégia móvel:

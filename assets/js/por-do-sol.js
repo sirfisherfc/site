@@ -97,18 +97,17 @@ if (typeof document !== 'undefined') {
   (function () {
     var clock = document.querySelector('[data-sunset-time]');
     if (!clock) return;
-    var label = document.querySelector('[data-sunset-label]');
     var date = document.querySelector('[data-sunset-date]');
     var next = document.querySelector('[data-sunset-next]');
     var formatter = new Intl.DateTimeFormat('pt-BR', {
-      timeZone: 'America/Fortaleza', day: 'numeric', month: 'long', year: 'numeric'
+      timeZone: 'America/Fortaleza', day: 'numeric', month: 'long'
     });
     function update() {
       try {
         var plan = FORTALEZA_SUNSET.todayAndTomorrow();
-        label.textContent = 'Pôr do sol hoje em Fortaleza';
-        date.textContent = formatter.format(new Date(plan.today.timestamp)) + ' · horário local (UTC−3)';
+        date.textContent = 'Hoje, ' + formatter.format(new Date(plan.today.timestamp));
         clock.textContent = plan.today.time;
+        clock.closest('.sunset-today').setAttribute('data-sunset-ready', '');
         next.hidden = !plan.hasPassed;
         next.textContent = plan.hasPassed
           ? 'O horário de hoje já passou. Amanhã: aproximadamente ' + plan.tomorrow.time + '.' : '';
