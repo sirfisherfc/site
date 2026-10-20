@@ -1,5 +1,9 @@
 # Presença no Google e medição
 
+O script legado `upload_and_create_ads.py` exige `META_ADS_TOKEN` no ambiente
+privado; não aceita credencial no código nem como argumento de linha de comando.
+Ele cria anúncios e não deve ser executado durante auditorias de leitura.
+
 ## Acesso ao Supabase portal
 
 Antes de solicitar reconexao, executar no workspace:

@@ -83,6 +83,7 @@ def create_ad_with_token(token):
             print(f"Erro ao criar anúncio {item['name']}: {err_msg}")
 
 if __name__ == '__main__':
-    import sys
-    token = sys.argv[1] if len(sys.argv) > 1 else 'EAADMjmhRGRQBSVhRGeNntsjL2ZCjQOZCfPzXSV0ZBefIJOUiVAy3M5A5v78ZCysSsjbeI96ascupMTdxdQUa2AeP9rKjDoDR8XS9UrcZCmsGe8SaHirhmtQfCB5QXoVSUnf9rpL4FIuZAqtFebMohsWYO8yhjB6xH2k5psftKLaYO2wPl3xw0rOTv1H51pMFfQPwZDZD'
+    token = os.environ.get('META_ADS_TOKEN')
+    if not token:
+        raise SystemExit('Defina META_ADS_TOKEN no ambiente privado antes de executar.')
     create_ad_with_token(token)
