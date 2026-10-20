@@ -1,0 +1,102 @@
+/* Pagina informativa com convite a visita; escopo exclusivo do por do sol. */
+.sunset-nav {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  min-height: 54px; padding: 10px 64px 10px 22px;
+  border-bottom: 1px solid var(--hairline);
+}
+.sunset-nav a { text-decoration: none; }
+.sunset-nav__brand { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; }
+.sunset-nav__table { font-size: 0.82rem; color: var(--on-card-soft); white-space: nowrap; }
+.sunset-page .theme-toggle {
+  top: 10px; right: 18px; background: var(--card-2); color: var(--on-card);
+  border-color: var(--hairline); opacity: 1; backdrop-filter: none;
+}
+.sunset-page .hero__img { height: clamp(150px, 22vh, 200px); }
+.sunset-today {
+  margin: 18px 22px 0; padding: 16px 18px; border-radius: 16px;
+  background: var(--card-2); border: 1px solid var(--hairline);
+}
+.sunset-today__label { margin: 0; font-size: 0.86rem; font-weight: 600; }
+.sunset-today__date { display: block; color: var(--on-card-soft); font-size: 0.8rem; margin-top: 2px; }
+.sunset-today__time {
+  display: block; font-family: var(--font-display); font-weight: 600;
+  font-size: 2.55rem; line-height: 1.15; margin: 6px 0; font-variant-numeric: tabular-nums;
+}
+.sunset-today__note { margin: 0; font-size: 0.82rem; line-height: 1.5; color: var(--on-card-soft); }
+.sunset-today__next { margin: 8px 0 0; font-size: 0.86rem; font-weight: 600; }
+.sunset-today__next[hidden] { display: none; }
+.sunset-today__table { display: inline-block; margin-top: 8px; padding: 4px 0; font-size: 0.82rem; text-underline-offset: 3px; }
+.sunset-page .sunset-invite { margin-top: 20px; }
+.sunset-invite h2 { font-size: 1.15rem; }
+.sunset-invite .btn-pair { gap: 10px; }
+.sunset-invite .sunset-invite__note { margin: 10px 0 0; font-size: 0.82rem; }
+.sunset-venue__photo { margin: 14px 0; }
+.sunset-venue__photo img { width: 100%; height: auto; border-radius: 16px; }
+.sunset-venue__photo figcaption, .sunset-dishes figcaption {
+  margin-top: 7px; font-size: 0.82rem; line-height: 1.4; color: var(--on-card-soft);
+}
+.sunset-dishes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+.sunset-dishes figure { margin: 0; }
+.sunset-dishes img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; }
+.sunset-dishes a { text-decoration: none; }
+.sunset-page .sunset-proof { margin-top: 14px; font-size: 0.9rem; }
+.sunset-proof small { display: block; color: var(--on-card-soft); font-size: 0.75rem; }
+.sunset-page .sunset-rule { font-size: 0.86rem; }
+.sunset-page :is(a, button):focus-visible { outline: 3px solid var(--sea); outline-offset: 4px; }
+.sunset-page :is(#tabela, #daqui, #metodo) { scroll-margin-top: 20px; }
+
+@media (min-width: 700px) {
+  .sunset-page::before { content: none; }
+  .shell--sunset { max-width: none; box-shadow: none; }
+  .sunset-nav { padding-left: max(32px, calc((100% - 1120px) / 2)); padding-right: max(88px, calc((100% - 1008px) / 2)); }
+  .sunset-page .theme-toggle { right: max(30px, calc((100% - 1120px) / 2)); }
+  .sunset-intro, .sunset-guide, .shell--sunset > main > .links { max-width: 1184px; margin-left: auto; margin-right: auto; }
+  .sunset-intro { padding: 28px 32px 0; }
+  .sunset-intro .hero { border-radius: 20px; overflow: hidden; }
+  .sunset-intro .hero__img { height: 300px; }
+  .sunset-intro .board { padding-top: 14px; }
+  .sunset-intro .board h1 { font-size: 2.2rem; max-width: 24ch; }
+  .sunset-intro .board__sub { max-width: 56ch; font-size: 1rem; }
+  .sunset-today { max-width: 600px; margin-left: auto; margin-right: auto; }
+  .sunset-invite { max-width: 600px; margin-left: auto; margin-right: auto; padding: 0; }
+  .sunset-guide { padding: 0 32px; }
+  .sunset-guide > .sec { padding: 0; margin-top: 48px; }
+  .sunset-guide .sec > p { max-width: 72ch; }
+  .sunset-venue__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+  .sunset-venue__photo { margin-top: 0; }
+  .sunset-venue__copy .place { margin-top: 0; }
+  .sunset-page .foot { margin-top: 48px; padding: 30px 32px; }
+}
+
+@media (min-width: 1000px) {
+  .sunset-intro {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto auto; gap: 22px 56px; padding-top: 44px;
+  }
+  .sunset-intro .hero { grid-column: 2; grid-row: 1 / 4; }
+  .sunset-intro .hero picture { display: block; height: 100%; }
+  .sunset-intro .hero__img { height: 100%; min-height: 580px; object-position: 58% center; }
+  .sunset-intro .board { grid-column: 1; grid-row: 1; text-align: left; padding: 0; }
+  .sunset-intro .eyebrow { margin-top: 0; }
+  .sunset-intro .board h1 { margin: 0; max-width: 20ch; font-size: clamp(2.3rem, 3.2vw, 3rem); line-height: 1.08; }
+  .sunset-intro .board__sub { margin-left: 0; font-size: 1.02rem; }
+  .sunset-today { grid-column: 1; grid-row: 2; margin: 0; width: 100%; max-width: none; }
+  .sunset-intro .sunset-invite { grid-column: 1; grid-row: 3; margin: 0; max-width: none; }
+  .sunset-guide { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 56px; padding-top: 64px; }
+  .sunset-guide > .sec { margin: 0; }
+  .sunset-guide .sec h2 { font-size: 1.65rem; }
+  .sunset-guide .sec p { font-size: 1rem; }
+  #tabela { grid-column: 1; grid-row: 1 / 3; }
+  #por-que { grid-column: 2; grid-row: 1; }
+  #quando-chegar { grid-column: 2; grid-row: 2; }
+  #onde-olhar, #daqui, #metodo { grid-column: 1 / -1; }
+  #onde-olhar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 56px; align-items: start; padding-top: 24px; }
+  #onde-olhar > :not(figure) { grid-column: 1; }
+  #onde-olhar > figure { grid-column: 2; grid-row: 1 / 4; margin-top: 0; }
+  #daqui { padding-top: 24px; }
+  .sunset-venue__grid { gap: 56px; margin-top: 24px; }
+  .sunset-venue__photo img { max-height: 430px; object-fit: contain; }
+  #metodo { padding-top: 24px; }
+  .shell--sunset > main > .links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; padding: 32px; }
+  .shell--sunset .links__label { grid-column: 1 / -1; }
+}

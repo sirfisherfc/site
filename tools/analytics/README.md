@@ -76,6 +76,45 @@ Meta/OpenAI esperavam só o `load` e o GA4 carregava de imediato). As filas
 teto. Visitas que saem antes disso sem interagir não chegam a ser medidas:
 a partir de 13/10/2026 as sessões e PageViews de rejeição imediata caem.
 
+## Página de pôr do sol: linha de base de 20/10/2026
+
+A melhoria de conversão preserva URL, canonical, title, description, H1 e as
+12 linhas da tabela mensal. CSS e cálculo diário ficam em `por-do-sol.css` e
+`por-do-sol.js`, exclusivos da página. O cálculo NOAA/Meeus usa as coordenadas
+da casa, horário `America/Fortaleza`, horizonte padrão e arredondamento para
+minuto; não consulta serviço externo nem localização do visitante. Depois do
+horário de hoje, mostra também o de amanhã. Sem JavaScript, faixa e tabela
+continuam disponíveis. Nuvens, prédios e atmosfera afetam a visibilidade real.
+
+Testes de datas de referência, fuso, virada do dia/ano e ano bissexto:
+
+```powershell
+node --test tools/analytics/sunset_test.mjs
+```
+
+O ambiente local também tem Node no driver do Playwright, em
+`tools/analytics/.venv/Lib/site-packages/playwright/driver/node.exe`.
+
+Base filtrada pela URL, 21/09–18/10/2026: Search Console 101 cliques e 42.831
+impressões. Sessões iniciadas nessa página no GA4: 86, sendo 79 google/organic,
+83 em celular e três em computador. Houve seis eventos click_menu, um
+click_maps e nenhum click_reservation nesse conjunto de sessões; não são
+visitas presenciais nem um funil deduplicado. A captura de três meses enviada
+pelo proprietário foi reconciliada com 21/07–18/10: a consulta “pôr do sol hoje”
+nessa URL teve 86 cliques e 34.835 impressões.
+
+Comparar janelas de 28 dias após consolidação, mantendo separado Search Console
+de GA4 e considerando a mudança de carregamento das tags em 13/10. Acompanhar
+cliques em rota/cardápio/reserva e resultados operacionais identificados, sem
+prometer efeito causal ou significância com esse volume. Os cliques preservam
+os nomes de evento existentes; `cta_position` distingue abertura/pratos/visita
+no payload. Para usá-lo como dimensão nos relatórios GA4, é necessário seu
+registro como dimensão personalizada; isso não foi alterado nesta entrega.
+
+O foco para quem decide vir hoje é a rota. Reservas online para o mesmo dia
+encerram às 15h30; depois, atendimento por chegada. Não prometer posição de
+mesa, primeira fila, ausência de espera, clima ou vista do disco solar.
+
 ## Verificação móvel de 06/10/2026
 
 PageSpeed Insights autenticado, home em produção, estratégia móvel:
