@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-wbHCAaZTh2PwiSTkIJtRaRceIaUDYUa8ZyAmjrga3Yw=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-VI+bw6dsGGjAL4sN5v6qVgvNoUML6vIqG/AU7lfZZfE=' 'sha256-/X7suNKy20/PgZ4NG5e9ubpCzvtuCnjF4TkEBj5tEsw=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-wbHCAaZTh2PwiSTkIJtRaRceIaUDYUa8ZyAmjrga3Yw=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-jvqg7Dri0BsQH/JHSa+fqoVOxGgv64+zcaB+zDU8NCA=' 'sha256-0w2UKqnVMF136QfduV4Vz8MsprwMEFSVtQCfx3ndRj0=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -343,9 +343,9 @@
         <a href="#sunset">Sunset</a>
         <a href="#booking">Booking</a>
         <a href="#where">Where we are</a>
-        <a href="../cardapio/?lang=en" data-evt="click_menu">Menu</a>
+        <a href="../cardapio/?lang=en" data-evt="click_menu" data-position="topo">Menu</a>
       </nav>
-      <a class="btn btn--primary topbar__cta" href="https://reservas.sirfisher.com.br/?lang=en" target="_blank" rel="noopener" data-evt="click_reservation">
+      <a class="btn btn--primary topbar__cta" href="https://reservas.sirfisher.com.br/?lang=en&amp;sf_cta=topo" target="_blank" rel="noopener" data-evt="click_reservation" data-position="topo">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="1"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
         Book a table
       </a>
@@ -375,14 +375,14 @@
         <p class="eyebrow">Av. Beira Mar · Fortaleza, Brazil</p>
         <h1>A seafront restaurant worth a stop on the Beira-Mar.</h1>
         <p class="board__sub">Fish, prawns, Brazilian cooking, a view of the sea and a sunset that earns the table on its own.</p>
-        <p class="board__proof"><a href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews"><strong>★ 4.7</strong> on Google · 787 reviews</a></p>
+        <p class="board__proof"><a href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews" data-position="abertura"><strong>★ 4.7</strong> on Google · 787 reviews</a></p>
       </header>
 
       <!-- Ações principais: o cardápio é a primeira coisa alcançável (QR Code) -->
       <div class="actions">
 
         <!-- CARDÁPIO = a própria foto do prato leva ao menu -->
-        <a class="feature" href="../cardapio/?lang=en" data-evt="click_menu">
+        <a class="feature" href="../cardapio/?lang=en" data-evt="click_menu" data-position="abertura">
           <picture>
             <source type="image/avif" srcset="../assets/img/prato-480.avif?v=cb15eda149 480w, ../assets/img/prato-800.avif?v=595c3ee448 800w, ../assets/img/prato-1200.avif?v=555b1999d6 1200w" sizes="(min-width:1024px) 340px, (max-width:460px) 100vw, 460px" />
             <source type="image/webp" srcset="../assets/img/prato-480.webp?v=5bacc37f7d 480w, ../assets/img/prato-800.webp?v=9ecb41bc8b 800w, ../assets/img/prato-1200.webp?v=6d8fc1ab53 1200w" sizes="(min-width:1024px) 340px, (max-width:460px) 100vw, 460px" />
@@ -401,11 +401,11 @@
         </a>
 
         <div class="btn-pair">
-          <a class="btn btn--solid" href="../cardapio/?lang=en" data-evt="click_menu">
+          <a class="btn btn--solid" href="../cardapio/?lang=en" data-evt="click_menu" data-position="abertura">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
             Menu
           </a>
-          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?lang=en" target="_blank" rel="noopener" data-evt="click_reservation">
+          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?lang=en&amp;sf_cta=abertura" target="_blank" rel="noopener" data-evt="click_reservation" data-position="abertura">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="1"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
             Book a table
           </a>
@@ -413,13 +413,13 @@
 
         <!-- Cardápio de almoço: nasce oculto e só aparece no horário (JS no fim
              da página). Sem JS, continua acessível pelo link "More from Sir Fisher". -->
-        <a class="btn btn--lunch" id="lunch-cta" href="../almoco-executivo/" hreflang="pt-BR" data-evt="click_menu" hidden>
+        <a class="btn btn--lunch" id="lunch-cta" href="../almoco-executivo/" hreflang="pt-BR" data-evt="click_menu" hidden data-position="abertura">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
           Set lunch menu
           <span class="btn__pill">until 2 pm</span>
         </a>
 
-        <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps">
+        <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps" data-position="abertura">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.2 7-12a7 7 0 0 0-14 0c0 4.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg>
           Directions
         </a>
@@ -496,7 +496,7 @@
           </figure>
         </div>
 
-        <a class="btn btn--solid" href="../cardapio/?lang=en" data-evt="click_menu">
+        <a class="btn btn--solid" href="../cardapio/?lang=en" data-evt="click_menu" data-position="pratos">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
           See the full menu
         </a>
@@ -540,11 +540,11 @@
         <p>For groups larger than ten, message us on WhatsApp instead, so we can check the room first.</p>
 
         <div class="btn-pair">
-          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?lang=en" target="_blank" rel="noopener" data-evt="click_reservation">
+          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?lang=en&amp;sf_cta=reservas" target="_blank" rel="noopener" data-evt="click_reservation" data-position="reservas">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="1"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
             Book a table
           </a>
-          <a class="btn btn--ghost" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">
+          <a class="btn btn--ghost" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp" data-position="reservas">
             WhatsApp
           </a>
         </div>
@@ -574,11 +574,11 @@
         <p class="hours-note">Times are Fortaleza local time (UTC−3, no daylight saving).</p>
 
         <div class="btn-pair">
-          <a class="btn btn--solid" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps">
+          <a class="btn btn--solid" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps" data-position="localizacao">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.2 7-12a7 7 0 0 0-14 0c0 4.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg>
             Directions
           </a>
-          <a class="btn btn--ghost" href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_maps">
+          <a class="btn btn--ghost" href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_maps" data-position="localizacao">
             Google Maps
           </a>
         </div>
@@ -604,7 +604,7 @@
           <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
 
-        <a class="link-row link-row--sun" id="lunch" href="../almoco-executivo/" hreflang="pt-BR" data-evt="click_menu">
+        <a class="link-row link-row--sun" id="lunch" href="../almoco-executivo/" hreflang="pt-BR" data-evt="click_menu" data-position="rodape">
           <span class="link-row__stamp">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
           </span>
@@ -620,7 +620,7 @@
           <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
 
-        <a class="link-row link-row--coral" href="https://www.instagram.com/sirfisherfc" target="_blank" rel="noopener" data-evt="click_instagram">
+        <a class="link-row link-row--coral" href="https://www.instagram.com/sirfisherfc" target="_blank" rel="noopener" data-evt="click_instagram" data-position="rodape">
           <span class="link-row__stamp">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
           </span>
@@ -628,7 +628,7 @@
           <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
 
-        <a class="link-row link-row--sea" href="https://open.spotify.com/playlist/6y71XQVrNNUDqCXPHbxGEB" target="_blank" rel="noopener" data-evt="click_spotify">
+        <a class="link-row link-row--sea" href="https://open.spotify.com/playlist/6y71XQVrNNUDqCXPHbxGEB" target="_blank" rel="noopener" data-evt="click_spotify" data-position="rodape">
           <span class="link-row__stamp">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 1.6-2l8-1.6A1 1 0 0 1 15 4.4V13"/><circle cx="6" cy="17" r="2.5"/><circle cx="13" cy="15.5" r="2.5"/></svg>
           </span>
@@ -636,7 +636,7 @@
           <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
 
-        <a class="link-row link-row--sun" href="https://g.page/r/CWhg4viCVhqbEBE/review" target="_blank" rel="noopener" data-evt="click_review">
+        <a class="link-row link-row--sun" href="https://g.page/r/CWhg4viCVhqbEBE/review" target="_blank" rel="noopener" data-evt="click_review" data-position="rodape">
           <span class="link-row__stamp">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9 6.8 19l1-5.8L3.6 9.1l5.8-.8L12 3z"/></svg>
           </span>
@@ -644,7 +644,7 @@
           <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
 
-        <a class="link-row link-row--sea" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">
+        <a class="link-row link-row--sea" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp" data-position="rodape">
           <span class="link-row__stamp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-2-1.2 7.4 7.4 0 0 1-1.4-1.7c-.1-.2 0-.4.1-.5s.2-.3.4-.4.2-.2.3-.4a.5.5 0 0 0 0-.5c0-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.7 11.7 0 0 0 4.5 4c.6.3 1.1.4 1.5.5a3.6 3.6 0 0 0 1.6.1 2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c-.1-.1-.2-.2-.5-.3z"/></svg>
           </span>
@@ -725,7 +725,7 @@
         if (!a) return;
         var name = a.getAttribute('data-evt');
         var label = a.getAttribute('aria-label') || a.textContent || '';
-        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80) };
+        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80), cta_position: a.getAttribute('data-position') || 'conteudo' };
         window.dataLayer.push(Object.assign({ event: name }, payload));
         if (typeof window.gtag === 'function') window.gtag('event', name, payload);
         // Eventos padrao do Meta: o otimizador entende esses nomes nativamente,
@@ -745,7 +745,7 @@
        que um bloco confiavel inserir. async=false mantem a ordem; no fim do
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
-    ['../assets/js/atribuicao.js?v=088591595a',
+    ['../assets/js/atribuicao.js?v=23902143b1',
      '../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
       var s = document.createElement('script');
       s.src = src;

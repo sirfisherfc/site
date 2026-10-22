@@ -670,11 +670,11 @@
     var en = LANG === 'en';
     partes.push('<div class="rodape__links">' +
       '<a href="' + (en ? '../en/' : '../') + '">' + esc(T('linkRestaurante')) + '</a>' +
-      '<a href="https://reservas.sirfisher.com.br/' + (en ? '?lang=en' : '') + '" data-evt="click_reservation">' + esc(T('linkReservar')) + '</a>' +
+      '<a href="https://reservas.sirfisher.com.br/?sf_cta=cardapio_rodape' + (en ? '&amp;lang=en' : '') + '" data-evt="click_reservation" data-position="cardapio_rodape">' + esc(T('linkReservar')) + '</a>' +
       '<a href="' + (en ? 'https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE' : '../como-chegar/') + '"' +
-      (en ? ' target="_blank" rel="noopener" data-evt="click_maps"' : '') + '>' + esc(T('linkChegar')) + '</a>' +
-      '<a href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">WhatsApp</a>' +
-      '<a href="tel:+5585988544274" data-evt="click_phone">' + esc(T('linkLigar')) + '</a></div>');
+      (en ? ' target="_blank" rel="noopener" data-evt="click_maps" data-position="cardapio_rodape"' : '') + '>' + esc(T('linkChegar')) + '</a>' +
+      '<a href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp" data-position="cardapio_rodape">WhatsApp</a>' +
+      '<a href="tel:+5585988544274" data-evt="click_phone" data-position="cardapio_rodape">' + esc(T('linkLigar')) + '</a></div>');
     $('#rodape').innerHTML = partes.join('');
   }
 
@@ -1087,7 +1087,8 @@
       if (nome) {
         var rotulo = (alvo.getAttribute('aria-label') || alvo.textContent || '')
           .replace(/\s+/g, ' ').trim().slice(0, 80);
-        sinal(nome, { link_url: alvo.href, link_text: rotulo });
+        sinal(nome, { link_url: alvo.href, link_text: rotulo,
+          cta_position: alvo.getAttribute('data-position') || 'conteudo' });
       }
       if (alvo.closest('#painel-categorias')) {
         var href = alvo.getAttribute('href') || '';

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-4EzY5b76q7VNgDbqPQrtd5vjWibBeR715uh36wKjAfM=' 'sha256-/X7suNKy20/PgZ4NG5e9ubpCzvtuCnjF4TkEBj5tEsw=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-jfYF8858cU3x6nTN1a0mC7//98FYiSIUpJk88KtJlDY=' 'sha256-0w2UKqnVMF136QfduV4Vz8MsprwMEFSVtQCfx3ndRj0=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -277,7 +277,7 @@
       </header>
 
       <section class="sec">
-        <a class="btn btn--solid" href="https://reservas.sirfisher.com.br/reveillon.html?sf_origin=pagina_reveillon#mapa" data-evt="click_reveillon">
+        <a class="btn btn--solid" href="https://reservas.sirfisher.com.br/reveillon.html?sf_origin=pagina_reveillon#mapa" data-evt="click_reveillon" data-position="abertura">
           Escolher minha mesa no mapa
         </a>
       </section>
@@ -332,7 +332,7 @@
           <p>A mesa fica garantida com o sinal de 30% em até 48 horas. O saldo pode ser pago até 20/12/2026. Valores do 1º lote.</p>
         </div>
 
-        <a class="btn btn--solid" href="https://reservas.sirfisher.com.br/reveillon.html?sf_origin=pagina_reveillon_mesas#mapa" data-evt="click_reveillon">
+        <a class="btn btn--solid" href="https://reservas.sirfisher.com.br/reveillon.html?sf_origin=pagina_reveillon_mesas#mapa" data-evt="click_reveillon" data-position="mesas">
           Ver mesas livres no mapa
         </a>
       </section>
@@ -370,10 +370,10 @@
         </dl>
 
         <div class="btn-pair">
-          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/reveillon.html?sf_origin=pagina_reveillon_fim#mapa" data-evt="click_reveillon">
+          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/reveillon.html?sf_origin=pagina_reveillon_fim#mapa" data-evt="click_reveillon" data-position="visita">
             Escolher mesa
           </a>
-          <a class="btn btn--ghost" href="https://api.whatsapp.com/send?phone=5585988544274&amp;text=Ol%C3%A1!%20Quero%20saber%20sobre%20o%20R%C3%A9veillon%202027." target="_blank" rel="noopener" data-evt="click_whatsapp">
+          <a class="btn btn--ghost" href="https://api.whatsapp.com/send?phone=5585988544274&amp;text=Ol%C3%A1!%20Quero%20saber%20sobre%20o%20R%C3%A9veillon%202027." target="_blank" rel="noopener" data-evt="click_whatsapp" data-position="visita">
             WhatsApp
           </a>
         </div>
@@ -383,7 +383,7 @@
       <nav class="links" aria-label="Mais do Sir Fisher">
         <p class="links__label">Mais do Sir Fisher</p>
 
-        <a class="link-row link-row--sun" href="../eventos/" data-evt="click_eventos">
+        <a class="link-row link-row--sun" href="../eventos/" data-evt="click_eventos" data-position="rodape">
           <span class="link-row__label">Eventos e confraternizações<span class="link-row__sub">Simule o seu evento no Sir Fisher</span></span>
           <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -416,7 +416,7 @@
         if (!a) return;
         var name = a.getAttribute('data-evt');
         var label = a.getAttribute('aria-label') || a.textContent || '';
-        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80) };
+        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80), cta_position: a.getAttribute('data-position') || 'conteudo' };
         window.dataLayer.push(Object.assign({ event: name }, payload));
         if (typeof window.gtag === 'function') window.gtag('event', name, payload);
         // Eventos padrao do Meta: o otimizador entende esses nomes nativamente,
@@ -435,7 +435,7 @@
        que um bloco confiavel inserir. async=false mantem a ordem; no fim do
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
-    ['../assets/js/atribuicao.js?v=088591595a',
+    ['../assets/js/atribuicao.js?v=23902143b1',
      '../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
       var s = document.createElement('script');
       s.src = src;

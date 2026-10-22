@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-4EzY5b76q7VNgDbqPQrtd5vjWibBeR715uh36wKjAfM=' 'sha256-/X7suNKy20/PgZ4NG5e9ubpCzvtuCnjF4TkEBj5tEsw=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-jfYF8858cU3x6nTN1a0mC7//98FYiSIUpJk88KtJlDY=' 'sha256-0w2UKqnVMF136QfduV4Vz8MsprwMEFSVtQCfx3ndRj0=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -221,7 +221,7 @@
       </header>
 
       <section class="sec">
-        <a class="btn btn--solid" href="https://reservas.sirfisher.com.br/?sf_origin=pagina_reservas" target="_blank" rel="noopener" data-evt="click_reservation">
+        <a class="btn btn--solid" href="https://reservas.sirfisher.com.br/?sf_origin=pagina_reservas&amp;sf_cta=abertura" target="_blank" rel="noopener" data-evt="click_reservation" data-position="abertura">
           Reservar agora
         </a>
       </section>
@@ -257,10 +257,10 @@
 
       <section class="sec">
         <h2>Pronto para reservar?</h2>
-        <a class="btn btn--solid" href="https://reservas.sirfisher.com.br/?sf_origin=pagina_reservas_fim" target="_blank" rel="noopener" data-evt="click_reservation">
+        <a class="btn btn--solid" href="https://reservas.sirfisher.com.br/?sf_origin=pagina_reservas_fim&amp;sf_cta=visita" target="_blank" rel="noopener" data-evt="click_reservation" data-position="visita">
           Reservar mesa online
         </a>
-        <a class="link-row link-row--sea" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">
+        <a class="link-row link-row--sea" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp" data-position="visita">
           Prefiro falar no WhatsApp
         </a>
         <a class="link-row" href="../como-chegar/">Como chegar ao restaurante</a>
@@ -288,7 +288,7 @@
         if (!a) return;
         var name = a.getAttribute('data-evt');
         var label = a.getAttribute('aria-label') || a.textContent || '';
-        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80) };
+        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80), cta_position: a.getAttribute('data-position') || 'conteudo' };
         window.dataLayer.push(Object.assign({ event: name }, payload));
         if (typeof window.gtag === 'function') window.gtag('event', name, payload);
         // Eventos padrao do Meta: o otimizador entende esses nomes nativamente,
@@ -307,7 +307,7 @@
        que um bloco confiavel inserir. async=false mantem a ordem; no fim do
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
-    ['../assets/js/atribuicao.js?v=088591595a',
+    ['../assets/js/atribuicao.js?v=23902143b1',
      '../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
       var s = document.createElement('script');
       s.src = src;

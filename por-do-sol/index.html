@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-jfYF8858cU3x6nTN1a0mC7//98FYiSIUpJk88KtJlDY=' 'sha256-5TMf36xDTAOOu+Z+zSEYpZjZUK8J5QS7H36PqLSkQIA=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-jfYF8858cU3x6nTN1a0mC7//98FYiSIUpJk88KtJlDY=' 'sha256-X0PptIH5XZICafUlbdpFzrezXpi04m5Yotbm6rbTiH4=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -359,12 +359,12 @@
             <figcaption>Camarão alho e óleo</figcaption></figure></a>
         </div>
         <p><a href="../cardapio/" data-evt="click_menu" data-position="visita">Veja pratos e preços no cardápio →</a></p>
-        <p class="sunset-proof"><a href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews"><strong>4,7/5 no Google · 800 avaliações</strong></a><small>Consulta ao Google em 20/10/2026.</small></p>
+        <p class="sunset-proof"><a href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews" data-position="visita"><strong>4,7/5 no Google · 800 avaliações</strong></a><small>Consulta ao Google em 20/10/2026.</small></p>
         <div class="btn-pair">
           <a class="btn btn--primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps" data-position="visita">
             Como chegar
           </a>
-          <a class="btn btn--ghost" href="https://reservas.sirfisher.com.br/?sf_origin=por_do_sol" target="_blank" rel="noopener" data-evt="click_reservation" data-position="visita">Planejar reserva</a>
+          <a class="btn btn--ghost" href="https://reservas.sirfisher.com.br/?sf_origin=por_do_sol&amp;sf_cta=visita" target="_blank" rel="noopener" data-evt="click_reservation" data-position="visita">Planejar reserva</a>
         </div>
         <p class="sunset-rule">Reservas para o mesmo dia até <strong>15h30</strong>. Depois, atendimento por ordem de chegada. A reserva não define a posição da mesa. <a href="../reservas/">Leia as regras de reserva.</a></p>
           </div>
@@ -453,7 +453,7 @@
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
     ['../assets/js/por-do-sol.js?v=debf5c9c44',
-     '../assets/js/atribuicao.js?v=088591595a',
+     '../assets/js/atribuicao.js?v=23902143b1',
      '../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
       var s = document.createElement('script');
       s.src = src;

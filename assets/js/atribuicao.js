@@ -124,6 +124,17 @@
       } catch (e) {
         return;
       }
+      if (destination.protocol !== 'https:' || destination.hostname !== 'reservas.sirfisher.com.br' ||
+          destination.port || destination.username || destination.password) return;
+
+      // Posicao do botao e contexto da navegacao, nao uma nova campanha.
+      // O Reveillon tem outro fluxo: nao recebe a posicao do formulario comum.
+      var position = link.getAttribute ? link.getAttribute('data-position') : null;
+      var eventName = link.getAttribute ? link.getAttribute('data-evt') : null;
+      if (eventName === 'click_reservation' && /^\/(?:index\.html)?$/.test(destination.pathname) &&
+          /^(topo|abertura|reservas|visita|cardapio_rodape|conteudo)$/.test(position || '')) {
+        destination.searchParams.set('sf_cta', position);
+      }
 
       // Um link interno não inicia uma campanha. Limpa os UTMs legados para
       // não transformar Google/Instagram em "site / organic" na reserva.

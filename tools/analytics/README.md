@@ -89,6 +89,93 @@ faltar por bloqueio da tag ou ausência dos identificadores. `--operations`
 consulta somente agregados por endpoint de banco com usuário de leitura,
 sem nomes, contatos, identificadores de clientes ou dados financeiros.
 
+### Posição dos botões e continuidade até o formulário (22/10/2026)
+
+Os eventos de clique existentes recebem `cta_position`, definido explicitamente
+por `data-position` no HTML. Home PT/EN, Conheça e páginas de descoberta usam
+posições como `topo`, `abertura`, `pratos`, `reservas`, `visita` e `rodape`.
+No cardápio, os links finais usam `cardapio_rodape`. Nomes de eventos, campanhas,
+carregador adiado e QR impresso permanecem os mesmos.
+
+Os links para a reserva comum levam a mesma posição em `sf_cta`, já no HTML,
+inclusive antes do carregamento das tags ou com JavaScript indisponível. O
+formulário pode assim usar `cta_position` nos estágios seguintes. Os únicos
+valores repassados são `topo`, `abertura`, `reservas`, `visita`,
+`cardapio_rodape` e `conteudo`; não contêm texto digitado ou dados de clientes.
+`sf_cta` é contexto do botão, separado de `sf_origin` e da atribuição de
+campanha. Não vira UTM, não é salvo como campanha e não substitui Google,
+Instagram ou outro canal. A decoração adicional exige HTTPS e o host exato
+`reservas.sirfisher.com.br`; não adiciona `sf_cta` a WhatsApp, Maps ou ao
+fluxo de Réveillon. Idioma, origem, identificadores e âncora são preservados.
+
+Para consultar `cta_position` no GA4, usar a dimensão personalizada de escopo
+de evento correspondente. O código de coleta não registra dimensões por si
+só e o registro não disponibiliza o parâmetro retroativamente. A continuidade
+até o resultado operacional depende dos identificadores efetivamente recebidos
+pelo portal; ausência de confirmação no Analytics não comprova desistência.
+
+Validação offline dos handlers reais e URLs, sem enviar eventos ou criar reservas:
+
+```powershell
+deno test --allow-read tools/analytics/reservation_cta_test.mjs tools/analytics/attribution_test.mjs tools/analytics/marketing_loader_test.mjs
+```
+
+O teste inclui as versões PT/EN, cliques antes das tags, tags ausentes, storage
+bloqueado, links inseridos depois, proteção de destino e o rodapé real do cardápio.
+
+### Revisão reproduzível do funil e da coorte operacional
+
+```powershell
+site/tools/analytics/.venv/Scripts/python.exe -X utf8 site/tools/analytics/reservation_funnel_report.py --start 2026-09-22 --end 2026-10-19
+site/tools/analytics/.venv/Scripts/python.exe -X utf8 site/tools/analytics/reservation_funnel_report.py --days 7 --end-date 2026-10-29
+```
+
+Executar na raiz do workspace. Sem datas, usa sete dias com três dias de margem
+para consolidação em Fortaleza. Aceita até 366 dias. `--no-operations` consulta
+somente GA4. O script reutiliza a conta de serviço existente, os SDKs Alpha/Beta
+instalados no ambiente de analytics e o helper canônico de acesso ao portal.
+Não instala dependências, envia eventos, cria reservas ou exporta dados pessoais.
+
+O funil fechado consulta, em sequência, `reservation_form_view` →
+`reservation_form_start` → `reservation_submit_attempt` → `reservation_confirmed`.
+Cada etapa exige o parâmetro nativo `form_kind=standard`, sem depender da
+propagação da dimensão personalizada, e permite eventos intermediários. Mede
+usuários que percorreram a sequência no período, não necessariamente na mesma
+sessão ou na mesma reserva. Mostra recortes por dispositivo, origem/mídia da
+sessão e posição do CTA quando disponível. Não soma usuários desses recortes.
+Cada recorte traz até 15 valores, limite da API, além do total reservado.
+Os metadados de amostragem e limitações são preservados. As novas etapas só
+existem a partir da publicação de 22/10; a janela anterior serve como linha de
+base operacional, sem inventar um funil retroativo.
+
+Contagens isoladas por evento são mostradas à parte, sem filtro novo de
+`form_kind`: `reservation_confirmed` já era exclusivo da reserva comum,
+enquanto Réveillon usa outros eventos. Sua contagem inclui confirmações legadas
+anteriores à instrumentação e não é a conclusão do novo funil sequencial.
+Recortes de dimensões novas indisponíveis aparecem como pendentes, sem impedir
+o total do funil. O cadastro dessas dimensões não retroage os dados.
+
+A consulta ao banco usa exclusivamente a rota Management API
+`database/query/read-only`, com parâmetros de data e o projeto `portal` fixo.
+A coorte é de reservas `source=public_site` criadas no mesmo intervalo civil
+em Fortaleza, com limite inicial inclusivo e final exclusivo. Retorna apenas
+total criado, total com os dois identificadores GA preenchidos e contagem por
+status atual dessa coorte. Não exporta os identificadores nem usa a data da
+visita como denominador. Contagens GA4 e banco são paralelas e têm cobertura
+parcial: não comprovam correspondência individual, igualdade, causalidade ou
+receita. O fuso retornado pelo GA4 aparece no relatório para conferir o recorte.
+
+Teste offline dos requests reais dos SDKs e da agregação, com rede bloqueada:
+
+```powershell
+site/tools/analytics/.venv/Scripts/python.exe -X utf8 -m unittest discover -s site/tools/analytics -p test_reservation_funnel_report.py
+```
+
+A fixture SQL roda em memória com adaptações de dialeto para data/fuso e JSON;
+a conferência no Postgres é feita pela leitura real do relatório. Referências:
+[funis da Data API](https://developers.google.com/analytics/devguides/reporting/data/v1/funnels)
+e [consulta somente de leitura do Supabase](https://supabase.com/docs/reference/api/v1-read-only-query).
+
 As reservas criadas usam data de criação no fuso de Fortaleza; comparecimentos
 usam data da visita. Esses números não formam uma coorte de conversão direta.
 Primeiro comparecimento **registrado** não comprova primeira visita à casa.

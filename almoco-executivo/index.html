@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-4EzY5b76q7VNgDbqPQrtd5vjWibBeR715uh36wKjAfM=' 'sha256-/X7suNKy20/PgZ4NG5e9ubpCzvtuCnjF4TkEBj5tEsw=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-jfYF8858cU3x6nTN1a0mC7//98FYiSIUpJk88KtJlDY=' 'sha256-0w2UKqnVMF136QfduV4Vz8MsprwMEFSVtQCfx3ndRj0=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -401,7 +401,7 @@
           </div>
         </div>
 
-        <a class="btn btn--solid" href="https://www.hubt.com.br/sir-fisher-praia--almoco/" target="_blank" rel="noopener" data-evt="click_menu">
+        <a class="btn btn--solid" href="https://www.hubt.com.br/sir-fisher-praia--almoco/" target="_blank" rel="noopener" data-evt="click_menu" data-position="pratos">
           Ver o cardápio de almoço completo
         </a>
       </section>
@@ -422,10 +422,10 @@
         </dl>
 
         <div class="btn-pair">
-          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?sf_origin=almoco_executivo" target="_blank" rel="noopener" data-evt="click_reservation">
+          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?sf_origin=almoco_executivo&amp;sf_cta=visita" target="_blank" rel="noopener" data-evt="click_reservation" data-position="visita">
             Reservar mesa
           </a>
-          <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps">
+          <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps" data-position="visita">
             Como chegar
           </a>
         </div>
@@ -452,7 +452,7 @@
           <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
 
-        <a class="link-row link-row--sea" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">
+        <a class="link-row link-row--sea" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp" data-position="rodape">
           <span class="link-row__label">Fale conosco<span class="link-row__sub">WhatsApp · (85) 98854-4274</span></span>
           <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -480,7 +480,7 @@
         if (!a) return;
         var name = a.getAttribute('data-evt');
         var label = a.getAttribute('aria-label') || a.textContent || '';
-        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80) };
+        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80), cta_position: a.getAttribute('data-position') || 'conteudo' };
         window.dataLayer.push(Object.assign({ event: name }, payload));
         if (typeof window.gtag === 'function') window.gtag('event', name, payload);
         // Eventos padrao do Meta: o otimizador entende esses nomes nativamente,
@@ -499,7 +499,7 @@
        que um bloco confiavel inserir. async=false mantem a ordem; no fim do
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
-    ['../assets/js/atribuicao.js?v=088591595a',
+    ['../assets/js/atribuicao.js?v=23902143b1',
      '../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
       var s = document.createElement('script');
       s.src = src;

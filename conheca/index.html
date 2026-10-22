@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-aNjaVLI++yziKytBgwPWcKxqgzsGx6MnwlS7ouFImbc=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-mIG1f0OJ4zLvPXeSaB5wjvqegDEvhFb3nG0djdMKNno=' 'sha256-lq9MhjkkLMuc1h5Ue7l6Pe7KIBWlR5GBRBgNTC31sQ8=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-aNjaVLI++yziKytBgwPWcKxqgzsGx6MnwlS7ouFImbc=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-DBA6lmbLWQPBabyOhmH7OrJjMhcuYMmx1r97M4HVnMg=' 'sha256-MyBRsYMUKggxWh0xTv5JoBPJnRO916UZwTAzkDryR6k=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -267,21 +267,21 @@
           <h1 id="titulo">Peixes, camarões<br />e vista pro mar.</h1>
           <p class="discovery-tagline">Uma mesa ao ar livre, em frente ao Jardim Japonês.</p>
           <div class="btn-pair">
-            <a class="btn btn--solid" href="../cardapio/" data-evt="click_menu">Ver cardápio</a>
-            <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps">Como chegar</a>
+            <a class="btn btn--solid" href="../cardapio/" data-evt="click_menu" data-position="abertura">Ver cardápio</a>
+            <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps" data-position="abertura">Como chegar</a>
           </div>
-          <p class="discovery-reserve"><a href="https://reservas.sirfisher.com.br/?sf_origin=conheca" target="_blank" rel="noopener" data-evt="click_reservation">Prefere planejar? Reserve sua mesa.</a></p>
+          <p class="discovery-reserve"><a href="https://reservas.sirfisher.com.br/?sf_origin=conheca&amp;sf_cta=abertura" target="_blank" rel="noopener" data-evt="click_reservation" data-position="abertura">Prefere planejar? Reserve sua mesa.</a></p>
           <div class="discovery-proof" aria-label="Reconhecimento e avaliações">
             <a href="#avaliacoes"><strong>4,7/5</strong><span>Google · 787 avaliações</span></a>
             <a href="#reconhecimento"><strong>Diamante</strong><span>Selo Sebrae</span></a>
-            <a href="https://www.instagram.com/sirfisherfc/" target="_blank" rel="noopener" data-evt="click_instagram"><strong>41,2 mil</strong><span>No Instagram</span></a>
+            <a href="https://www.instagram.com/sirfisherfc/" target="_blank" rel="noopener" data-evt="click_instagram" data-position="abertura"><strong>41,2 mil</strong><span>No Instagram</span></a>
           </div>
         </div>
       </section>
       <section class="sec" aria-labelledby="comida">
-        <div class="discovery-section-head"><h2 id="comida">Deu vontade?</h2><a href="../cardapio/" data-evt="click_menu">Cardápio completo →</a></div>
+        <div class="discovery-section-head"><h2 id="comida">Deu vontade?</h2><a href="../cardapio/" data-evt="click_menu" data-position="pratos">Cardápio completo →</a></div>
         <div class="discovery-dishes">
-          <a href="../cardapio/" data-evt="click_menu">
+          <a href="../cardapio/" data-evt="click_menu" data-position="pratos">
             <picture>
               <source type="image/avif" srcset="../assets/img/prato-800.avif?v=595c3ee448" />
               <source type="image/webp" srcset="../assets/img/prato-800.webp?v=9ecb41bc8b" />
@@ -289,7 +289,7 @@
             </picture>
             <span class="discovery-dish-label"><span>Fish &amp; chips</span><strong>R$45</strong></span>
           </a>
-          <a href="../cardapio/" data-evt="click_menu">
+          <a href="../cardapio/" data-evt="click_menu" data-position="pratos">
             <picture>
               <source type="image/avif" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.avif?v=eee3a0316e" />
               <source type="image/webp" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-440.webp?v=7b8c73f061" />
@@ -297,7 +297,7 @@
             </picture>
             <span class="discovery-dish-label"><span>Camarão alho e óleo</span><strong>R$47</strong></span>
           </a>
-          <a href="../cardapio/" data-evt="click_menu">
+          <a href="../cardapio/" data-evt="click_menu" data-position="pratos">
             <picture>
               <source type="image/avif" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-440.avif?v=79423aa2b7" />
               <source type="image/webp" srcset="../assets/img/newcastle-camarao-empanado-sir-fisher-440.webp?v=5076786506" />
@@ -335,7 +335,7 @@
             <figcaption>Para celebrar · Réveillon</figcaption>
           </figure>
         </div>
-        <p class="discovery-small"><a href="../eventos/" data-evt="click_eventos">Vai reunir um grupo? Veja as opções.</a></p>
+        <p class="discovery-small"><a href="../eventos/" data-evt="click_eventos" data-position="conteudo">Vai reunir um grupo? Veja as opções.</a></p>
       </section>
       <section class="sec" id="reconhecimento" aria-labelledby="selo">
         <div class="discovery-award-copy">
@@ -363,7 +363,7 @@
         </div>
       </section>
       <section class="sec" id="avaliacoes" aria-labelledby="clientes">
-        <div class="discovery-section-head"><h2 id="clientes">Quem veio, conta.</h2><a href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews">4,7/5 · 787 avaliações no Google →</a></div>
+        <div class="discovery-section-head"><h2 id="clientes">Quem veio, conta.</h2><a href="https://maps.google.com/?cid=11176340545794629736" target="_blank" rel="noopener" data-evt="click_reviews" data-position="avaliacoes">4,7/5 · 787 avaliações no Google →</a></div>
         <p class="discovery-review-intro">6 experiências de clientes: comida, atendimento e vista.</p>
         <div class="discovery-reviews" role="region" aria-label="Seis avaliações selecionadas do Google" tabindex="0">
           <figure class="discovery-review">
@@ -404,16 +404,16 @@
         <p>Av. Beira Mar, 3421 · Em frente ao Jardim Japonês</p>
         <p class="discovery-small">Dom–qui: 9h–22h15 · Sex–sáb: 9h–23h</p>
         <div class="btn-pair">
-          <a class="btn btn--solid" href="../cardapio/" data-evt="click_menu">Ver cardápio</a>
-          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?sf_origin=conheca" target="_blank" rel="noopener" data-evt="click_reservation">Reservar mesa</a>
-          <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps">Como chegar</a>
+          <a class="btn btn--solid" href="../cardapio/" data-evt="click_menu" data-position="reservas">Ver cardápio</a>
+          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?sf_origin=conheca&amp;sf_cta=reservas" target="_blank" rel="noopener" data-evt="click_reservation" data-position="reservas">Reservar mesa</a>
+          <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps" data-position="reservas">Como chegar</a>
         </div>
         <details class="discovery-details">
           <summary>Informações para a visita</summary>
-          <p>Parte das mesas funciona por ordem de chegada. Para grupos acima de 10 pessoas, <a href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">fale com a equipe</a>.</p>
+          <p>Parte das mesas funciona por ordem de chegada. Para grupos acima de 10 pessoas, <a href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp" data-position="reservas">fale com a equipe</a>.</p>
           <p>Mesas acessíveis para cadeirantes; banheiro não acessível. <a href="../como-chegar/">Acesso e estacionamento</a>.</p>
           <p>Pix, dinheiro, Visa, Mastercard, Elo, American Express, UnionPay, Cabal e principais vales-refeição. Confirme a bandeira do vale com a equipe.</p>
-          <p><a href="../almoco-executivo/" data-evt="click_menu">Executivo a partir de R$31</a>: seg–sex, 10h–14h, exceto feriados.</p>
+          <p><a href="../almoco-executivo/" data-evt="click_menu" data-position="reservas">Executivo a partir de R$31</a>: seg–sex, 10h–14h, exceto feriados.</p>
           <p>Google: 4,7/5 e 787 avaliações em 07/10/2026. Instagram: 41,2 mil seguidores informados em 06/10/2026. Números podem mudar.</p>
         </details>
       </section>
@@ -434,7 +434,7 @@
         if (!a) return;
         var name = a.getAttribute('data-evt');
         var label = a.getAttribute('aria-label') || a.textContent || '';
-        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80) };
+        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80), cta_position: a.getAttribute('data-position') || 'conteudo' };
         window.dataLayer.push(Object.assign({ event: name }, payload));
         if (typeof window.gtag === 'function') window.gtag('event', name, payload);
         // Eventos padrao do Meta: o otimizador entende esses nomes nativamente,
@@ -453,7 +453,7 @@
        que um bloco confiavel inserir. async=false mantem a ordem; no fim do
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
-    ['../assets/js/atribuicao.js?v=088591595a'].forEach(function (src) {
+    ['../assets/js/atribuicao.js?v=23902143b1'].forEach(function (src) {
       var s = document.createElement('script');
       s.src = src;
       s.async = false;

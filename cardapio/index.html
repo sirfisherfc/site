@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-1cY8xa6j+faDhQ+tNfvsb8+lLeAGKzFIWj1LbKEWFdI=' 'sha256-TOYqio9y72EuKJLOaALOk4ceTq3T+WCptE8XxOOfld4=' 'sha256-q8lA8In6Ne0JSYK2oStREGeqgeVnDhD1QMkYhnAU+aw=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-VUbnFjCRS9sdCGZhOTXQ3dAqh8lAgXKXNQCuXjEL29w=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-1cY8xa6j+faDhQ+tNfvsb8+lLeAGKzFIWj1LbKEWFdI=' 'sha256-TOYqio9y72EuKJLOaALOk4ceTq3T+WCptE8XxOOfld4=' 'sha256-q8lA8In6Ne0JSYK2oStREGeqgeVnDhD1QMkYhnAU+aw=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-K9FOQYrAYZ4zpozeQnhUq9fNHIE5HLeB2eDcAajWoKA=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -188,7 +188,7 @@
   <!-- Estado do catálogo. Fica junto ao conteúdo, não é pop-up e some sozinho
        quando a operação publicar o catálogo já conferido. -->
   <div class="aviso-estado" id="aviso-estado" hidden></div>
-  <p class="aviso-idioma"><a id="trocar-idioma" href="?lang=en" hreflang="en" lang="en" data-evt="click_menu_lang">Menu in English →</a></p>
+  <p class="aviso-idioma"><a id="trocar-idioma" href="?lang=en" hreflang="en" lang="en" data-evt="click_menu_lang" data-position="cardapio_cabecalho">Menu in English →</a></p>
 
   <main id="catalogo">
     <div class="esqueleto" aria-hidden="true">
@@ -292,9 +292,9 @@
        que um bloco confiavel inserir. async=false mantem a ordem; no fim do
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
-    ['../assets/js/atribuicao.js?v=088591595a',
+    ['../assets/js/atribuicao.js?v=23902143b1',
      '../assets/js/cardapio-en.js?v=23303640be',
-     '../assets/js/cardapio.js?v=fe9e0ce5a0',
+     '../assets/js/cardapio.js?v=1b563e07bd',
      '../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
       var s = document.createElement('script');
       s.src = src;

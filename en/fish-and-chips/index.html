@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-wbHCAaZTh2PwiSTkIJtRaRceIaUDYUa8ZyAmjrga3Yw=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-4EzY5b76q7VNgDbqPQrtd5vjWibBeR715uh36wKjAfM=' 'sha256-RvShPFF5lJsjTjKptYCrPOeU+COfzgCM0lvH26hbD3s=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-wbHCAaZTh2PwiSTkIJtRaRceIaUDYUa8ZyAmjrga3Yw=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-eO5tNXgG55tRkSrheOwSjGRksqEyw4s6MWvtPwBelL0=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-jfYF8858cU3x6nTN1a0mC7//98FYiSIUpJk88KtJlDY=' 'sha256-2pqdhUh8ZCR8+IjZL68F52k93sL5wlT2r9nzBid9wC8=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -297,15 +297,15 @@
         <p>We are on <strong>Avenida Beira Mar</strong>, the seafront avenue where most of the city's beachfront hotels are. If you are staying on that stretch, walking here along the promenade takes anywhere from five to twenty minutes, and you never leave the sea on your right.</p>
         <p>Prices are in <strong>Brazilian reais (R$)</strong>. The weekday set lunch runs from <strong>R$ 31 to R$ 52</strong>, roughly US$ 6 to US$ 10 at recent rates. We take cash, Pix and the usual credit and debit cards. Check the online menu below for current prices.</p>
 
-        <a class="btn btn--solid" href="../../cardapio/?lang=en" data-evt="click_menu">
+        <a class="btn btn--solid" href="../../cardapio/?lang=en" data-evt="click_menu" data-position="visita">
           See the full menu and prices
         </a>
 
         <div class="btn-pair" style="margin-top:12px">
-          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?lang=en&amp;sf_origin=en_fish_and_chips" target="_blank" rel="noopener" data-evt="click_reservation">
+          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?lang=en&amp;sf_origin=en_fish_and_chips&amp;sf_cta=visita" target="_blank" rel="noopener" data-evt="click_reservation" data-position="visita">
             Book a table
           </a>
-          <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps">
+          <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps" data-position="visita">
             Directions
           </a>
         </div>
@@ -391,7 +391,7 @@
           <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
 
-        <a class="link-row link-row--sea" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp">
+        <a class="link-row link-row--sea" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp" data-position="rodape">
           <span class="link-row__label">Message us<span class="link-row__sub">WhatsApp · +55 85 98854-4274</span></span>
           <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -419,7 +419,7 @@
         if (!a) return;
         var name = a.getAttribute('data-evt');
         var label = a.getAttribute('aria-label') || a.textContent || '';
-        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80) };
+        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80), cta_position: a.getAttribute('data-position') || 'conteudo' };
         window.dataLayer.push(Object.assign({ event: name }, payload));
         if (typeof window.gtag === 'function') window.gtag('event', name, payload);
         // Eventos padrao do Meta: o otimizador entende esses nomes nativamente,
@@ -438,7 +438,7 @@
        que um bloco confiavel inserir. async=false mantem a ordem; no fim do
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
-    ['../../assets/js/atribuicao.js?v=088591595a',
+    ['../../assets/js/atribuicao.js?v=23902143b1',
      '../../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
       var s = document.createElement('script');
       s.src = src;
