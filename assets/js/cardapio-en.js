@@ -18,7 +18,7 @@
     'fish-and-chips': { nome: 'Fish & Chips', resumo: 'The house dish, in two different batters.' },
     'petiscos': { nome: 'Starters and sharing plates', resumo: 'To share at the table while the conversation flows.' },
     'sanduiches': { nome: 'Sandwiches', resumo: 'On brioche buns, served individually.' },
-    'para-dividir': { nome: 'Mains to share', resumo: 'Served on a platter with rice, fries (or cassava), salad, farota and house-made sauce.' },
+    'para-dividir': { nome: 'Mains to share', resumo: 'Served on a platter with rice, fries (or cassava), salad, farofa (toasted cassava flour) and house-made sauce.' },
     'sobremesas': { nome: 'Desserts and coffee', resumo: 'Something sweet to finish.' },
     'cervejas': { nome: 'Beer', resumo: 'Long necks, 600 mL bottles and draught beer.' },
     'coqueteis': { nome: 'Cocktails', resumo: 'Classics and house creations.' },
@@ -36,7 +36,7 @@
     'cobrancas': 'Charges'
   };
 
-  var COM_ARROZ = ['Rice', 'Fries or cassava', 'Salad', 'Farota', 'House-made sauce'];
+  var COM_ARROZ = ['Rice', 'Fries or cassava', 'Salad', 'Farofa', 'House-made sauce'];
   var FRITAS_OU_MACAXEIRA = ['Fries or cassava'];
   var ADD_FRITAS = { 'Adicionar batata frita': 'Add fries' };
   var ARROZ_EXTRA = { 'Arroz extra': 'Extra rice' };
@@ -54,7 +54,6 @@
     'crocante-calabresa': { nome: 'Calabresa Sausage and Leek Croquettes', descricao: 'Six crispy croquettes filled with fried calabresa (Brazilian smoked sausage) and leek.' },
     'big-ben-fries': { nome: 'Big Ben Fries', descritor: 'fries with creamy cheddar and bacon' },
     'pasteizinhos': { nome: 'Mini Pastéis', descricao: 'Ten crispy mini pastries with special sauce. Choose one filling.', inclui: ['Special sauce'], opcoes: ['Two cheeses', 'Beef', 'Prawn'] },
-    'crispy-spicy-chicken': { nome: 'Crispy Spicy Chicken', descritor: 'breaded chicken rolls filled with cheese', descricao: 'Marinated in spices and fried to order. Served with a creamy sauce.', inclui: ['Creamy sauce'] },
     'file-mignon-trinchado': { nome: 'Sliced Filet Mignon', descricao: 'Filet mignon with sautéed onions, served with fries or golden cassava.', opcoes: FRITAS_OU_MACAXEIRA },
     'caldo-de-peixe': { nome: 'Fish Broth', descricao: 'Pescada amarela broth, light and full of flavour.' },
     'camarao-alho-e-oleo': { nome: 'Garlic Prawns', descricao: 'Large prawns sautéed in garlic and oil.' },
@@ -64,7 +63,6 @@
     'isca-de-peixe': { nome: 'Fish Strips', descricao: 'Strips of pescada amarela breaded in panko, with special sauce.', inclui: ['Special sauce'] },
     'fisher-burger': { nome: 'Fisher Burger', descritor: 'breaded pescada amarela burger', descricao: 'On a brioche bun, with pickles and special sauce.', adicionais: ADD_FRITAS },
     'edimburger': { nome: 'Edimburger', descritor: '120 g beef patty with bacon', descricao: 'On a brioche bun, with lettuce, tomato, special mayonnaise and cheddar.', adicionais: ADD_FRITAS },
-    'marine-sandwich': { nome: 'Marine Sandwich', descritor: 'sautéed prawns with breaded cream cheese', descricao: 'With aioli, lettuce and cucumber, on a brioche bun.', adicionais: ADD_FRITAS },
     'file-mignon-dividir': { nome: 'Filet Mignon', descricao: 'Juicy filet mignon, with Madeira sauce or cooked in garlic and oil.', inclui: COM_ARROZ, adicionais: ARROZ_EXTRA, opcoes: FRITAS_OU_MACAXEIRA },
     'picanha-importada': { nome: 'Imported Picanha (Top Sirloin Cap)', descricao: 'Imported picanha, char-grilled for flavour and juiciness.', inclui: COM_ARROZ, adicionais: ARROZ_EXTRA, opcoes: FRITAS_OU_MACAXEIRA },
     'file-de-peixe-grelhado': { nome: 'Grilled Fish Fillet', descricao: 'Grilled pescada amarela fillet, light and full of flavour.', inclui: COM_ARROZ, adicionais: ARROZ_EXTRA, opcoes: FRITAS_OU_MACAXEIRA },
@@ -81,8 +79,8 @@
     'corona-zero-longneck': { nome: 'Corona Zero Long Neck', descritor: 'long neck, alcohol-free' },
     'spaten-600': { nome: 'Spaten 600', descritor: 'bottle' },
     'original-600': { nome: 'Original 600', descritor: 'bottle' },
-    'budweiser-600': { nome: 'Budweiser 600', descritor: 'bottle' },
     'stella-artois-600': { nome: 'Stella Artois 600', descritor: 'bottle' },
+    'corona-600': { nome: 'Corona 600', descritor: 'bottle' },
     'stella-pure-gold-600': { nome: 'Stella Pure Gold 600', descritor: 'bottle' },
     'caipirinha': { nome: 'Caipirinha', descritor: 'lime, sugar and cachaça', variantes: { 'Cachaça nacional': 'Brazilian cachaça' } },
     'caipiroska': { nome: 'Caipiroska', descritor: 'lime, sugar and vodka', variantes: VODKAS },
@@ -112,17 +110,17 @@
     'campari': { nome: 'Campari' },
     'martini': { nome: 'Martini', opcoes: ['Bianco or Rosato'] },
     'vodka-nacional': { nome: 'Brazilian Vodka' },
-    'vodka-sky': { nome: 'Sky Vodka' },
+    'vodka-sky': { nome: 'Skyy Vodka' },
     'vodka-absolut': { nome: 'Absolut Vodka' },
     'gin-nacional': { nome: 'Brazilian Gin' },
     'gin-gordons': { nome: "Gordon's Gin" },
     'aperol': { nome: 'Aperol' },
     'conhaque': { nome: 'Brandy (Conhaque)' },
     'cachaca-nacional': { nome: 'Brazilian Cachaça' },
-    'cachaca-ypioca-150': { nome: 'Cachaça Ypioca 150' },
-    'cachaca-premium': { nome: 'Premium Cachaça', opcoes: ['Batista (3 years in oak, MG), Gogó da Ema (2 years in balsam wood, AL), Matriarca (2 years in umburana wood, BA) or Caipira 5 Estrelas (1 year in cherry wood, ES)'] },
+    'cachaca-ypioca-150': { nome: 'Cachaça Ypióca 150' },
     'molho-extra': { nome: 'Extra Sauce', descritor: 'extra portion of sauce' },
     'arroz-extra': { nome: 'Extra Rice', descritor: 'extra portion of rice' },
+    'adicional-salada': { nome: 'Extra Salad', descritor: 'extra portion of salad' },
     'rolha': { nome: 'Corkage', descritor: 'fee for drinks brought by guests' },
     'pacote-gelo': { nome: 'Bag of Ice', descritor: 'bag of ice' },
     'embalagem-viagem': { nome: 'Take-away Container', descritor: 'container to take food home' }

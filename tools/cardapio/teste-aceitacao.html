@@ -6,7 +6,7 @@
   Teste de aceitacao do portal do cardapio.
 
   Roda no navegador contra /cardapio/ e confere os criterios que nao podem
-  regredir: os 81 registros na pagina, nome/preco/porcao/descricao na propria
+  regredir: os 79 registros na pagina, nome/preco/porcao/descricao na propria
   listagem, adicional nunca como preco do produto, faixa de preco nas
   variantes, porcao divergente sem numero, atalhos, busca sem acento, termo de
   restricao alimentar mandando falar com a equipe, detalhe com endereco
@@ -38,7 +38,7 @@ quadro.onload = async () => {
 
   // --- Catálogo completo e alcançável só rolando ---------------------------
   const itens = d.querySelectorAll('.item');
-  ok('81 registros renderizados na página', itens.length === 81, itens.length);
+  ok('79 registros renderizados na página', itens.length === 79, itens.length);
   ok('10 categorias com título escrito', d.querySelectorAll('.secao h2').length === 10);
   ok('nenhum carrossel na página', d.querySelectorAll('[class*=carrossel],[class*=carousel],[class*=slider]').length === 0);
 
@@ -71,9 +71,9 @@ quadro.onload = async () => {
      comPorcao.length + ' com porção; faltando: ' + porcaoFaltando.map(p => p.id).join(','));
   ok('catálogo identifica publicamente o estado de conferência',
      dados.estado === 'em_conferencia' && /confirme preços e porções/i.test(dados.aviso_estado || ''));
-  const fisherBurger = dados.produtos.find(p => p.id === 'fisher-burger');
+  const fishAndChips = dados.produtos.find(p => p.id === 'sir-fisher-fish-n-chips');
   ok('porção divergente não publica um número como fato',
-     fisherBurger.porcao.estado === 'em_conferencia' && !fisherBurger.porcao.texto);
+     fishAndChips.porcao.estado === 'em_conferencia' && !fishAndChips.porcao.texto);
   ok('informação alimentar transcrita mantém ressalva de conferência',
      dados.produtos.filter(p => p.alimentar.estado === 'declarado')
        .every(p => /não conferidas com a cozinha/i.test(p.alimentar.texto || '')));
@@ -96,10 +96,10 @@ quadro.onload = async () => {
     });
   });
   ok('nenhum adicional exibido como preço do produto', adicionalComoPreco.length === 0, adicionalComoPreco.join(','));
-  const sanduiches = ['fisher-burger', 'edimburger', 'marine-sandwich'].map(id =>
+  const sanduiches = ['fisher-burger', 'edimburger'].map(id =>
     d.getElementById('item-' + id).querySelector('.item__preco').innerText.trim());
   ok('sanduíches com o preço do sanduíche, não o da batata',
-     sanduiches.join(' ') === 'R$ 37,00 R$ 37,00 R$ 46,00', sanduiches.join(' | '));
+     sanduiches.join(' ') === 'R$ 37,00 R$ 37,00', sanduiches.join(' | '));
   ok('adicional aparece rotulado como adicional',
      /Adicionar batata frita \+ R\$ 9,90/.test(d.getElementById('item-fisher-burger').innerText));
 
@@ -142,9 +142,9 @@ quadro.onload = async () => {
   }
   let s = await buscar('camarao');
   const achados = s.querySelectorAll('.busca-resultados li').length;
-  ok('busca sem acento encontra "camarão"', achados >= 4, achados + ' resultados');
+  ok('busca sem acento encontra "camarão"', achados >= 3, achados + ' resultados');
   ok('busca encontra por ingrediente, não só por nome',
-     /Marine Sandwich/.test(s.innerText) && /Pasteizinhos/.test(s.innerText));
+     /NewCastle/.test(s.innerText) && /Pasteizinhos/.test(s.innerText));
   s = await buscar('MANDIOCA');
   ok('busca com sinônimo cadastrado (mandioca → macaxeira)',
      /Macaxeira/.test(s.innerText), s.innerText.split('\n')[0]);
