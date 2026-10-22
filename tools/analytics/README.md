@@ -18,6 +18,38 @@ OneDrive entre os dois PCs e ignorado pelo Git. Scripts podem importar
 `access_token()` desse modulo. Nao imprimir seu retorno. Consultas de auditoria
 continuam usando a rota de leitura da Management API.
 
+## MCP oficial do Google Analytics
+
+Para preparar o Codex neste computador, execute uma vez na raiz do workspace
+com Python 3.11 ou mais recente:
+
+```powershell
+python site/tools/analytics/configurar_mcp.py
+```
+
+O instalador fixa `analytics-mcp==0.8.0` em um ambiente isolado no
+`LOCALAPPDATA`, fora do OneDrive, e registra `google_analytics` na configuração
+local compartilhada pelo aplicativo desktop, CLI e extensão do Codex. Reutiliza
+o `service_account.json` privado desta pasta por ADC, sem copiar a chave ou
+alterar o ambiente dos relatórios. Ferramentas de escrita não são habilitadas.
+O cadastro reserva até 90 s para a inicialização do SDK Google.
+
+Reinicie o cliente uma vez após cadastrar o servidor. A configuração fica
+salva e o cliente inicia o MCP automaticamente nas próximas sessões; a conta
+de serviço renova suas credenciais temporárias sem login interativo. No outro
+PC, execute o mesmo instalador uma vez. A chave precisa continuar disponível
+e autorizada no Google. Esta configuração local não conecta o ChatGPT web.
+
+`codex mcp get google_analytics` confere o cadastro, mas não comprova acesso
+ao Google. A validação real deve ler a propriedade `353205396` com
+`get_property_details` e executar um `run_report` agregado mínimo. Não imprimir
+credenciais ou dados pessoais nos testes. Em 22/10/2026, ambas as consultas
+passaram no PC configurado, sem novo login, com nove ferramentas de leitura.
+O MCP complementa este relatório;
+Search Console, Perfil da Empresa e agregados do portal continuam nas rotinas
+próprias. Fontes: [servidor oficial](https://github.com/googleanalytics/google-analytics-mcp)
+e [configuração MCP do Codex](https://learn.chatgpt.com/docs/extend/mcp).
+
 ## Relatório reproduzível
 
 Para acessar o Perfil da Empresa, verificar primeiro a autorização persistente
