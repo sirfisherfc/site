@@ -92,7 +92,6 @@
     'margarita': { nome: 'Margarita', descritor: 'tequila, triple sec and lime' },
     'fitzgerald': { nome: 'Fitzgerald', descritor: 'gin, lime, sugar and house-made bitters' },
     'moscow-mule': { nome: 'Moscow Mule', descritor: 'vodka, ginger and lime' },
-    'smirnoff-ice': { nome: 'Smirnoff Ice' },
     'agua-sem-gas': { nome: 'Still Water' },
     'agua-com-gas': { nome: 'Sparkling Water' },
     'agua-de-coco-copo': { nome: 'Coconut Water' },
