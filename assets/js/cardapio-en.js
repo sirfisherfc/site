@@ -169,6 +169,8 @@
     [/(\d+) unidades/g, '$1 pieces'],
     [/(\d+) bolinhos/g, '$1 croquettes'],
     [/ no total/g, ' in total'],
+    [/ de peixe empanado/g, ' of breaded fish'],
+    [/ de peixe/g, ' of fish'],
     [/ de proteína/g, ' of protein'],
     [/ de carne/g, ' of meat']
   ];
@@ -200,7 +202,7 @@
     itens: 'items',
     legendaTitulo: 'Allergen key',
     legendaIntro: 'Main ingredients found in the menu items:',
-    legendaAviso: '<p><strong>ALLERGIES:</strong> All our dishes and drinks are prepared in the same kitchen. Even dishes without the listed ingredients <strong>may contain traces of gluten, prawns, fish, egg, soy and milk through cross-contact</strong>. If you have a severe allergy or dietary restriction, please tell our team before ordering.</p>',
+    legendaAviso: '<p><strong>ALLERGIES? TELL US BEFORE YOU ORDER.</strong> Dishes and drinks are prepared in the same kitchen, and all fried items share the same oil used for fish, prawns, crab and breaded food. Even items without the listed ingredients <strong>may contain traces of gluten, shellfish, fish, egg, soy and milk through cross-contact</strong>. On request, we fry your order in a separate pan.</p>',
     voltarTopo: 'Back to the top of the menu',
     rodapeCasa: '<p><strong>Good to know:</strong> Prices are in Brazilian reais (R$). We do not accept cheques. &bull; The 10% service charge is optional (Brazilian Federal Law 13,419/2017).</p>' +
       '<p><strong>Payment:</strong> Cash, Pix, debit and credit cards (Visa, Mastercard, Elo, Hipercard, American Express), including foreign cards.</p>' +
@@ -223,7 +225,7 @@
     adicionaisNota: 'Added to the price of the dish if you order it.',
     nomeOriginal: 'On the Portuguese menu:',
     buscaCurta: 'Type at least two letters. You can also close the search and scroll through the whole menu.',
-    buscaRestricao: '<p><b>For allergies and dietary restrictions, please talk to the team.</b></p><p>All our dishes are prepared in the same kitchen. For your safety, if you have an allergy or food intolerance, ask our team before ordering.</p>',
+    buscaRestricao: '<p><b>For allergies and dietary restrictions, please talk to the team.</b></p><p>All our dishes are prepared in the same kitchen and all fried items share the same oil. For your safety, if you have an allergy or food intolerance, tell our team before ordering: on request, we fry your order in a separate pan.</p>',
     buscaVazia: '<p><b>We couldn’t find that on the menu.</b></p><p>Try an ingredient, such as <i>prawn</i> or <i>fish</i>. You can also close the search and browse by section.</p>',
     encontrado: 'item found',
     encontrados: 'items found',

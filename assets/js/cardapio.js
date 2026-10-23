@@ -97,7 +97,7 @@
     itens: 'itens',
     legendaTitulo: 'Legenda de alérgenos',
     legendaIntro: 'Identificação dos principais ingredientes presentes nos itens do cardápio:',
-    legendaAviso: '<p><strong>ALÉRGICOS:</strong> Nossos pratos e bebidas são manipulados em uma mesma cozinha. Mesmo pratos sem os ingredientes listados <strong>podem conter traços de glúten, camarão, peixe, ovos, soja e leite por contaminação cruzada</strong>. Em caso de restrições ou alergias severas, por favor avise nossa equipe antes de fazer seu pedido.</p>',
+    legendaAviso: '<p><strong>TEM ALERGIA? AVISE ANTES DO PEDIDO.</strong> Pratos e bebidas são preparados na mesma cozinha, e todos os fritos usam o mesmo óleo, compartilhado por peixe, camarão, caranguejo e empanados. Por isso, mesmo itens sem os ingredientes listados <strong>podem conter traços de glúten, crustáceos, peixe, ovo, soja e leite por contaminação cruzada</strong>. A pedido, fritamos em panela separada.</p>',
     voltarTopo: 'Voltar ao começo do cardápio',
     rodapeCasa: '<p><strong>Informações da casa:</strong> Não aceitamos cheques. &bull; Taxa de serviço (10%) é opcional (Lei Federal nº 13.419/2017).</p>' +
       '<p><strong>Formas de pagamento:</strong> Dinheiro, PIX, Cartões de Débito e Crédito (Visa, Mastercard, Elo, Hipercard, American Express).</p>' +
@@ -120,7 +120,7 @@
     adicionaisNota: 'Valor somado ao preço do prato, se você pedir.',
     nomeOriginal: '',
     buscaCurta: 'Digite ao menos duas letras. Você também pode fechar a busca e rolar o cardápio inteiro.',
-    buscaRestricao: '<p><b>Sobre alergias e restrições, fale com a equipe.</b></p><p>Nossos pratos são preparados no mesmo ambiente. Para sua segurança em casos de alergias ou intolerâncias alimentares, consulte nossa equipe diretamente antes de fazer seu pedido.</p>',
+    buscaRestricao: '<p><b>Sobre alergias e restrições, fale com a equipe.</b></p><p>Nossos pratos são preparados na mesma cozinha e todos os fritos usam o mesmo óleo. Para sua segurança em casos de alergias ou intolerâncias alimentares, avise a equipe antes de fazer o pedido: a pedido, fritamos em panela separada.</p>',
     buscaVazia: '<p><b>Não encontramos esse termo no cardápio.</b></p><p>Tente o nome de um ingrediente, como <i>camarão</i> ou <i>peixe</i>. Você também pode fechar a busca e ver os itens por categoria.</p>',
     encontrado: 'item encontrado',
     encontrados: 'itens encontrados',
