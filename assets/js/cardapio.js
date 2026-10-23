@@ -97,7 +97,7 @@
     itens: 'itens',
     legendaTitulo: 'Legenda de alérgenos',
     legendaIntro: 'Identificação dos principais ingredientes presentes nos itens do cardápio:',
-    legendaAviso: '<p><strong>TEM ALERGIA? AVISE ANTES DO PEDIDO.</strong> Pratos e bebidas são preparados na mesma cozinha, e todos os fritos usam o mesmo óleo, compartilhado por peixe, camarão, caranguejo e empanados. Por isso, mesmo itens sem os ingredientes listados <strong>podem conter traços de glúten, crustáceos, peixe, ovo, soja e leite por contaminação cruzada</strong>. A pedido, fritamos em panela separada.</p>',
+    legendaAviso: '<p><strong>ALERGIA? AVISE ANTES DO PEDIDO:</strong> pode ter contaminação cruzada.</p>',
     voltarTopo: 'Voltar ao começo do cardápio',
     rodapeCasa: '<p><strong>Informações da casa:</strong> Não aceitamos cheques. &bull; Taxa de serviço (10%) é opcional (Lei Federal nº 13.419/2017).</p>' +
       '<p><strong>Formas de pagamento:</strong> Dinheiro, PIX, Cartões de Débito e Crédito (Visa, Mastercard, Elo, Hipercard, American Express).</p>' +

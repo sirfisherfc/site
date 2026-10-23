@@ -202,7 +202,7 @@
     itens: 'items',
     legendaTitulo: 'Allergen key',
     legendaIntro: 'Main ingredients found in the menu items:',
-    legendaAviso: '<p><strong>ALLERGIES? TELL US BEFORE YOU ORDER.</strong> Dishes and drinks are prepared in the same kitchen, and all fried items share the same oil used for fish, prawns, crab and breaded food. Even items without the listed ingredients <strong>may contain traces of gluten, shellfish, fish, egg, soy and milk through cross-contact</strong>. On request, we fry your order in a separate pan.</p>',
+    legendaAviso: '<p><strong>ALLERGIES? TELL US BEFORE YOU ORDER:</strong> cross-contact may occur.</p>',
     voltarTopo: 'Back to the top of the menu',
     rodapeCasa: '<p><strong>Good to know:</strong> Prices are in Brazilian reais (R$). We do not accept cheques. &bull; The 10% service charge is optional (Brazilian Federal Law 13,419/2017).</p>' +
       '<p><strong>Payment:</strong> Cash, Pix, debit and credit cards (Visa, Mastercard, Elo, Hipercard, American Express), including foreign cards.</p>' +
