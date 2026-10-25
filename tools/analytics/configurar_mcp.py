@@ -50,9 +50,13 @@ def main():
     python = environment / "Scripts" / "python.exe"
     if not python.is_file():
         subprocess.run([sys.executable, "-m", "venv", str(environment)], check=True)
+    # O Python da Microsoft Store redireciona LOCALAPPDATA para LocalCache.
+    # O launcher do venv precisa do caminho real para encontrar pyvenv.cfg.
+    environment = environment.resolve()
+    python = environment / "Scripts" / "python.exe"
     installed = subprocess.run(
         [str(python), "-c", "from importlib.metadata import version; print(version('analytics-mcp'))"],
-        capture_output=True, text=True, check=False,
+        capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
     )
     if installed.returncode or installed.stdout.strip() != VERSION:
         subprocess.run(

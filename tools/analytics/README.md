@@ -1,5 +1,33 @@
 # Presença no Google e medição
 
+## Revisão de 25/10/2026
+
+O relatório consolidado, as prioridades e o acompanhamento de 30/60/90 dias
+ficam em `gestao/docs/REVISAO_SEO_LOCAL_CONVERSAO_2026-10-25.md`, no workspace.
+As respostas e capturas locais ficam em `_materiais/revisao-seo-2026-10-25/`,
+ignorado pelo Git. Foram relidos GA4, Search Console, Perfil Google e os
+agregados operacionais pela rota de leitura do portal. O funil novo tem só
+um dia consolidado em 22/10; esse volume ainda não permite avaliar desistências.
+
+A revisão corrigiu o contraste do aviso de almoço fora do horário em ambos
+os temas, alinhou as orientações de reserva às regras confirmadas e atualizou
+a prova de confiança da home PT/EN e da Conheça para 4,7/5 e 813 avaliações,
+consultadas em 25/10. Os depoimentos selecionados e o dado de Instagram mantêm suas fontes
+e datas anteriores. `noindex` da Conheça e do redirecionamento legado
+`/en/menu/` continua intencional; o cardápio em inglês usa `/cardapio/?lang=en`.
+Os dois botões legados de almoço/fish and chips agora abrem o cardápio próprio.
+As sete opções executivas continuam na página de almoço; o botão identifica
+o cardápio completo da casa. O aviso de privacidade acompanha os serviços
+atuais, incluindo Resend para e-mails e a retirada da referência ao Hubt.
+
+Neste PC, o `.venv` sincronizado aponta para o Python do outro computador.
+Os relatórios foram executados com o Python local e os SDKs já disponíveis.
+O instalador do MCP agora resolve o caminho real do ambiente após a criação,
+incluindo o redirecionamento `LocalCache` do Python da Microsoft Store.
+A versão continua fixada em 0.8.0 e o cadastro continua somente para leitura.
+O cliente aberto precisa ser reiniciado para carregar o servidor cadastrado.
+Referência: [configuração MCP do Codex](https://learn.chatgpt.com/docs/extend/mcp).
+
 O script legado `upload_and_create_ads.py` exige `META_ADS_TOKEN` no ambiente
 privado; não aceita credencial no código nem como argumento de linha de comando.
 Ele cria anúncios e não deve ser executado durante auditorias de leitura.
@@ -339,7 +367,9 @@ Ferramentas (Playwright em `tools/analytics/.venv`):
 
 ## Cardápio do Perfil da Empresa
 
-O arquivo público `cardapio/dados/cardapio.json` é a fonte dos itens e preços.
+O gerador lê itens e preços de `cardapio/dados/cardapio.json`, derivado do
+catálogo editorial versionado conforme `gestao/docs/HANDOFF_CARDAPIO.md`.
+Não editar o JSON público nem o bloco embutido no HTML manualmente.
 O usuário confirmou os preços publicados em 06/10/2026. Pesos e alérgenos
 continuam em conferência e não são enviados como alegações ao Google.
 

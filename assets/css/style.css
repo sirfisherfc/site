@@ -51,7 +51,7 @@
     --ink: #ece2c4; --ink-soft: #a7b6bf;
     --page-bg: #0a1622; --card: #14283a; --card-2: #1c3247;
     --on-card: #f0e6cd; --on-card-soft: #a9b8c1;
-    --sun: #f4b559; --coral: #ef6d4c; --coral-texto: #ef6d4c; --coral-deep: #d6512f;
+    --sun: #f4b559; --coral: #ef6d4c; --coral-texto: #f47b59; --coral-deep: #d6512f;
     --sea: #52a89f; --union: #4f8fce;
     --hairline: rgba(240, 230, 205, 0.16);
   }
@@ -60,7 +60,7 @@
   --ink: #ece2c4; --ink-soft: #a7b6bf;
   --page-bg: #0a1622; --card: #14283a; --card-2: #1c3247;
   --on-card: #f0e6cd; --on-card-soft: #a9b8c1;
-  --sun: #f4b559; --coral: #ef6d4c; --coral-texto: #ef6d4c; --coral-deep: #d6512f;
+  --sun: #f4b559; --coral: #ef6d4c; --coral-texto: #f47b59; --coral-deep: #d6512f;
   --sea: #52a89f; --union: #4f8fce;
   --hairline: rgba(240, 230, 205, 0.16);
 }
@@ -592,7 +592,7 @@ a { color: inherit; }
 /* Item com horário: estado indisponível (fora do almoço) */
 .link-row.is-unavailable .link-row__label { color: var(--on-card-soft); }
 .link-row.is-unavailable .link-row__stamp { color: var(--on-card-soft); opacity: 0.6; }
-.link-row.is-unavailable .link-row__sub { color: var(--coral); }
+.link-row.is-unavailable .link-row__sub { color: var(--coral-texto); }
 .link-row.is-available .link-row__sub { color: var(--sea); font-weight: 600; }
 
 .feature:focus-visible, .btn:focus-visible, .link-row:focus-visible {
