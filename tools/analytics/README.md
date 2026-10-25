@@ -41,8 +41,10 @@ A primeira entrega da janela de três dias reúne 298 termos distintos e oito
 oportunidades por URL. Os originais e derivados privados estão em
 `_materiais/revisao-seo-2026-10-25/semrush/`, com manifesto e registro de consumo.
 O plano e os limites ficam em `gestao/docs/SEMRUSH_3_DIAS_2026-10-25.md`.
-As 40 palavras de acompanhamento e os 16 prompts estão preparados; sua
-configuração no painel depende de navegador conectado e recursos disponíveis.
+Depois da conexão do navegador, foram configurados 40 termos para Google,
+Fortaleza e celular, além de 12 perguntas em português para ChatGPT/Fortaleza.
+Os quatro prompts em inglês ficaram preparados em arquivo separado. A primeira
+coleta é de 25/10; uma data ainda não permite medir evolução.
 
 A abertura do executivo e o link do guia agora identificam a refeição
 individual e os dias/horários confirmados. O guia distingue os caminhos de
@@ -89,6 +91,22 @@ portal para até dez pessoas, WhatsApp para 11–29 e proposta de evento para
 30–100 pessoas sentadas. A home EN avisa que o configurador de eventos está
 em português. A página de eventos explicita aniversários e confraternizações
 na abertura e na descrição, preservando title, H1 e as regras do configurador.
+
+### Conferência posterior das páginas de reserva e eventos
+
+A página pública `/reservas/` passou a usar a mesma divisão da home: portal
+para até dez pessoas, WhatsApp para 11–29 e configurador para eventos de
+30–100 pessoas sentadas. O link para `/eventos/` aparece junto da regra,
+e o FAQ estruturado usa os mesmos limites. A resposta estruturada sobre a
+posição da mesa também passou a informar a distribuição pela equipe na
+chegada, conforme a disponibilidade, como já dizia o texto visível.
+
+A abertura e a descrição de `/eventos/` passaram a identificar Meireles,
+confraternizações de empresa e os formatos de petiscos, almoço ou jantar
+já oferecidos no configurador. As três ausências na primeira coleta local de
+ChatGPT ajudaram a conferir essas jornadas; elas ainda não explicam causas
+ou resultados de busca. O relatório e o ZIP da entrega anterior permanecem
+como snapshots da coleta, sem substituir seus arquivos por dados posteriores.
 
 ## Revisão de 25/10/2026
 
