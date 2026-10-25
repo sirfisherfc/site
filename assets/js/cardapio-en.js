@@ -180,6 +180,7 @@
     descricao: 'The full Sir Fisher menu in English, with current prices in Brazilian reais: fish and chips, prawns, sharing plates, cocktails and drinks on the Beira-Mar in Fortaleza, Brazil.',
     pular: 'Skip to the menu',
     secaoPadrao: 'Menu',
+    cabecalho: 'Sir Fisher menu',
     categorias: 'Sections',
     buscar: 'Search',
     abasRotulo: 'Menu sections',

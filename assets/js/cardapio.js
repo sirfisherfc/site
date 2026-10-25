@@ -88,6 +88,7 @@
 
   var UI_PT = {
     secaoPadrao: 'Cardápio',
+    cabecalho: 'Cardápio do Sir Fisher',
     trocarIdioma: 'Menu in English →',
     semEstoque: 'Hoje não temos',
     semEstoqueItem: 'Hoje não temos este item',

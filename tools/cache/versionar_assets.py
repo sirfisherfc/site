@@ -36,6 +36,10 @@ EXT = r"(?:css|js|woff2|woff|ttf|avif|webp|jpe?g|png|svg|gif|ico|json|mp4|webm|p
 REF_HTML = re.compile(
     r"(?P<pre>[\"'\s,(])(?P<caminho>(?:\.{1,2}/)+assets/[A-Za-z0-9_\-./]+?\." + EXT + r")"
     r"(?P<versao>\?v=[A-Za-z0-9_\-]*)?(?=[\"'\s,)#])")
+# Catalogo do cardapio escrito no HTML (tools/cardapio/prerenderizar.py): fica
+# sem ?v=, com os mesmos enderecos que o cardapio.js monta, para a foto nao ser
+# baixada de novo quando o script redesenha a lista.
+CATALOGO = re.compile(r"<!-- CATALOGO-ESTATICO:INICIO -->.*?<!-- CATALOGO-ESTATICO:FIM -->", re.S)
 # url("../fonts/x.woff2") dentro de assets/css/.
 REF_CSS = re.compile(
     r"(?P<pre>url\(\s*[\"']?)(?P<caminho>\.\./[A-Za-z0-9_\-./]+?\." + EXT + r")"
@@ -97,7 +101,12 @@ class Versionador:
         paginas = [p for p in RAIZ.rglob("*.html")
                    if not FORA.intersection(p.relative_to(RAIZ).parts)]
         for pagina in sorted(paginas):
-            self.propor(pagina, self.trocar(self.ler(pagina), pagina.parent, REF_HTML, pagina))
+            texto, pedacos, pos = self.ler(pagina), [], 0
+            for m in CATALOGO.finditer(texto):
+                pedacos += [self.trocar(texto[pos:m.start()], pagina.parent, REF_HTML, pagina), m.group(0)]
+                pos = m.end()
+            pedacos.append(self.trocar(texto[pos:], pagina.parent, REF_HTML, pagina))
+            self.propor(pagina, "".join(pedacos))
         return sorted(self.novos)
 
     def gravar(self):

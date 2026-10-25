@@ -1,4 +1,5 @@
-User-agent: *
-Allow: /
+# O Cloudflare insere antes destas linhas o bloco gerenciado dele
+# (User-agent: * com Allow: / e os robos de treino de IA bloqueados).
+# Um segundo grupo User-agent: * aqui duplicaria aquele grupo.
 
 Sitemap: https://www.sirfisher.com.br/sitemap.xml

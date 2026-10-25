@@ -1,5 +1,37 @@
 # Presença no Google e medição
 
+## Site Audit da Semrush em 25/10/2026
+
+O rastreador da auditoria não executa JavaScript, assim como robôs de busca de
+IA. Por isso o cardápio aparecia sem h1, com 68 palavras e razão texto/HTML de
+0,01: a lista só existia depois do `cardapio.js`. Agora
+`tools/cardapio/prerenderizar.py` grava no `<main>` a mesma marcação que o
+script desenha em português (h1, 10 seções, 78 itens, ~1.400 palavras sem JS).
+O script troca por uma cópia igual ao carregar, sem salto (CLS 0). O passo roda
+no pre-commit, antes do `versionar_assets.py`, e o workflow `verificar-assets`
+confere. Quando o `exportar_snapshot.py` do gestao atualizar `CARDAPIO-DADOS`,
+o commit no site regenera o catálogo. O `versionar_assets.py` não mexe nesse
+bloco: as fotos mantêm os endereços do script e não são baixadas duas vezes.
+
+Outras correções:
+
+- Réveillon: o `organizer` do Event (`Restaurant`, um LocalBusiness) ganhou o
+  `address` obrigatório.
+- `robots.txt`: o Cloudflare antepõe o bloco gerenciado dele (`Content-Signal`,
+  `User-agent: *` e robôs de treino de IA bloqueados). O arquivo do site
+  repetia o grupo `User-agent: *`; agora só declara o sitemap. O token do
+  `gestao/scripts/cloudflare/cf.py` não tem permissão de Bot Management, então
+  o bloco gerenciado (que também bloqueia o `Google-Extended`) só pode ser
+  mudado no painel do Cloudflare.
+- `llms.txt` com a descrição da casa e os links das páginas, sem preços nem
+  horários, que mudam.
+- Como chegar e Almoço executivo passaram a linkar `/reservas/`.
+
+Ficaram como estão: minificação de CSS (o Cloudflare já comprime em Brotli;
+um passo de build traria arquivos derivados para ganho de poucos KB) e a
+razão texto/HTML da home, do executivo e da EN, que vem do CSS embutido e
+das imagens responsivas, escolhidos para o PageSpeed.
+
 ## Pesquisa ampliada da Semrush em 25/10/2026
 
 A primeira entrega da janela de três dias reúne 298 termos distintos e oito

@@ -1,11 +1,13 @@
 #!/bin/sh
 # Antes de cada commit, sem nada para lembrar:
+#  0. escreve no HTML do cardapio o catalogo que o cardapio.js desenha
+#     (para quem le sem JavaScript);
 #  1. grava em cada referencia a /assets/ o hash do arquivo (?v=...), para o
 #     cache longo do Cloudflare nunca servir versao velha;
 #  2. recalcula a CSP de cada pagina (hash dos blocos <script>).
 # Ativado no clone com: git config core.hooksPath .githooks
 PY=$(command -v python || command -v python3) || { echo "pre-commit: python nao encontrado" >&2; exit 1; }
-for passo in tools/cache/versionar_assets.py tools/seguranca/csp.py; do
+for passo in tools/cardapio/prerenderizar.py tools/cache/versionar_assets.py tools/seguranca/csp.py; do
   alterados=$("$PY" "$passo" --listar | tr -d '\r') || { echo "pre-commit: $passo falhou" >&2; exit 1; }
   [ -z "$alterados" ] && continue
   echo "$alterados" | while IFS= read -r arquivo; do git add -- "$arquivo"; done
