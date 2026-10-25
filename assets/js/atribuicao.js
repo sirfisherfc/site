@@ -6,6 +6,7 @@
 
   var STORAGE_KEY = 'sf_attribution_v1';
   var COOKIE_KEY = 'sf_attribution_v1';
+  var ATTRIBUTION_TTL_MS = 90 * 24 * 60 * 60 * 1000;
   var PIXEL_ID = 'EeuuYrh8KtQu1TPmmwWctv';
   var tracked = [
     'oppref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
@@ -30,7 +31,12 @@
     if (!raw) return null;
     try {
       var parsed = JSON.parse(raw);
-      return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : null;
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed) ||
+          typeof parsed.captured_at !== 'string') return null;
+      var captured = Date.parse(parsed.captured_at);
+      var age = Date.now() - captured;
+      return Number.isFinite(captured) && captured > 0 && age >= 0 && age < ATTRIBUTION_TTL_MS
+        ? parsed : null;
     } catch (e) {
       return null;
     }
@@ -64,8 +70,10 @@
     var domain = window.location.hostname.endsWith('.sirfisher.com.br')
       ? '; Domain=.sirfisher.com.br'
       : '';
+    var remaining = Math.max(0, Math.floor((Date.parse(attribution.captured_at) +
+      ATTRIBUTION_TTL_MS - Date.now()) / 1000));
     document.cookie = COOKIE_KEY + '=' + encodeURIComponent(value) +
-      '; Max-Age=7776000; Path=/' + domain + '; SameSite=Lax' + secure;
+      '; Max-Age=' + remaining + '; Path=/' + domain + '; SameSite=Lax' + secure;
   }
 
   function limited(value, max) {

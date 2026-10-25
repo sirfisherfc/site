@@ -233,6 +233,13 @@ sem nomes, contatos, identificadores de clientes ou dados financeiros.
 
 ### Posição dos botões e continuidade até o formulário (22/10/2026)
 
+Em 25/10, os consumidores de `sf_attribution_v1` passaram a rejeitar copias
+com 90 dias ou mais, sem data valida ou com data futura. O cookie recebe
+somente o tempo restante desde `captured_at`; navegacao interna conserva
+esse instante e a origem externa. A integracao de leitura do Instagram e
+os agregados de reservas estao documentados em
+`gestao/docs/INTEGRACAO_INSTAGRAM_ANALYTICS.md`, na raiz do workspace.
+
 Os eventos de clique existentes recebem `cta_position`, definido explicitamente
 por `data-position` no HTML. Home PT/EN, Conheça e páginas de descoberta usam
 posições como `topo`, `abertura`, `pratos`, `reservas`, `visita` e `rodape`.
