@@ -1,9 +1,11 @@
 # Regras do site. O robots.txt gerenciado do Cloudflare foi desligado em
 # 25/10/2026 (gestao/scripts/cloudflare/cf.py robots): ele repetia o grupo
 # User-agent: * e trazia a linha Content-Signal, que validadores acusam como
-# erro de formato. Os bloqueios abaixo sao os mesmos que ele publicava:
-# robos de treino de IA. Busca e assistentes de IA (OAI-SearchBot,
-# ChatGPT-User, PerplexityBot, Claude-SearchBot) seguem liberados.
+# erro de formato. Os bloqueios abaixo sao os que ele publicava: robos de
+# treino de IA. Busca e assistentes de IA (OAI-SearchBot, ChatGPT-User,
+# PerplexityBot, Claude-SearchBot) seguem liberados. Google-Extended
+# liberado por decisao do proprietario em 25/10/2026: o Gemini pode usar o
+# site como fonte (a busca do Google nao depende dele).
 
 User-agent: *
 Allow: /
@@ -15,7 +17,6 @@ User-agent: Bytespider
 User-agent: CCBot
 User-agent: ClaudeBot
 User-agent: Diffbot
-User-agent: Google-Extended
 User-agent: GPTBot
 User-agent: omgili
 User-agent: anthropic-ai

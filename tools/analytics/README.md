@@ -21,10 +21,11 @@ Outras correções:
   (`Content-Signal`, `User-agent: *` e robôs de treino de IA bloqueados), o que
   duplicava o grupo `User-agent: *` do site. O bloco foi desligado
   (`gestao/scripts/cloudflare/cf.py robots`; `--religar` desfaz) e o
-  `robots.txt` do site passou a ter a mesma lista de 32 robôs de treino
-  bloqueados, inclusive o `Google-Extended`. Busca e assistentes de IA
-  (OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot) seguem
-  liberados. Robô novo de treino não entra mais sozinho: revisar a lista.
+  `robots.txt` do site passou a ter a lista de robôs de treino bloqueados que
+  ele publicava, menos o `Google-Extended`, liberado por decisão do
+  proprietário para o Gemini poder usar o site como fonte. Busca e
+  assistentes de IA (OAI-SearchBot, ChatGPT-User, PerplexityBot,
+  Claude-SearchBot) seguem liberados. Robô novo de treino não entra mais sozinho: revisar a lista.
 - `llms.txt` com a descrição da casa e os links das páginas, sem preços nem
   horários, que mudam.
 - Como chegar e Almoço executivo passaram a linkar `/reservas/`.
