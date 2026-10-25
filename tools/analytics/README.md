@@ -1,5 +1,21 @@
 # Presença no Google e medição
 
+## Pesquisa ampliada da Semrush em 25/10/2026
+
+A primeira entrega da janela de três dias reúne 298 termos distintos e oito
+oportunidades por URL. Os originais e derivados privados estão em
+`_materiais/revisao-seo-2026-10-25/semrush/`, com manifesto e registro de consumo.
+O plano e os limites ficam em `gestao/docs/SEMRUSH_3_DIAS_2026-10-25.md`.
+As 40 palavras de acompanhamento e os 16 prompts estão preparados; sua
+configuração no painel depende de navegador conectado e recursos disponíveis.
+
+A abertura do executivo e o link do guia agora identificam a refeição
+individual e os dias/horários confirmados. O guia distingue os caminhos de
+grupos, e a página de eventos identifica Beira-Mar/Fortaleza. A jornada EN
+mantém o retorno à home em inglês e foi alinhada às regras de mesa e rota;
+as aproximações em dólares sem data foram retiradas. Os preços em reais,
+URLs e ofertas continuam com as fontes e regras já confirmadas.
+
 ## Revisão de 25/10/2026
 
 O relatório consolidado, as prioridades e o acompanhamento de 30/60/90 dias
