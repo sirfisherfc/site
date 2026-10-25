@@ -42,9 +42,15 @@ oportunidades por URL. Os originais e derivados privados estão em
 `_materiais/revisao-seo-2026-10-25/semrush/`, com manifesto e registro de consumo.
 O plano e os limites ficam em `gestao/docs/SEMRUSH_3_DIAS_2026-10-25.md`.
 Depois da conexão do navegador, foram configurados 40 termos para Google,
-Fortaleza e celular, além de 12 perguntas em português para ChatGPT/Fortaleza.
-Os quatro prompts em inglês ficaram preparados em arquivo separado. A primeira
-coleta é de 25/10; uma data ainda não permite medir evolução.
+Fortaleza e celular, além de 12 perguntas em português e quatro em inglês para
+ChatGPT/Fortaleza, em campanhas separadas. As duas coletas foram concluídas em
+25/10; uma data ainda não permite medir evolução.
+
+O On Page SEO Checker voltou a ler a página EN de fish and chips após uma
+exceção restrita no Cloudflare para o SemrushBot-SI. A regra limita a leitura
+à faixa de IPs oficial, ao host público, a GET/HEAD sem parâmetros e aos
+caminhos do sitemap, mais robots.txt e sitemap.xml. O relatório em `gestao`
+registra a regra, as provas e como desativar essa exceção.
 
 A abertura do executivo e o link do guia agora identificam a refeição
 individual e os dias/horários confirmados. O guia distingue os caminhos de
