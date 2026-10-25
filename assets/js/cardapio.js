@@ -248,17 +248,22 @@
   // Os dez rotulos do cardapio impresso, preservados como estao na fonte.
   // LACTOSE e LEITE sao rotulos distintos no documento e continuam distintos
   // aqui: nao foram fundidos numa taxonomia regulatoria.
+  // PNGs originais de 400x200, copiados sem alteracao. O nome traz os dez
+  // primeiros caracteres do SHA-256 dos bytes. Ao trocar a fonte, usar outro
+  // nome/hash. O SVG recorta apenas o desenho, com 2px de margem na fonte:
+  // janela 107x107 em (24,35), ou (35,35) para OVO, escalada para 24x24.
+  // O prerender le estes mesmos fragmentos; as URLs ficam iguais com/sem JS.
   var GLIFOS = {
-    'GLÚTEN': '<path d="M12 3v18M12 7c-2-2-4-2-5-1 1 2 3 3 5 3zm0 0c2-2 4-2 5-1-1 2-3 3-5 3zm0 5c-2-2-4-2-5-1 1 2 3 3 5 3zm0 0c2-2 4-2 5-1-1 2-3 3-5 3zm0 5c-2-2-4-2-5-1 1 2 3 3 5 3zm0 0c2-2 4-2 5-1-1 2-3 3-5 3z"/>',
-    'LACTOSE': '<path d="M9 2h6v3l2 3v11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V8l2-3z"/><path d="M7 12h10"/>',
-    'LEITE': '<path d="M4 17c0-4 2-6 4-7V5h8v5c2 1 4 3 4 7a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path d="M8 5h8"/>',
-    'OVO': '<ellipse cx="12" cy="13.5" rx="6" ry="8"/><path d="M12 5.5c1.5 1.5 2.5 3 3 4.5"/>',
-    'PEIXE': '<path d="M3 12c3-4 7-5 10-5s6 2 8 5c-2 3-5 5-8 5s-7-1-10-5z"/><circle cx="16.5" cy="11" r="1"/><path d="M3 12 6 8m-3 4 3 4"/>',
-    'CRUSTÁCEOS': '<path d="M12 8a4 4 0 0 1 4 4v3a4 4 0 0 1-8 0v-3a4 4 0 0 1 4-4z"/><path d="M8 9 4 5M16 9l4-4M7 14H3m18 0h-4"/>',
-    'SOJA': '<path d="M7 16a5 5 0 0 1 0-8c3-2 7-2 10 0a5 5 0 0 1 0 8c-3 2-7 2-10 0z"/><circle cx="10" cy="12" r="1.3"/><circle cx="14.5" cy="12" r="1.3"/>',
-    'CASTANHAS': '<path d="M12 3c4 2 6 5 6 9s-2.7 9-6 9-6-5-6-9 2-7 6-9z"/><path d="M12 6v13"/>',
-    'AMÊNDOAS': '<path d="M12 3c3.5 3 5 6 5 9.5S15 21 12 21s-5-5-5-8.5S8.5 6 12 3z"/>',
-    'CORANTES': '<path d="M5 19a4 4 0 0 0 4-4c0-2 1-3 2-4l7-7 2 2-7 7c-1 1-2 2-4 2a4 4 0 0 0-4 4z"/><circle cx="7" cy="17" r="1"/>'
+    'GLÚTEN': '<image href="../assets/img/alergenos/gluten.829f0274bc.png" x="-5.383178" y="-7.850467" width="89.719626" height="44.859813"/>',
+    'LACTOSE': '<image href="../assets/img/alergenos/lactose.e905946b9f.png" x="-5.383178" y="-7.850467" width="89.719626" height="44.859813"/>',
+    'LEITE': '<image href="../assets/img/alergenos/leite.4818bdcb40.png" x="-5.383178" y="-7.850467" width="89.719626" height="44.859813"/>',
+    'OVO': '<image href="../assets/img/alergenos/ovo.c4647ea636.png" x="-7.850467" y="-7.850467" width="89.719626" height="44.859813"/>',
+    'PEIXE': '<image href="../assets/img/alergenos/peixe.934feee8dd.png" x="-5.383178" y="-7.850467" width="89.719626" height="44.859813"/>',
+    'CRUSTÁCEOS': '<image href="../assets/img/alergenos/crustaceos.a47eb1852d.png" x="-5.383178" y="-7.850467" width="89.719626" height="44.859813"/>',
+    'SOJA': '<image href="../assets/img/alergenos/soja.68025c9c0f.png" x="-5.383178" y="-7.850467" width="89.719626" height="44.859813"/>',
+    'CASTANHAS': '<image href="../assets/img/alergenos/castanhas.9b8f24d44e.png" x="-5.383178" y="-7.850467" width="89.719626" height="44.859813"/>',
+    'AMÊNDOAS': '<image href="../assets/img/alergenos/amendoas.455034c890.png" x="-5.383178" y="-7.850467" width="89.719626" height="44.859813"/>',
+    'CORANTES': '<image href="../assets/img/alergenos/corantes.2edec260a3.png" x="-5.383178" y="-7.850467" width="89.719626" height="44.859813"/>'
   };
 
   // Termos que descrevem restricao alimentar, nao ingrediente. Buscar por

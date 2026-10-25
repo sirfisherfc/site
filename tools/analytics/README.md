@@ -117,12 +117,26 @@ como snapshots da coleta, sem substituir seus arquivos por dados posteriores.
 
 ### Alérgenos na lista e orientação para hóspedes
 
-Na lista do cardápio, os alérgenos agora aparecem como ícones de 18 px, com
-os nomes completos em texto para leitores de tela. O card inteiro continua
-abrindo a ficha, onde ícone e nome permanecem visíveis. Um atalho discreto
-no início leva à legenda final, em português ou inglês. O catálogo estático
-usa a mesma apresentação; os dados culinários, preços e o Menu estruturado
-foram preservados, incluindo os 250 g de Big Ben Fries.
+Na lista do cardápio, os alérgenos usam os ícones originais coloridos de 24 px,
+com os nomes completos em texto para leitores de tela. O card inteiro continua
+abrindo a ficha, onde ícone de 24 px e nome permanecem visíveis. Um atalho
+discreto no início leva à legenda final, com ícones de 32 px, em português ou
+inglês. O catálogo estático usa a mesma apresentação; os dados culinários,
+preços e o Menu estruturado foram preservados, incluindo os 250 g de Big Ben
+Fries.
+
+Os dez PNGs de 400×200 foram copiados byte a byte da fonte do cardápio para
+`assets/img/alergenos/`. Cada nome reúne o rótulo em ASCII e os dez primeiros
+caracteres do SHA-256 dos bytes. Ao trocar uma fonte, publicar outro nome/hash
+e atualizar `GLIFOS` em `cardapio.js`. A ordem do hook e o versionador de assets
+continuam os mesmos. O prerender lê os mesmos fragmentos de `GLIFOS`, por isso
+o HTML estático e o JavaScript usam a mesma URL de imagem.
+
+O SVG recorta uma janela de 107×107 na exibição, com dois pixels de margem
+ao redor do desenho original. Os pixels e as cores dos arquivos permanecem
+intactos. Uma superfície clara circular sustenta essas cores no tema escuro,
+inclusive o marrom de amêndoas e o azul-marinho de leite. Os dez rótulos do
+catálogo permanecem distintos e seguem as declarações já publicadas.
 
 O guia da Beira-Mar ganhou a seção `#hospedagem`, com o executivo nos dias e
 horários vigentes, acesso ao cardápio, horário da casa e rota a partir do hotel
@@ -148,9 +162,11 @@ estático, versões de assets, CSP e CSS embutido. A comparação dos dados
 confirmou 78 cards, 61 ícones com nomes preservados e nenhum controle
 interativo dentro do link de um card.
 
-A revisão no navegador cobriu PT/EN em 375 e 1425 px, os nomes completos na
-ficha, os atalhos da legenda e o guia nos temas claro e escuro. Essas telas
-ficaram sem rolagem horizontal. Os 47 critérios de aceitação passaram.
+A revisão dos PNGs no navegador cobriu PT/EN em 375/390 e 1525 px, os nomes
+completos na ficha e os dez símbolos da legenda, nos temas claro e escuro.
+Essas telas ficaram sem rolagem horizontal, com 78 cards e 61 ícones na lista.
+As letras das fontes PNG ficaram fora dos recortes. Os 47 critérios de
+aceitação passaram.
 O iframe desse teste agora força `?lang=pt`, para que o idioma salvo pela
 interface não altere o resultado. O critério alimentar público confere a
 orientação de consultar a equipe antes do pedido; a conferência separada da

@@ -750,14 +750,19 @@ main { padding-bottom: 40px; }
   background: var(--page-bg);
   font-size: 14.5px; font-weight: 600;
 }
-.alergeno svg { width: 18px; height: 18px; flex: none; }
+.alergeno svg { width: 24px; height: 24px; flex: none; overflow: hidden; }
+
+/* As cores do PNG original precisam de uma superficie clara tambem no escuro. */
+.alergeno svg,
+.item__alergeno svg,
+.legenda-alergenos__icone svg { background: #fffaf0; border-radius: 50%; }
 
 .item__alergenos { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 2px; }
 .item__alergeno {
   display: inline-flex; align-items: center;
   color: var(--on-card-soft);
 }
-.item__alergeno svg { width: 18px; height: 18px; flex: none; }
+.item__alergeno svg { width: 24px; height: 24px; flex: none; overflow: hidden; }
 
 .bloco--alimentar { border-left: 4px solid var(--sun); }
 .bloco--conferencia { border-left: 4px solid var(--coral); }
@@ -806,14 +811,15 @@ main { padding-bottom: 40px; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   flex: none;
   color: var(--coral);
 }
 .legenda-alergenos__icone svg {
-  width: 22px;
-  height: 22px;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
 }
 .legenda-alergenos__info {
   display: flex;
