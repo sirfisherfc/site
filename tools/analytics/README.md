@@ -115,6 +115,48 @@ ChatGPT ajudaram a conferir essas jornadas; elas ainda não explicam causas
 ou resultados de busca. O relatório e o ZIP da entrega anterior permanecem
 como snapshots da coleta, sem substituir seus arquivos por dados posteriores.
 
+### Alérgenos na lista e orientação para hóspedes
+
+Na lista do cardápio, os alérgenos agora aparecem como ícones de 18 px, com
+os nomes completos em texto para leitores de tela. O card inteiro continua
+abrindo a ficha, onde ícone e nome permanecem visíveis. Um atalho discreto
+no início leva à legenda final, em português ou inglês. O catálogo estático
+usa a mesma apresentação; os dados culinários, preços e o Menu estruturado
+foram preservados, incluindo os 250 g de Big Ben Fries.
+
+O guia da Beira-Mar ganhou a seção `#hospedagem`, com o executivo nos dias e
+horários vigentes, acesso ao cardápio, horário da casa e rota a partir do hotel
+de partida. O endereço e os horários usam as informações já publicadas nas
+páginas oficiais de [chegada](https://www.sirfisher.com.br/como-chegar/) e
+[almoço executivo](https://www.sirfisher.com.br/almoco-executivo/). A pessoa
+informa seu hotel e escolhe o modo de transporte no Maps. O guia mantém a
+função de passeio e logística definida no mapa de oportunidades da Semrush;
+a home continua atendendo à intenção comercial do restaurante.
+
+Os quatro links da seção usam os eventos existentes `click_menu` (executivo
+e cardápio), `click_maps` e `click_reservation`, com `cta_position=conteudo`.
+Nesta versão, a combinação de `/guia/beira-mar/`, um desses eventos e essa
+posição identifica os cliques da seção. Os CTAs equivalentes do bloco final
+mantêm `visita`. A reserva leva `sf_origin=guia_beira_mar` e
+`sf_cta=conteudo`; a atribuição externa segue o contrato existente. No portal,
+`conteudo` também atende a botões de outras páginas, por isso o resultado da
+reserva exige o contexto da jornada e a cobertura dos identificadores.
+
+A conferência sem navegador passou nos 113 testes existentes de CTAs,
+atribuição e carregamento de marketing, além dos verificadores de catálogo
+estático, versões de assets, CSP e CSS embutido. A comparação dos dados
+confirmou 78 cards, 61 ícones com nomes preservados e nenhum controle
+interativo dentro do link de um card.
+
+A revisão no navegador cobriu PT/EN em 375 e 1425 px, os nomes completos na
+ficha, os atalhos da legenda e o guia nos temas claro e escuro. Essas telas
+ficaram sem rolagem horizontal. Os 47 critérios de aceitação passaram.
+O iframe desse teste agora força `?lang=pt`, para que o idioma salvo pela
+interface não altere o resultado. O critério alimentar público confere a
+orientação de consultar a equipe antes do pedido; a conferência separada da
+metadata editorial foi preservada. O servidor de revisão bloqueou as
+conexões externas de marketing e do contador.
+
 ## Revisão de 25/10/2026
 
 O relatório consolidado, as prioridades e o acompanhamento de 30/60/90 dias

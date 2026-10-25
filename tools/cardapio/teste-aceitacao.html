@@ -16,11 +16,11 @@
       python -m http.server 8777
       abrir http://127.0.0.1:8777/tools/cardapio/teste-aceitacao.html
 
-  O iframe aponta para /cardapio/ na mesma origem, entao precisa do servidor
-  local (nao funciona abrindo o arquivo direto).
+  O iframe abre explicitamente em portugues para os criterios nao dependerem
+  do idioma salvo na UI. Usa a mesma origem e precisa do servidor local.
 -->
 <body><pre id="saida">rodando...</pre>
-<iframe id="quadro" src="/cardapio/" style="width:390px;height:844px;border:0;position:absolute;left:-9999px"></iframe>
+<iframe id="quadro" src="/cardapio/?lang=pt" style="width:390px;height:844px;border:0;position:absolute;left:-9999px"></iframe>
 <script>
 const linhas = [];
 let falhas = 0;
@@ -169,8 +169,12 @@ quadro.onload = async () => {
   ok('detalhe tem endereço próprio', w.location.hash === '#p-newcastle', w.location.hash);
   ok('detalhe mostra variantes/adicionais e informação alimentar',
      /INFORMAÇÃO ALIMENTAR/i.test(det.innerText) && /PORÇÃO/i.test(det.innerText));
-  ok('detalhe informa que alérgenos transcritos aguardam conferência',
-     /não conferidas com a cozinha/i.test(det.innerText));
+  // A metadata editorial e conferida acima. O texto publico orienta a pessoa
+  // a consultar a equipe antes de pedir, conforme blocoAlimentar().
+  const alimentar = det.querySelector('.bloco--alimentar');
+  ok('detalhe orienta consultar a equipe antes do pedido',
+     !!alimentar && /alergias|restrições/i.test(alimentar.innerText) &&
+     /consulte.*equipe.*antes.*pedido/i.test(alimentar.innerText));
   ok('bloco "Como pedir" retirado do detalhe', !/Como pedir/i.test(det.innerText));
   ok('detalhe limpo sem instruções operacionais', !/mostrar o celular/i.test(det.innerText));
   w.history.back();

@@ -128,7 +128,7 @@ class Catalogo:
             partes.append(f'<span class="item__alergeno" title="{esc(self.ui["contem"] + " " + rotulo)}">'
                           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
                           f'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{glifo}</svg>'
-                          f'<span>{esc(rotulo)}</span></span>')
+                          f'<span class="visivel-so-leitor">{esc(self.ui["contem"] + " " + rotulo)}</span></span>')
         return '<div class="item__alergenos">' + "".join(partes) + "</div>"
 
     @staticmethod

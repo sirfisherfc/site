@@ -202,6 +202,7 @@
     item: 'item',
     itens: 'items',
     legendaTitulo: 'Allergen key',
+    legendaAtalho: 'Allergen key',
     legendaIntro: 'Main ingredients found in the menu items:',
     legendaAviso: '<p><strong>ALLERGIES? TELL US BEFORE YOU ORDER:</strong> cross-contact may occur.</p>',
     voltarTopo: 'Back to the top of the menu',

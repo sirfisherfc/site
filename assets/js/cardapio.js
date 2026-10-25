@@ -97,6 +97,7 @@
     item: 'item',
     itens: 'itens',
     legendaTitulo: 'Legenda de alérgenos',
+    legendaAtalho: 'Alérgenos',
     legendaIntro: 'Identificação dos principais ingredientes presentes nos itens do cardápio:',
     legendaAviso: '<p><strong>ALERGIA? AVISE ANTES DO PEDIDO:</strong> pode ter contaminação cruzada.</p>',
     voltarTopo: 'Voltar ao começo do cardápio',
@@ -418,7 +419,7 @@
       return '<span class="item__alergeno" title="' + esc(T('contem') + ' ' + rotuloAlergeno(rotulo)) + '">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + glifo + '</svg>' +
-        '<span>' + esc(rotuloAlergeno(rotulo)) + '</span></span>';
+        '<span class="visivel-so-leitor">' + esc(T('contem') + ' ' + rotuloAlergeno(rotulo)) + '</span></span>';
     }).join('') + '</div>';
   }
 
