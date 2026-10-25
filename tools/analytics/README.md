@@ -75,6 +75,20 @@ O verificador CSP também passou a normalizar CRLF ao ler o HTML do clone
 Windows. A leitura anterior falhava ao procurar o comentário com LF.
 A política e os hashes dos scripts foram preservados.
 
+### Pets, grupos e ocasiões de evento
+
+As homes PT e EN agora mostram a política existente: pets de pequeno e médio
+porte são bem-vindos nas mesas externas. O fato já constava no FAQ estruturado
+da home PT; a leitura autenticada do Perfil Google em 25/10 também confirmou
+`attributes/welcomes_dogs=true`. O texto visível e o FAQ em ambos os idiomas
+mantêm os mesmos limites.
+
+As orientações de grupos também foram alinhadas no texto visível e no FAQ:
+portal para até dez pessoas, WhatsApp para 11–29 e proposta de evento para
+30–100 pessoas sentadas. A home EN avisa que o configurador de eventos está
+em português. A página de eventos explicita aniversários e confraternizações
+na abertura e na descrição, preservando title, H1 e as regras do configurador.
+
 ## Revisão de 25/10/2026
 
 O relatório consolidado, as prioridades e o acompanhamento de 30/60/90 dias
