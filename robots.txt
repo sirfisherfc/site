@@ -1,5 +1,46 @@
-# O Cloudflare insere antes destas linhas o bloco gerenciado dele
-# (User-agent: * com Allow: / e os robos de treino de IA bloqueados).
-# Um segundo grupo User-agent: * aqui duplicaria aquele grupo.
+# Regras do site. O robots.txt gerenciado do Cloudflare foi desligado em
+# 25/10/2026 (gestao/scripts/cloudflare/cf.py robots): ele repetia o grupo
+# User-agent: * e trazia a linha Content-Signal, que validadores acusam como
+# erro de formato. Os bloqueios abaixo sao os mesmos que ele publicava:
+# robos de treino de IA. Busca e assistentes de IA (OAI-SearchBot,
+# ChatGPT-User, PerplexityBot, Claude-SearchBot) seguem liberados.
+
+User-agent: *
+Allow: /
+
+# Treino de IA e coleta para modelos
+User-agent: Amazonbot
+User-agent: Applebot-Extended
+User-agent: Bytespider
+User-agent: CCBot
+User-agent: ClaudeBot
+User-agent: Diffbot
+User-agent: Google-Extended
+User-agent: GPTBot
+User-agent: omgili
+User-agent: anthropic-ai
+User-agent: Claude-Web
+User-agent: cohere-ai
+User-agent: MistralAI-Training
+User-agent: meta-externalagent
+User-agent: GoogleOther
+User-agent: Baiduspider
+User-agent: PetalBot
+User-agent: AwarioSmartBot
+User-agent: AwarioRssBot
+User-agent: Google-CloudVertexBot
+User-agent: QualifiedBot
+User-agent: Cotoyogi
+User-agent: ICC-Crawler
+User-agent: atlassian-bot
+User-agent: FishBot
+User-agent: BorderxBot
+User-agent: NavuBot
+User-agent: SemrushBot-SWA
+User-agent: WARDBot
+User-agent: magpie-crawler
+User-agent: KimiBot
+User-agent: CitibotSiteCrawler
+Disallow: /
 
 Sitemap: https://www.sirfisher.com.br/sitemap.xml

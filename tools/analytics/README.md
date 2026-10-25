@@ -17,12 +17,14 @@ Outras correções:
 
 - Réveillon: o `organizer` do Event (`Restaurant`, um LocalBusiness) ganhou o
   `address` obrigatório.
-- `robots.txt`: o Cloudflare antepõe o bloco gerenciado dele (`Content-Signal`,
-  `User-agent: *` e robôs de treino de IA bloqueados). O arquivo do site
-  repetia o grupo `User-agent: *`; agora só declara o sitemap. O token do
-  `gestao/scripts/cloudflare/cf.py` não tem permissão de Bot Management, então
-  o bloco gerenciado (que também bloqueia o `Google-Extended`) só pode ser
-  mudado no painel do Cloudflare.
+- `robots.txt`: o Cloudflare antepunha o bloco gerenciado dele
+  (`Content-Signal`, `User-agent: *` e robôs de treino de IA bloqueados), o que
+  duplicava o grupo `User-agent: *` do site. O bloco foi desligado
+  (`gestao/scripts/cloudflare/cf.py robots`; `--religar` desfaz) e o
+  `robots.txt` do site passou a ter a mesma lista de 32 robôs de treino
+  bloqueados, inclusive o `Google-Extended`. Busca e assistentes de IA
+  (OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot) seguem
+  liberados. Robô novo de treino não entra mais sozinho: revisar a lista.
 - `llms.txt` com a descrição da casa e os links das páginas, sem preços nem
   horários, que mudam.
 - Como chegar e Almoço executivo passaram a linkar `/reservas/`.
