@@ -102,7 +102,8 @@ def main() -> int:
                      and str(p.relative_to(RAIZ)).replace("\\", "/") not in EXCLUIDAS)
     erros, alterados = [], []
     for pagina in paginas:
-        with open(pagina, encoding="utf-8", newline="") as f:
+        # O clone Windows pode usar CRLF; o HTML e os hashes usam LF.
+        with open(pagina, encoding="utf-8") as f:
             atual = f.read()
         nome = str(pagina.relative_to(RAIZ)).replace("\\", "/")
         for padrao, motivo in PROIBIDOS:

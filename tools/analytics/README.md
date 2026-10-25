@@ -50,6 +50,31 @@ mantém o retorno à home em inglês e foi alinhada às regras de mesa e rota;
 as aproximações em dólares sem data foram retiradas. Os preços em reais,
 URLs e ofertas continuam com as fontes e regras já confirmadas.
 
+### Links de visita e orientação de rota
+
+A legenda do almoço na home agora abre o executivo individual. O bloco do
+restaurante no guia da Beira-Mar também abre o cardápio completo. Os dois
+links registram `click_menu` com a posição do clique, usando a medição existente.
+O sitemap passou a registrar 25/10 para as alterações já publicadas no
+cardápio e no Réveillon.
+
+A página Como chegar passou a orientar a caminhada conforme o hotel de
+partida, com rota para Av. Beira Mar, 3421, em frente ao Jardim Japonês.
+O texto visível e a resposta FAQ estruturada usam a mesma orientação;
+foram retirados o sentido fixo com o mar à direita e a faixa geral de 5–20
+minutos, que dependem do ponto de partida.
+
+A conferência local cobriu home, guia e Como chegar em 390 e 1440 px, nos
+temas claro e escuro: foco por teclado, contraste e ausência de rolagem
+horizontal. Os novos links abriram os destinos e registraram uma ocorrência
+local por clique. A rede externa ficou bloqueada. Os 108 testes existentes
+de CTAs, atribuição e carregamento de marketing passaram, assim como os
+verificadores de catálogo estático, assets, CSP e CSS embutido.
+
+O verificador CSP também passou a normalizar CRLF ao ler o HTML do clone
+Windows. A leitura anterior falhava ao procurar o comentário com LF.
+A política e os hashes dos scripts foram preservados.
+
 ## Revisão de 25/10/2026
 
 O relatório consolidado, as prioridades e o acompanhamento de 30/60/90 dias
