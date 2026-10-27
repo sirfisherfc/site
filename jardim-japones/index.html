@@ -79,6 +79,7 @@
 
   <link rel="preload" href="../assets/fonts/fraunces.woff2?v=7234ed860a" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="../assets/css/style.css?v=6b8dadcac8" />
+  <link rel="stylesheet" href="../assets/css/jardim.css?v=aef03e79bd" />
 
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Sir Fisher" />
@@ -86,12 +87,12 @@
   <meta property="og:url" content="https://www.sirfisher.com.br/jardim-japones/" />
   <meta property="og:title" content="Jardim Japonês de Fortaleza | Horário, onde fica e o que ver" />
   <meta property="og:description" content="Lagos, cascatas e uma ponte vermelha na Beira-Mar do Meireles. Entrada gratuita, horário, o que fica perto e onde comer em frente." />
-  <meta property="og:image" content="https://www.sirfisher.com.br/assets/img/og-sir-fisher-beira-mar-fortaleza.jpg" />
-  <meta property="og:image:alt" content="Pôr do sol sobre o mar na Beira-Mar de Fortaleza, visto do Sir Fisher" />
+  <meta property="og:image" content="https://www.sirfisher.com.br/assets/img/jardim-japones-torii-fortaleza-1200.jpg" />
+  <meta property="og:image:alt" content="Torii vermelho do Jardim Japonês com a Beira-Mar de Fortaleza ao fundo" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Jardim Japonês de Fortaleza | Horário e o que ver" />
   <meta name="twitter:description" content="Lagos, cascatas e uma ponte vermelha na Beira-Mar do Meireles. Entrada gratuita." />
-  <meta name="twitter:image" content="https://www.sirfisher.com.br/assets/img/og-sir-fisher-beira-mar-fortaleza.jpg" />
+  <meta name="twitter:image" content="https://www.sirfisher.com.br/assets/img/jardim-japones-torii-fortaleza-1200.jpg" />
 
   <script type="application/ld+json">
   {
@@ -113,6 +114,7 @@
     "name": "Jardim Japonês de Fortaleza",
     "alternateName": "Jardim Japonês Jusaku Fujita",
     "description": "Praça pública de cerca de 1.900 m² na Avenida Beira Mar, no Meireles, com lagos, fontes, cascatas, ponte, coreto, monumentos de temática japonesa e mais de 50 espécies de plantas. Homenageia Jusaku Fujita, o primeiro imigrante japonês a chegar ao Ceará, em 1922.",
+    "image": "https://www.sirfisher.com.br/assets/img/jardim-japones-torii-fortaleza-1200.jpg",
     "isAccessibleForFree": true,
     "publicAccess": true,
     "address": {
@@ -251,176 +253,250 @@
 </head>
 <body>
 
-  <div class="shell">
-    <button class="theme-toggle" type="button" aria-label="Mudar para o tema escuro" aria-pressed="false">
-      <svg class="ico-lua" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      <svg class="ico-sol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-    </button>
+  <div class="shell shell--garden">
+    <header class="garden-header">
+      <a class="garden-brand" href="../" aria-label="Sir Fisher, página inicial"><img src="../assets/img/logo-emblem-64.webp?v=17e34c8835" alt="" width="64" height="68" />Sir Fisher</a>
+      <nav class="garden-nav" aria-label="Nesta página">
+        <a href="#o-que-ver">O que ver</a>
+        <a href="#horario">Horário</a>
+        <a href="#quando-ir">Quando ir</a>
+        <a href="#em-frente">Onde comer em frente</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Mudar para o tema escuro" aria-pressed="false">
+        <svg class="ico-lua" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="ico-sol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </header>
+
     <main>
 
-      <div class="hero">
-        <picture>
-          <source type="image/avif" srcset="../assets/img/por-do-sol-beira-mar-fortaleza-460.avif?v=ff7b34fb7d 460w, ../assets/img/por-do-sol-beira-mar-fortaleza-720.avif?v=fcba9708a9 720w" sizes="(max-width:460px) 100vw, 460px" />
-          <source type="image/webp" srcset="../assets/img/por-do-sol-beira-mar-fortaleza-460.webp?v=c5c3f1e63c 460w, ../assets/img/por-do-sol-beira-mar-fortaleza-720.webp?v=a76706c36b 720w" sizes="(max-width:460px) 100vw, 460px" />
-          <img class="hero__img" src="../assets/img/por-do-sol-beira-mar-fortaleza-460.jpg?v=499ce944e2" alt="A orla da Beira-Mar de Fortaleza no fim da tarde, vista das mesas do Sir Fisher, em frente ao Jardim Japonês" width="460" height="307" fetchpriority="high" />
-        </picture>
-      </div>
+      <section class="garden-intro" aria-labelledby="titulo">
+        <figure class="garden-hero">
+          <picture>
+            <source type="image/avif" srcset="../assets/img/jardim-japones-torii-fortaleza-480.avif?v=e76c32b2a5 480w, ../assets/img/jardim-japones-torii-fortaleza-800.avif?v=dfe9f81770 800w, ../assets/img/jardim-japones-torii-fortaleza-1200.avif?v=bb36708c69 1200w" sizes="(min-width:1180px) 620px, (min-width:900px) 54vw, calc(100vw - 44px)" />
+            <source type="image/webp" srcset="../assets/img/jardim-japones-torii-fortaleza-480.webp?v=2dcc722ad3 480w, ../assets/img/jardim-japones-torii-fortaleza-800.webp?v=b7332e1d3c 800w, ../assets/img/jardim-japones-torii-fortaleza-1200.webp?v=af49dd9c28 1200w" sizes="(min-width:1180px) 620px, (min-width:900px) 54vw, calc(100vw - 44px)" />
+            <img src="../assets/img/jardim-japones-torii-fortaleza-800.jpg?v=09862512fd" srcset="../assets/img/jardim-japones-torii-fortaleza-480.jpg?v=1c1d0a1c85 480w, ../assets/img/jardim-japones-torii-fortaleza-800.jpg?v=09862512fd 800w, ../assets/img/jardim-japones-torii-fortaleza-1200.jpg?v=dd9f4ba5c3 1200w" sizes="(min-width:1180px) 620px, (min-width:900px) 54vw, calc(100vw - 44px)" alt="Torii vermelho e passarela de madeira do Jardim Japonês, com a Beira-Mar de Fortaleza ao fundo" width="1200" height="900" fetchpriority="high" />
+          </picture>
+          <figcaption class="garden-credit">O torii e a passarela, com a orla ao fundo (2023). Foto: <a href="https://commons.wikimedia.org/wiki/File:Jardim_Japon%C3%AAs_Jusaku_Fujita,_Meireles,_Fortaleza,_setembro_de_2023_(6).jpg" rel="noopener">Fronteira</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br" rel="license noopener">CC BY-SA 4.0</a>, via Wikimedia Commons.</figcaption>
+        </figure>
 
-      <header class="board">
-        <p class="eyebrow">Av. Beira Mar · Meireles</p>
-        <h1>Jardim Japonês de Fortaleza.</h1>
-        <p class="board__sub">Uma praça pública de 1.900 m² na Beira-Mar, com lagos, cascatas e uma ponte vermelha. <strong>A entrada é gratuita.</strong> Fica do outro lado da avenida, <em>em frente ao Sir Fisher</em>.</p>
-      </header>
-
-      <section class="sec" id="horario">
-        <h2>Horário, endereço e entrada</h2>
-
-        <dl class="hours">
-          <div><dt>Funcionamento</dt><dd>Todos os dias, 6h às 22h</dd></div>
-          <div><dt>Entrada</dt><dd>Gratuita</dd></div>
-          <div><dt>Área</dt><dd>Cerca de 1.900 m²</dd></div>
-          <div><dt>Onde</dt><dd>Av. Beira Mar, Meireles</dd></div>
-        </dl>
-
-        <p>O horário é o informado pela Prefeitura de Fortaleza. Em feriados, eventos e manutenção, o funcionamento pode mudar.</p>
-        <p>O jardim fica do lado oposto ao mar, em frente ao número 3421 da Beira Mar, onde está o Sir Fisher, e a cerca de 300 metros da Feirinha da Beira-Mar. O nome oficial é <strong>Jardim Japonês Jusaku Fujita</strong>.</p>
-
-        <div class="btn-pair">
-          <a class="btn btn--solid" href="https://www.google.com/maps/search/?api=1&amp;query=Jardim+Japon%C3%AAs+Jusaku+Fujita+Fortaleza" target="_blank" rel="noopener" data-evt="click_maps" data-position="jardim">
-            Ver no mapa
-          </a>
-          <a class="btn btn--ghost" href="../guia/beira-mar/">
-            Guia da Beira-Mar
+        <div class="garden-copy">
+          <p class="eyebrow">Beira-Mar · Meireles · Fortaleza</p>
+          <h1 id="titulo">Jardim Japonês de Fortaleza.</h1>
+          <p class="garden-lead">Lagos, cascatas, um coreto e a ponte vermelha, em 1.900 m² de praça pública na Beira-Mar. Um passeio curto, de graça, todos os dias, com o mar logo ali.</p>
+          <ul class="garden-facts" aria-label="Resumo do jardim">
+            <li><strong>Grátis</strong><span>entrada</span></li>
+            <li><strong>6h–22h</strong><span>todos os dias</span></li>
+            <li><strong>1.900 m²</strong><span>de jardim</span></li>
+          </ul>
+          <a class="garden-teaser" href="#em-frente">
+            <picture>
+              <source type="image/avif" srcset="../assets/img/terraco-por-do-sol-sir-fisher-640.avif?v=f82929df8f 640w" sizes="96px" />
+              <img src="../assets/img/terraco-por-do-sol-sir-fisher-640.webp?v=de5325d8a5" alt="" width="640" height="572" loading="lazy" decoding="async" />
+            </picture>
+            <span class="garden-teaser__text">
+              <span class="garden-teaser__kicker">Do outro lado da avenida</span>
+              <strong>Sir Fisher, de frente para o mar</strong>
+              <span class="garden-teaser__sub">Almoço, pôr do sol e jantar a poucos passos do jardim.</span>
+            </span>
+            <span class="garden-teaser__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
           </a>
         </div>
       </section>
 
-      <section class="sec" id="o-que-ver">
-        <h2>O que tem no jardim</h2>
-        <ul>
-          <li>Lagos com fontes e cascatas.</li>
-          <li>Uma ponte vermelha sobre a água.</li>
-          <li>Um coreto e monumentos de temática japonesa.</li>
-          <li>Mais de 50 espécies de plantas.</li>
-          <li>Bancos para sentar e iluminação para a visita à noite.</li>
-        </ul>
-        <p>A visita é curta: dá para percorrer o jardim sem pressa em poucos minutos e seguir pelo calçadão.</p>
+      <section class="garden-sec" id="o-que-ver" aria-labelledby="ver">
+        <div class="garden-head">
+          <h2 id="ver">O que tem no jardim</h2>
+          <p>Lagos com fontes e cascatas, uma ponte vermelha, um coreto, monumentos de temática japonesa e mais de 50 espécies de plantas. Dá para percorrer tudo sem pressa e seguir pelo calçadão, com bancos e iluminação para a visita à noite.</p>
+        </div>
+        <div class="garden-gallery" tabindex="0" role="region" aria-label="Fotos do Jardim Japonês (role para o lado)">
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/jardim-japones-ponte-vermelha-fortaleza-480.avif?v=403382ab86 480w, ../assets/img/jardim-japones-ponte-vermelha-fortaleza-800.avif?v=4dcf2fc96d 800w" sizes="(min-width:900px) 440px, 80vw" />
+              <source type="image/webp" srcset="../assets/img/jardim-japones-ponte-vermelha-fortaleza-480.webp?v=4f539cb776 480w, ../assets/img/jardim-japones-ponte-vermelha-fortaleza-800.webp?v=4c7fc91cf3 800w" sizes="(min-width:900px) 440px, 80vw" />
+              <img src="../assets/img/jardim-japones-ponte-vermelha-fortaleza-480.jpg?v=d498e1375b" srcset="../assets/img/jardim-japones-ponte-vermelha-fortaleza-480.jpg?v=d498e1375b 480w, ../assets/img/jardim-japones-ponte-vermelha-fortaleza-800.jpg?v=6c35a44ce7 800w" sizes="(min-width:900px) 440px, 80vw" alt="Ponte vermelha do Jardim Japonês entre luminárias redondas, buganvílias e prédios da Beira-Mar" width="800" height="600" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>A ponte vermelha e as luminárias.<small>Foto (2025): <a href="https://commons.wikimedia.org/wiki/File:Jardim_Japon%C3%AAs_de_Fortaleza_16.jpg" rel="noopener">Joelkaula</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br" rel="license noopener">CC BY-SA 4.0</a>, via Wikimedia Commons.</small></figcaption>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/jardim-japones-coreto-fortaleza-480.avif?v=5727bcf410 480w, ../assets/img/jardim-japones-coreto-fortaleza-800.avif?v=c52e087355 800w" sizes="(min-width:900px) 360px, 80vw" />
+              <source type="image/webp" srcset="../assets/img/jardim-japones-coreto-fortaleza-480.webp?v=016d9f912b 480w, ../assets/img/jardim-japones-coreto-fortaleza-800.webp?v=215e86a2e0 800w" sizes="(min-width:900px) 360px, 80vw" />
+              <img src="../assets/img/jardim-japones-coreto-fortaleza-480.jpg?v=e42d0590f4" srcset="../assets/img/jardim-japones-coreto-fortaleza-480.jpg?v=e42d0590f4 480w, ../assets/img/jardim-japones-coreto-fortaleza-800.jpg?v=b30f432de5 800w" sizes="(min-width:900px) 360px, 80vw" alt="Coreto de madeira vermelha com telhado em estilo japonês, cercado de plantas" width="800" height="600" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>O coreto, de madeira vermelha.<small>Foto (2025): <a href="https://commons.wikimedia.org/wiki/File:Jardim_Japon%C3%AAs_de_Fortaleza_18.jpg" rel="noopener">Joelkaula</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br" rel="license noopener">CC BY-SA 4.0</a>, via Wikimedia Commons.</small></figcaption>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/jardim-japones-lago-mar-fortaleza-480.avif?v=d6b30f40cb 480w, ../assets/img/jardim-japones-lago-mar-fortaleza-800.avif?v=e9a85847a0 800w" sizes="(min-width:900px) 290px, 80vw" />
+              <source type="image/webp" srcset="../assets/img/jardim-japones-lago-mar-fortaleza-480.webp?v=51aab847a9 480w, ../assets/img/jardim-japones-lago-mar-fortaleza-800.webp?v=5ce61d7c54 800w" sizes="(min-width:900px) 290px, 80vw" />
+              <img src="../assets/img/jardim-japones-lago-mar-fortaleza-480.jpg?v=00581199e3" srcset="../assets/img/jardim-japones-lago-mar-fortaleza-480.jpg?v=00581199e3 480w, ../assets/img/jardim-japones-lago-mar-fortaleza-800.jpg?v=84f6b7e8b5 800w" sizes="(min-width:900px) 290px, 80vw" alt="Lago entre pedras do Jardim Japonês, sob folhas de palmeira, com a avenida e o mar ao fundo" width="800" height="1067" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>O lago entre pedras, com o mar ao fundo.<small>Foto (2025): <a href="https://commons.wikimedia.org/wiki/File:Jardim_Japon%C3%AAs_de_Fortaleza_14.jpg" rel="noopener">Joelkaula</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br" rel="license noopener">CC BY-SA 4.0</a>, via Wikimedia Commons.</small></figcaption>
+          </figure>
+        </div>
       </section>
 
-      <section class="sec" id="historia">
-        <h2>Quem foi Jusaku Fujita</h2>
-        <p>O jardim leva o nome de <strong>Jusaku Fujita</strong>. Segundo a família, citada pela Prefeitura, ele foi o primeiro imigrante japonês a chegar ao Ceará, em 1922. O espaço homenageia a contribuição da comunidade japonesa no estado.</p>
-        <p>O jardim foi inaugurado em abril de 2011 e se tornou um dos cartões-postais da Beira-Mar.</p>
+      <section class="garden-band" id="em-frente" aria-labelledby="frente">
+        <div class="garden-band__copy">
+          <p class="eyebrow">Em frente ao Jardim Japonês</p>
+          <h2 id="frente">Atravesse a avenida. A mesa é de frente para o mar.</h2>
+          <p>O Sir Fisher fica do lado do mar da Beira Mar, no número 3421, bem em frente ao jardim. Peixes, camarões, <a href="../fish-and-chips/">fish and chips</a> com pescada amarela, carnes para dividir e petiscos, com as mesas voltadas para a orla.</p>
+          <ul class="garden-band__list">
+            <li><strong>Almoço executivo</strong> de segunda a sexta, das 10h às 14h, a partir de R$ 31, exceto feriados.</li>
+            <li><strong>Pôr do sol</strong> entre 17h25 e 17h56, conforme o mês, visto das mesas.</li>
+            <li><strong>Jantar</strong> até 22h15 de domingo a quinta e até 23h às sextas e sábados.</li>
+            <li><strong>Pets</strong> de pequeno e médio porte são bem-vindos nas mesas externas.</li>
+          </ul>
+          <div class="garden-band__actions">
+            <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?sf_origin=jardim_japones&amp;sf_cta=visita" target="_blank" rel="noopener" data-evt="click_reservation" data-position="visita">Reservar mesa</a>
+            <a class="btn btn--ghost" href="../cardapio/" data-evt="click_menu" data-position="visita">Ver cardápio</a>
+            <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Beira+Mar%2C+3421%2C+Meireles%2C+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="click_maps" data-position="visita">Como chegar</a>
+          </div>
+          <p class="garden-band__note">Reservamos parte das mesas e atendemos o restante por ordem de chegada.</p>
+        </div>
+        <div class="garden-band__photos">
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/terraco-por-do-sol-sir-fisher-640.avif?v=f82929df8f 640w, ../assets/img/terraco-por-do-sol-sir-fisher-960.avif?v=6eae7d1a09 960w" sizes="(min-width:900px) 500px, calc(100vw - 68px)" />
+              <img src="../assets/img/terraco-por-do-sol-sir-fisher-640.webp?v=de5325d8a5" srcset="../assets/img/terraco-por-do-sol-sir-fisher-640.webp?v=de5325d8a5 640w, ../assets/img/terraco-por-do-sol-sir-fisher-960.webp?v=3bc929848c 960w" sizes="(min-width:900px) 500px, calc(100vw - 68px)" alt="Mesas do Sir Fisher de frente para o mar, com guarda-sóis e luz do pôr do sol" width="960" height="858" loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-340.avif?v=6e661f36c3 340w, ../assets/img/camarao-alho-e-oleo-sir-fisher-440.avif?v=eee3a0316e 440w" sizes="(min-width:900px) 245px, 45vw" />
+              <source type="image/webp" srcset="../assets/img/camarao-alho-e-oleo-sir-fisher-340.webp?v=40634972cd 340w, ../assets/img/camarao-alho-e-oleo-sir-fisher-440.webp?v=7b8c73f061 440w" sizes="(min-width:900px) 245px, 45vw" />
+              <img src="../assets/img/camarao-alho-e-oleo-sir-fisher-440.jpg?v=f0ede79d4f" alt="Travessa de camarões ao alho e óleo do Sir Fisher" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/avif" srcset="../assets/img/clientes-fim-de-tarde-sir-fisher-240.avif?v=2dc4c10626 240w, ../assets/img/clientes-fim-de-tarde-sir-fisher-440.avif?v=58c02375fe 440w" sizes="(min-width:900px) 245px, 45vw" />
+              <source type="image/webp" srcset="../assets/img/clientes-fim-de-tarde-sir-fisher-240.webp?v=815b3323a7 240w, ../assets/img/clientes-fim-de-tarde-sir-fisher-440.webp?v=2021b684e6 440w" sizes="(min-width:900px) 245px, 45vw" />
+              <img src="../assets/img/clientes-fim-de-tarde-sir-fisher-440.jpg?v=08a30c49e4" alt="Clientes nas mesas ao ar livre do Sir Fisher, com vista para o mar no fim da tarde" width="440" height="550" loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+        </div>
       </section>
 
-      <section class="sec" id="reforma">
+      <section class="garden-sec garden-split" id="horario">
+        <div>
+          <h2>Horário, endereço e entrada</h2>
+          <dl class="hours">
+            <div><dt>Funcionamento</dt><dd>Todos os dias, 6h às 22h</dd></div>
+            <div><dt>Entrada</dt><dd>Gratuita</dd></div>
+            <div><dt>Área</dt><dd>Cerca de 1.900 m²</dd></div>
+            <div><dt>Onde</dt><dd>Av. Beira Mar, Meireles</dd></div>
+          </dl>
+          <p>O horário é o informado pela Prefeitura de Fortaleza. Em feriados, eventos e manutenção, o funcionamento pode mudar.</p>
+          <p>O jardim fica do lado oposto ao mar, em frente ao número 3421 da Beira Mar, onde está o Sir Fisher, e a cerca de 300 metros da Feirinha da Beira-Mar. O nome oficial é <strong>Jardim Japonês Jusaku Fujita</strong>.</p>
+          <div class="btn-pair">
+            <a class="btn btn--solid" href="https://www.google.com/maps/search/?api=1&amp;query=Jardim+Japon%C3%AAs+Jusaku+Fujita+Fortaleza" target="_blank" rel="noopener" data-evt="click_maps" data-position="jardim">Ver o jardim no mapa</a>
+            <a class="btn btn--ghost" href="../como-chegar/">Onde estacionar</a>
+          </div>
+        </div>
+        <div id="historia">
+          <figure class="garden-figure">
+            <picture>
+              <source type="image/avif" srcset="../assets/img/jardim-japones-coreto-placa-fortaleza-480.avif?v=40c75f8d57 480w, ../assets/img/jardim-japones-coreto-placa-fortaleza-800.avif?v=c9f5d11bd1 800w" sizes="(min-width:900px) 520px, calc(100vw - 44px)" />
+              <source type="image/webp" srcset="../assets/img/jardim-japones-coreto-placa-fortaleza-480.webp?v=6a6089c340 480w, ../assets/img/jardim-japones-coreto-placa-fortaleza-800.webp?v=6225d6aa4d 800w" sizes="(min-width:900px) 520px, calc(100vw - 44px)" />
+              <img src="../assets/img/jardim-japones-coreto-placa-fortaleza-480.jpg?v=905037b7c9" srcset="../assets/img/jardim-japones-coreto-placa-fortaleza-480.jpg?v=905037b7c9 480w, ../assets/img/jardim-japones-coreto-placa-fortaleza-800.jpg?v=ac26955016 800w" sizes="(min-width:900px) 520px, calc(100vw - 44px)" alt="Coreto vermelho sobre base de pedra, com a placa Jardim Japonês Jusaku Fujita" width="800" height="600" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption><small>A placa com o nome oficial (2023). Foto: <a href="https://commons.wikimedia.org/wiki/File:Jardim_Japon%C3%AAs_Jusaku_Fujita,_Meireles,_Fortaleza,_setembro_de_2023_(7).jpg" rel="noopener">Fronteira</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br" rel="license noopener">CC BY-SA 4.0</a>, via Wikimedia Commons.</small></figcaption>
+          </figure>
+          <h2>Quem foi Jusaku Fujita</h2>
+          <p>O jardim leva o nome de <strong>Jusaku Fujita</strong>. Segundo a família, citada pela Prefeitura, ele foi o primeiro imigrante japonês a chegar ao Ceará, em 1922. O espaço homenageia a contribuição da comunidade japonesa no estado.</p>
+          <p>Inaugurado em abril de 2011, o jardim se tornou um dos cartões-postais da Beira-Mar.</p>
+        </div>
+      </section>
+
+      <section class="garden-sec" id="reforma">
         <h2>A reforma de 2026</h2>
-        <p>A Prefeitura de Fortaleza entregou a requalificação do jardim em <strong>9 de julho de 2026</strong>, com investimento aproximado de R$ 340 mil. A obra recuperou o guarda-corpo e o piso, pintou o espaço, fez a manutenção do telhado do coreto e a revisão elétrica das bombas das fontes e cascatas, trocou pedras de revestimento danificadas, limpou pichações e melhorou a iluminação.</p>
+        <p>A Prefeitura de Fortaleza entregou a requalificação do jardim em <strong>9 de julho de 2026</strong>, com investimento aproximado de R$ 340 mil. A obra recuperou o guarda-corpo e o piso, pintou o espaço, fez a manutenção do telhado do coreto e a revisão elétrica das bombas das fontes e cascatas, trocou pedras de revestimento danificadas, limpou pichações e melhorou a iluminação. As fotos desta página são de antes da reforma.</p>
         <p>A Guarda Municipal patrulha a área, e a Central de Operações da Beira-Mar monitora a orla 24 horas, com 144 câmeras.</p>
       </section>
 
-      <section class="sec" id="quando-ir">
+      <section class="garden-sec" id="quando-ir">
         <h2>Quando ir</h2>
-        <h3>De manhã cedo</h3>
-        <p>O jardim abre às 6h. Até umas 8h, o calçadão fica vazio e a ciclovia, livre.</p>
-        <h3>No fim da tarde</h3>
-        <p>A luz começa a mudar por volta das 16h45, e o sol se põe entre <strong>17h25 e 17h56</strong>, conforme o mês. Veja a <a href="../por-do-sol/">tabela do pôr do sol mês a mês</a> e o horário de hoje.</p>
-        <h3>À noite</h3>
-        <p>Com a iluminação reformada, a visita segue até as 22h. A Feirinha da Beira-Mar funciona das 16h às 22h, a poucos minutos a pé.</p>
-      </section>
-
-      <section class="sec" id="perto">
-        <h2>O que fica perto</h2>
-        <ul>
-          <li><strong>Feirinha da Beira-Mar</strong>, a cerca de 300 metros: artesanato, roupas, redes e comida típica, das 16h às 22h.</li>
-          <li><strong>Calçadão e ciclovia</strong> da Beira-Mar, bem em frente, para caminhar ou pedalar pela orla do Meireles.</li>
-          <li><strong>Praia de Iracema</strong>, na ponta oeste, e o <strong>Mercado dos Peixes</strong>, no Mucuripe, na ponta leste do trecho.</li>
-        </ul>
-        <p>O <a href="../guia/beira-mar/">guia da Beira-Mar</a> mostra o trecho de ponta a ponta, com horários, onde estacionar e os tipos de restaurante da orla.</p>
-      </section>
-
-      <section class="sec" id="onde-comer">
-        <h2>Onde comer em frente ao Jardim Japonês</h2>
-        <p>Do outro lado da avenida, de frente para o mar, fica o <strong>Sir Fisher</strong>. A casa serve peixes, camarões, <a href="../fish-and-chips/">fish and chips</a> com pescada amarela, carnes para dividir e petiscos, com as mesas voltadas para a orla.</p>
-        <p>De segunda a sexta, das 10h às 14h, há <a href="../almoco-executivo/">almoço executivo</a> a partir de R$ 31, exceto feriados. Para jantar, a casa fica aberta até 22h15 de domingo a quinta e até 23h às sextas e sábados. Pets de pequeno e médio porte são bem-vindos nas mesas externas.</p>
-
-        <address class="place">
-          <strong>Sir Fisher</strong>
-          Av. Beira Mar, 3421 · Meireles<br />
-          Fortaleza, CE · em frente ao Jardim Japonês
-        </address>
-
-        <div class="btn-pair">
-          <a class="btn btn--primary" href="https://reservas.sirfisher.com.br/?sf_origin=jardim_japones&amp;sf_cta=visita" target="_blank" rel="noopener" data-evt="click_reservation" data-position="visita">
-            Reservar mesa
-          </a>
-          <a class="btn btn--ghost" href="../cardapio/" data-evt="click_menu" data-position="visita">
-            Ver cardápio
-          </a>
+        <div class="garden-cards">
+          <article>
+            <h3>De manhã cedo</h3>
+            <p>O jardim abre às 6h. Até umas 8h, o calçadão fica vazio e a ciclovia, livre. Depois, o almoço executivo do Sir Fisher começa às 10h, de segunda a sexta.</p>
+          </article>
+          <article>
+            <h3>No fim da tarde</h3>
+            <p>A luz começa a mudar por volta das 16h45 e o sol se põe entre <strong>17h25 e 17h56</strong>. Veja o <a href="../por-do-sol/">horário de hoje</a> e atravesse para assistir da mesa, de frente para o mar.</p>
+          </article>
+          <article>
+            <h3>À noite</h3>
+            <p>Com a iluminação reformada, a visita segue até as 22h. A Feirinha da Beira-Mar funciona das 16h às 22h, e o jantar no Sir Fisher vai até 22h15, ou 23h às sextas e sábados.</p>
+          </article>
         </div>
       </section>
 
-      <section class="sec" id="duvidas">
-        <h2>Perguntas frequentes</h2>
-
-        <h3>Precisa pagar para entrar?</h3>
-        <p>Não. É uma praça pública, com entrada gratuita.</p>
-
-        <h3>Qual o horário?</h3>
-        <p>Todos os dias, das 6h às 22h, segundo a Prefeitura. Em feriados e eventos, confirme no local.</p>
-
-        <h3>Dá para ir a pé dos hotéis da Beira-Mar?</h3>
-        <p>Sim, pelo calçadão, que é plano e acompanha o mar. O tempo de caminhada depende do hotel de partida.</p>
-
-        <h3>Onde estacionar?</h3>
-        <p>Há vagas públicas na própria Beira Mar e nas transversais do Meireles. No fim de tarde e nos fins de semana, a procura aumenta. Veja <a href="../como-chegar/">como chegar e onde estacionar</a>.</p>
+      <section class="garden-sec garden-split" id="perto">
+        <div>
+          <h2>O que fica perto</h2>
+          <ul>
+            <li><strong>Sir Fisher</strong>, em frente: peixes, camarões e petiscos de frente para o mar. <a href="#em-frente">Ver detalhes</a>.</li>
+            <li><strong>Feirinha da Beira-Mar</strong>, a cerca de 300 metros: artesanato, roupas, redes e comida típica, das 16h às 22h.</li>
+            <li><strong>Calçadão e ciclovia</strong> da Beira-Mar, bem em frente, para caminhar ou pedalar pela orla do Meireles.</li>
+            <li><strong>Praia de Iracema</strong>, na ponta oeste, e o <strong>Mercado dos Peixes</strong>, no Mucuripe, na ponta leste do trecho.</li>
+          </ul>
+          <p>O <a href="../guia/beira-mar/">guia da Beira-Mar</a> mostra o trecho de ponta a ponta, com horários, onde estacionar e os tipos de restaurante da orla.</p>
+        </div>
+        <div id="duvidas">
+          <h2>Perguntas frequentes</h2>
+          <h3>Precisa pagar para entrar?</h3>
+          <p>Não. É uma praça pública, com entrada gratuita.</p>
+          <h3>Qual o horário?</h3>
+          <p>Todos os dias, das 6h às 22h, segundo a Prefeitura. Em feriados e eventos, confirme no local.</p>
+          <h3>Dá para ir a pé dos hotéis da Beira-Mar?</h3>
+          <p>Sim, pelo calçadão, que é plano e acompanha o mar. O tempo de caminhada depende do hotel de partida.</p>
+          <h3>Onde comer perto do Jardim Japonês?</h3>
+          <p>O Sir Fisher fica em frente, do lado do mar, na Av. Beira Mar, 3421. Veja o <a href="../cardapio/" data-evt="click_menu" data-position="conteudo">cardápio com preços</a>.</p>
+        </div>
       </section>
 
-      <section class="sec" id="fontes">
+      <section class="garden-sec garden-sources" id="fontes">
         <h2>De onde vêm estas informações</h2>
-        <p>Área, elementos do jardim, homenagem, reforma e segurança: notícias da Prefeitura de Fortaleza sobre a <a href="https://www.fortaleza.ce.gov.br/noticias/prefeitura-de-fortaleza-entrega-requalificacao-do-jardim-japones-na-beira-mar" rel="noopener">entrega da requalificação</a>, de julho de 2026. Data de inauguração: <a href="https://conexao085.com.br/lugar-de-cultura-e-natureza-exuberante-assim-e-o-jardim-japones-em-fortaleza/" rel="noopener">Conexão 085</a>. Horários do jardim e da Feirinha: os mesmos do nosso <a href="../guia/beira-mar/">guia da Beira-Mar</a>. Horários do pôr do sol: algoritmo solar do NOAA para as coordenadas da Beira-Mar.</p>
-        <p>Horários de terceiros podem mudar. Confirme antes de sair.</p>
+        <p>Área, elementos do jardim, homenagem, reforma e segurança: notícia da Prefeitura de Fortaleza sobre a <a href="https://www.fortaleza.ce.gov.br/noticias/prefeitura-de-fortaleza-entrega-requalificacao-do-jardim-japones-na-beira-mar" rel="noopener">entrega da requalificação</a>, de julho de 2026. Data de inauguração: <a href="https://conexao085.com.br/lugar-de-cultura-e-natureza-exuberante-assim-e-o-jardim-japones-em-fortaleza/" rel="noopener">Conexão 085</a>. Horários do jardim e da Feirinha: os mesmos do nosso <a href="../guia/beira-mar/">guia da Beira-Mar</a>. Horários do pôr do sol: algoritmo solar do NOAA para as coordenadas da Beira-Mar.</p>
+        <p>As fotos do jardim são do Wikimedia Commons, sob licença <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br" rel="license noopener">CC BY-SA 4.0</a>, redimensionadas para esta página. Os autores aparecem em cada legenda. Horários de terceiros podem mudar; confirme antes de sair.</p>
       </section>
 
-      <nav class="links" aria-label="Mais do Sir Fisher">
-        <p class="links__label">Mais do Sir Fisher</p>
-
-        <a class="link-row link-row--sun" href="../por-do-sol/">
-          <span class="link-row__stamp">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M4.9 7.9l2.1 2.1M2 15h3M19 15h3M17 10l2.1-2.1"/><path d="M8 15a4 4 0 0 1 8 0"/><path d="M2 19h20"/></svg>
-          </span>
-          <span class="link-row__label">A que horas é o pôr do sol<span class="link-row__sub">O horário de hoje e a tabela mês a mês</span></span>
-          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-
-        <a class="link-row link-row--sea" href="../guia/beira-mar/">
-          <span class="link-row__stamp">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/><path d="M2 21c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/><path d="M12 3v7M8.5 6.5 12 3l3.5 3.5"/></svg>
-          </span>
-          <span class="link-row__label">Guia da Beira-Mar<span class="link-row__sub">O trecho inteiro, vizinhos inclusos</span></span>
-          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-
-        <a class="link-row link-row--coral" href="../fish-and-chips/">
-          <span class="link-row__stamp">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-5 9-5 6 3 9 5c-3 2-4 5-9 5s-9-5-9-5z"/><circle cx="8" cy="11" r="0.9" fill="currentColor" stroke="none"/></svg>
-          </span>
-          <span class="link-row__label">Fish and chips<span class="link-row__sub">O prato inglês, com peixe daqui</span></span>
-          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-
-        <a class="link-row link-row--sea" href="../como-chegar/">
-          <span class="link-row__label">Como chegar ao Sir Fisher<span class="link-row__sub">A pé, de aplicativo ou de carro</span></span>
-          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-
-        <a class="link-row link-row--sea" href="../">
-          <span class="link-row__label">O restaurante<span class="link-row__sub">Cardápio, fim de tarde e localização</span></span>
-          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-      </nav>
-
+      <div class="garden-sticky">
+        <span><strong>Sir Fisher</strong> em frente ao jardim</span>
+        <a class="btn btn--primary" href="../cardapio/" data-evt="click_menu" data-position="rodape">Ver cardápio</a>
+      </div>
     </main>
+
+    <nav class="links" aria-label="Mais do Sir Fisher">
+      <p class="links__label">Mais do Sir Fisher</p>
+
+      <a class="link-row link-row--sun" href="../por-do-sol/">
+        <span class="link-row__stamp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M4.9 7.9l2.1 2.1M2 15h3M19 15h3M17 10l2.1-2.1"/><path d="M8 15a4 4 0 0 1 8 0"/><path d="M2 19h20"/></svg>
+        </span>
+        <span class="link-row__label">A que horas é o pôr do sol<span class="link-row__sub">O horário de hoje e a tabela mês a mês</span></span>
+        <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="link-row link-row--sea" href="../guia/beira-mar/">
+        <span class="link-row__stamp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/><path d="M2 21c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/><path d="M12 3v7M8.5 6.5 12 3l3.5 3.5"/></svg>
+        </span>
+        <span class="link-row__label">Guia da Beira-Mar<span class="link-row__sub">O trecho inteiro, vizinhos inclusos</span></span>
+        <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="link-row link-row--coral" href="../fish-and-chips/">
+        <span class="link-row__stamp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-5 9-5 6 3 9 5c-3 2-4 5-9 5s-9-5-9-5z"/><circle cx="8" cy="11" r="0.9" fill="currentColor" stroke="none"/></svg>
+        </span>
+        <span class="link-row__label">Fish and chips<span class="link-row__sub">O prato inglês, com peixe daqui</span></span>
+        <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </nav>
 
     <footer class="foot">
       <div class="foot__flag" aria-hidden="true"></div>
