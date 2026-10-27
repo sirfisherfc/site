@@ -2,7 +2,8 @@
 // Executa os handlers reais com tags/rede ausentes; nao envia eventos nem reservas.
 const pages = ['index.html', 'en/index.html', 'conheca/index.html', 'almoco-executivo/index.html',
   'como-chegar/index.html', 'fish-and-chips/index.html', 'en/fish-and-chips/index.html',
-  'guia/beira-mar/index.html', 'por-do-sol/index.html', 'reservas/index.html', 'reveillon/index.html'];
+  'guia/beira-mar/index.html', 'jardim-japones/index.html', 'por-do-sol/index.html', 'reservas/index.html',
+  'reveillon/index.html'];
 const read = (path) => Deno.readTextFile(new URL('../../' + path, import.meta.url));
 const source = await read('assets/js/atribuicao.js');
 const cardapio = await read('assets/js/cardapio.js');

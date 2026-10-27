@@ -105,6 +105,22 @@ button[disabled] { opacity:.6; cursor:wait; }
 .success-wa { display:inline-flex; margin-top:12px; border-radius:12px; padding:13px 17px; background:#1d9b55; color:#fff; font-weight:700; text-decoration:none; }
 .submit-button { width:100%; margin-top:22px; }
 .honeypot { position:absolute!important; left:-10000px!important; width:1px!important; height:1px!important; overflow:hidden!important; }
+.event-info { max-width:980px; margin:0 auto 56px; padding:0 clamp(4px,2vw,12px); line-height:1.6; }
+.event-info h2 { margin:44px 0 12px; font:600 clamp(1.6rem,4.4vw,2.3rem)/1.1 "Fraunces",serif; letter-spacing:-.02em; }
+.event-info h2:first-child { margin-top:8px; }
+.event-info h3 { margin:22px 0 6px; font-size:1.06rem; }
+.event-info p { margin:0 0 12px; color:#33434f; }
+.event-info a { color:var(--event-coral); text-underline-offset:3px; }
+.info-grid { display:grid; gap:14px; margin-top:18px; }
+.info-grid article { background:#fff; border:1px solid var(--event-line); border-radius:18px; padding:20px 22px; }
+.info-grid h3 { margin-top:0; }
+.info-grid p { margin:0; }
+.info-steps { margin:0; padding-left:1.3em; }
+.info-steps li { margin:0 0 10px; color:#33434f; }
+.info-sizes { margin:0; display:grid; gap:10px; }
+.info-sizes div { display:grid; gap:4px; background:#fff; border:1px solid var(--event-line); border-radius:14px; padding:14px 18px; }
+.info-sizes dt { font-weight:700; }
+.info-sizes dd { margin:0; color:#33434f; }
 .event-footer { display:flex; justify-content:center; gap:24px; padding:28px 20px 48px; font-size:.82rem; color:#66747d; }
 .event-footer p { margin:0; }
 .event-footer a { color:inherit; }
@@ -115,6 +131,8 @@ button[disabled] { opacity:.6; cursor:wait; }
   .field-grid--3 { grid-template-columns:1.2fr 1fr 1fr; }
   .choice-grid { grid-template-columns:1fr 1fr; }
   .option-grid { grid-template-columns:repeat(3,minmax(0,1fr)); align-items:stretch; }
+  .info-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .info-sizes div { grid-template-columns:200px 1fr; align-items:baseline; }
 }
 @media (max-width:520px) {
   .event-topbar span { display:none; }
