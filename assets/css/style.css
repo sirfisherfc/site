@@ -576,6 +576,19 @@ a { color: inherit; }
   .btn-pair .btn svg { display: none; }
 }
 
+/* Atalho do topo no celular; no desktop, fica na barra de navegacao. */
+.more-toggle {
+  position: absolute; top: 10px; left: 50%; z-index: 5;
+  transform: translateX(-50%);
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 34px; padding: 0 12px;
+  border: 1px solid rgba(240,230,205,0.3); border-radius: 999px;
+  background: rgba(10,22,34,0.72); color: #f0e6cd;
+  font-size: 12px; font-weight: 600; white-space: nowrap; text-decoration: none;
+}
+.more-toggle:hover { background: rgba(10,22,34,0.9); }
+.more-toggle:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; }
+
 /* ---------- Lista de links (secundário) ---------- */
 .links { padding: 8px 22px 6px; margin-top: 12px; }
 .links__label {

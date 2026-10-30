@@ -32,7 +32,7 @@
   /* ---------- Barra do topo ---------- */
   .shell--home .topbar {
     position: sticky; top: 0; z-index: 20;
-    display: flex; align-items: center; gap: 36px;
+    display: flex; align-items: center; gap: 24px;
     height: 72px;
     /* A direita fica livre para os botoes de idioma e tema (fixos, abaixo). */
     padding: 0 calc(var(--gut) + 128px) 0 var(--gut);
@@ -41,6 +41,7 @@
     border-bottom: 1px solid var(--hairline);
   }
   .topbar__brand {
+    flex: none;
     display: flex; align-items: center; gap: 12px;
     text-decoration: none; color: var(--on-card);
   }
@@ -65,7 +66,7 @@
   }
   .topbar__nav {
     flex: 1;
-    display: flex; justify-content: flex-end; gap: 28px;
+    display: flex; justify-content: flex-end; gap: 20px;
   }
   .topbar__nav a {
     white-space: nowrap;
@@ -77,6 +78,7 @@
   }
   .topbar__nav a:hover { color: var(--on-card); background-size: 100% 2px; }
   .topbar__nav a:focus-visible { outline: 2px solid var(--sea); outline-offset: 4px; border-radius: 4px; }
+  .shell--home .more-toggle { display: none; }
   .shell--home .topbar__cta {
     width: auto; flex: none;
     padding: 11px 20px; font-size: 0.92rem; border-radius: 12px;
@@ -302,11 +304,12 @@
 
 /* Notebook pequeno e tablet deitado: a barra perde o subtitulo da marca e
    aperta o menu para tudo caber numa linha. */
-@media (min-width: 1024px) and (max-width: 1199px) {
-  .shell--home .topbar { gap: 24px; }
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .shell--home .topbar { gap: 16px; }
   .topbar__name span { display: none; }
-  .topbar__nav { gap: 20px; }
+  .topbar__nav { gap: 12px; }
   .topbar__nav a { font-size: 0.88rem; }
+  .shell--home .topbar__cta { padding-inline: 14px; }
 }
 
 @media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
