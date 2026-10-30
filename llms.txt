@@ -6,9 +6,9 @@ Preços, horários e regras mudam: as páginas abaixo têm a informação atual 
 
 ## Restaurante
 
-- [Página principal](https://www.sirfisher.com.br/): o restaurante, horários, endereço e perguntas frequentes
+- [Página principal](https://www.sirfisher.com.br/): o restaurante, horários, endereço e perguntas frequentes (vista para o mar, jantar a dois, camarão, peixes, pratos para compartilhar, almoço de negócios, domingo em família, aniversário e confraternização)
 - [Cardápio](https://www.sirfisher.com.br/cardapio/): cardápio completo, com preços e porções
-- [Almoço executivo](https://www.sirfisher.com.br/almoco-executivo/): menu executivo de segunda a sexta no almoço
+- [Almoço executivo](https://www.sirfisher.com.br/almoco-executivo/): sete pratos individuais com preço, de R$ 31 a R$ 52, de segunda a sexta, das 10h às 14h
 - [Fish and chips](https://www.sirfisher.com.br/fish-and-chips/): o prato da casa e a pescada amarela
 - [Como chegar](https://www.sirfisher.com.br/como-chegar/): a pé, de aplicativo ou de carro, e onde estacionar
 
