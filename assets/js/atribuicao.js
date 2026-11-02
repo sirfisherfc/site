@@ -9,7 +9,7 @@
   var ATTRIBUTION_TTL_MS = 90 * 24 * 60 * 60 * 1000;
   var PIXEL_ID = 'EeuuYrh8KtQu1TPmmwWctv';
   var tracked = [
-    'oppref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+    'oppref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id',
     'campaign_id', 'ad_group_id', 'ad_id', 'fbclid', 'gclid'
   ];
 
@@ -81,6 +81,16 @@
     return typeof value === 'string' && value.length <= limit ? value : null;
   }
 
+  function externalReferrer() {
+    if (!document.referrer) return false;
+    try {
+      var hostname = new URL(document.referrer).hostname;
+      return hostname !== 'sirfisher.com.br' && !hostname.endsWith('.sirfisher.com.br');
+    } catch (e) {
+      return false;
+    }
+  }
+
   function capture() {
     var params = new URLSearchParams(window.location.search);
     var incoming = {};
@@ -88,6 +98,8 @@
       var value = limited(params.get(key), key === 'oppref' ? 1024 : 255);
       if (value) incoming[key] = value;
     });
+    // O GA4 usa utm_id; o portal guarda o mesmo ID em campaign_id.
+    if (incoming.utm_id && !incoming.campaign_id) incoming.campaign_id = incoming.utm_id;
 
     var stored = loadStored();
     if (stored.utm_source === 'site' && stored.utm_medium === 'organic') {
@@ -97,7 +109,7 @@
       persist(stored);
     }
     if (Object.keys(incoming).length) {
-      if (Object.keys(incoming).every(function (key) { return incoming[key] === stored[key]; })) {
+      if (!externalReferrer() && Object.keys(incoming).every(function (key) { return incoming[key] === stored[key]; })) {
         // Um link interno decorado nao e um novo clique de anuncio.
         persist(stored);
         return stored;

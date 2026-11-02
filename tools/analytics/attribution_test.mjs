@@ -5,12 +5,13 @@ class Clock extends Date {
   static now() { return NOW; }
 }
 
-function run({ search = '', stored = null, cookieStored = stored, blocked = false, details = false } = {}) {
+function run({ search = '', stored = null, cookieStored = stored, blocked = false, details = false,
+  referrer = 'https://www.sirfisher.com.br/' } = {}) {
   let written = null;
   const link = { href: 'https://reservas.sirfisher.com.br/reveillon.html?utm_source=site&utm_medium=organic&utm_content=por_do_sol#mapa' };
   const document = {
     cookie: cookieStored ? 'sf_attribution_v1=' + encodeURIComponent(JSON.stringify(cookieStored)) : '',
-    title: 'Sir Fisher', referrer: 'https://www.google.com/',
+    title: 'Sir Fisher', referrer,
     querySelectorAll() { return [link]; }, addEventListener() {},
   };
   const window = {
@@ -97,4 +98,49 @@ Deno.test('nova campanha apos expiracao recebe janela propria de 90 dias', () =>
   const result = run({ search: '?utm_source=instagram&utm_campaign=novo',
     stored: { utm_source: 'google', captured_at: '2000-01-01T00:00:00Z' }, details: true });
   if (result.written.utm_source !== 'instagram' || !result.cookie.includes('Max-Age=7776000;')) throw new Error('Nova campanha perdeu validade');
+});
+
+Deno.test('conteudo Meta e utm_id chegam ao portal sem perder identificadores explicitos', () => {
+  const result = run({ search: '?utm_source=instagram&utm_medium=organic_social&utm_campaign=novembro&utm_content=ig_17900000000000000&utm_id=campanha-2026', details: true });
+  for (const key of ['utm_content', 'utm_id', 'campaign_id']) {
+    const expected = key === 'utm_content' ? 'ig_17900000000000000' : 'campanha-2026';
+    if (result.url.searchParams.get(key) !== expected || result.written[key] !== expected) {
+      throw new Error('Perdeu identificador: ' + key);
+    }
+  }
+});
+
+Deno.test('utm_id nao substitui campaign_id explicito e nao herda ID de campanha anterior', () => {
+  const url = run({ search: '?utm_source=facebook&utm_id=ga-campaign&campaign_id=meta-campaign',
+    stored: { utm_source: 'instagram', campaign_id: 'antiga', utm_id: 'antiga', captured_at: '2026-10-06T12:00:00Z' } });
+  if (url.searchParams.get('campaign_id') !== 'meta-campaign' || url.searchParams.get('utm_id') !== 'ga-campaign') {
+    throw new Error('Substituiu um identificador explicito');
+  }
+});
+
+Deno.test('novo clique externo da mesma fonte nao herda conteudo, campanha ou anuncio anterior', () => {
+  const result = run({ search: '?utm_source=instagram', referrer: 'https://l.instagram.com/', details: true,
+    stored: { utm_source: 'instagram', utm_content: 'ig_17900000000000000', campaign_id: 'antiga',
+      utm_id: 'antiga', ad_id: 'anuncio-antigo', fbclid: 'clique-antigo', captured_at: '2026-10-06T12:00:00Z' } });
+  for (const key of ['utm_content', 'campaign_id', 'utm_id', 'ad_id', 'fbclid']) {
+    if (result.url.searchParams.has(key) || result.written[key]) throw new Error('Herdou identificador: ' + key);
+  }
+  if (Date.parse(result.written.captured_at) !== NOW) throw new Error('Nao registrou nova chegada');
+});
+
+Deno.test('navegacao por subdominio proprio preserva conteudo e idade quando tags coincidem', () => {
+  const captured_at = '2026-10-06T12:00:00Z';
+  for (const referrer of ['https://sirfisher.com.br/', 'https://reservas.sirfisher.com.br/', '']) {
+    const result = run({ search: '?utm_source=instagram', referrer, details: true,
+      stored: { utm_source: 'instagram', utm_content: 'ig_17900000000000000', captured_at } });
+    if (result.written.utm_content !== 'ig_17900000000000000' || result.written.captured_at !== captured_at) {
+      throw new Error('Navegacao perdeu conteudo ou renovou prazo: ' + referrer);
+    }
+  }
+});
+
+Deno.test('hostname que apenas inclui o dominio proprio continua sendo chegada externa', () => {
+  const result = run({ search: '?utm_source=instagram', referrer: 'https://sirfisher.com.br.example.com/', details: true,
+    stored: { utm_source: 'instagram', utm_content: 'ig_antigo', captured_at: '2026-10-06T12:00:00Z' } });
+  if (result.written.utm_content) throw new Error('Host externo foi tratado como navegacao interna');
 });

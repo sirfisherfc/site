@@ -1,5 +1,49 @@
 # Presença no Google e medição
 
+## Conteúdo e campanhas Meta (02/11/2026)
+
+O site e o portal usam `utm_content` como identificador rastreável do
+conteúdo: `ig_<ID da mídia>` para Instagram e `fb_<ID do post>` para Facebook.
+O link externo deve conter `utm_source=instagram` ou `facebook`,
+`utm_medium=organic_social` ou `paid_social`, `utm_campaign` com o nome
+aprovado e `utm_content` com o ID da publicação. Links da bio e links
+genéricos sem ID de publicação só permitem consultar essa origem agregada.
+
+`utm_id` identifica a campanha no GA4 e segue para o portal. Na entrada do
+site ele também preenche `campaign_id` quando este campo estiver ausente.
+Se os dois IDs forem enviados, cada valor explícito é preservado; conferir
+o link antes de usar essa campanha em um relatório conjunto. Os IDs de
+anúncio continuam em `ad_id` e `ad_group_id`. A configuração dos anúncios
+e seus orçamentos permanece no serviço da Meta.
+
+O `atribuicao.js` preserva os parâmetros em `sf_attribution_v1` por até
+90 dias e os repassa aos links HTTPS do portal, inclusive os inseridos após
+o carregamento da página. Uma nova chegada com parâmetros e referrer
+externo inicia outro registro, mesmo quando a fonte coincide com a visita
+anterior. Assim, um clique genérico novo não recebe o ID de uma publicação
+antiga. Quando o navegador omite o referrer e os parâmetros coincidem com
+os já guardados, o site conserva a captura existente para manter a navegação
+interna. Esse caso tem cobertura limitada e não comprova um novo clique.
+
+A origem registrada no portal, os eventos medidos pelo GA4 e o crédito
+atribuído pela Meta mantêm suas coberturas próprias. Um ID rastreável
+permite agrupar reservas e comparecimentos que o receberam; ele não
+comprova que a publicação foi a única influência na decisão. As alterações
+não criam eventos adicionais no Pixel nem na API de Conversões.
+
+O Perfil Google continua usando `gestao/scripts/gbp/gbp.py`, com autorização
+própria. A consulta real `google_oauth_helper.py --verificar` renovou o acesso
+e confirmou a ficha Sir Fisher em 02/11/2026. O comando `instagram` prepara
+fotos em pasta privada para revisão e compara dHash com fotos publicadas e
+descartadas. Antes de publicar, conferir direito de uso, pessoas reconhecíveis,
+qualidade e a lista exata aprovada. O site não envia fotos neste fluxo de
+medição. As operações de publicação continuam dependendo do material aprovado.
+
+Fontes oficiais consultadas em 02/11/2026:
+[parâmetros de campanha do GA4](https://support.google.com/analytics/answer/10917952),
+[envio de mídia ao Perfil Google](https://developers.google.com/my-business/content/upload-photos)
+e [requisitos da mídia](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.media).
+
 ## Site Audit da Semrush em 25/10/2026
 
 O rastreador da auditoria não executa JavaScript, assim como robôs de busca de
