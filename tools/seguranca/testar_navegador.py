@@ -33,10 +33,11 @@ SEM_PIXEL_META = {"cardapio/"}
 UA = ("Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) "
       "Chrome/155.0.0.0 Mobile Safari/537.36")
 INTERCEPTADOS = {
-    "ga": "google-analytics.com/g/collect",
-    "meta": "facebook.com/tr",
-    "openai": "bzr.openai.com/v1/sdk/events",
-    "contador": "/rest/v1/rpc/register_site_visit",
+    "ga": ("google-analytics.com/g/collect", "analytics.google.com/g/collect",
+           "stats.g.doubleclick.net/g/collect"),
+    "meta": ("facebook.com/tr",),
+    "openai": ("bzr.openai.com/v1/sdk/events",),
+    "contador": ("/rest/v1/rpc/register_site_visit",),
 }
 VIOLACOES_JS = """
 window.__violacoes = [];
@@ -69,8 +70,8 @@ def main() -> int:
             vistos, erros, sdks = {k: 0 for k in INTERCEPTADOS}, [], set()
 
             def rota(route, req):
-                for nome, trecho in INTERCEPTADOS.items():
-                    if trecho in req.url:
+                for nome, trechos in INTERCEPTADOS.items():
+                    if any(trecho in req.url for trecho in trechos):
                         vistos[nome] += 1
                         corpo = "123" if nome == "contador" else ""
                         return route.fulfill(status=200, body=corpo, content_type="application/json")

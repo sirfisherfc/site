@@ -39,6 +39,13 @@ descartadas. Antes de publicar, conferir direito de uso, pessoas reconhecíveis,
 qualidade e a lista exata aprovada. O site não envia fotos neste fluxo de
 medição. As operações de publicação continuam dependendo do material aprovado.
 
+A validação passou em 121 testes de atribuição, CTAs e carregamento de
+marketing, além dos verificadores de catálogo, versões dos assets, CSP e
+CSS embutido. O teste Edge passou a interceptar também os destinos GA4
+`analytics.google.com/g/collect` e `stats.g.doubleclick.net/g/collect`,
+observados nesta conferência. A comparação no navegador confirmou que o
+`atribuicao.js` publicado corresponde ao arquivo validado localmente.
+
 Fontes oficiais consultadas em 02/11/2026:
 [parâmetros de campanha do GA4](https://support.google.com/analytics/answer/10917952),
 [envio de mídia ao Perfil Google](https://developers.google.com/my-business/content/upload-photos)
