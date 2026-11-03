@@ -51,6 +51,23 @@ Fontes oficiais consultadas em 02/11/2026:
 [envio de mídia ao Perfil Google](https://developers.google.com/my-business/content/upload-photos)
 e [requisitos da mídia](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.media).
 
+## Ideias do Semrush conferidas em 03/11/2026
+
+O arquivo exportado pelo proprietário contém 262 linhas detalhadas na aba
+SEO Ideas, correspondentes aos grupos de recomendações por página/palavra.
+Foram revisados identificação de Meireles/Fortaleza, descrições, H1 e orientação
+de rota; o guia recebeu atalhos, e a página EN ganhou acesso direto às duas
+versões do prato. O método do pôr do sol foi dividido em parágrafos curtos.
+Só as cinco páginas alteradas tiveram o lastmod atualizado no sitemap.
+
+Nomes de outras casas permanecem como pesquisa de concorrência. Keywords do
+Semrush configuram o acompanhamento; não inserem tags no site. Não foi criada
+meta keywords, ignorada pelo Google. O controle por linha e os motivos dos
+itens pendentes ficam em `gestao/docs/seo/SEMRUSH_IDEIAS_2026-11-03.md` e JSON
+do mesmo nome, no workspace. Recoleta, sete redistribuições de palavras no
+Semrush e links publicados por terceiros continuam com seus estados próprios.
+O potencial do painel pressupõe primeira posição para todos os termos.
+
 ## Site Audit da Semrush em 25/10/2026
 
 O rastreador da auditoria não executa JavaScript, assim como robôs de busca de
