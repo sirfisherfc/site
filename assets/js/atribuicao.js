@@ -8,6 +8,14 @@
   var COOKIE_KEY = 'sf_attribution_v1';
   var ATTRIBUTION_TTL_MS = 90 * 24 * 60 * 60 * 1000;
   var PIXEL_ID = 'EeuuYrh8KtQu1TPmmwWctv';
+  var advertisingKeys = ['oppref', 'fbclid', 'gclid', 'campaign_id', 'ad_group_id', 'ad_id'];
+  var measuredPage = false;
+  function advertisingAllowed() {
+    return !!(window.sfGoogleAds && window.sfGoogleAds.getChoice() === 'granted');
+  }
+  function safeUrl(value) {
+    try { var u = new URL(value); return u.origin + u.pathname; } catch (e) { return null; }
+  }
   var tracked = [
     'oppref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id',
     'campaign_id', 'ad_group_id', 'ad_id', 'fbclid', 'gclid'
@@ -95,13 +103,18 @@
     var params = new URLSearchParams(window.location.search);
     var incoming = {};
     tracked.forEach(function (key) {
+      if (!advertisingAllowed() && advertisingKeys.indexOf(key) !== -1) return;
       var value = limited(params.get(key), key === 'oppref' ? 1024 : 255);
       if (value) incoming[key] = value;
     });
     // O GA4 usa utm_id; o portal guarda o mesmo ID em campaign_id.
-    if (incoming.utm_id && !incoming.campaign_id) incoming.campaign_id = incoming.utm_id;
+    if (advertisingAllowed() && incoming.utm_id && !incoming.campaign_id) incoming.campaign_id = incoming.utm_id;
 
     var stored = loadStored();
+    if (!advertisingAllowed()) advertisingKeys.forEach(function (key) { delete stored[key]; });
+    if (stored.landing_url) stored.landing_url = safeUrl(stored.landing_url);
+    if (stored.referrer) stored.referrer = safeUrl(stored.referrer);
+    if (stored.captured_at) persist(stored);
     if (stored.utm_source === 'site' && stored.utm_medium === 'organic') {
       ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (key) {
         delete stored[key];
@@ -116,8 +129,8 @@
       }
       // Novo toque: nao herda identificadores de outro canal ou campanha.
       var current = Object.assign({}, incoming, {
-        landing_url: window.location.href.slice(0, 2000),
-        referrer: (document.referrer || '').slice(0, 2000) || null,
+        landing_url: safeUrl(window.location.href),
+        referrer: safeUrl(document.referrer),
         captured_at: new Date().toISOString()
       });
       persist(current);
@@ -126,8 +139,8 @@
 
     if (!stored.captured_at) {
       stored = {
-        landing_url: window.location.href.slice(0, 2000),
-        referrer: (document.referrer || '').slice(0, 2000) || null,
+        landing_url: safeUrl(window.location.href),
+        referrer: safeUrl(document.referrer),
         captured_at: new Date().toISOString()
       };
       persist(stored);
@@ -166,6 +179,9 @@
         if (origin) destination.searchParams.set('sf_origin', origin);
       }
       tracked.forEach(function (key) {
+        if (!advertisingAllowed() && advertisingKeys.indexOf(key) !== -1) {
+          destination.searchParams.delete(key); return;
+        }
         var value = attribution[key];
         if (value) destination.searchParams.set(key, value);
       });
@@ -174,7 +190,7 @@
   }
 
   function initOpenAIAdsPixel() {
-    if (!PIXEL_ID || window.oaiq) return;
+    if (!advertisingAllowed() || !PIXEL_ID || window.oaiq) return;
     var queue = function () { queue.q.push(arguments); };
     queue.q = [];
     window.oaiq = queue;
@@ -183,15 +199,17 @@
     script.async = true;
     script.src = 'https://bzrcdn.openai.com/sdk/oaiq.min.js';
     if (typeof window.sfAfterFirstPaint === 'function') {
-      window.sfAfterFirstPaint(function () { document.head.appendChild(script); });
+      window.sfAfterFirstPaint(function () { if (advertisingAllowed()) document.head.appendChild(script); });
     } else {
       document.head.appendChild(script);
     }
+    window.oaiq('consent', true);
     window.oaiq('init', { pixelId: PIXEL_ID });
   }
 
   function measurePage() {
-    if (typeof window.oaiq !== 'function') return;
+    if (!advertisingAllowed() || measuredPage || typeof window.oaiq !== 'function') return;
+    measuredPage = true;
     var path = window.location.pathname.replace(/^\/+|\/+$/g, '');
     var pageId = path ? 'sir_fisher_' + path.replace(/[^a-z0-9]+/gi, '_').toLowerCase() : 'sir_fisher_site';
     var pageName = path === 'cardapio' ? 'Cardapio Sir Fisher' : document.title.slice(0, 100);
@@ -218,7 +236,7 @@
 
     document.addEventListener('click', function (event) {
       var link = event.target.closest ? event.target.closest('a[data-evt]') : null;
-      if (!link || typeof window.oaiq !== 'function') return;
+      if (!advertisingAllowed() || !link || typeof window.oaiq !== 'function') return;
       var customName = events[link.getAttribute('data-evt')];
       if (!customName) return;
       window.oaiq('measure', 'custom', { type: 'custom' }, {
@@ -251,4 +269,11 @@
     measurePage();
     measureIntentClicks();
   }
+  if (window.addEventListener) window.addEventListener('sf-advertising-consent', function () {
+    attribution = capture();
+    decorateReservationLinks(attribution, document);
+    if (window.location.pathname.replace(/\/+$/, '') !== '/privacidade') {
+      initOpenAIAdsPixel(); measurePage();
+    }
+  });
 })();

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-Q1df7ELm/NG41Rb/PglxDKVBZL7tZ0/m2IKzKC3DQxg=' 'sha256-CmqlRRqJZmCBVajS5Vq8h86kI9TMmKz04SsZgGCDP7E=' 'sha256-jfYF8858cU3x6nTN1a0mC7//98FYiSIUpJk88KtJlDY=' 'sha256-SH2GAHCV9RGHyt9oXF3aKBeACmKzlOQMC6mkWUq/ehA=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-LnpgWI42cQJB3LTD/RZbleeaHf5ka5sZEYljMDY9DLA=' 'sha256-jfYF8858cU3x6nTN1a0mC7//98FYiSIUpJk88KtJlDY=' 'sha256-p1vCUzvHrnsffO8deIQDXesKZXG2vspM3XGCh6Uvnrw=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -200,6 +200,9 @@
     gtag('consent', 'default', {
       ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500
     });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'allow_ad_personalization_signals', false);
+    gtag('set', 'allow_google_signals', false);
     gtag('js', new Date());
     gtag('config', 'G-F40Z5Y9QT6', {
       linker: { domains: ['sirfisher.com.br', 'www.sirfisher.com.br', 'reservas.sirfisher.com.br'] }
@@ -214,15 +217,7 @@
   <!-- Meta Pixel. O mesmo dataset da Conversions API: os eventos do navegador e
        os do servidor sao unidos pelo event_id, para a reserva nao contar duas
        vezes. Ver supabase/meta-capi.sql no repositorio de reservas. -->
-  <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];f.sfAfterFirstPaint(function(){s.parentNode.insertBefore(t,s)})}(window,
-    document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '948509834960152');
-    fbq('track', 'PageView');
-  </script>
+  <!-- Meta Pixel: carregado apenas com publicidade permitida em google-ads.js. -->
 </head>
 <body>
 
@@ -415,8 +410,8 @@
        que um bloco confiavel inserir. async=false mantem a ordem; no fim do
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
-    ['../assets/js/google-ads.js?v=b25d5c1153',
-     '../assets/js/atribuicao.js?v=553172d69a',
+    ['../assets/js/google-ads.js?v=8993b0e4f2',
+     '../assets/js/atribuicao.js?v=22f091c212',
      '../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
       var s = document.createElement('script');
       s.src = src;

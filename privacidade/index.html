@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-SH2GAHCV9RGHyt9oXF3aKBeACmKzlOQMC6mkWUq/ehA=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-p1vCUzvHrnsffO8deIQDXesKZXG2vspM3XGCh6Uvnrw=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -114,15 +114,15 @@
         <ul>
           <li><strong><code>_ga</code> e <code>_ga_F40Z5Y9QT6</code></strong> — cookies do Google Analytics com identificadores técnicos do navegador e da sessão, usados para contar visitas e acompanhar a passagem do site para o portal de reservas. Duram até 2 anos.</li>
           <li><strong><code>sf_attribution_v1</code></strong> — guarda de onde você veio (por exemplo, um link do Instagram ou um anúncio), para sabermos qual canal trouxe uma reserva. Dura 90 dias.</li>
-          <li><strong><code>sf_google_ads_v1</code></strong> — registra se você permitiu ou recusou a publicidade do Google. Dura 180 dias e compartilha essa escolha entre o site e o portal de reservas.</li>
+          <li><strong><code>sf_advertising_v2</code></strong> — registra sua escolha sobre publicidade, a data e um comprovante aleatório. Dura até 180 dias e compartilha essa escolha entre o site e o portal de reservas. O cookie <code>sf_ads_revoke_pending_v1</code> pode guardar uma revogação até conseguirmos comunicá-la ao servidor.</li>
           <li><strong><code>_gcl_*</code></strong> — cookies de publicidade do Google que podem ser usados, após sua permissão, para atribuir visitas e resultados aos anúncios.</li>
           <li><strong><code>_fbp</code> e <code>_fbc</code></strong> — cookies da Meta (Facebook e Instagram) com identificadores técnicos do navegador e, quando disponível, do clique em um anúncio. Usamos esses registros para medir o resultado das campanhas. Duram até 90 dias.</li>
           <li><strong><code>sf-visit-session</code></strong> — identificador aleatório usado pelo contador público para registrar uma visita por sessão. Ele desaparece quando você fecha a aba e não contém dados pessoais.</li>
         </ul>
-        <p>Se você chegou por um anúncio no ChatGPT, o pixel de medição da OpenAI também registra a visita e ações de intenção, como abrir o cardápio, pedir rota, iniciar contato ou começar uma reserva. A atribuição usa um identificador opaco de campanha chamado <code>oppref</code>; ele não carrega nome, telefone nem e-mail. Esses sinais não são tratados como confirmação de que a pessoa visitou o restaurante.</p>
+        <p>Quando você permite publicidade, o pixel de medição da OpenAI pode registrar visitas e ações de intenção, como abrir o cardápio, pedir rota ou começar uma reserva. A atribuição pode usar o identificador de clique <code>oppref</code>, guardado no cookie <code>__oppref</code>, e um identificador técnico de navegador, <code>__obref</code>. Esses sinais ajudam a medir campanhas e não confirmam presença no restaurante.</p>
 
         <h3>Informações demográficas e interesses no Google Analytics</h3>
-        <p>Usamos os indicadores do Google (<em>Google Signals</em>) no nosso Analytics. Esse recurso permite que o Google associe dados desta sessão a informações de usuários conectados à Conta do Google que tenham ativado a Personalização de anúncios. Usaremos os relatórios agregados de faixa etária, gênero e interesses para conhecer o público do site e planejar anúncios.</p>
+        <p>Quando você permite publicidade, podemos usar os indicadores do Google (<em>Google Signals</em>) no Analytics. Esse recurso permite que o Google associe dados desta sessão a informações de usuários conectados à Conta do Google que tenham ativado a Personalização de anúncios. Consultamos relatórios agregados de faixa etária, gênero e interesses para conhecer o público do site e planejar anúncios.</p>
         <p>Para esses recursos, nós e o Google podemos usar em conjunto cookies próprios do site, como os do Analytics, e outros identificadores próprios com cookies de publicidade e identificadores do Google. Consulte a descrição dos <a href="https://support.google.com/analytics/answer/9445345?hl=pt-BR" target="_blank" rel="noopener">indicadores do Google</a> e dos <a href="https://support.google.com/analytics/answer/2700409?hl=pt-BR" target="_blank" rel="noopener">Recursos de publicidade do Analytics</a>.</p>
         <p>Esses relatórios cobrem apenas a parte dos visitantes para a qual o Google dispõe dessas informações, conforme as configurações da conta e as permissões aplicáveis. Em grupos pequenos, o Google pode omitir dados para proteger a privacidade. Os resultados descrevem esse público medido; a leitura de um QR Code, por si só, não confirma que a pessoa esteve no restaurante.</p>
 
@@ -151,18 +151,19 @@
         <ul>
           <li><strong>Executar a reserva</strong> — confirmar, organizar o salão e entrar em contato sobre a sua visita. Base legal: execução de procedimentos preliminares e do próprio serviço solicitado por você.</li>
           <li><strong>Preparar e validar propostas de eventos</strong> — dimensionar a operação, conferir disponibilidade e responder à solicitação enviada. Base legal: procedimentos preliminares relacionados ao serviço solicitado.</li>
-          <li><strong>Medir o site e as campanhas</strong> — entender quais canais trazem visitas e reservas, planejar a operação e reduzir mesas vazias e filas. Base legal: legítimo interesse, com dados de navegação e sem o conteúdo das suas conversas.</li>
-          <li><strong>Usar cookies de publicidade e personalizar anúncios no Google</strong> — medir anúncios e disponibilizar públicos de visitantes para campanhas do restaurante, conforme sua escolha. Base legal: seu consentimento, que pode ser retirado nas preferências de anúncios Google.</li>
+          <li><strong>Medir o funcionamento do site</strong> — consultar estatísticas de navegação e origens de visitas e reservas para melhorar o serviço. Base legal: legítimo interesse. A escolha de recusar publicidade mantém essas estatísticas e impede o envio dos identificadores de clique às plataformas de anúncios.</li>
+          <li><strong>Medir e personalizar publicidade</strong> — usar cookies e sinais de anúncios do Google, Meta e OpenAI, inclusive medição de reservas pelo servidor. Base legal: seu consentimento, que pode ser retirado nas preferências de cookies.</li>
           <li><strong>Atender pedidos enviados pelo Instagram</strong> — responder dúvidas, encaminhar pendências para a equipe e acompanhar a conversa nas condições descritas abaixo.</li>
           <li><strong>Enviar novidades e promoções</strong> — apenas se você marcar a caixa correspondente. Base legal: seu consentimento, que pode ser retirado a qualquer momento.</li>
         </ul>
       </section>
 
       <section class="sec" id="anuncios-google">
-        <h2>Anúncios no Google</h2>
+        <h2>Publicidade: Google, Meta e OpenAI</h2>
         <p>O site e o portal de reservas usam a tag do Google Ads junto ao Google Analytics. Antes da sua escolha, e quando você recusa, os cookies de publicidade ficam desautorizados; a tag pode enviar sinais limitados de medição sem esses cookies, conforme o modo de consentimento do Google.</p>
-        <p>Ao permitir, você autoriza os cookies e sinais de publicidade do Google para medir nossos anúncios e usar públicos de visitantes em campanhas do Sir Fisher. A participação nesses públicos depende também das suas configurações no Google e dos critérios da plataforma. O Google pode processar esses dados fora do Brasil.</p>
-        <p>Use <strong>Preferências de anúncios Google</strong>, no rodapé das páginas, para mudar sua escolha. A recusa mantém os cookies de publicidade do Google desautorizados. Essa escolha trata da publicidade Google; os demais usos de dados e serviços estão descritos neste aviso.</p>
+        <p>Ao permitir, você autoriza cookies e sinais de publicidade do Google, Meta e OpenAI para medir anúncios do Sir Fisher e, quando elegível, formar públicos para campanhas. Esses fornecedores podem processar dados fora do Brasil. Antes da autorização, os pixels de publicidade da Meta e da OpenAI ficam bloqueados.</p>
+        <p>Use <strong>Preferências de cookies</strong>, no rodapé, para mudar sua escolha. Recusar mantém os serviços de funcionamento e estatísticas ativos, remove os cookies de publicidade acessíveis neste domínio e bloqueia novos eventos publicitários. O servidor confere a autorização registrada para a reserva antes de enviar eventos à Meta ou OpenAI. A revogação impede os próximos envios ligados àquele comprovante; se estiver sem conexão, a preferência local vale de imediato e tentamos avisar o servidor novamente quando a conexão voltar. Dados já recebidos pelos fornecedores seguem os controles e prazos deles.</p>
+        <p>Uma escolha antiga que citava apenas o Google não autoriza os outros fornecedores: nesses casos, a janela pede uma nova escolha. O aceite das regras da reserva e o aceite de novidades por mensagem são separados desta permissão.</p>
         <p>Essa configuração não envia ao Google Ads os nomes, telefones ou e-mails digitados nas reservas. A página de cancelamento por link privado fica fora das tags de publicidade, e a medição dessa página remove os parâmetros do link.</p>
       </section>
 
@@ -211,8 +212,8 @@
           <li><strong>Google (Analytics e APIs)</strong> — medição de audiência do site e gerenciamento da presença digital oficial da empresa, em conformidade com as políticas do Google.</li>
           <li><strong>Jotform e seus fornecedores de serviço</strong> — processamento das mensagens do Direct, geração das respostas por IA e armazenamento do histórico do atendimento. Pode haver transferência internacional de dados, conforme as políticas do fornecedor indicadas acima.</li>
           <li><strong>Google Gemini (testes anteriores)</strong> — processou mensagens da conta controlada do proprietário adulto no piloto agora pausado. Os registros do fornecedor seguem as condições aplicáveis aos testes, com possível processamento fora do Brasil.</li>
-          <li><strong>OpenAI (medição de anúncios)</strong> — recebe o identificador opaco da campanha, quando disponível, e o fato de a visita ou reserva ter acontecido. Para melhorar a medição, e-mail, telefone e identificador interno podem ser convertidos em código irreversível (hash SHA-256) antes do envio. A OpenAI não recebe esses dados em texto puro nem o conteúdo da reserva.</li>
-          <li><strong>Meta (Facebook e Instagram)</strong> — mantém as conversas no Instagram e conecta o perfil ao atendimento descrito acima. Na medição de anúncios, quando você faz uma reserva, informamos à Meta que ela aconteceu. <strong>Seu e-mail e telefone são convertidos em código irreversível (hash SHA-256) antes de sair do nosso servidor</strong> para essa medição; enviamos o código, sem seu nome nem o conteúdo da reserva. Há transferência internacional de dados.</li>
+          <li><strong>OpenAI (medição de anúncios)</strong> — com sua autorização de publicidade, recebe identificadores de campanha e eventos de visita ou reserva. Nome, e-mail, telefone e identificador interno podem ser convertidos em códigos SHA-256 antes do envio para permitir correspondência com registros da plataforma. Esses códigos continuam sujeitos à proteção de dados; não equivalem a anonimização.</li>
+          <li><strong>Meta (Facebook e Instagram)</strong> — mantém as conversas no Instagram e conecta o perfil ao atendimento descrito acima. Para medir anúncios, com sua autorização, recebe o evento de reserva e identificadores de publicidade. E-mail e telefone são convertidos em códigos SHA-256 antes de sair do servidor. Esses códigos permitem correspondência com registros da Meta. Há transferência internacional de dados.</li>
           <li><strong>Anthropic (Claude)</strong> — executa a rotina que cuida do Perfil da Empresa no Google, incluindo as respostas às avaliações públicas e a seleção de fotos do nosso Instagram. Não recebe dados de reservas.</li>
           <li><strong>GitHub Pages e Cloudflare</strong> — hospedagem e entrega das páginas.</li>
         </ul>
@@ -279,8 +280,8 @@
        que um bloco confiavel inserir. async=false mantem a ordem; no fim do
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
-    ['../assets/js/google-ads.js?v=b25d5c1153',
-     '../assets/js/atribuicao.js?v=553172d69a',
+    ['../assets/js/google-ads.js?v=8993b0e4f2',
+     '../assets/js/atribuicao.js?v=22f091c212',
      '../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
       var s = document.createElement('script');
       s.src = src;

@@ -44,6 +44,8 @@ def route(context):
                 content_type = mimetypes.guess_type(str(file))[0] or 'application/octet-stream'
                 return request_route.fulfill(body=file.read_bytes(), content_type=content_type)
             return request_route.fulfill(status=404, body='fixture not found')
+        if url.hostname == 'lucpxoynpvogkvzepagi.supabase.co' and url.path.endswith('/fn_revoke_advertising_consent'):
+            return request_route.fulfill(body='true', content_type='application/json')
         if url.hostname == 'www.googletagmanager.com' and url.path == '/gtag/js':
             return request_route.fulfill(body='/* SDK externo bloqueado no teste. */', content_type='text/javascript')
         return request_route.abort()
@@ -81,11 +83,13 @@ def main():
         assert ads_config(page)[0][2]['allow_enhanced_conversions'] is False
         assert ads_config(page)[0][2]['page_location'] == 'https://www.sirfisher.com.br/'
         cookie_names = {c['name'] for c in context.cookies()}
-        previous_names = {'_ga', '_ga_F40Z5Y9QT6', '_fbp', '_fbc', 'sf_attribution_v1'}
-        assert previous_names <= cookie_names and '_gcl_aw' not in cookie_names, cookie_names
+        previous_names = {'_ga', '_ga_F40Z5Y9QT6', 'sf_attribution_v1'}
+        assert previous_names <= cookie_names and not {'_gcl_aw','_fbp','_fbc'} & cookie_names, cookie_names
+        assert page.evaluate('typeof window.fbq === "undefined" && typeof window.oaiq === "undefined"')
         preserved = {c['name']: c['value'] for c in context.cookies() if c['name'] in previous_names}
         desktop_box = page.locator('.sf-gads-banner').bounding_box()
         assert desktop_box['width'] <= 421 and desktop_box['height'] <= 170
+        assert page.locator('.sf-gads-description').evaluate('e => e.offsetHeight / parseFloat(getComputedStyle(e).lineHeight)') <= 2.1
         page.screenshot(path=str(SCREENSHOTS / 'desktop.png'), full_page=False)
 
         page.locator('.sf-gads-deny').click()
@@ -104,9 +108,11 @@ def main():
         }""")
         page.locator('.sf-gads-allow').click()
         assert consent(page)['ad_storage'] == 'granted'
-        choice = next(c for c in context.cookies() if c['name'] == 'sf_google_ads_v1')
-        assert choice['value'] == 'granted' and choice['domain'] == '.sirfisher.com.br' and choice['secure']
+        assert page.evaluate('sfGoogleAds.snapshot().advertising_consent && typeof fbq === \"function\"')
+        choice = next(c for c in context.cookies() if c['name'] == 'sf_advertising_v2')
+        assert choice['value'].startswith('granted.') and choice['domain'] == '.sirfisher.com.br' and choice['secure']
         assert len(ads_config(page)) == 1
+        assert page.evaluate('sfGoogleAds.snapshot().advertising_consent_at !== null')
 
         ready(page, 'https://reservas.sirfisher.com.br/')
         assert consent(page)['ad_personalization'] == 'granted'
@@ -148,6 +154,7 @@ def main():
         box = page.locator('.sf-gads-banner').bounding_box()
         assert box['x'] >= 0 and box['x'] + box['width'] <= 391
         assert box['height'] <= 170
+        assert page.locator('.sf-gads-description').evaluate('e => e.offsetHeight / parseFloat(getComputedStyle(e).lineHeight)') <= 2.1
         page.screenshot(path=str(SCREENSHOTS / 'mobile.png'), full_page=False)
         page.locator('.sf-gads-deny').click()
         assert consent(page)['ad_user_data'] == 'denied'
@@ -156,6 +163,19 @@ def main():
         assert consent(page)['ad_storage'] == 'granted'
         assert len(ads_config(page)) == 1
         mobile.close()
+
+        for width in [320, 360, 390, 430]:
+            compact = browser.new_context(viewport={'width': width, 'height': 844}, is_mobile=True)
+            route(compact)
+            compact.add_cookies([{'name': 'sf_google_ads_v1', 'value': 'granted',
+                                 'domain': '.sirfisher.com.br', 'path': '/', 'secure': True}])
+            sample = compact.new_page()
+            ready(sample, 'https://www.sirfisher.com.br/')
+            assert sample.locator('.sf-gads-banner').is_visible(), 'Autorizacao antiga de Google foi ampliada'
+            assert sample.evaluate('typeof fbq === "undefined" && typeof oaiq === "undefined"')
+            assert sample.locator('.sf-gads-description').evaluate(
+                'e => e.offsetHeight / parseFloat(getComputedStyle(e).lineHeight)') <= 2.1
+            compact.close()
         browser.close()
     print('OK: consentimento, escolha entre subdominios, recusa, eventos GA4, URLs privadas, idioma e celular; sem SDKs externos ou reservas reais.')
 

@@ -47,9 +47,9 @@ for (const search of ['?utm_source=chatgpt&utm_medium=paid', '?oppref=test-click
     s.frames.shift()();
     if (s.scripts.length) throw new Error('SDK antes da primeira pintura');
     s.frames.shift()();
-    if (s.scripts.length !== 2) throw new Error('Nao mediu trafego pago sem load');
+    if (s.scripts.length !== 1) throw new Error('Nao mediu trafego pago sem load');
     s.disparar(1000);
-    if (s.scripts.length !== 2) throw new Error('SDK duplicado');
+    if (s.scripts.length !== 1) throw new Error('SDK duplicado');
     let executed = false;
     s.window.sfAfterFirstPaint(() => { executed = true; });
     if (!executed) throw new Error('Pixel OpenAI tardio ficou bloqueado');
@@ -59,9 +59,9 @@ for (const search of ['?utm_source=chatgpt&utm_medium=paid', '?oppref=test-click
 Deno.test('pagina do anuncio: teto de 1 s mede campanha em aba sem animacao', () => {
   const s = setup(paidBlock, 'loading', '?utm_medium=cpc');
   s.disparar(1000);
-  if (s.scripts.length !== 2) throw new Error('Campanha nao medida no teto');
+  if (s.scripts.length !== 1) throw new Error('Campanha nao medida no teto');
   s.frames.shift()(); s.frames.shift()();
-  if (s.scripts.length !== 2) throw new Error('SDK duplicado');
+  if (s.scripts.length !== 1) throw new Error('SDK duplicado');
 });
 
 for (const pagina of PAGINAS) {
@@ -74,7 +74,7 @@ for (const pagina of PAGINAS) {
   Deno.test(`${pagina}: enfileira eventos e so baixa SDKs 7 s depois do load`, () => {
     const s = setup(block);
     if (s.scripts.length) throw new Error('SDK baixado antes do load');
-    if (s.dataLayer.length !== 3 || (pixel && s.window.fbq.queue.length !== 2)) throw new Error('Perdeu a fila inicial');
+    if (s.dataLayer.length !== 6 || (pixel && s.window.fbq.queue.length !== 2)) throw new Error('Perdeu a fila inicial');
     const consent = Array.from(s.dataLayer[0]);
     if (consent[0] !== 'consent' || consent[1] !== 'default' ||
       ['ad_storage', 'ad_user_data', 'ad_personalization'].some((key) => consent[2][key] !== 'denied')) {

@@ -745,25 +745,35 @@ A galeria da casa mantém a foto anterior do almoço com vista para o mar.
 - [API da tag Google](https://developers.google.com/tag-platform/gtagjs/reference#get)
 - [Consulta Supabase somente de leitura](https://supabase.com/docs/reference/api/v1-read-only-query)
 
-## Tag Google Ads e escolha de publicidade (03/11/2026)
+## Publicidade Google, Meta e OpenAI (03/11/2026)
 
 A tag `AW-10856025003` usa o SDK gtag.js que já atende ao GA4
 `G-F40Z5Y9QT6`. O módulo `assets/js/google-ads.js` configura o destino Ads
 sem carregar outra cópia do SDK. Manter esse arquivo idêntico ao módulo
 de mesmo caminho no repositório `reservas`.
 
-Por escolha do proprietário, o site mostra uma janela pequena para cookies
-de publicidade Google. Antes da escolha e após Recusar, `ad_storage`,
+O site mostra uma janela pequena para publicidade dos três fornecedores,
+com descrição em duas linhas em telas de 320 a 430 px. Antes da escolha e após Recusar, `ad_storage`,
 `ad_user_data` e `ad_personalization` ficam `denied`. A medição limitada
 sem cookies de publicidade pode continuar. Permitir envia a atualização
-`granted`. `sf_google_ads_v1` registra a escolha por 180 dias, com Secure e
+`granted`. `sf_advertising_v2` registra escolha, comprovante aleatório e data por até 180 dias, com Secure e
 SameSite=Lax na produção e domínio compartilhado entre site e reservas.
 O botão no rodapé permite mudar a escolha.
 
-A recusa trata somente dessa publicidade Google. Ela limpa cookies
-`_gcl_*`, preserva os cookies existentes de Analytics, Meta e atribuição
-e não muda `analytics_storage`. Isso registra o alcance técnico do controle;
-não atesta a base legal de cada coleta anterior.
+A recusa limpa `_gcl_*`, `_fbp`, `_fbc`, `__obref` e `__oppref`. Os pixels
+Meta/OpenAI carregam depois de permitir; uma revogação usa seus controles
+de consentimento. A escolha antiga que citava apenas Google pede nova decisão.
+GA4 estatístico, idioma e origens UTM permanecem ativos; identificadores de
+anúncios são retirados da atribuição e dos links quando a publicidade está negada.
+URLs de origem ficam sem parâmetros e fragmentos.
+
+O portal envia o comprovante e a data em `p_attribution`. A migration
+`20261103071209` do gestao guarda esses campos por reserva e exige autorização
+válida nas filas Meta/OpenAI. O rodapé revoga pelo comprovante; falhas de rede
+ficam no cookie técnico `sf_ads_revoke_pending_v1` e são reenviadas. A função
+de conversões versão 48 consulta a autorização outra vez antes do envio.
+Os eventos estatísticos GA4 pelo servidor negam personalização publicitária.
+Detalhes em `reservas/docs/supabase.md` no workspace.
 
 Eventos sem `send_to` explícito continuam destinados ao GA4, evitando
 repassar automaticamente os eventos já existentes ao novo destino Ads.
@@ -785,7 +795,12 @@ python tools/seguranca/csp.py --verificar
 ```
 
 O teste específico simula os hosts públicos com arquivos locais, bloqueia
-os SDKs externos e cobre recusa sem apagar os cookies anteriores, escolha
+os SDKs externos e cobre recusa preservando estatísticas, escolha
 entre subdomínios, revogação, idioma e celular. O teste de CSP usa os SDKs
 reais, mas intercepta as coletas GA4, Ads, Meta e OpenAI. Nenhum deles cria
 reservas reais ou comprova por si o status exibido no diagnóstico do Ads.
+
+`configurar_contagem_reservas.py` confere o método do evento
+`reservation_confirmed`; `--aplicar` usa a Admin API com escrita explícita
+na propriedade fixa. O navegador deduplica pelo ID da reserva para permitir
+contagem por evento. O MCP permanece somente para leitura.

@@ -6,7 +6,7 @@ class Clock extends Date {
 }
 
 function run({ search = '', stored = null, cookieStored = stored, blocked = false, details = false,
-  referrer = 'https://www.sirfisher.com.br/' } = {}) {
+  referrer = 'https://www.sirfisher.com.br/', consent = true } = {}) {
   let written = null;
   const link = { href: 'https://reservas.sirfisher.com.br/reveillon.html?utm_source=site&utm_medium=organic&utm_content=por_do_sol#mapa' };
   const document = {
@@ -15,6 +15,7 @@ function run({ search = '', stored = null, cookieStored = stored, blocked = fals
     querySelectorAll() { return [link]; }, addEventListener() {},
   };
   const window = {
+    sfGoogleAds: { getChoice: () => consent ? 'granted' : 'denied' },
     location: { search, href: 'https://www.sirfisher.com.br/por-do-sol/' + search,
       pathname: '/por-do-sol/', hostname: 'www.sirfisher.com.br', protocol: 'https:' },
     localStorage: { getItem() { if (blocked) throw new Error('blocked'); return stored && JSON.stringify(stored); }, setItem(_key, value) { written = JSON.parse(value); } },
@@ -24,6 +25,17 @@ function run({ search = '', stored = null, cookieStored = stored, blocked = fals
   const url = new URL(link.href);
   return details ? { url, written, cookie: document.cookie } : url;
 }
+
+Deno.test('recusa preserva campanha estatistica e remove identificadores publicitarios', () => {
+  const result = run({ consent: false, details: true,
+    search: '?utm_source=google&utm_medium=cpc&gclid=private-click&oppref=private-reference',
+    stored: { oppref: 'old', fbclid: 'old', captured_at: '2026-10-06T12:00:00Z' } });
+  if (result.url.searchParams.get('utm_source') !== 'google') throw new Error('Perdeu estatistica');
+  for (const key of ['gclid','fbclid','oppref']) {
+    if (result.url.searchParams.has(key) || result.written[key]) throw new Error('Reteve clique sem consentimento');
+  }
+  if (result.written.landing_url.includes('?')) throw new Error('Persistiu parametros da pagina');
+});
 
 Deno.test('navegacao interna remove campanha site e preserva contexto e ancora', () => {
   const url = run();

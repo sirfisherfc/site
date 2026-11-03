@@ -72,6 +72,8 @@ def main() -> int:
             vistos, erros, sdks = {k: 0 for k in INTERCEPTADOS}, [], set()
 
             def rota(route, req):
+                if req.url.endswith('/fn_revoke_advertising_consent'):
+                    return route.fulfill(status=200, body='true', content_type='application/json')
                 for nome, trechos in INTERCEPTADOS.items():
                     if any(trecho in req.url for trecho in trechos):
                         if nome == 'ads' and urlparse(req.url).path.endswith('.js'):
@@ -103,13 +105,25 @@ def main() -> int:
             problemas = list(estado["violacoes"]) + erros
             if pagina not in SEM_MARKETING:
                 antes = {cookie['name'] for cookie in ctx.cookies([base + pagina])}
-                if any(name.startswith('_gcl_') for name in antes):
-                    problemas.append('Cookie de publicidade Google antes de permitir')
+                if any(name.startswith('_gcl_') or name in {'_fbp','_fbc','__obref','__oppref'} for name in antes):
+                    problemas.append('Cookie de publicidade antes de permitir')
+                if {'fbevents','oaiq'} & sdks:
+                    problemas.append('Pixel publicitario antes de permitir')
                 page.locator('.sf-gads-deny').click()
                 depois = {cookie['name'] for cookie in ctx.cookies([base + pagina])}
-                preservados = {name for name in antes if name.startswith('_ga') or name in {'_fbp', '_fbc', 'sf_attribution_v1'}}
+                preservados = {name for name in antes if name.startswith('_ga') or name == 'sf_attribution_v1'}
                 if not preservados <= depois:
-                    problemas.append('Recusa Google removeu cookies anteriores: ' + ', '.join(sorted(preservados - depois)))
+                    problemas.append('Recusa removeu cookies estatisticos: ' + ', '.join(sorted(preservados - depois)))
+                page.locator('.sf-gads-preferences').click()
+                page.locator('.sf-gads-allow').click()
+                page.wait_for_timeout(4000)
+                estado['oaiq'] = page.evaluate('typeof window.oaiq === "function"')
+                page.locator('.sf-gads-preferences').click()
+                page.locator('.sf-gads-deny').click()
+                page.wait_for_timeout(1000)
+                finais = {cookie['name'] for cookie in ctx.cookies([base + pagina])}
+                if any(name.startswith('_gcl_') or name in {'_fbp','_fbc','__obref','__oppref'} for name in finais):
+                    problemas.append('SDK recriou identificador publicitario depois da revogacao')
             if pagina not in SEM_MARKETING:
                 esperados = {"gtag", "oaiq"} | (set() if pagina in SEM_PIXEL_META else {"fbevents"})
                 faltam = esperados - sdks
