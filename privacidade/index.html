@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
        Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-YoV9mUCdZgyi718yYbXpRLMrhcFW49uR7EofE6SqKxM=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-2SFokyJCIKsA2kqjBevT7bv40u95ZubXtbxSAJ73SqQ=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
   <script>
     // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -96,7 +96,7 @@
       <header class="board">
         <p class="eyebrow">Sir Fisher · Beira-Mar de Fortaleza</p>
         <h1>Aviso de Privacidade</h1>
-        <p class="board__sub">Como tratamos dados pessoais no site, nas reservas, no atendimento e na medição de campanhas. Última atualização: 2 de novembro de 2026.</p>
+        <p class="board__sub">Como tratamos dados pessoais no site, nas reservas, no atendimento e na medição de campanhas. Última atualização: 3 de novembro de 2026.</p>
       </header>
 
       <section class="sec">
@@ -114,6 +114,8 @@
         <ul>
           <li><strong><code>_ga</code> e <code>_ga_F40Z5Y9QT6</code></strong> — cookies do Google Analytics com identificadores técnicos do navegador e da sessão, usados para contar visitas e acompanhar a passagem do site para o portal de reservas. Duram até 2 anos.</li>
           <li><strong><code>sf_attribution_v1</code></strong> — guarda de onde você veio (por exemplo, um link do Instagram ou um anúncio), para sabermos qual canal trouxe uma reserva. Dura 90 dias.</li>
+          <li><strong><code>sf_google_ads_v1</code></strong> — registra se você permitiu ou recusou a publicidade do Google. Dura 180 dias e compartilha essa escolha entre o site e o portal de reservas.</li>
+          <li><strong><code>_gcl_*</code></strong> — cookies de publicidade do Google que podem ser usados, após sua permissão, para atribuir visitas e resultados aos anúncios.</li>
           <li><strong><code>_fbp</code> e <code>_fbc</code></strong> — cookies da Meta (Facebook e Instagram) com identificadores técnicos do navegador e, quando disponível, do clique em um anúncio. Usamos esses registros para medir o resultado das campanhas. Duram até 90 dias.</li>
           <li><strong><code>sf-visit-session</code></strong> — identificador aleatório usado pelo contador público para registrar uma visita por sessão. Ele desaparece quando você fecha a aba e não contém dados pessoais.</li>
         </ul>
@@ -150,9 +152,18 @@
           <li><strong>Executar a reserva</strong> — confirmar, organizar o salão e entrar em contato sobre a sua visita. Base legal: execução de procedimentos preliminares e do próprio serviço solicitado por você.</li>
           <li><strong>Preparar e validar propostas de eventos</strong> — dimensionar a operação, conferir disponibilidade e responder à solicitação enviada. Base legal: procedimentos preliminares relacionados ao serviço solicitado.</li>
           <li><strong>Medir o site e as campanhas</strong> — entender quais canais trazem visitas e reservas, planejar a operação e reduzir mesas vazias e filas. Base legal: legítimo interesse, com dados de navegação e sem o conteúdo das suas conversas.</li>
+          <li><strong>Usar cookies de publicidade e personalizar anúncios no Google</strong> — medir anúncios e disponibilizar públicos de visitantes para campanhas do restaurante, conforme sua escolha. Base legal: seu consentimento, que pode ser retirado nas preferências de anúncios Google.</li>
           <li><strong>Atender pedidos enviados pelo Instagram</strong> — responder dúvidas, encaminhar pendências para a equipe e acompanhar a conversa nas condições descritas abaixo.</li>
           <li><strong>Enviar novidades e promoções</strong> — apenas se você marcar a caixa correspondente. Base legal: seu consentimento, que pode ser retirado a qualquer momento.</li>
         </ul>
+      </section>
+
+      <section class="sec" id="anuncios-google">
+        <h2>Anúncios no Google</h2>
+        <p>O site e o portal de reservas usam a tag do Google Ads junto ao Google Analytics. Antes da sua escolha, e quando você recusa, os cookies de publicidade ficam desautorizados; a tag pode enviar sinais limitados de medição sem esses cookies, conforme o modo de consentimento do Google.</p>
+        <p>Ao permitir, você autoriza os cookies e sinais de publicidade do Google para medir nossos anúncios e usar públicos de visitantes em campanhas do Sir Fisher. A participação nesses públicos depende também das suas configurações no Google e dos critérios da plataforma. O Google pode processar esses dados fora do Brasil.</p>
+        <p>Use <strong>Preferências de anúncios Google</strong>, no rodapé das páginas, para mudar sua escolha. A recusa mantém os cookies de publicidade do Google desautorizados. Essa escolha trata da publicidade Google; os demais usos de dados e serviços estão descritos neste aviso.</p>
+        <p>Essa configuração não envia ao Google Ads os nomes, telefones ou e-mails digitados nas reservas. A página de cancelamento por link privado fica fora das tags de publicidade, e a medição dessa página remove os parâmetros do link.</p>
       </section>
 
       <section class="sec">
@@ -161,7 +172,7 @@
         <ul>
           <li><strong>Acesso e gerenciamento dos perfis da empresa:</strong> O sistema acessa e gerencia os dados do próprio Perfil da Empresa do <strong>Sir Fisher</strong> no Google Maps e na Busca, tais como informações cadastrais, horários de funcionamento, atributos/comodidades, fotos, cardápio, publicação de postagens informativas e acompanhamento de avaliações públicas deixadas por clientes.</li>
           <li><strong>Autenticação administrativa segura:</strong> O Google OAuth é utilizado unicamente para verificar a identidade de administradores e sócios autorizados a acessar o painel de gestão interno. Nenhum dado pessoal além de nome e e-mail vinculados à conta autorizada é acessado ou armazenado.</li>
-          <li><strong>Não compartilhamento e não comercialização:</strong> Nenhuma informação obtida por meio de APIs do Google é vendida, compartilhada com terceiros para fins publicitários ou utilizada para fins estranhos à administração do restaurante, tampouco utilizada para treinamento de modelos de inteligência artificial de terceiros.</li>
+          <li><strong>Uso dos dados de autenticação e do Perfil da Empresa:</strong> Nenhuma informação de autenticação administrativa ou do Perfil da Empresa obtida por essas APIs é vendida, compartilhada com terceiros para fins publicitários ou utilizada para fins estranhos à administração do restaurante, tampouco utilizada para treinamento de modelos de inteligência artificial de terceiros.</li>
           <li><strong>Conformidade com a Política de Dados do Google:</strong> O uso e a transferência para qualquer outro aplicativo de informações recebidas por meio de APIs do Google cumprirão integralmente a <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Política de Dados do Usuário dos Serviços de API do Google</a>, incluindo os requisitos de Uso Limitado (Limited Use Requirements).</li>
         </ul>
       </section>
@@ -268,7 +279,8 @@
        que um bloco confiavel inserir. async=false mantem a ordem; no fim do
        body o DOM ja esta pronto, como antes com defer. -->
   <script>
-    ['../assets/js/atribuicao.js?v=553172d69a',
+    ['../assets/js/google-ads.js?v=3ca950b5fc',
+     '../assets/js/atribuicao.js?v=553172d69a',
      '../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
       var s = document.createElement('script');
       s.src = src;

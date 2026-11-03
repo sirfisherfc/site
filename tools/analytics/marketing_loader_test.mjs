@@ -1,7 +1,7 @@
 // deno test tools/analytics/marketing_loader_test.mjs
 const PAGINAS = ['index.html', 'en/index.html', 'conheca/index.html', 'almoco-executivo/index.html',
   'cardapio/index.html', 'como-chegar/index.html', 'en/fish-and-chips/index.html', 'fish-and-chips/index.html',
-  'guia/beira-mar/index.html', 'por-do-sol/index.html', 'reservas/index.html', 'reveillon/index.html']
+  'guia/beira-mar/index.html', 'jardim-japones/index.html', 'por-do-sol/index.html', 'reservas/index.html', 'reveillon/index.html']
   .map((p) => '../../' + p);
 
 async function blocoMarketing(pagina) {
@@ -74,7 +74,12 @@ for (const pagina of PAGINAS) {
   Deno.test(`${pagina}: enfileira eventos e so baixa SDKs 7 s depois do load`, () => {
     const s = setup(block);
     if (s.scripts.length) throw new Error('SDK baixado antes do load');
-    if (s.dataLayer.length !== 2 || (pixel && s.window.fbq.queue.length !== 2)) throw new Error('Perdeu a fila inicial');
+    if (s.dataLayer.length !== 3 || (pixel && s.window.fbq.queue.length !== 2)) throw new Error('Perdeu a fila inicial');
+    const consent = Array.from(s.dataLayer[0]);
+    if (consent[0] !== 'consent' || consent[1] !== 'default' ||
+      ['ad_storage', 'ad_user_data', 'ad_personalization'].some((key) => consent[2][key] !== 'denied')) {
+      throw new Error('Publicidade nao iniciou com consentimento negado antes da configuracao');
+    }
     s.listeners.get('load')();
     if (s.scripts.length) throw new Error('SDK baixado junto com o load');
     s.disparar(7000);

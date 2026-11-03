@@ -1,4 +1,49 @@
-# Presença no Google e medição
+# Tag Google Ads e escolha de publicidade (03/11/2026)
+
+A tag `AW-10856025003` usa o SDK gtag.js que já atende ao GA4
+`G-F40Z5Y9QT6`. O módulo `assets/js/google-ads.js` configura o destino Ads
+sem carregar outra cópia do SDK. Manter esse arquivo idêntico ao módulo
+de mesmo caminho no repositório `reservas`.
+
+Por escolha do proprietário, o site mostra uma janela pequena para cookies
+de publicidade Google. Antes da escolha e após Recusar, `ad_storage`,
+`ad_user_data` e `ad_personalization` ficam `denied`. A medição limitada
+sem cookies de publicidade pode continuar. Permitir envia a atualização
+`granted`. `sf_google_ads_v1` registra a escolha por 180 dias, com Secure e
+SameSite=Lax na produção e domínio compartilhado entre site e reservas.
+O botão no rodapé permite mudar a escolha.
+
+A recusa trata somente dessa publicidade Google. Ela limpa cookies
+`_gcl_*`, preserva os cookies existentes de Analytics, Meta e atribuição
+e não muda `analytics_storage`. Isso registra o alcance técnico do controle;
+não atesta a base legal de cada coleta anterior.
+
+Eventos sem `send_to` explícito continuam destinados ao GA4, evitando
+repassar automaticamente os eventos já existentes ao novo destino Ads.
+A instalação não cria ações de conversão nem ativa conversões otimizadas.
+Conferir as ações existentes no Ads antes de importar reservas.
+
+A página de privacidade carrega somente as preferências, sem instalar o
+SDK Google. A página privada de cancelamento no portal não carrega os
+pixels de publicidade e remove query/hash da URL enviada ao GA4.
+
+Validação local, com coleta externa interceptada:
+
+```powershell
+python -X utf8 tools/analytics/google_ads_browser_test.py
+python -X utf8 tools/seguranca/testar_navegador.py / en/ cardapio/ privacidade/
+npx --yes deno test --allow-read tools/analytics/marketing_loader_test.mjs tools/analytics/reservation_cta_test.mjs tools/analytics/attribution_test.mjs
+python tools/cache/versionar_assets.py --verificar
+python tools/seguranca/csp.py --verificar
+```
+
+O teste específico simula os hosts públicos com arquivos locais, bloqueia
+os SDKs externos e cobre recusa sem apagar os cookies anteriores, escolha
+entre subdomínios, revogação, idioma e celular. O teste de CSP usa os SDKs
+reais, mas intercepta as coletas GA4, Ads, Meta e OpenAI. Nenhum deles cria
+reservas reais ou comprova por si o status exibido no diagnóstico do Ads.
+
+## Presença no Google e medição
 
 ## Conteúdo e campanhas Meta (02/11/2026)
 

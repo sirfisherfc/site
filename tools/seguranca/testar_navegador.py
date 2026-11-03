@@ -21,6 +21,7 @@ import os
 import sys
 import threading
 from pathlib import Path
+from urllib.parse import urlparse
 
 from playwright.sync_api import sync_playwright
 
@@ -35,6 +36,7 @@ UA = ("Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like 
 INTERCEPTADOS = {
     "ga": ("google-analytics.com/g/collect", "analytics.google.com/g/collect",
            "stats.g.doubleclick.net/g/collect"),
+    "ads": ("/pagead/", "/ccm/collect", "/ads/ga-audiences"),
     "meta": ("facebook.com/tr",),
     "openai": ("bzr.openai.com/v1/sdk/events",),
     "contador": ("/rest/v1/rpc/register_site_visit",),
@@ -72,6 +74,8 @@ def main() -> int:
             def rota(route, req):
                 for nome, trechos in INTERCEPTADOS.items():
                     if any(trecho in req.url for trecho in trechos):
+                        if nome == 'ads' and urlparse(req.url).path.endswith('.js'):
+                            continue
                         vistos[nome] += 1
                         corpo = "123" if nome == "contador" else ""
                         return route.fulfill(status=200, body=corpo, content_type="application/json")
@@ -98,12 +102,23 @@ def main() -> int:
 
             problemas = list(estado["violacoes"]) + erros
             if pagina not in SEM_MARKETING:
+                antes = {cookie['name'] for cookie in ctx.cookies([base + pagina])}
+                if any(name.startswith('_gcl_') for name in antes):
+                    problemas.append('Cookie de publicidade Google antes de permitir')
+                page.locator('.sf-gads-deny').click()
+                depois = {cookie['name'] for cookie in ctx.cookies([base + pagina])}
+                preservados = {name for name in antes if name.startswith('_ga') or name in {'_fbp', '_fbc', 'sf_attribution_v1'}}
+                if not preservados <= depois:
+                    problemas.append('Recusa Google removeu cookies anteriores: ' + ', '.join(sorted(preservados - depois)))
+            if pagina not in SEM_MARKETING:
                 esperados = {"gtag", "oaiq"} | (set() if pagina in SEM_PIXEL_META else {"fbevents"})
                 faltam = esperados - sdks
                 if faltam:
                     problemas.append(f"SDK nao carregou: {sorted(faltam)}")
                 if not vistos["ga"]:
                     problemas.append("GA nao enviou evento")
+                if not vistos["ads"]:
+                    problemas.append("Tag Ads nao tentou enviar sinal de medicao")
                 if pagina not in SEM_PIXEL_META and not vistos["meta"]:
                     problemas.append("Meta nao enviou evento")
                 if not estado["oaiq"]:
@@ -113,7 +128,7 @@ def main() -> int:
             if pagina == "cardapio/" and not estado["itens"]:
                 problemas.append("cardapio nao montou os itens")
             rotulo = f"/{pagina:<20}"
-            resumo = f"GA {vistos['ga']} · Meta {vistos['meta']} · OpenAI {vistos['openai']} · contador {vistos['contador']}"
+            resumo = f"GA {vistos['ga']} · Ads {vistos['ads']} · Meta {vistos['meta']} · OpenAI {vistos['openai']} · contador {vistos['contador']}"
             if problemas:
                 falhas += 1
                 print(f"{rotulo} FALHOU ({resumo})")
