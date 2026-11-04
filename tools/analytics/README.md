@@ -821,3 +821,58 @@ reservas reais ou comprova por si o status exibido no diagnóstico do Ads.
 `reservation_confirmed`; `--aplicar` usa a Admin API com escrita explícita
 na propriedade fixa. O navegador deduplica pelo ID da reserva para permitir
 contagem por evento. O MCP permanece somente para leitura.
+
+## Público QR e perfil agregado (03/11/2026)
+
+`perfil_qr.py` separa sessões identificadas por `qr_code / offline` dos
+membros de um público que podem voltar depois por outros canais. Os dados
+demográficos usam `activeUsers` e o público baseado no evento `qr_visit`.
+
+A Data API recusa idade/gênero/interesses combinados com dimensões de
+aquisição da sessão. Um público que usa essas dimensões também herda a
+restrição, mesmo quando `checkCompatibility` aceita apenas o nome do público.
+O relatório real é a validação necessária. Preservar `subjectToThresholding`
+e linhas desconhecidas; uma resposta vazia não comprova contagem zero.
+
+Configuração aplicada na propriedade fixa `353205396` e relida:
+
+- `Visitantes pelo QR | 90 dias`: origem/mídia exata e navegação nos hosts
+  públicos, condições estáticas entre sessões. Mantido para acompanhamento
+  e preparação de publicidade. Não usar para o cruzamento demográfico.
+- `QR | perfil agregado | 90 dias`: entrada pelo evento `qr_visit`, com
+  consultas demográficas reais aceitas pela Data API. Coleta nova desde 03/11.
+- Regra do fluxo `15405248385`: cria `qr_visit` a partir de `page_view` com
+  URL em host público e os dois parâmetros QR na query. Não copia parâmetros
+  não internos e não altera a página vista original. Eventos podem se repetir
+  ao recarregar ou seguir links identificados; não equivalem a leituras físicas.
+
+As condições dos públicos são imutáveis. O script preserva definições
+divergentes e só cria recursos ausentes depois de conferir o destino.
+As regras de consentimento existentes continuam valendo. O evento QR não
+foi marcado como conversão e não houve mudança de orçamento ou campanha.
+
+```powershell
+# Prévia; os dois comandos também são idempotentes depois de aplicar.
+python tools/analytics/perfil_qr.py configurar
+python tools/analytics/perfil_qr.py preparar-perfil
+# Escritas administrativas específicas, quando autorizadas.
+python tools/analytics/perfil_qr.py configurar --aplicar
+python tools/analytics/perfil_qr.py preparar-perfil --aplicar
+# Consulta com analytics.readonly. Sem datas, usa 14 dias terminando há 3 dias.
+python tools/analytics/perfil_qr.py relatorio --start 2026-11-03 --end 2026-11-16 --out ../gestao/tmp/perfil-qr-2026-11-17/perfil-qr.json
+python -B -m unittest discover -s tools/analytics -p test_perfil_qr.py
+```
+
+A revisão única está registrada neste PC para **17/11/2026 às 9h de Fortaleza**,
+com `agendar_revisao_qr.ps1 -Aplicar`. `-Verificar` confere a definição.
+A tarefa exige computador ligado, internet e sessão do proprietário aberta;
+`StartWhenAvailable` tenta executar depois se perder o horário. Não envia
+mensagens. O recibo fica em `gestao/tmp/perfil-qr-2026-11-17/perfil-qr.json`,
+ignorado pelo Git. A configuração local não é replicada automaticamente
+para outro PC. Não criar outra tarefa com o mesmo propósito.
+
+Os dados recentes podem receber processamento posterior. A revisão não
+garante que o volume de visitantes elegíveis alcance os limites do Google.
+O GA4 recebe `reservation_confirmed` e `visit_realized`; a criação/importação
+da ação correspondente no Google Ads exige conferir o inventário do Ads.
+API administrativa do GA4 e evento principal não comprovam essa etapa.
