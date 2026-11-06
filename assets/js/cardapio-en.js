@@ -71,6 +71,8 @@
     'picanha-suina': { nome: 'Pork Picanha', descricao: 'Char-grilled pork picanha.', inclui: COM_ARROZ, adicionais: ARROZ_EXTRA, opcoes: FRITAS_OU_MACAXEIRA },
     'brownie-de-chocolate': { nome: 'Chocolate Brownie', descricao: 'Soft brownie made with high-quality chocolate.' },
     'brownie-com-sorvete': { nome: 'Brownie with Ice Cream', descricao: 'Chocolate brownie with cream ice cream and chocolate sauce.' },
+    'charlote-de-morango': { nome: 'Strawberry Charlotte', descricao: 'Layers of biscuit, cream and strawberry jam with a creamy topping, served in an individual pot.' },
+    'charlote-de-chocolate': { nome: 'Chocolate Charlotte', descricao: 'Layers of biscuit and cream with a chocolate topping, served in an individual pot.' },
     'cafe-expresso': { nome: 'Espresso' },
     'chope-brahma': { nome: 'Brahma Draught Beer', descritor: 'draught' },
     'spaten-longneck': { nome: 'Spaten Long Neck', descritor: 'long neck' },

@@ -6,7 +6,7 @@
   Teste de aceitacao do portal do cardapio.
 
   Roda no navegador contra /cardapio/ e confere os criterios que nao podem
-  regredir: os 78 registros na pagina, nome/preco/porcao/descricao na propria
+  regredir: os 80 registros na pagina, nome/preco/porcao/descricao na propria
   listagem, adicional nunca como preco do produto, faixa de preco nas
   variantes, porcao divergente sem numero, atalhos, busca sem acento, termo de
   restricao alimentar mandando falar com a equipe, detalhe com endereco
@@ -38,7 +38,7 @@ quadro.onload = async () => {
 
   // --- Catálogo completo e alcançável só rolando ---------------------------
   const itens = d.querySelectorAll('.item');
-  ok('78 registros renderizados na página', itens.length === 78, itens.length);
+  ok('80 registros renderizados na página', itens.length === 80, itens.length);
   ok('10 categorias com título escrito', d.querySelectorAll('.secao h2').length === 10);
   ok('nenhum carrossel na página', d.querySelectorAll('[class*=carrossel],[class*=carousel],[class*=slider]').length === 0);
 
