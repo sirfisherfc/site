@@ -114,8 +114,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Event",
-    "name": "Réveillon 2027 no Sir Fisher Praia",
-    "description": "Virada de 2026 para 2027 no Sir Fisher Praia, na Beira-Mar de Fortaleza, com DJ e cantor ao vivo, vista dos fogos da orla e o cardápio da casa. Venda por mesa, com consumação inclusa.",
+    "name": "Réveillon 2027 no Sir Fisher",
+    "description": "Virada de 2026 para 2027 no Sir Fisher, na Beira-Mar de Fortaleza, com DJ e cantor ao vivo, vista dos fogos da orla e o cardápio da casa. Venda por mesa, com consumação inclusa.",
     "startDate": "2026-12-31T20:00:00-03:00",
     "endDate": "2027-01-01T02:00:00-03:00",
     "eventStatus": "https://schema.org/EventScheduled",
@@ -127,8 +127,9 @@
       "https://www.sirfisher.com.br/assets/img/festa-reveillon-sir-fisher-660.jpg"
     ],
     "location": {
-      "@type": "Place",
-      "name": "Sir Fisher Praia",
+      "@type": "Restaurant",
+      "@id": "https://www.sirfisher.com.br/#restaurante",
+      "name": "Sir Fisher",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Av. Beira Mar, 3421",
@@ -172,27 +173,66 @@
       {
         "@type": "Question",
         "name": "O valor do Réveillon é por pessoa ou por mesa?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Por mesa. A mesa lateral custa R$ 2.800 para até 8 pessoas, com R$ 800 de consumação. A central custa R$ 1.500 para até 4 pessoas, com R$ 400 de consumação. O bistrô custa R$ 800 para 2 pessoas, com R$ 200 de consumação. Cadeira extra: R$ 350, com R$ 100 de consumação." }
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Por mesa. A mesa lateral custa R$ 2.800 para até 8 pessoas, com R$ 800 de consumação. A central custa R$ 1.500 para até 4 pessoas, com R$ 400 de consumação. O bistrô custa R$ 800 para 2 pessoas, com R$ 200 de consumação. Cadeira extra: R$ 350, com R$ 100 de consumação."
+        }
       },
       {
         "@type": "Question",
         "name": "Dá para ver a queima de fogos do Sir Fisher?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Sim. Da nossa orla dá para ver a queima oficial do Aterro e também as de vários clubes e hotéis da Beira-Mar." }
-      },
-      {
-        "@type": "Question",
-        "name": "Como faço o pagamento?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No Pix, com 8% de desconto, ou no cartão, presencialmente no restaurante. A mesa fica garantida com o sinal de 30% em até 48 horas, e o saldo pode ser pago até 20/12/2026." }
-      },
-      {
-        "@type": "Question",
-        "name": "Posso levar crianças?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Sim. Crianças de colo não pagam e não contam para o mínimo da mesa. Crianças até 11 anos têm R$ 100 de desconto cada." }
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Da nossa orla dá para ver a queima oficial do Aterro e também as de vários clubes e hotéis da Beira-Mar."
+        }
       },
       {
         "@type": "Question",
         "name": "Qual o horário do Réveillon?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Das 20h do dia 31 de dezembro de 2026 às 2h de 1º de janeiro de 2027." }
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Das 20h do dia 31 de dezembro de 2026 às 2h de 1º de janeiro de 2027."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como faço o pagamento?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No Pix, com 8% de desconto, ou no cartão de débito ou crédito, presencialmente no restaurante. Não enviamos link de pagamento. A mesa fica garantida com o sinal de 30% em até 48 horas, e o saldo pode ser pago até 20/12/2026. Sem o sinal em 48 horas, a pré-reserva expira e a mesa volta a ficar livre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Posso levar crianças?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Crianças de colo não pagam e não contam para o mínimo da mesa. Crianças até 11 anos têm R$ 100 de desconto cada."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "E se eu desistir?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O reembolso é integral se a desistência for comunicada por escrito em até 7 dias da contratação. Depois disso não há reembolso, mas você pode indicar outras pessoas para usar a mesa. Nenhum reembolso após 25/12/2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Posso levar bebida?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Só champanhe e espumante. Destilados pagam rolha de R$ 50 por garrafa, e não é permitido trazer alimentos. Fogos e pirotecnia são proibidos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "A consumação vale para outro dia?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Não. Ela vale só na noite do evento, sem devolução em dinheiro."
+        }
       }
     ]
   }
@@ -298,7 +338,7 @@
             <picture>
               <source type="image/avif" srcset="../assets/img/festa-reveillon-sir-fisher-440.avif?v=5e77d26266 440w, ../assets/img/festa-reveillon-sir-fisher-660.avif?v=2d7277e3a7 660w" sizes="(max-width:500px) 46vw, 205px" />
               <source type="image/webp" srcset="../assets/img/festa-reveillon-sir-fisher-440.webp?v=d614ccce88 440w, ../assets/img/festa-reveillon-sir-fisher-660.webp?v=c14d97048d 660w" sizes="(max-width:500px) 46vw, 205px" />
-              <img src="../assets/img/festa-reveillon-sir-fisher-440.jpg?v=270bcc99b7" srcset="../assets/img/festa-reveillon-sir-fisher-440.jpg?v=270bcc99b7 440w, ../assets/img/festa-reveillon-sir-fisher-660.jpg?v=b8588301e1 660w" sizes="(max-width:500px) 46vw, 205px" alt="Clientes dançando no Réveillon do Sir Fisher Praia" width="440" height="550" loading="lazy" decoding="async" />
+              <img src="../assets/img/festa-reveillon-sir-fisher-440.jpg?v=270bcc99b7" srcset="../assets/img/festa-reveillon-sir-fisher-440.jpg?v=270bcc99b7 440w, ../assets/img/festa-reveillon-sir-fisher-660.jpg?v=b8588301e1 660w" sizes="(max-width:500px) 46vw, 205px" alt="Clientes dançando no Réveillon do Sir Fisher" width="440" height="550" loading="lazy" decoding="async" />
             </picture>
             <figcaption>Réveillon 2025 no Sir Fisher</figcaption>
           </figure>
@@ -307,7 +347,7 @@
             <picture>
               <source type="image/avif" srcset="../assets/img/fogos-orla-reveillon-sir-fisher-440.avif?v=d33fc25061 440w, ../assets/img/fogos-orla-reveillon-sir-fisher-660.avif?v=f6b3749a68 660w" sizes="(max-width:500px) 46vw, 205px" />
               <source type="image/webp" srcset="../assets/img/fogos-orla-reveillon-sir-fisher-440.webp?v=5e510874cc 440w, ../assets/img/fogos-orla-reveillon-sir-fisher-660.webp?v=0ac11fb499 660w" sizes="(max-width:500px) 46vw, 205px" />
-              <img src="../assets/img/fogos-orla-reveillon-sir-fisher-440.jpg?v=43aeb0b385" srcset="../assets/img/fogos-orla-reveillon-sir-fisher-440.jpg?v=43aeb0b385 440w, ../assets/img/fogos-orla-reveillon-sir-fisher-660.jpg?v=6390a2348f 660w" sizes="(max-width:500px) 46vw, 205px" alt="Ilustração dos fogos sobre os prédios da Beira-Mar, a partir de uma foto do Sir Fisher Praia" width="440" height="550" loading="lazy" decoding="async" />
+              <img src="../assets/img/fogos-orla-reveillon-sir-fisher-440.jpg?v=43aeb0b385" srcset="../assets/img/fogos-orla-reveillon-sir-fisher-440.jpg?v=43aeb0b385 440w, ../assets/img/fogos-orla-reveillon-sir-fisher-660.jpg?v=6390a2348f 660w" sizes="(max-width:500px) 46vw, 205px" alt="Ilustração dos fogos sobre os prédios da Beira-Mar, a partir de uma foto do Sir Fisher" width="440" height="550" loading="lazy" decoding="async" />
             </picture>
             <!-- Montagem: trocar por foto real da virada quando houver (ver handoff do Réveillon). -->
             <figcaption>Imagem ilustrativa (montagem sobre foto do local)</figcaption>
@@ -345,9 +385,18 @@
 
       <section class="sec" id="duvidas">
         <h2>Perguntas frequentes</h2>
+        <!-- faq:inicio estilo=aberto -->
+        <h3>O valor do Réveillon é por pessoa ou por mesa?</h3>
+        <p>Por mesa. A mesa lateral custa R$ 2.800 para até 8 pessoas, com R$ 800 de consumação. A central custa R$ 1.500 para até 4 pessoas, com R$ 400 de consumação. O bistrô custa R$ 800 para 2 pessoas, com R$ 200 de consumação. Cadeira extra: R$ 350, com R$ 100 de consumação.</p>
+
+        <h3>Dá para ver a queima de fogos do Sir Fisher?</h3>
+        <p>Sim. Da nossa orla dá para ver a queima oficial do Aterro e também as de vários clubes e hotéis da Beira-Mar.</p>
+
+        <h3>Qual o horário do Réveillon?</h3>
+        <p>Das 20h do dia 31 de dezembro de 2026 às 2h de 1º de janeiro de 2027.</p>
 
         <h3>Como faço o pagamento?</h3>
-        <p>No Pix, com 8% de desconto, ou no cartão de débito ou crédito, presencialmente no restaurante ou na própria noite. Não enviamos link de pagamento. Sem o sinal em 48 horas, a pré-reserva expira e a mesa volta a ficar livre.</p>
+        <p>No Pix, com 8% de desconto, ou no cartão de débito ou crédito, presencialmente no restaurante. Não enviamos link de pagamento. A mesa fica garantida com o sinal de 30% em até 48 horas, e o saldo pode ser pago até 20/12/2026. Sem o sinal em 48 horas, a pré-reserva expira e a mesa volta a ficar livre.</p>
 
         <h3>Posso levar crianças?</h3>
         <p>Sim. Crianças de colo não pagam e não contam para o mínimo da mesa. Crianças até 11 anos têm R$ 100 de desconto cada.</p>
@@ -360,12 +409,13 @@
 
         <h3>A consumação vale para outro dia?</h3>
         <p>Não. Ela vale só na noite do evento, sem devolução em dinheiro.</p>
+        <!-- faq:fim -->
       </section>
 
       <section class="sec" id="onde">
         <h2>Onde fica</h2>
         <address class="place">
-          <strong>Sir Fisher Praia</strong>
+          <strong>Sir Fisher</strong>
           Av. Beira Mar, 3421 · Meireles<br />
           Fortaleza, CE · em frente ao Jardim Japonês
         </address>

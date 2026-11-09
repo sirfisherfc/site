@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.sirfisher.com.br/</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.sirfisher.com.br/"/>
@@ -12,7 +12,7 @@
   </url>
   <url>
     <loc>https://www.sirfisher.com.br/en/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.sirfisher.com.br/"/>
@@ -66,7 +66,7 @@
   </url>
   <url>
     <loc>https://www.sirfisher.com.br/reveillon/</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -99,5 +99,11 @@
     <lastmod>2026-10-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sirfisher.com.br/sobre/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

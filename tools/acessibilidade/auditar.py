@@ -33,7 +33,7 @@ from playwright.sync_api import sync_playwright
 RAIZ = Path(__file__).resolve().parents[2]
 PAGINAS = ["", "en/", "conheca/", "cardapio/", "en/menu/", "almoco-executivo/", "como-chegar/",
            "fish-and-chips/", "en/fish-and-chips/", "guia/beira-mar/", "por-do-sol/", "reservas/",
-           "reveillon/", "eventos/", "privacidade/", "qr/"]
+           "reveillon/", "eventos/", "privacidade/", "qr/", "sobre/", "jardim-japones/"]
 AXE = "https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.10.2/axe.min.js"
 TELAS = {"celular": {"width": 412, "height": 915}, "desktop": {"width": 1350, "height": 900}}
 

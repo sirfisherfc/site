@@ -19,5 +19,7 @@ jobs:
         run: python tools/cache/versionar_assets.py --verificar
       - name: CSP com o hash de todos os scripts de cada pagina
         run: python tools/seguranca/csp.py --verificar
+      - name: FAQ visivel igual ao FAQPage de cada pagina
+        run: python tools/faq/sincronizar_faq.py --verificar
       - name: Perfil QR, escrita administrativa restrita e limites dos relatórios
         run: python -B -m unittest discover -s tools/analytics -p test_perfil_qr.py

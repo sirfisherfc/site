@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Seguranca: CSP com hash dos scripts desta pagina e Trusted Types.
+       Gerado por tools/seguranca/csp.py no pre-commit; nao edite a mao. -->
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-VZdynsabwrvsOuNv47v29NtyywCo8aX5fxtUMKSw6Ko=' 'sha256-fE2hRnhd0CyWOsDyVSrEDSnLIuGPj1Qw4YyMzDTuNWc=' 'sha256-Fjl59OWerYWK2/8LztoQ/nZ1+wpc/SuEB15EQXN1k+8=' 'sha256-LnpgWI42cQJB3LTD/RZbleeaHf5ka5sZEYljMDY9DLA=' 'sha256-jfYF8858cU3x6nTN1a0mC7//98FYiSIUpJk88KtJlDY=' 'sha256-p1vCUzvHrnsffO8deIQDXesKZXG2vspM3XGCh6Uvnrw=' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script'" />
+  <script>
+    // Trusted Types: politica padrao do site (tools/seguranca/csp.py).
+    if (window.trustedTypes && window.trustedTypes.createPolicy) {
+      window.trustedTypes.createPolicy('default', {
+        createHTML: function (s) { return s; },
+        createScript: function (s) { return s; },
+        createScriptURL: function (u) {
+          var url = new URL(u, location.href);
+          if (url.protocol === 'https:' || url.protocol === 'blob:' || url.origin === location.origin) return u;
+          throw new TypeError('Script bloqueado pela politica do site: ' + url.protocol);
+        }
+      });
+    }
+  </script>
+
+  <title>Sobre o Sir Fisher | Restaurante na Beira-Mar de Fortaleza</title>
+  <meta name="description" content="O Sir Fisher é um restaurante e bar de frente para o mar na Av. Beira Mar, 3421, no Meireles, em frente ao Jardim Japonês. A casa, o fish and chips de pescada amarela, a unidade única e a imprensa." />
+  <link rel="canonical" href="https://www.sirfisher.com.br/sobre/" />
+
+  <meta name="theme-color" content="#12293d" />
+
+  <!-- Tema: aplica a escolha salva ANTES da primeira pintura, senao a pagina
+       aparece no tema errado por um instante. Sem escolha salva, o CSS segue
+       o sistema operacional sozinho e nada e gravado. -->
+  <script>
+  (function () {
+    var raiz = document.documentElement;
+    var CHAVE = 'sf-tema';
+
+    try {
+      var salvo = localStorage.getItem(CHAVE);
+      if (salvo === 'dark' || salvo === 'light') raiz.setAttribute('data-theme', salvo);
+    } catch (e) {}
+
+    function atual() {
+      var t = raiz.getAttribute('data-theme');
+      if (t === 'dark' || t === 'light') return t;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function rotular() {
+      var escuro = atual() === 'dark';
+      var b = document.querySelector('.theme-toggle');
+      if (b) {
+        b.setAttribute('aria-label', escuro ? 'Mudar para o tema claro' : 'Mudar para o tema escuro');
+        b.setAttribute('aria-pressed', escuro ? 'true' : 'false');
+      }
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', escuro ? '#0a1622' : '#12293d');
+    }
+
+    document.addEventListener('click', function (ev) {
+      var alvo = ev.target;
+      if (!alvo || !alvo.closest) return;
+      if (!alvo.closest('.theme-toggle')) return;
+      var novo = atual() === 'dark' ? 'light' : 'dark';
+      raiz.setAttribute('data-theme', novo);
+      try { localStorage.setItem(CHAVE, novo); } catch (e) {}
+      rotular();
+    });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', rotular);
+    } else {
+      rotular();
+    }
+  })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png?v=f76e7675f5" />
+
+  <link rel="preload" href="../assets/fonts/fraunces.woff2?v=7234ed860a" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../assets/css/style.css?v=35da0fb8d3" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Sir Fisher" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://www.sirfisher.com.br/sobre/" />
+  <meta property="og:title" content="Sobre o Sir Fisher | Restaurante na Beira-Mar de Fortaleza" />
+  <meta property="og:description" content="Restaurante e bar de frente para o mar na Beira-Mar de Fortaleza. Uma única casa, em frente ao Jardim Japonês." />
+  <meta property="og:image" content="https://www.sirfisher.com.br/assets/img/og-sir-fisher-beira-mar-fortaleza.jpg" />
+  <meta property="og:image:alt" content="Pôr do sol sobre o mar na Beira-Mar de Fortaleza, visto do Sir Fisher" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sobre o Sir Fisher | Beira-Mar de Fortaleza" />
+  <meta name="twitter:description" content="Restaurante e bar de frente para o mar na Beira-Mar de Fortaleza. Uma única casa, em frente ao Jardim Japonês." />
+  <meta name="twitter:image" content="https://www.sirfisher.com.br/assets/img/og-sir-fisher-beira-mar-fortaleza.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Sir Fisher",
+        "item": "https://www.sirfisher.com.br/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Sobre",
+        "item": "https://www.sirfisher.com.br/sobre/"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://www.sirfisher.com.br/sobre/#pagina",
+        "url": "https://www.sirfisher.com.br/sobre/",
+        "name": "Sobre o Sir Fisher",
+        "inLanguage": "pt-BR",
+        "isPartOf": {
+          "@id": "https://www.sirfisher.com.br/#site"
+        },
+        "about": {
+          "@id": "https://www.sirfisher.com.br/#restaurante"
+        }
+      },
+      {
+        "@type": "Restaurant",
+        "@id": "https://www.sirfisher.com.br/#restaurante",
+        "name": "Sir Fisher",
+        "url": "https://www.sirfisher.com.br/",
+        "telephone": "+5585988544274",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Beira Mar, 3421",
+          "addressLocality": "Fortaleza",
+          "addressRegion": "CE",
+          "postalCode": "60165-121",
+          "addressCountry": "BR"
+        },
+        "subjectOf": [
+          {
+            "@type": "NewsArticle",
+            "headline": "Guia dos quiosques da Beira-Mar de Fortaleza: todos os sabores reunidos, do Ceará e do mundo",
+            "url": "https://diariodonordeste.verdesmares.com.br/verso/guia-dos-quiosques-da-beira-mar-de-fortaleza-todos-os-sabores-reunidos-do-ceara-e-do-mundo-1.3435985",
+            "datePublished": "2023-11-15",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Diário do Nordeste"
+            }
+          },
+          {
+            "@type": "WebPage",
+            "name": "Sir Fisher no Comida di Buteco",
+            "url": "https://comidadibuteco.com.br/buteco/sir-fisher/"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://www.sirfisher.com.br/sobre/#faq",
+    "about": {
+      "@id": "https://www.sirfisher.com.br/#restaurante"
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "O Sir Fisher tem outras unidades?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Não. O Sir Fisher funciona apenas na Av. Beira Mar, 3421, no Meireles, em frente ao Jardim Japonês. As antigas unidades da Rua Frederico Borges (Sir Fisher Pub) e do Imprensa Food Square foram encerradas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O Sir Fisher já teve outro nome?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. A casa já se chamou Sir Fisher - Barra Sol. Hoje o nome é só Sir Fisher, no mesmo endereço da Av. Beira Mar, 3421."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O Sir Fisher faz entrega?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim, pelo 99Food. O cardápio completo, com preços, está em sirfisher.com.br/cardapio/."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como falar com o Sir Fisher?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pelo WhatsApp (85) 98854-4274 ou pelo e-mail contato@sirfisher.com.br. Reservas para até dez pessoas ficam em reservas.sirfisher.com.br."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Marketing: Google tag, Meta Pixel e o pixel da OpenAI (atribuicao.js).
+       Os eventos entram na fila na hora; os SDKs so baixam na primeira
+       interacao (toque, rolagem, tecla, mouse) ou 7 s depois do load, para nao
+       disputar CPU e banda com a primeira dobra no celular (o PageSpeed
+       mede ate ~5,25 s apos o load; 4 s caia dentro da medicao). Quem sai antes
+       disso sem tocar na tela nao chega a ser medido. -->
+  <script>
+    window.sfAfterFirstPaint = (function (w, d) {
+      var fila = [], pronto = false, espera, teto;
+      var GATILHOS = ['pointerdown', 'pointermove', 'keydown', 'touchstart', 'scroll', 'wheel'];
+      function run() {
+        if (pronto) return;
+        pronto = true;
+        clearTimeout(espera);
+        clearTimeout(teto);
+        GATILHOS.forEach(function (n) { w.removeEventListener(n, gatilho, true); });
+        while (fila.length) fila.shift()();
+      }
+      function gatilho(e) {
+        // Quando o layout muda sob o cursor parado, o navegador gera um
+        // pointermove sem deslocamento; o PageSpeed provoca isso ao ajustar a
+        // tela. So movimento de verdade conta como interacao.
+        if (e.type === 'pointermove' && !e.movementX && !e.movementY) return;
+        run();
+      }
+      GATILHOS.forEach(function (n) { w.addEventListener(n, gatilho, { capture: true, passive: true }); });
+      function depoisDoLoad() { espera = setTimeout(run, 7000); }
+      if (d.readyState === 'complete') depoisDoLoad();
+      else w.addEventListener('load', depoisDoLoad, { once: true });
+      // Se o load nunca chegar (uma foto travada), a visita ainda e medida.
+      teto = setTimeout(run, 15000);
+      return function (load) { if (pronto) load(); else fila.push(load); };
+    })(window, document);
+  </script>
+  <!-- Google tag (gtag.js). Os eventos de saida disparados no fim do body
+       chegam aqui por gtag('event', ...) e esperam o SDK na dataLayer. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500
+    });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'allow_ad_personalization_signals', false);
+    gtag('set', 'allow_google_signals', false);
+    gtag('js', new Date());
+    gtag('config', 'G-F40Z5Y9QT6', {
+      linker: { domains: ['sirfisher.com.br', 'www.sirfisher.com.br', 'reservas.sirfisher.com.br'] }
+    });
+    window.sfAfterFirstPaint(function () {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-F40Z5Y9QT6';
+      document.head.appendChild(s);
+    });
+  </script>
+  <!-- Meta Pixel. O mesmo dataset da Conversions API: os eventos do navegador e
+       os do servidor sao unidos pelo event_id, para a reserva nao contar duas
+       vezes. Ver supabase/meta-capi.sql no repositorio de reservas. -->
+  <!-- Meta Pixel: carregado apenas com publicidade permitida em google-ads.js. -->
+</head>
+<body>
+
+  <div class="shell">
+    <button class="theme-toggle" type="button" aria-label="Mudar para o tema escuro" aria-pressed="false">
+      <svg class="ico-lua" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="ico-sol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <main>
+
+      <div class="hero">
+        <picture>
+          <source type="image/avif" srcset="../assets/img/por-do-sol-beira-mar-fortaleza-460.avif?v=ff7b34fb7d 460w, ../assets/img/por-do-sol-beira-mar-fortaleza-720.avif?v=fcba9708a9 720w" sizes="(max-width:460px) 100vw, 460px" />
+          <source type="image/webp" srcset="../assets/img/por-do-sol-beira-mar-fortaleza-460.webp?v=c5c3f1e63c 460w, ../assets/img/por-do-sol-beira-mar-fortaleza-720.webp?v=a76706c36b 720w" sizes="(max-width:460px) 100vw, 460px" />
+          <img class="hero__img" src="../assets/img/por-do-sol-beira-mar-fortaleza-460.jpg?v=499ce944e2" alt="A orla da Beira-Mar de Fortaleza vista das mesas do Sir Fisher, no fim da tarde" width="460" height="307" fetchpriority="high" />
+        </picture>
+      </div>
+
+      <header class="board">
+        <p class="eyebrow">Av. Beira Mar, 3421 · Meireles</p>
+        <h1>Sobre o Sir Fisher.</h1>
+        <p class="board__sub">Restaurante e bar de frente para o mar, na Beira-Mar de Fortaleza, <em>em frente ao Jardim Japonês</em>. Uma única casa, aberta todos os dias a partir das 9h.</p>
+      </header>
+
+      <section class="sec" id="a-casa">
+        <h2>A casa</h2>
+        <p>O Sir Fisher serve peixes, camarões, petiscos e pratos para compartilhar, com receitas de inspiração britânica e sabores brasileiros. As mesas ficam voltadas para a orla do Meireles, e o pôr do sol, entre 17h25 e 17h56, entra no programa do fim de tarde.</p>
+        <p>A casa abre às 9h todos os dias e fica aberta até 22h15 de domingo a quinta e até 23h às sextas e sábados. De segunda a sexta, das 10h às 14h, exceto feriados, há <a href="../almoco-executivo/">almoço executivo</a> com sete pratos individuais. O <a href="../cardapio/">cardápio completo</a>, com preços, fica no site.</p>
+      </section>
+
+      <section class="sec" id="fish-and-chips">
+        <h2>O fish and chips</h2>
+        <p>O prato da casa é o <a href="../fish-and-chips/">fish and chips</a> de pescada amarela, peixe de carne branca pescado na costa do Ceará. Ele sai em duas versões: o London, com massa leve fermentada na cerveja, e o Sir Fisher, empanado no panko. Os dois acompanham batatas.</p>
+      </section>
+
+      <section class="sec" id="unidade">
+        <h2>Uma única unidade</h2>
+        <p>O Sir Fisher funciona apenas na <strong>Av. Beira Mar, 3421</strong>, no Meireles, em frente ao Jardim Japonês. As antigas unidades da Rua Frederico Borges (Sir Fisher Pub) e do Imprensa Food Square foram encerradas.</p>
+        <p>A casa já se chamou Sir Fisher - Barra Sol. Hoje o nome é só <strong>Sir Fisher</strong>. As entregas são feitas pelo 99Food.</p>
+      </section>
+
+      <section class="sec" id="visita">
+        <h2>Para a sua visita</h2>
+        <ul>
+          <li>Mesas ao ar livre, com vista para o mar.</li>
+          <li>Pets de pequeno e médio porte são bem-vindos nas mesas externas.</li>
+          <li>Entrada e mesas acessíveis para cadeira de rodas. O banheiro não é adaptado.</li>
+          <li>Wi-Fi gratuito.</li>
+          <li>Estacionamento público na rua, em frente à casa. Veja <a href="../como-chegar/">como chegar</a>.</li>
+          <li>Pix, dinheiro, cartões Visa, Mastercard, Elo, American Express, UnionPay e Cabal, e os principais vales-refeição.</li>
+          <li>Reservas para até dez pessoas no portal; de 11 a 29, pelo WhatsApp; eventos de 30 a 100 pessoas sentadas pelo <a href="../eventos/">configurador de eventos</a>. Veja as <a href="../reservas/">regras de reserva</a>.</li>
+        </ul>
+      </section>
+
+      <section class="sec" id="imprensa">
+        <h2>Na imprensa</h2>
+        <ul>
+          <li><a href="https://diariodonordeste.verdesmares.com.br/verso/guia-dos-quiosques-da-beira-mar-de-fortaleza-todos-os-sabores-reunidos-do-ceara-e-do-mundo-1.3435985" target="_blank" rel="noopener">Guia dos quiosques da Beira-Mar de Fortaleza</a>, Diário do Nordeste, 15/11/2023. A matéria apresenta a casa e o London Fish N' Chips.</li>
+          <li><a href="https://comidadibuteco.com.br/buteco/sir-fisher/" target="_blank" rel="noopener">Sir Fisher no Comida di Buteco</a>, com o London Fish N' Chips.</li>
+        </ul>
+        <p>Horários e preços citados em matérias antigas podem ter mudado. Os atuais estão neste site.</p>
+        <p>Imprensa e parcerias: <a href="mailto:contato@sirfisher.com.br">contato@sirfisher.com.br</a> ou WhatsApp <a href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp" data-position="imprensa">(85) 98854-4274</a>.</p>
+      </section>
+
+      <section class="sec" id="duvidas">
+        <h2>Perguntas frequentes</h2>
+        <!-- faq:inicio estilo=aberto -->
+        <h3>O Sir Fisher tem outras unidades?</h3>
+        <p>Não. O Sir Fisher funciona apenas na Av. Beira Mar, 3421, no Meireles, em frente ao Jardim Japonês. As antigas unidades da Rua Frederico Borges (Sir Fisher Pub) e do Imprensa Food Square foram encerradas.</p>
+
+        <h3>O Sir Fisher já teve outro nome?</h3>
+        <p>Sim. A casa já se chamou Sir Fisher - Barra Sol. Hoje o nome é só Sir Fisher, no mesmo endereço da Av. Beira Mar, 3421.</p>
+
+        <h3>O Sir Fisher faz entrega?</h3>
+        <p>Sim, pelo 99Food. O cardápio completo, com preços, está em sirfisher.com.br/cardapio/.</p>
+
+        <h3>Como falar com o Sir Fisher?</h3>
+        <p>Pelo WhatsApp (85) 98854-4274 ou pelo e-mail contato@sirfisher.com.br. Reservas para até dez pessoas ficam em reservas.sirfisher.com.br.</p>
+        <!-- faq:fim -->
+      </section>
+
+      <nav class="links" aria-label="Mais do Sir Fisher">
+        <p class="links__label">Mais do Sir Fisher</p>
+
+        <a class="link-row link-row--sun" href="../por-do-sol/">
+          <span class="link-row__stamp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M4.9 7.9l2.1 2.1M2 15h3M19 15h3M17 10l2.1-2.1"/><path d="M8 15a4 4 0 0 1 8 0"/><path d="M2 19h20"/></svg>
+          </span>
+          <span class="link-row__label">A que horas é o pôr do sol<span class="link-row__sub">A tabela mês a mês em Fortaleza</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <a class="link-row link-row--coral" href="../fish-and-chips/">
+          <span class="link-row__stamp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-5 9-5 6 3 9 5c-3 2-4 5-9 5s-9-5-9-5z"/><circle cx="8" cy="11" r="0.9" fill="currentColor" stroke="none"/></svg>
+          </span>
+          <span class="link-row__label">Fish and chips<span class="link-row__sub">O prato inglês, com peixe daqui</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <a class="link-row link-row--sea" href="../guia/beira-mar/">
+          <span class="link-row__stamp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/><path d="M2 21c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/><path d="M12 3v7M8.5 6.5 12 3l3.5 3.5"/></svg>
+          </span>
+          <span class="link-row__label">Guia da Beira-Mar<span class="link-row__sub">O trecho inteiro, vizinhos inclusos</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <a class="link-row link-row--sea" href="../">
+          <span class="link-row__label">O restaurante<span class="link-row__sub">Cardápio, fim de tarde e localização</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <a class="link-row link-row--sea" href="https://api.whatsapp.com/send?phone=5585988544274" target="_blank" rel="noopener" data-evt="click_whatsapp" data-position="rodape">
+          <span class="link-row__label">Fale conosco<span class="link-row__sub">WhatsApp · (85) 98854-4274</span></span>
+          <svg class="link-row__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </nav>
+
+    </main>
+
+    <footer class="foot">
+      <div class="foot__flag" aria-hidden="true"></div>
+      <address>
+        Av. Beira Mar, 3421 · Meireles<br />
+        Fortaleza · Ceará
+      </address>
+      <p class="foot__brand">Sir Fisher · Beira-Mar de Fortaleza</p>
+      <p class="foot__legal"><a href="../privacidade/">Aviso de privacidade</a></p>
+    </footer>
+
+  </div>
+
+  <script>
+    (function () {
+      window.dataLayer = window.dataLayer || [];
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest ? e.target.closest('a[data-evt]') : null;
+        if (!a) return;
+        var name = a.getAttribute('data-evt');
+        var label = a.getAttribute('aria-label') || a.textContent || '';
+        var payload = { link_url: a.href, link_text: label.replace(/\s+/g, ' ').trim().slice(0, 80), cta_position: a.getAttribute('data-position') || 'conteudo' };
+        window.dataLayer.push(Object.assign({ event: name }, payload));
+        if (typeof window.gtag === 'function') window.gtag('event', name, payload);
+        // Eventos padrao do Meta: o otimizador entende esses nomes nativamente,
+        // ao contrario de eventos customizados.
+        var meta = { click_menu: 'ViewContent', click_reservation: 'InitiateCheckout',
+                     click_maps: 'FindLocation', click_whatsapp: 'Contact' }[name];
+        if (meta && typeof window.fbq === 'function') {
+          window.fbq('track', meta, { content_name: payload.link_text });
+        }
+      }, { passive: true });
+    })();
+  </script>
+
+
+  <!-- Scripts do site (assets/js), inseridos por este bloco: a CSP aceita o
+       que um bloco confiavel inserir. async=false mantem a ordem; no fim do
+       body o DOM ja esta pronto, como antes com defer. -->
+  <script>
+    ['../assets/js/google-ads.js?v=8993b0e4f2',
+     '../assets/js/atribuicao.js?v=22f091c212',
+     '../assets/js/contador-visitas.js?v=b52f8d7f9e'].forEach(function (src) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = false;
+      document.body.appendChild(s);
+    });
+  </script>
+</body>
+</html>
