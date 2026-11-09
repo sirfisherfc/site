@@ -1,0 +1,42 @@
+name: Avisar buscadores (IndexNow)
+
+# Depois de cada publicacao, avisa o Bing (e os demais buscadores do IndexNow)
+# sobre as paginas do sitemap que mudaram. O Bing alimenta o Copilot.
+# Execucao manual com "todas" envia o sitemap inteiro.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.html"
+      - "*.html"
+      - "sitemap.xml"
+  workflow_dispatch:
+    inputs:
+      todas:
+        description: "Enviar todas as URLs do sitemap"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Testes offline
+        run: python -B -m unittest discover -s tools/indexnow -p 'test_*.py'
+      - name: Esperar o GitHub Pages publicar
+        run: sleep 150
+      - name: Enviar URLs
+        env:
+          ANTES: ${{ github.event.before }}
+          TODAS: ${{ inputs.todas || 'false' }}
+        run: python tools/indexnow/avisar.py --desde "$ANTES" --todas "$TODAS"
