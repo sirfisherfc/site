@@ -226,6 +226,16 @@
     }
   }
 
+  // Quem chegou pelo QR da mesa esteve no restaurante. Com permissao de
+  // publicidade, avisa a Meta para formar o publico de clientes e semelhantes.
+  var qrSignaled = false;
+  function signalQrVisit() {
+    if (qrSignaled || !advertisingAllowed() || typeof window.fbq !== 'function') return;
+    if (!attribution || attribution.utm_source !== 'qr_code') return;
+    qrSignaled = true;
+    window.fbq('trackCustom', 'VisitaQR');
+  }
+
   function measureIntentClicks() {
     var events = {
       click_maps: 'directions_requested',
@@ -268,12 +278,13 @@
     initOpenAIAdsPixel();
     measurePage();
     measureIntentClicks();
+    signalQrVisit();
   }
   if (window.addEventListener) window.addEventListener('sf-advertising-consent', function () {
     attribution = capture();
     decorateReservationLinks(attribution, document);
     if (window.location.pathname.replace(/\/+$/, '') !== '/privacidade') {
-      initOpenAIAdsPixel(); measurePage();
+      initOpenAIAdsPixel(); measurePage(); signalQrVisit();
     }
   });
 })();

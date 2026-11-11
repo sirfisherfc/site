@@ -6,8 +6,9 @@ class Clock extends Date {
 }
 
 function run({ search = '', stored = null, cookieStored = stored, blocked = false, details = false,
-  referrer = 'https://www.sirfisher.com.br/', consent = true } = {}) {
+  referrer = 'https://www.sirfisher.com.br/', consent = true, meta = false } = {}) {
   let written = null;
+  const metaCalls = [];
   const link = { href: 'https://reservas.sirfisher.com.br/reveillon.html?utm_source=site&utm_medium=organic&utm_content=por_do_sol#mapa' };
   const document = {
     cookie: cookieStored ? 'sf_attribution_v1=' + encodeURIComponent(JSON.stringify(cookieStored)) : '',
@@ -21,10 +22,35 @@ function run({ search = '', stored = null, cookieStored = stored, blocked = fals
     localStorage: { getItem() { if (blocked) throw new Error('blocked'); return stored && JSON.stringify(stored); }, setItem(_key, value) { written = JSON.parse(value); } },
     oaiq() {},
   };
+  if (meta) window.fbq = (...args) => { metaCalls.push(args); };
   new Function('window', 'document', 'Date', source)(window, document, Clock);
   const url = new URL(link.href);
-  return details ? { url, written, cookie: document.cookie } : url;
+  return details ? { url, written, cookie: document.cookie, metaCalls } : url;
 }
+
+const QR = '?utm_source=qr_code&utm_medium=offline&utm_campaign=cardapio_restaurante';
+const visitaQr = (calls) => calls.filter((c) => c[0] === 'trackCustom' && c[1] === 'VisitaQR').length;
+
+Deno.test('chegada pelo QR com permissao avisa a Meta uma vez', () => {
+  const { metaCalls } = run({ search: QR, meta: true, details: true, referrer: '' });
+  if (visitaQr(metaCalls) !== 1) throw new Error('VisitaQR deveria sair uma vez: ' + JSON.stringify(metaCalls));
+});
+
+Deno.test('origem QR guardada vale nas paginas seguintes', () => {
+  const { metaCalls } = run({ meta: true, details: true,
+    stored: { utm_source: 'qr_code', utm_medium: 'offline', captured_at: '2026-10-25T11:00:00Z' } });
+  if (visitaQr(metaCalls) !== 1) throw new Error('Perdeu a origem QR guardada');
+});
+
+Deno.test('QR sem permissao de publicidade nao avisa a Meta', () => {
+  const { metaCalls } = run({ search: QR, meta: true, details: true, consent: false, referrer: '' });
+  if (metaCalls.length) throw new Error('Enviou sinal sem permissao');
+});
+
+Deno.test('outra origem nao vira visita QR', () => {
+  const { metaCalls } = run({ search: '?utm_source=instagram&utm_medium=social', meta: true, details: true });
+  if (visitaQr(metaCalls)) throw new Error('Marcou visita QR sem QR');
+});
 
 Deno.test('recusa preserva campanha estatistica e remove identificadores publicitarios', () => {
   const result = run({ consent: false, details: true,

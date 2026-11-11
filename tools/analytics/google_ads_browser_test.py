@@ -25,6 +25,10 @@ def ads_config(page):
     return [x for x in commands(page) if x[:2] == ['config', ADS]]
 
 
+def events(page, name):
+    return [x for x in commands(page) if x[:2] == ['event', name]]
+
+
 def consent(page):
     rows = [x for x in commands(page) if x[0] == 'consent']
     return rows[-1][2]
@@ -86,7 +90,9 @@ def main():
         previous_names = {'_ga', '_ga_F40Z5Y9QT6', 'sf_attribution_v1'}
         assert previous_names <= cookie_names and not {'_gcl_aw','_fbp','_fbc'} & cookie_names, cookie_names
         assert page.evaluate('typeof window.fbq === "undefined" && typeof window.oaiq === "undefined"')
-        preserved = {c['name']: c['value'] for c in context.cookies() if c['name'] in previous_names}
+        shown = events(page, 'publicidade_aviso_exibido')
+        assert len(shown) == 1 and shown[0][2] == {'send_to': GA}, shown
+        preserved ={c['name']: c['value'] for c in context.cookies() if c['name'] in previous_names}
         desktop_box = page.locator('.sf-gads-banner').bounding_box()
         assert desktop_box['width'] <= 421 and desktop_box['height'] <= 170
         assert page.locator('.sf-gads-description').evaluate('e => e.offsetHeight / parseFloat(getComputedStyle(e).lineHeight)') <= 2.1
@@ -97,6 +103,7 @@ def main():
         assert after_denial == preserved, 'Recusa Google modificou cookies existentes'
         assert consent(page)['ad_storage'] == 'denied'
         assert 'analytics_storage' not in consent(page), 'Recusa Google alterou o consentimento analitico'
+        assert len(events(page, 'publicidade_recusada')) == 1 and not events(page, 'publicidade_aceita')
         page.locator('.sf-gads-preferences').click()
 
         # Eventos existentes recebem um destino GA4 sem alterar o objeto original.
@@ -108,6 +115,8 @@ def main():
         }""")
         page.locator('.sf-gads-allow').click()
         assert consent(page)['ad_storage'] == 'granted'
+        accepted = events(page, 'publicidade_aceita')
+        assert len(accepted) == 1 and accepted[0][2] == {'send_to': GA}, accepted
         assert page.evaluate('sfGoogleAds.snapshot().advertising_consent && typeof fbq === \"function\"')
         choice = next(c for c in context.cookies() if c['name'] == 'sf_advertising_v2')
         assert choice['value'].startswith('granted.') and choice['domain'] == '.sirfisher.com.br' and choice['secure']
@@ -117,6 +126,7 @@ def main():
         ready(page, 'https://reservas.sirfisher.com.br/')
         assert consent(page)['ad_personalization'] == 'granted'
         assert page.locator('.sf-gads-banner').is_hidden()
+        assert not events(page, 'publicidade_aviso_exibido'), 'Aviso contado depois da escolha'
         rows = commands(page)
         saved_update = next(i for i, x in enumerate(rows) if x[:2] == ['consent', 'update'])
         ad_index = next(i for i, x in enumerate(rows) if x[:2] == ['config', ADS])
