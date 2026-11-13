@@ -736,7 +736,9 @@ A galeria da casa mantém a foto anterior do almoço com vista para o mar.
   Não divulgar nomes, contatos, detalhes de reservas ou outros dados privados.
 - Publicar fotos reais e recentes quando houver material novo: fachada,
   localização, mesas e pratos disponíveis. Conferir consentimento de pessoas
-  identificáveis. Evitar duplicar as fotos recentes de 28 e 30/09.
+  identificáveis. Evitar duplicar as fotos recentes de 28 e 30/09 e as
+  14 do ensaio de Luisa Dörr (13/11). Fotos dela levam sempre o crédito
+  "Foto: Luisa Dörr" (classe `.foto-credito` sobre a imagem ou legenda).
 - Conferir horários especiais antes de cada feriado/evento, e atualizar Google
   e site juntos. Em 31/12/2026, a abertura foi confirmada das 9h às 2h de 01/01.
 - Entrega exclusivamente pelo 99Food; sem sala privativa; mesas acessíveis,
