@@ -533,11 +533,24 @@ a { color: inherit; }
   color: var(--on-card-soft);
 }
 
-.wide { margin: 14px 0 0; }
+.wide { margin: 14px 0 0; position: relative; }
 .wide img {
   width: 100%; height: auto; aspect-ratio: 3 / 2;
   object-fit: cover; border-radius: 16px;
 }
+.wide figcaption {
+  margin-top: 6px; font-size: 0.75rem; line-height: 1.35;
+  color: var(--on-card-soft);
+}
+/* Credito da fotografa sobre a foto (Lei 9.610/98, art. 79, par. 1o). */
+.foto-credito {
+  position: absolute; top: 8px; right: 10px; z-index: 1;
+  font-size: 0.68rem; line-height: 1; color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
+  pointer-events: none;
+}
+/* Na capa, o canto de cima e do botao de tema. */
+.hero .foto-credito { top: auto; bottom: 8px; }
 
 .place {
   font-style: normal; margin: 14px 0 12px; padding: 14px 16px;
