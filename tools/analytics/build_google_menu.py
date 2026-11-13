@@ -1,6 +1,6 @@
 """Converte o cardápio público para FoodMenus do Google Business Profile.
 
-Não inclui alérgenos, pesos em conferência ou serviços que não são pratos.
+Inclui alérgenos em texto; omite pesos em conferência e serviços que não são pratos.
 Não acessa credenciais nem publica: a atualização deve usar OAuth autorizado.
 """
 
@@ -38,15 +38,20 @@ def build_menu(data: dict) -> dict:
                 continue
             variants = product.get("variantes", [])
             first = variants[0] if variants else None
+            description = product.get("descricao") or ""
+            allergens = (product.get("alimentar") or {}).get("declarados") or []
+            if allergens:
+                description = (description + " Contém: " + ", ".join(allergens) +
+                               ". Alergia? Avise antes do pedido: pode ter contaminação cruzada.").strip()
             item = {
                 "labels": label(product["nome"] + (" — " + first["nome"] if first else ""),
-                                product.get("descricao") or ""),
+                                description),
                 "attributes": {"price": money(first["preco_centavos"] if first
                                                else product["preco"]["centavos"])},
             }
             if len(variants) > 1:
                 item["options"] = [{
-                    "labels": label(product["nome"] + " — " + variant["nome"]),
+                    "labels": label(product["nome"] + " — " + variant["nome"], description),
                     "attributes": {"price": money(variant["preco_centavos"])},
                 } for variant in variants[1:]]
             items.append(item)

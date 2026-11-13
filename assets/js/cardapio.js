@@ -544,10 +544,10 @@
     'OVO': 'Presente em massas, empanados, maioneses e sobremesas.',
     'PEIXE': 'Pescada amarela e caldos de peixe.',
     'CRUSTÁCEOS': 'Camarão e caranguejo.',
-    'SOJA': 'Presente em molhos artesanais e óleos de preparo.',
+    'SOJA': 'Soja e derivados. Consulte a marcação de cada produto.',
     'CASTANHAS': 'Oleaginosas e derivados.',
     'AMÊNDOAS': 'Frutos secos e preparações.',
-    'CORANTES': 'Colorantes alimentícios em bebidas e xaropes.'
+    'CORANTES': 'Corantes artificiais. Consulte a marcação de cada produto.'
   };
 
   function legendaAlergenosHTML() {

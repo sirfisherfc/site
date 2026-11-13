@@ -23,3 +23,5 @@ jobs:
         run: python tools/faq/sincronizar_faq.py --verificar
       - name: Perfil QR, escrita administrativa restrita e limites dos relatórios
         run: python -B -m unittest discover -s tools/analytics -p test_perfil_qr.py
+      - name: Alergenos no cardapio do Google e suas opcoes
+        run: python -B -m unittest discover -s tools/analytics -p test_google_menu.py

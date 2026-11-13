@@ -53,7 +53,7 @@
     'crocante-carne-de-sol': { nome: 'Carne de Sol and Pumpkin Croquettes', descricao: 'Six crispy croquettes in a light pumpkin dough, with a creamy filling of carne de sol (salted, sun-dried beef).' },
     'crocante-calabresa': { nome: 'Calabresa Sausage and Leek Croquettes', descricao: 'Six crispy croquettes filled with fried calabresa (Brazilian smoked sausage) and leek.' },
     'big-ben-fries': { nome: 'Big Ben Fries', descritor: 'fries with creamy cheddar and bacon' },
-    'pasteizinhos': { nome: 'Mini Pastéis', descricao: 'Ten crispy mini pastries with special sauce. Choose one filling.', inclui: ['Special sauce'], opcoes: ['Two cheeses', 'Beef', 'Prawn'] },
+    'pasteizinhos': { nome: 'Mini Pastéis', descricao: 'Ten crispy mini pastries with special sauce. Choose a filling: two cheeses, beef or prawn. Allergen symbols cover all three fillings and the sauce; ask our team about each filling before ordering.', inclui: ['Special sauce'], opcoes: ['Two cheeses', 'Beef', 'Prawn'] },
     'file-mignon-trinchado': { nome: 'Sliced Filet Mignon', descricao: 'Filet mignon with sautéed onions, served with fries or golden cassava.', opcoes: FRITAS_OU_MACAXEIRA },
     'caldo-de-peixe': { nome: 'Fish Broth', descricao: 'Pescada amarela broth, light and full of flavour.' },
     'camarao-alho-e-oleo': { nome: 'Garlic Prawns', descricao: 'Large prawns sautéed in garlic and oil.' },
@@ -142,10 +142,10 @@
     'OVO': 'Found in batters, breaded dishes, mayonnaise and desserts.',
     'PEIXE': 'Pescada amarela and fish broth.',
     'CRUSTÁCEOS': 'Prawns and crab.',
-    'SOJA': 'Found in house sauces and cooking oils.',
+    'SOJA': 'Soy and soy derivatives. Check the symbols for each product.',
     'CASTANHAS': 'Nuts and nut products.',
     'AMÊNDOAS': 'Dried fruit and preparations.',
-    'CORANTES': 'Food colourings in drinks and syrups.'
+    'CORANTES': 'Artificial colourings. Check the symbols for each product.'
   };
 
   // Frases fixas que vem dos dados publicados (texto exato -> ingles).
